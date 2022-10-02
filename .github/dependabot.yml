@@ -1,0 +1,22 @@
+version: 2
+enable-beta-ecosystems: true
+updates:
+  - package-ecosystem: "pub"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    assignees:
+      - "Ziedelth"
+    reviewers:
+      - "Ziedelth"
+    target-branch: "dev"
+
+  - package-ecosystem: "gradle"
+    directory: "/android/"
+    schedule:
+      interval: "daily"
+    assignees:
+      - "Ziedelth"
+    reviewers:
+      - "Ziedelth"
+    target-branch: "dev"
