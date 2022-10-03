@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/mappers/display_mapper.dart';
+import 'package:jais/utils/const.dart';
 
 class EpisodeLoaderWidget extends StatelessWidget {
   const EpisodeLoaderWidget({super.key});
@@ -20,9 +21,9 @@ class EpisodeLoaderWidget extends StatelessWidget {
         children: <Widget>[
           Row(
             children: const <Widget>[
-              Skeleton(width: 20, height: 20),
+              Skeleton(width: Const.platformImageWith, height: Const.platformImageHeight),
               SizedBox(width: 10),
-              Expanded(child: Skeleton(height: 20)),
+              Expanded(child: Skeleton(height: Const.platformImageHeight)),
             ],
           ),
           const SizedBox(height: 10),
@@ -33,7 +34,7 @@ class EpisodeLoaderWidget extends StatelessWidget {
           const Skeleton(width: 100, height: 20),
           const SizedBox(height: 10),
           if (DisplayMapper.isOnMobile(context))
-            const Skeleton(height: 200)
+            const Skeleton(height: Const.episodeImageHeight)
           else
             const Expanded(child: Skeleton()),
           const SizedBox(height: 10),

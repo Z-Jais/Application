@@ -16,5 +16,6 @@ class EpisodeMapper extends IMapper<Episode> {
 
   @override
   Future<void> updateCurrentPage() async => loadPage(
-      'https://beta-api.ziedelth.fr/episodes/country/fr/page/$page/limit/$limit');
+        'https://beta-api.ziedelth.fr/episodes/country/fr/page/$page/limit/$limit',
+      );
 }

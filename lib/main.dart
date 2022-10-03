@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/ads/banner_ad.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/logger/logger.dart';
+import 'package:jais/mappers/display_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
+import 'package:jais/utils/ad_utils.dart';
 import 'package:jais/utils/color.dart';
 import 'package:jais/views/episodes_view.dart';
 import 'package:provider/provider.dart';
@@ -21,16 +24,18 @@ Future<void> main() async {
     );
   };
 
-  try {
-    Logger.info('Initializing Google Mobile Ads...');
-    await MobileAds.instance.initialize();
-    await createGlobalBanner();
-  } catch (exception, stacktrace) {
-    Logger.error(
-      'An error occurred while initializing Google Mobile Ads',
-      exception,
-      stacktrace,
-    );
+  if (AdUtils.canShowAd) {
+    try {
+      Logger.info('Initializing Google Mobile Ads...');
+      await MobileAds.instance.initialize();
+      await createGlobalBanner();
+    } catch (exception, stacktrace) {
+      Logger.error(
+        'An error occurred while initializing Google Mobile Ads',
+        exception,
+        stacktrace,
+      );
+    }
   }
 
   Logger.info('Running app...');
@@ -73,6 +78,7 @@ class MyApp extends StatelessWidget {
                     Navbar(
                       onPageChanged: (int page) =>
                           navbarMapper.currentPage = page,
+                      webWidgets: navbarMapper.itemsTopNavBar(),
                     ),
                     Expanded(
                       child: PageView(
@@ -85,7 +91,7 @@ class MyApp extends StatelessWidget {
                     ),
                   ],
                 ),
-                bottomNavigationBar: BottomNavigationBar(
+                bottomNavigationBar: ((kIsWeb && DisplayMapper.isOnMobile(context)) || DisplayMapper.isOnMobile(context)) ? BottomNavigationBar(
                   showSelectedLabels: false,
                   showUnselectedLabels: false,
                   selectedItemColor: Theme.of(context).primaryColor,
@@ -93,7 +99,7 @@ class MyApp extends StatelessWidget {
                   currentIndex: navbarMapper.currentPage,
                   onTap: (int index) => navbarMapper.currentPage = index,
                   items: navbarMapper.itemsBottomNavBar,
-                ),
+                ) : null,
               );
             },
           ),

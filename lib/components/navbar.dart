@@ -1,14 +1,18 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/ads/banner_ad.dart';
 import 'package:jais/components/roundborder_widget.dart';
+import 'package:jais/mappers/display_mapper.dart';
 
 class Navbar extends StatelessWidget {
   final Function(int)? onPageChanged;
+  final List<Widget>? webWidgets;
 
   const Navbar({
     this.onPageChanged,
+    this.webWidgets,
     super.key,
   });
 
@@ -35,7 +39,10 @@ class Navbar extends StatelessWidget {
                 ? AdWidget(ad: globalBannerAd!)
                 : ColoredBox(color: Theme.of(context).backgroundColor),
           ),
-          const SizedBox(width: 10),
+          if (kIsWeb && !DisplayMapper.isOnMobile(context) && webWidgets != null) ...[
+            const SizedBox(width: 10),
+            ...webWidgets!
+          ]
         ],
       ),
     );

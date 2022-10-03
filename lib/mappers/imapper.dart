@@ -74,7 +74,8 @@ abstract class IMapper<T> extends ChangeNotifier {
     try {
       return (jsonDecode(string) as List<dynamic>)
           .map<Widget>(
-              (dynamic e) => toWidget(fromJson(e as Map<String, dynamic>)))
+            (dynamic e) => toWidget(fromJson(e as Map<String, dynamic>)),
+          )
           .toList();
     } catch (exception, stackTrace) {
       Logger.error('Error while parsing JSON', exception, stackTrace);

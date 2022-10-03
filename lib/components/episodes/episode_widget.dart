@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:jais/ads/video_ad.dart';
 import 'package:jais/components/roundborder_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/entities/episode.dart';
 import 'package:jais/mappers/display_mapper.dart';
+import 'package:jais/utils/ad_utils.dart';
+import 'package:jais/utils/const.dart';
 import 'package:jais/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,13 +15,25 @@ class EpisodeWidget extends StatelessWidget {
 
   const EpisodeWidget({required this.episode, super.key});
 
+  Future<bool> redirectToEpisode() {
+    return launchUrl(
+      Uri.parse(episode.url),
+      mode: LaunchMode.externalApplication,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async => launchUrl(
-        Uri.parse(episode.url),
-        mode: LaunchMode.externalApplication,
-      ),
+      onTap: () async {
+        if (AdUtils.canShowAd) {
+          showVideoAd(
+            callback: (_) async => redirectToEpisode(),
+          );
+        } else {
+          redirectToEpisode();
+        }
+      },
       child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(5),
@@ -40,11 +55,11 @@ class EpisodeWidget extends StatelessWidget {
                     radius: 360,
                     widget: Image(image: imageProvider, fit: BoxFit.cover),
                   ),
-                  placeholder: (_, __) => const Skeleton(width: 20, height: 20),
+                  placeholder: (_, __) => const Skeleton(width: Const.platformImageWith, height: Const.platformImageHeight),
                   errorWidget: (_, __, ___) =>
-                      const Skeleton(width: 20, height: 20),
-                  width: 20,
-                  height: 20,
+                      const Skeleton(width: Const.platformImageWith, height: Const.platformImageHeight),
+                  width: Const.platformImageWith,
+                  height: Const.platformImageHeight,
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -83,8 +98,8 @@ class EpisodeWidget extends StatelessWidget {
                   imageUrl: episode.image,
                   imageBuilder: (_, ImageProvider<Object> imageProvider) =>
                       Image(image: imageProvider, fit: BoxFit.cover),
-                  placeholder: (_, __) => const Skeleton(height: 200),
-                  errorWidget: (_, __, ___) => const Skeleton(height: 200),
+                  placeholder: (_, __) => const Skeleton(height: Const.episodeImageHeight),
+                  errorWidget: (_, __, ___) => const Skeleton(height: Const.episodeImageHeight),
                 ),
               )
             else

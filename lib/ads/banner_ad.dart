@@ -8,7 +8,7 @@ Future<void> createGlobalBanner() async {
     size: AdSize.banner,
     request: const AdRequest(),
     listener: BannerAdListener(
-      onAdFailedToLoad: (Ad ad, LoadAdError error) async {
+      onAdFailedToLoad: (Ad ad, _) async {
         ad.dispose();
       },
     ),

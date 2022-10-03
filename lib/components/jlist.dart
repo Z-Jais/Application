@@ -20,7 +20,7 @@ class JList extends StatelessWidget {
       controller: controller,
       itemCount: children.length,
       scrollDirection: direction,
-      itemBuilder: (BuildContext context, int index) => children[index],
+      itemBuilder: (_, int index) => children[index],
     );
   }
 }
