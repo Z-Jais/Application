@@ -5,8 +5,10 @@ import 'package:jais/components/roundborder_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/entities/episode.dart';
 import 'package:jais/mappers/display_mapper.dart';
+import 'package:jais/url/url_const.dart';
 import 'package:jais/utils/ad_utils.dart';
 import 'package:jais/utils/const.dart';
+import 'package:jais/utils/dictionary.dart';
 import 'package:jais/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,6 +21,18 @@ class EpisodeWidget extends StatelessWidget {
     return launchUrl(
       Uri.parse(episode.url),
       mode: LaunchMode.externalApplication,
+    );
+  }
+
+  Widget image({double? height}) {
+    return RoundBorderWidget(
+      widget: CachedNetworkImage(
+        imageUrl: '${UrlConst.episodeAttachment}${episode.uuid}',
+        imageBuilder: (_, ImageProvider<Object> imageProvider) =>
+            Image(image: imageProvider, fit: BoxFit.cover),
+        placeholder: (_, __) => Skeleton(height: height),
+        errorWidget: (_, __, ___) => Skeleton(height: height),
+      ),
     );
   }
 
@@ -49,7 +63,7 @@ class EpisodeWidget extends StatelessWidget {
               children: <Widget>[
                 CachedNetworkImage(
                   imageUrl:
-                      'https://ziedelth.fr/images/platforms/${episode.platform.image}',
+                      '${UrlConst.platformImage}${episode.platform.image}',
                   imageBuilder: (_, ImageProvider<Object> imageProvider) =>
                       RoundBorderWidget(
                     radius: 360,
@@ -81,7 +95,7 @@ class EpisodeWidget extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
-              'Saison ${episode.season} • ${episode.episodeType.name} ${episode.number} ${episode.langType.name}',
+              Dictionary.getEpisodeDetails(episode),
               overflow: TextOverflow.ellipsis,
             ),
             Row(
@@ -93,26 +107,10 @@ class EpisodeWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             if (DisplayMapper.isOnMobile(context))
-              RoundBorderWidget(
-                widget: CachedNetworkImage(
-                  imageUrl: episode.image,
-                  imageBuilder: (_, ImageProvider<Object> imageProvider) =>
-                      Image(image: imageProvider, fit: BoxFit.cover),
-                  placeholder: (_, __) => const Skeleton(height: Const.episodeImageHeight),
-                  errorWidget: (_, __, ___) => const Skeleton(height: Const.episodeImageHeight),
-                ),
-              )
+              image(height: Const.episodeImageHeight)
             else
               Expanded(
-                child: RoundBorderWidget(
-                  widget: CachedNetworkImage(
-                    imageUrl: episode.image,
-                    imageBuilder: (_, ImageProvider<Object> imageProvider) =>
-                        Image(image: imageProvider, fit: BoxFit.cover),
-                    placeholder: (_, __) => const Skeleton(),
-                    errorWidget: (_, __, ___) => const Skeleton(),
-                  ),
-                ),
+                child: image(),
               ),
             const SizedBox(height: 10),
             Text(

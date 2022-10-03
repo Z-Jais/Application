@@ -2,6 +2,7 @@ import 'package:jais/components/episodes/episode_loader_widget.dart';
 import 'package:jais/components/episodes/episode_widget.dart';
 import 'package:jais/entities/episode.dart';
 import 'package:jais/mappers/imapper.dart';
+import 'package:jais/url/url_const.dart';
 
 class EpisodeMapper extends IMapper<Episode> {
   EpisodeMapper()
@@ -16,6 +17,6 @@ class EpisodeMapper extends IMapper<Episode> {
 
   @override
   Future<void> updateCurrentPage() async => loadPage(
-        'https://beta-api.ziedelth.fr/episodes/country/fr/page/$page/limit/$limit',
+        UrlConst.getEpisodesPage(page, limit),
       );
 }

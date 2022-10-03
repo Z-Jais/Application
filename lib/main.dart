@@ -6,6 +6,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/ads/banner_ad.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/logger/logger.dart';
+import 'package:jais/mappers/country_mapper.dart';
 import 'package:jais/mappers/display_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
 import 'package:jais/utils/ad_utils.dart';
@@ -37,6 +38,11 @@ Future<void> main() async {
       );
     }
   }
+
+  Logger.info('Init all entities...');
+  await Future.wait(<Future<void>>[
+    CountryMapper.instance.update()
+  ]);
 
   Logger.info('Running app...');
   runApp(const MyApp());

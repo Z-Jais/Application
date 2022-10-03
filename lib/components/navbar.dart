@@ -39,7 +39,7 @@ class Navbar extends StatelessWidget {
                 ? AdWidget(ad: globalBannerAd!)
                 : ColoredBox(color: Theme.of(context).backgroundColor),
           ),
-          if (kIsWeb && !DisplayMapper.isOnMobile(context) && webWidgets != null) ...[
+          if (kIsWeb && !DisplayMapper.isOnMobile(context) && webWidgets != null) ...<Widget>[
             const SizedBox(width: 10),
             ...webWidgets!
           ]
