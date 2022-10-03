@@ -1,6 +1,7 @@
 import 'package:jais/entities/episode.dart';
 import 'package:jais/entities/episodetype.dart';
 import 'package:jais/entities/langtype.dart';
+import 'package:jais/entities/simulcast.dart';
 import 'package:jais/mappers/country_mapper.dart';
 
 class Dictionary {
@@ -39,6 +40,33 @@ class Dictionary {
 
         if (langType.name == 'VOICE') {
           return 'VF';
+        }
+
+        break;
+      default:
+        break;
+    }
+
+    return '??';
+  }
+
+  static String getNaturalSeason(Simulcast simulcast) {
+    switch (CountryMapper.selectedCountry?.tag) {
+      case 'fr':
+        if (simulcast.season == 'WINTER') {
+          return 'Hivers';
+        }
+
+        if (simulcast.season == 'SPRING') {
+          return 'Printemps';
+        }
+
+        if (simulcast.season == 'SUMMER') {
+          return 'Été';
+        }
+
+        if (simulcast.season == 'AUTUMN') {
+          return 'Automne';
         }
 
         break;

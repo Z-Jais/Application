@@ -11,6 +11,7 @@ import 'package:jais/mappers/display_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
 import 'package:jais/utils/ad_utils.dart';
 import 'package:jais/utils/color.dart';
+import 'package:jais/views/animes_view.dart';
 import 'package:jais/views/episodes_view.dart';
 import 'package:provider/provider.dart';
 
@@ -90,8 +91,12 @@ class MyApp extends StatelessWidget {
                       child: PageView(
                         controller: navbarMapper.pageController,
                         onPageChanged: (int i) => navbarMapper.currentPage = i,
-                        children: const <Widget>[
-                          EpisodesView(),
+                        children: <Widget>[
+                          const EpisodesView(),
+                          Container(),
+                          Container(),
+                          const AnimesView(),
+                          Container(),
                         ],
                       ),
                     ),
