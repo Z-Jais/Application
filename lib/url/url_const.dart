@@ -8,6 +8,7 @@ class UrlConst {
   static const String simulcasts = '${domain}simulcasts';
   static const String animes = '${domain}animes/';
   static const String episodeAttachment = '${episodes}attachment/';
+  static const String animeAttachment = '${animes}attachment/';
   static const String platformImage = 'https://ziedelth.fr/images/platforms/';
 
   static String getEpisodesPage(int page, int limit) {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jais/components/roundborder_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/entities/anime.dart';
+import 'package:jais/url/url_const.dart';
 import 'package:jais/utils/const.dart';
 import 'package:jais/utils/utils.dart';
 
@@ -23,7 +24,7 @@ class AnimeWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           CachedNetworkImage(
-            imageUrl: anime.image,
+            imageUrl: '${UrlConst.animeAttachment}${anime.uuid}',
             imageBuilder: (_, ImageProvider<Object> imageProvider) =>
                 RoundBorderWidget(
               widget: Image(image: imageProvider, fit: BoxFit.cover),

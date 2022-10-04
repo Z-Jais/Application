@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
                     Navbar(
                       onPageChanged: (int page) =>
                           navbarMapper.currentPage = page,
-                      webWidgets: navbarMapper.itemsTopNavBar(),
+                      webWidgets: navbarMapper.itemsTopNavBar((int page) => navbarMapper.currentPage = page),
                     ),
                     Expanded(
                       child: PageView(
