@@ -34,7 +34,22 @@ abstract class IMapper<T> extends ChangeNotifier {
           Utils.clearImagesCache();
           page++;
           Logger.debug('Loading page $page...');
-          await updateCurrentPage();
+          final bool correct = await updateCurrentPage();
+
+          if (!correct) {
+            Logger.warning('Invalid response for new page, rollback...');
+            page--;
+            canLoadMore = true;
+            Logger.debug('Can load more: $canLoadMore');
+            removeLoader();
+
+            Future<void>.delayed(const Duration(seconds: 1)).then((_) {
+              isLoading = false;
+            });
+
+            return;
+          }
+
           isLoading = false;
           canLoadMore = list.length % limit == 0;
           Logger.debug('Can load more: $canLoadMore');
@@ -83,17 +98,18 @@ abstract class IMapper<T> extends ChangeNotifier {
     }
   }
 
-  Future<void> loadPage(String url) async {
+  Future<bool> loadPage(String url) async {
     addLoader();
     final Response? response = await URL().get(url);
 
     if (!response.isOk) {
-      return;
+      return false;
     }
 
     list.addAll(toWidgets(utf8.decode(response!.bodyBytes)));
     removeLoader();
+    return true;
   }
 
-  Future<void> updateCurrentPage();
+  Future<bool> updateCurrentPage();
 }

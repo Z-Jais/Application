@@ -17,11 +17,11 @@ class AnimeMapper extends IMapper<Anime> {
         );
 
   @override
-  Future<void> updateCurrentPage() async {
+  Future<bool> updateCurrentPage() async {
     if (simulcast == null) {
-      return;
+      return false;
     }
 
-    await loadPage(UrlConst.getAnimesPage(simulcast!, page, limit));
+    return await loadPage(UrlConst.getAnimesPage(simulcast!, page, limit));
   }
 }
