@@ -82,8 +82,11 @@ class AnimesViewState extends State<AnimesView> {
               ChangeNotifierProvider<SimulcastMapper>.value(
                 value: _simulcastMapper,
                 child: Consumer<SimulcastMapper>(
-                  builder: (BuildContext context,
-                          SimulcastMapper simulcastMapper, _) =>
+                  builder: (
+                    BuildContext context,
+                    SimulcastMapper simulcastMapper,
+                    _,
+                  ) =>
                       SimulcastList(
                     scrollController: simulcastMapper.scrollController,
                     children: simulcastMapper

@@ -24,7 +24,9 @@ abstract class JMapper<T> {
 
     try {
       return (jsonDecode(string) as List<dynamic>)
-          .map((dynamic e) => fromJson(e as Map<String, dynamic>),)
+          .map(
+            (dynamic e) => fromJson(e as Map<String, dynamic>),
+          )
           .toList();
     } catch (_) {
       return null;
@@ -43,7 +45,6 @@ abstract class JMapper<T> {
     }
 
     final List<T>? list = stringTo(response!.body);
-    print(list);
 
     if (list == null || list.isEmpty) {
       return;

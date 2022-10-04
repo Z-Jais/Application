@@ -41,9 +41,7 @@ Future<void> main() async {
   }
 
   Logger.info('Init all entities...');
-  await Future.wait(<Future<void>>[
-    CountryMapper.instance.update()
-  ]);
+  await Future.wait(<Future<void>>[CountryMapper.instance.update()]);
 
   Logger.info('Running app...');
   runApp(const MyApp());
@@ -85,7 +83,9 @@ class MyApp extends StatelessWidget {
                     Navbar(
                       onPageChanged: (int page) =>
                           navbarMapper.currentPage = page,
-                      webWidgets: navbarMapper.itemsTopNavBar((int page) => navbarMapper.currentPage = page),
+                      webWidgets: navbarMapper.itemsTopNavBar(
+                        (int page) => navbarMapper.currentPage = page,
+                      ),
                     ),
                     Expanded(
                       child: PageView(
@@ -102,15 +102,19 @@ class MyApp extends StatelessWidget {
                     ),
                   ],
                 ),
-                bottomNavigationBar: ((kIsWeb && DisplayMapper.isOnMobile(context)) || DisplayMapper.isOnMobile(context)) ? BottomNavigationBar(
-                  showSelectedLabels: false,
-                  showUnselectedLabels: false,
-                  selectedItemColor: Theme.of(context).primaryColor,
-                  unselectedItemColor: Colors.grey,
-                  currentIndex: navbarMapper.currentPage,
-                  onTap: (int index) => navbarMapper.currentPage = index,
-                  items: navbarMapper.itemsBottomNavBar,
-                ) : null,
+                bottomNavigationBar: ((kIsWeb &&
+                            DisplayMapper.isOnMobile(context)) ||
+                        DisplayMapper.isOnMobile(context))
+                    ? BottomNavigationBar(
+                        showSelectedLabels: false,
+                        showUnselectedLabels: false,
+                        selectedItemColor: Theme.of(context).primaryColor,
+                        unselectedItemColor: Colors.grey,
+                        currentIndex: navbarMapper.currentPage,
+                        onTap: (int index) => navbarMapper.currentPage = index,
+                        items: navbarMapper.itemsBottomNavBar,
+                      )
+                    : null,
               );
             },
           ),

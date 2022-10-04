@@ -30,9 +30,13 @@ class AnimeWidget extends StatelessWidget {
               widget: Image(image: imageProvider, fit: BoxFit.cover),
             ),
             placeholder: (_, __) => const Skeleton(
-                width: Const.animeImageWith, height: Const.animeImageHeight),
+              width: Const.animeImageWith,
+              height: Const.animeImageHeight,
+            ),
             errorWidget: (_, __, ___) => const Skeleton(
-                width: Const.animeImageWith, height: Const.animeImageHeight),
+              width: Const.animeImageWith,
+              height: Const.animeImageHeight,
+            ),
             width: Const.animeImageWith,
             height: Const.animeImageHeight,
           ),

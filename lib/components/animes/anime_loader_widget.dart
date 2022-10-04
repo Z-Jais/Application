@@ -17,7 +17,9 @@ class AnimeLoaderWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           const Skeleton(
-              width: Const.animeImageWith, height: Const.animeImageHeight),
+            width: Const.animeImageWith,
+            height: Const.animeImageHeight,
+          ),
           const SizedBox(width: 10),
           Expanded(
             child: Column(

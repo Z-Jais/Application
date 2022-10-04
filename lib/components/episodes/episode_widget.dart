@@ -69,9 +69,14 @@ class EpisodeWidget extends StatelessWidget {
                     radius: 360,
                     widget: Image(image: imageProvider, fit: BoxFit.cover),
                   ),
-                  placeholder: (_, __) => const Skeleton(width: Const.platformImageWith, height: Const.platformImageHeight),
-                  errorWidget: (_, __, ___) =>
-                      const Skeleton(width: Const.platformImageWith, height: Const.platformImageHeight),
+                  placeholder: (_, __) => const Skeleton(
+                    width: Const.platformImageWith,
+                    height: Const.platformImageHeight,
+                  ),
+                  errorWidget: (_, __, ___) => const Skeleton(
+                    width: Const.platformImageWith,
+                    height: Const.platformImageHeight,
+                  ),
                   width: Const.platformImageWith,
                   height: Const.platformImageHeight,
                 ),

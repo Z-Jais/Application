@@ -14,8 +14,10 @@ class AnimeList extends StatelessWidget {
       final List<Widget> columnChildren = <Widget>[];
 
       for (int i = 0; i < children.length; i += 3) {
-        final List<Widget> subChildren = children.sublist(i, min(i + 3, children.length));
-        subChildren.addAll(List.filled(3 - subChildren.length, Container()));
+        final List<Widget> subChildren =
+            children.sublist(i, min(i + 3, children.length));
+        subChildren
+            .addAll(List<Widget>.filled(3 - subChildren.length, Container()));
 
         columnChildren.add(
           Row(

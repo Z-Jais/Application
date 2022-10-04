@@ -6,7 +6,7 @@ import 'package:jais/mappers/country_mapper.dart';
 
 class Dictionary {
   static String getSeason() {
-    switch(CountryMapper.selectedCountry?.tag) {
+    switch (CountryMapper.selectedCountry?.tag) {
       case 'fr':
         return 'Saison';
       default:
@@ -17,7 +17,7 @@ class Dictionary {
   }
 
   static String getEpisodeType(EpisodeType episodeType) {
-    switch(CountryMapper.selectedCountry?.tag) {
+    switch (CountryMapper.selectedCountry?.tag) {
       case 'fr':
         if (episodeType.name == 'EPISODE') {
           return 'Épisode';
@@ -32,7 +32,7 @@ class Dictionary {
   }
 
   static String getLangType(LangType langType) {
-    switch(CountryMapper.selectedCountry?.tag) {
+    switch (CountryMapper.selectedCountry?.tag) {
       case 'fr':
         if (langType.name == 'SUBTITLES') {
           return 'VOSTFR';
