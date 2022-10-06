@@ -21,13 +21,10 @@ Country _$CountryFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Country {
   String get uuid => throw _privateConstructorUsedError;
-
   String get tag => throw _privateConstructorUsedError;
-
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $CountryCopyWith<Country> get copyWith => throw _privateConstructorUsedError;
 }
@@ -36,7 +33,6 @@ mixin _$Country {
 abstract class $CountryCopyWith<$Res> {
   factory $CountryCopyWith(Country value, $Res Function(Country) then) =
       _$CountryCopyWithImpl<$Res>;
-
   $Res call({String uuid, String tag, String name});
 }
 
@@ -45,7 +41,6 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
   _$CountryCopyWithImpl(this._value, this._then);
 
   final Country _value;
-
   // ignore: unused_field
   final $Res Function(Country) _then;
 
@@ -77,7 +72,6 @@ abstract class _$$_CountryCopyWith<$Res> implements $CountryCopyWith<$Res> {
   factory _$$_CountryCopyWith(
           _$_Country value, $Res Function(_$_Country) then) =
       __$$_CountryCopyWithImpl<$Res>;
-
   @override
   $Res call({String uuid, String tag, String name});
 }
@@ -175,13 +169,10 @@ abstract class _Country implements Country {
 
   @override
   String get uuid;
-
   @override
   String get tag;
-
   @override
   String get name;
-
   @override
   @JsonKey(ignore: true)
   _$$_CountryCopyWith<_$_Country> get copyWith =>

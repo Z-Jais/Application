@@ -13,6 +13,7 @@ import 'package:jais/utils/ad_utils.dart';
 import 'package:jais/utils/color.dart';
 import 'package:jais/views/animes_view.dart';
 import 'package:jais/views/episodes_view.dart';
+import 'package:jais/views/mangas_view.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -93,7 +94,7 @@ class MyApp extends StatelessWidget {
                         onPageChanged: (int i) => navbarMapper.currentPage = i,
                         children: <Widget>[
                           const EpisodesView(),
-                          Container(),
+                          const MangasView(),
                           Container(),
                           const AnimesView(),
                           Container(),
