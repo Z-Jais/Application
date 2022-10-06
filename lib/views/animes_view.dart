@@ -4,7 +4,6 @@ import 'package:jais/components/animes/anime_widget.dart';
 import 'package:jais/components/simulcasts/simulcast_list.dart';
 import 'package:jais/components/simulcasts/simulcast_widget.dart';
 import 'package:jais/entities/simulcast.dart';
-import 'package:jais/logger/logger.dart';
 import 'package:jais/mappers/anime_mapper.dart';
 import 'package:jais/mappers/simulcast_mapper.dart';
 import 'package:provider/provider.dart';
@@ -47,28 +46,20 @@ class AnimesViewState extends State<AnimesView> {
   @override
   void initState() {
     super.initState();
-    Logger.info('Initializing animes view...');
     WidgetsBinding.instance.addPostFrameCallback((_) async => init());
-    Logger.info('Animes view initialized.');
   }
 
   Future<void> init() async {
     _simulcastMapper.clear();
     _animeMapper.clear();
-    Logger.info('Loading simulcasts...');
     await _simulcastMapper.updateCurrentPage();
-    Logger.debug('Simulcasts length: ${_simulcastMapper.list.length}');
 
     if (_simulcastMapper.list.last is SimulcastWidget) {
       scrollToEndSimulcasts();
       final Simulcast simulcast =
           (_simulcastMapper.list.last as SimulcastWidget).simulcast;
-      Logger.info('Loading animes of simulcast ${simulcast.uuid}...');
       _animeMapper.simulcast = simulcast;
-
-      Logger.info('Loading animes...');
       await rebuildAnimes();
-      Logger.debug('Animes length: ${_animeMapper.list.length}');
     }
   }
 
@@ -95,16 +86,9 @@ class AnimesViewState extends State<AnimesView> {
                           (Widget e) => e is SimulcastWidget
                               ? GestureDetector(
                                   onTap: () async {
-                                    Logger.info(
-                                      'Changing simulcast to ${e.simulcast.uuid}...',
-                                    );
                                     _animeMapper.scrollController.jumpTo(0);
                                     _animeMapper.simulcast = e.simulcast;
-                                    Logger.info('Loading animes...');
-                                    rebuildAnimes(force: true);
-                                    Logger.debug(
-                                      'Animes length: ${_animeMapper.list.length}',
-                                    );
+                                    await rebuildAnimes(force: true);
                                     setState(() {});
                                   },
                                   child: e,

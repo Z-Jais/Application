@@ -21,15 +21,23 @@ Anime _$AnimeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Anime {
   String get uuid => throw _privateConstructorUsedError;
+
   Country get country => throw _privateConstructorUsedError;
+
   String get name => throw _privateConstructorUsedError;
+
   String get releaseDate => throw _privateConstructorUsedError;
+
   String get image => throw _privateConstructorUsedError;
+
   String? get description => throw _privateConstructorUsedError;
+
   List<String> get hashes => throw _privateConstructorUsedError;
+
   List<Simulcast> get simulcasts => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $AnimeCopyWith<Anime> get copyWith => throw _privateConstructorUsedError;
 }
@@ -38,6 +46,7 @@ mixin _$Anime {
 abstract class $AnimeCopyWith<$Res> {
   factory $AnimeCopyWith(Anime value, $Res Function(Anime) then) =
       _$AnimeCopyWithImpl<$Res>;
+
   $Res call(
       {String uuid,
       Country country,
@@ -56,6 +65,7 @@ class _$AnimeCopyWithImpl<$Res> implements $AnimeCopyWith<$Res> {
   _$AnimeCopyWithImpl(this._value, this._then);
 
   final Anime _value;
+
   // ignore: unused_field
   final $Res Function(Anime) _then;
 
@@ -118,6 +128,7 @@ class _$AnimeCopyWithImpl<$Res> implements $AnimeCopyWith<$Res> {
 abstract class _$$_AnimeCopyWith<$Res> implements $AnimeCopyWith<$Res> {
   factory _$$_AnimeCopyWith(_$_Anime value, $Res Function(_$_Anime) then) =
       __$$_AnimeCopyWithImpl<$Res>;
+
   @override
   $Res call(
       {String uuid,
@@ -221,6 +232,7 @@ class _$_Anime implements _Anime {
   @override
   final String? description;
   final List<String> _hashes;
+
   @override
   List<String> get hashes {
     // ignore: implicit_dynamic_type
@@ -228,6 +240,7 @@ class _$_Anime implements _Anime {
   }
 
   final List<Simulcast> _simulcasts;
+
   @override
   List<Simulcast> get simulcasts {
     // ignore: implicit_dynamic_type
@@ -298,20 +311,28 @@ abstract class _Anime implements Anime {
 
   @override
   String get uuid;
+
   @override
   Country get country;
+
   @override
   String get name;
+
   @override
   String get releaseDate;
+
   @override
   String get image;
+
   @override
   String? get description;
+
   @override
   List<String> get hashes;
+
   @override
   List<Simulcast> get simulcasts;
+
   @override
   @JsonKey(ignore: true)
   _$$_AnimeCopyWith<_$_Anime> get copyWith =>

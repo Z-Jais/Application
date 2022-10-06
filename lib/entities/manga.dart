@@ -3,7 +3,6 @@ import 'package:jais/entities/anime.dart';
 import 'package:jais/entities/platform.dart';
 
 part 'manga.freezed.dart';
-
 part 'manga.g.dart';
 
 @freezed
@@ -23,6 +22,5 @@ class Manga with _$Manga {
     required double? price,
   }) = _Manga;
 
-  factory Manga.fromJson(Map<String, dynamic> json) =>
-      _$MangaFromJson(json);
+  factory Manga.fromJson(Map<String, dynamic> json) => _$MangaFromJson(json);
 }

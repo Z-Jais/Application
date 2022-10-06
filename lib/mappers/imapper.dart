@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:jais/logger/logger.dart';
 import 'package:jais/url/url.dart';
 import 'package:jais/utils/utils.dart';
 
@@ -30,17 +29,13 @@ abstract class IMapper<T> extends ChangeNotifier {
             !isLoading &&
             canLoadMore) {
           isLoading = true;
-          Logger.info('Clearing images cache...');
           Utils.clearImagesCache();
           page++;
-          Logger.debug('Loading page $page...');
           final bool correct = await updateCurrentPage();
 
           if (!correct) {
-            Logger.warning('Invalid response for new page, rollback...');
             page--;
             canLoadMore = true;
-            Logger.debug('Can load more: $canLoadMore');
             removeLoader();
 
             Future<void>.delayed(const Duration(seconds: 1)).then((_) {
@@ -52,7 +47,6 @@ abstract class IMapper<T> extends ChangeNotifier {
 
           isLoading = false;
           canLoadMore = list.length % limit == 0;
-          Logger.debug('Can load more: $canLoadMore');
         }
       });
     }
@@ -92,8 +86,7 @@ abstract class IMapper<T> extends ChangeNotifier {
             (dynamic e) => toWidget(fromJson(e as Map<String, dynamic>)),
           )
           .toList();
-    } catch (exception, stackTrace) {
-      Logger.error('Error while parsing JSON', exception, stackTrace);
+    } catch (_) {
       return <Widget>[];
     }
   }

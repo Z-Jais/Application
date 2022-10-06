@@ -21,20 +21,33 @@ Episode _$EpisodeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Episode {
   String get uuid => throw _privateConstructorUsedError;
+
   Platform get platform => throw _privateConstructorUsedError;
+
   Anime get anime => throw _privateConstructorUsedError;
+
   EpisodeType get episodeType => throw _privateConstructorUsedError;
+
   LangType get langType => throw _privateConstructorUsedError;
+
   String get hash => throw _privateConstructorUsedError;
+
   String get releaseDate => throw _privateConstructorUsedError;
+
   int get season => throw _privateConstructorUsedError;
+
   int get number => throw _privateConstructorUsedError;
+
   String? get title => throw _privateConstructorUsedError;
+
   String get url => throw _privateConstructorUsedError;
+
   String get image => throw _privateConstructorUsedError;
+
   int get duration => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $EpisodeCopyWith<Episode> get copyWith => throw _privateConstructorUsedError;
 }
@@ -43,6 +56,7 @@ mixin _$Episode {
 abstract class $EpisodeCopyWith<$Res> {
   factory $EpisodeCopyWith(Episode value, $Res Function(Episode) then) =
       _$EpisodeCopyWithImpl<$Res>;
+
   $Res call(
       {String uuid,
       Platform platform,
@@ -59,8 +73,11 @@ abstract class $EpisodeCopyWith<$Res> {
       int duration});
 
   $PlatformCopyWith<$Res> get platform;
+
   $AnimeCopyWith<$Res> get anime;
+
   $EpisodeTypeCopyWith<$Res> get episodeType;
+
   $LangTypeCopyWith<$Res> get langType;
 }
 
@@ -69,6 +86,7 @@ class _$EpisodeCopyWithImpl<$Res> implements $EpisodeCopyWith<$Res> {
   _$EpisodeCopyWithImpl(this._value, this._then);
 
   final Episode _value;
+
   // ignore: unused_field
   final $Res Function(Episode) _then;
 
@@ -178,6 +196,7 @@ abstract class _$$_EpisodeCopyWith<$Res> implements $EpisodeCopyWith<$Res> {
   factory _$$_EpisodeCopyWith(
           _$_Episode value, $Res Function(_$_Episode) then) =
       __$$_EpisodeCopyWithImpl<$Res>;
+
   @override
   $Res call(
       {String uuid,
@@ -196,10 +215,13 @@ abstract class _$$_EpisodeCopyWith<$Res> implements $EpisodeCopyWith<$Res> {
 
   @override
   $PlatformCopyWith<$Res> get platform;
+
   @override
   $AnimeCopyWith<$Res> get anime;
+
   @override
   $EpisodeTypeCopyWith<$Res> get episodeType;
+
   @override
   $LangTypeCopyWith<$Res> get langType;
 }
@@ -412,30 +434,43 @@ abstract class _Episode implements Episode {
 
   @override
   String get uuid;
+
   @override
   Platform get platform;
+
   @override
   Anime get anime;
+
   @override
   EpisodeType get episodeType;
+
   @override
   LangType get langType;
+
   @override
   String get hash;
+
   @override
   String get releaseDate;
+
   @override
   int get season;
+
   @override
   int get number;
+
   @override
   String? get title;
+
   @override
   String get url;
+
   @override
   String get image;
+
   @override
   int get duration;
+
   @override
   @JsonKey(ignore: true)
   _$$_EpisodeCopyWith<_$_Episode> get copyWith =>

@@ -21,19 +21,31 @@ Manga _$MangaFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Manga {
   String get uuid => throw _privateConstructorUsedError;
+
   Platform get platform => throw _privateConstructorUsedError;
+
   Anime get anime => throw _privateConstructorUsedError;
+
   String get hash => throw _privateConstructorUsedError;
+
   String get releaseDate => throw _privateConstructorUsedError;
+
   String get url => throw _privateConstructorUsedError;
+
   String get cover => throw _privateConstructorUsedError;
+
   String get editor => throw _privateConstructorUsedError;
+
   String? get ref => throw _privateConstructorUsedError;
+
   int? get ean => throw _privateConstructorUsedError;
+
   int? get age => throw _privateConstructorUsedError;
+
   double? get price => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $MangaCopyWith<Manga> get copyWith => throw _privateConstructorUsedError;
 }
@@ -42,6 +54,7 @@ mixin _$Manga {
 abstract class $MangaCopyWith<$Res> {
   factory $MangaCopyWith(Manga value, $Res Function(Manga) then) =
       _$MangaCopyWithImpl<$Res>;
+
   $Res call(
       {String uuid,
       Platform platform,
@@ -57,6 +70,7 @@ abstract class $MangaCopyWith<$Res> {
       double? price});
 
   $PlatformCopyWith<$Res> get platform;
+
   $AnimeCopyWith<$Res> get anime;
 }
 
@@ -65,6 +79,7 @@ class _$MangaCopyWithImpl<$Res> implements $MangaCopyWith<$Res> {
   _$MangaCopyWithImpl(this._value, this._then);
 
   final Manga _value;
+
   // ignore: unused_field
   final $Res Function(Manga) _then;
 
@@ -154,6 +169,7 @@ class _$MangaCopyWithImpl<$Res> implements $MangaCopyWith<$Res> {
 abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
   factory _$$_MangaCopyWith(_$_Manga value, $Res Function(_$_Manga) then) =
       __$$_MangaCopyWithImpl<$Res>;
+
   @override
   $Res call(
       {String uuid,
@@ -171,6 +187,7 @@ abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
 
   @override
   $PlatformCopyWith<$Res> get platform;
+
   @override
   $AnimeCopyWith<$Res> get anime;
 }
@@ -371,28 +388,40 @@ abstract class _Manga implements Manga {
 
   @override
   String get uuid;
+
   @override
   Platform get platform;
+
   @override
   Anime get anime;
+
   @override
   String get hash;
+
   @override
   String get releaseDate;
+
   @override
   String get url;
+
   @override
   String get cover;
+
   @override
   String get editor;
+
   @override
   String? get ref;
+
   @override
   int? get ean;
+
   @override
   int? get age;
+
   @override
   double? get price;
+
   @override
   @JsonKey(ignore: true)
   _$$_MangaCopyWith<_$_Manga> get copyWith =>

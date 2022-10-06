@@ -13,10 +13,11 @@ _$_Anime _$$_AnimeFromJson(Map<String, dynamic> json) => _$_Anime(
       releaseDate: json['releaseDate'] as String,
       image: json['image'] as String,
       description: json['description'] as String?,
-      hashes:
-          (json['hashes'] as List<dynamic>).map((e) => e as String).toList(),
+      hashes: (json['hashes'] as List<dynamic>)
+          .map((dynamic e) => e as String)
+          .toList(),
       simulcasts: (json['simulcasts'] as List<dynamic>)
-          .map((e) => Simulcast.fromJson(e as Map<String, dynamic>))
+          .map((dynamic e) => Simulcast.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

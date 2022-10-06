@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/ads/banner_ad.dart';
 import 'package:jais/components/navbar.dart';
-import 'package:jais/logger/logger.dart';
 import 'package:jais/mappers/country_mapper.dart';
 import 'package:jais/mappers/display_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
@@ -19,32 +18,14 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  FlutterError.onError = (FlutterErrorDetails details) {
-    Logger.error(
-      'An error occurred with Flutter',
-      details.exception,
-      details.stack,
-    );
-  };
-
   if (AdUtils.canShowAd) {
     try {
-      Logger.info('Initializing Google Mobile Ads...');
       await MobileAds.instance.initialize();
       await createGlobalBanner();
-    } catch (exception, stacktrace) {
-      Logger.error(
-        'An error occurred while initializing Google Mobile Ads',
-        exception,
-        stacktrace,
-      );
-    }
+    } catch (_) {}
   }
 
-  Logger.info('Init all entities...');
   await Future.wait(<Future<void>>[CountryMapper.instance.update()]);
-
-  Logger.info('Running app...');
   runApp(const MyApp());
 }
 

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:jais/components/jlist.dart';
 import 'package:jais/mappers/display_mapper.dart';
@@ -13,7 +11,7 @@ class MangaList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!DisplayMapper.isOnMobile(context)) {
-      final width = MediaQuery.of(context).size.width;
+      final double width = MediaQuery.of(context).size.width;
 
       return GridView(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

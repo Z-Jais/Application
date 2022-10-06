@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/episodes/episode_list.dart';
 import 'package:jais/components/mangas/manga_list.dart';
-import 'package:jais/mappers/episode_mapper.dart';
 import 'package:jais/mappers/manga_mapper.dart';
 import 'package:provider/provider.dart';
 

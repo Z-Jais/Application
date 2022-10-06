@@ -5,7 +5,6 @@ import 'package:jais/entities/langtype.dart';
 import 'package:jais/entities/platform.dart';
 
 part 'episode.freezed.dart';
-
 part 'episode.g.dart';
 
 @freezed

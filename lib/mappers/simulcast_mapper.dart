@@ -16,7 +16,9 @@ class SimulcastMapper extends IMapper<Simulcast> {
         );
 
   @override
-  Future<bool> updateCurrentPage() async => loadPage(UrlConst.simulcasts);
+  Future<bool> updateCurrentPage() async {
+    return loadPage(UrlConst.simulcasts);
+  }
 
   List<Widget> toWidgetsSelected(Simulcast? simulcast) {
     if (simulcast == null) {

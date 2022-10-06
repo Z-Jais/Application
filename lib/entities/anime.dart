@@ -3,7 +3,6 @@ import 'package:jais/entities/country.dart';
 import 'package:jais/entities/simulcast.dart';
 
 part 'anime.freezed.dart';
-
 part 'anime.g.dart';
 
 @freezed

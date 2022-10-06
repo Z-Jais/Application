@@ -21,9 +21,11 @@ LangType _$LangTypeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LangType {
   String get uuid => throw _privateConstructorUsedError;
+
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $LangTypeCopyWith<LangType> get copyWith =>
       throw _privateConstructorUsedError;
@@ -33,6 +35,7 @@ mixin _$LangType {
 abstract class $LangTypeCopyWith<$Res> {
   factory $LangTypeCopyWith(LangType value, $Res Function(LangType) then) =
       _$LangTypeCopyWithImpl<$Res>;
+
   $Res call({String uuid, String name});
 }
 
@@ -41,6 +44,7 @@ class _$LangTypeCopyWithImpl<$Res> implements $LangTypeCopyWith<$Res> {
   _$LangTypeCopyWithImpl(this._value, this._then);
 
   final LangType _value;
+
   // ignore: unused_field
   final $Res Function(LangType) _then;
 
@@ -67,6 +71,7 @@ abstract class _$$_LangTypeCopyWith<$Res> implements $LangTypeCopyWith<$Res> {
   factory _$$_LangTypeCopyWith(
           _$_LangType value, $Res Function(_$_LangType) then) =
       __$$_LangTypeCopyWithImpl<$Res>;
+
   @override
   $Res call({String uuid, String name});
 }
@@ -154,8 +159,10 @@ abstract class _LangType implements LangType {
 
   @override
   String get uuid;
+
   @override
   String get name;
+
   @override
   @JsonKey(ignore: true)
   _$$_LangTypeCopyWith<_$_LangType> get copyWith =>

@@ -60,7 +60,7 @@ class MangaWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  manga.editor.ifEmptyOrNull('Aucune référence pour le moment'),
+                  manga.editor,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontStyle: FontStyle.italic),
                 ),
