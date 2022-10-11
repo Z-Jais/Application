@@ -8,7 +8,7 @@ import 'package:jais/mappers/display_mapper.dart';
 
 class Navbar extends StatelessWidget {
   final Function(int)? onPageChanged;
-  final List<Widget>? webWidgets;
+  final Iterable<Widget>? webWidgets;
 
   const Navbar({
     this.onPageChanged,

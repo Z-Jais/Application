@@ -25,10 +25,11 @@ class MangaWidget extends StatelessWidget {
         children: <Widget>[
           CachedNetworkImage(
             imageUrl: '${UrlConst.mangasAttachment}${manga.uuid}',
-            imageBuilder: (_, ImageProvider<Object> imageProvider) =>
-                RoundBorderWidget(
-              widget: Image(image: imageProvider, fit: BoxFit.cover),
-            ),
+            imageBuilder: (_, ImageProvider<Object> imageProvider) {
+              return RoundBorderWidget(
+                widget: Image(image: imageProvider, fit: BoxFit.cover),
+              );
+            },
             placeholder: (_, __) => const Skeleton(
               width: Const.mangaImageWith,
               height: Const.mangaImageHeight,

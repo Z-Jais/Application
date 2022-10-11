@@ -34,6 +34,8 @@ class MyApp extends StatelessWidget {
 
   const MyApp({super.key});
 
+  void changePage(int page) => NavbarMapper.instance.currentPage = page;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -58,21 +60,20 @@ class MyApp extends StatelessWidget {
           value: NavbarMapper.instance,
           child: Consumer<NavbarMapper>(
             builder: (BuildContext context, NavbarMapper navbarMapper, _) {
+              final bool onMobile = DisplayMapper.isOnMobile(context);
+
               return Scaffold(
                 resizeToAvoidBottomInset: false,
                 body: Column(
                   children: <Widget>[
                     Navbar(
-                      onPageChanged: (int page) =>
-                          navbarMapper.currentPage = page,
-                      webWidgets: navbarMapper.itemsTopNavBar(
-                        (int page) => navbarMapper.currentPage = page,
-                      ),
+                      onPageChanged: changePage,
+                      webWidgets: navbarMapper.itemsTopNavBar(changePage),
                     ),
                     Expanded(
                       child: PageView(
                         controller: navbarMapper.pageController,
-                        onPageChanged: (int i) => navbarMapper.currentPage = i,
+                        onPageChanged: changePage,
                         children: <Widget>[
                           const EpisodesView(),
                           const MangasView(),
@@ -84,17 +85,15 @@ class MyApp extends StatelessWidget {
                     ),
                   ],
                 ),
-                bottomNavigationBar: ((kIsWeb &&
-                            DisplayMapper.isOnMobile(context)) ||
-                        DisplayMapper.isOnMobile(context))
+                bottomNavigationBar: ((kIsWeb && onMobile) || onMobile)
                     ? BottomNavigationBar(
                         showSelectedLabels: false,
                         showUnselectedLabels: false,
                         selectedItemColor: Theme.of(context).primaryColor,
                         unselectedItemColor: Colors.grey,
                         currentIndex: navbarMapper.currentPage,
-                        onTap: (int index) => navbarMapper.currentPage = index,
-                        items: navbarMapper.itemsBottomNavBar,
+                        onTap: changePage,
+                        items: <BottomNavigationBarItem>[...navbarMapper.itemsBottomNavBar],
                       )
                     : null,
               );

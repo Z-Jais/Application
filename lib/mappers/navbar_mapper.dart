@@ -45,10 +45,10 @@ class NavbarMapper extends ChangeNotifier {
         ),
       ];
 
-  List<BottomNavigationBarItem> get itemsBottomNavBar =>
-      items.map((NavbarLink e) => e.toBottomNavigationBarItem()).toList();
+  Iterable<BottomNavigationBarItem> get itemsBottomNavBar =>
+      items.map((NavbarLink e) => e.toBottomNavigationBarItem());
 
-  List<Widget> itemsTopNavBar([Function(int)? callback]) => items
+  Iterable<Widget> itemsTopNavBar([Function(int)? callback]) => items
       .asMap()
       .map(
         (int i, NavbarLink e) => MapEntry<int, TextButton>(
@@ -56,8 +56,7 @@ class NavbarMapper extends ChangeNotifier {
           e.toTextButton(onPressed: () => callback?.call(i)),
         ),
       )
-      .values
-      .toList();
+      .values;
 }
 
 class NavbarLink {

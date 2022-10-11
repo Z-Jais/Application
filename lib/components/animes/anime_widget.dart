@@ -25,10 +25,11 @@ class AnimeWidget extends StatelessWidget {
         children: <Widget>[
           CachedNetworkImage(
             imageUrl: '${UrlConst.animeAttachment}${anime.uuid}',
-            imageBuilder: (_, ImageProvider<Object> imageProvider) =>
-                RoundBorderWidget(
-              widget: Image(image: imageProvider, fit: BoxFit.cover),
-            ),
+            imageBuilder: (_, ImageProvider<Object> imageProvider) {
+              return RoundBorderWidget(
+                widget: Image(image: imageProvider, fit: BoxFit.cover),
+              );
+            },
             placeholder: (_, __) => const Skeleton(
               width: Const.animeImageWith,
               height: Const.animeImageHeight,

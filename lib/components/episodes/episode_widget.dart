@@ -64,11 +64,12 @@ class EpisodeWidget extends StatelessWidget {
                 CachedNetworkImage(
                   imageUrl:
                       '${UrlConst.platformImage}${episode.platform.image}',
-                  imageBuilder: (_, ImageProvider<Object> imageProvider) =>
-                      RoundBorderWidget(
-                    radius: 360,
-                    widget: Image(image: imageProvider, fit: BoxFit.cover),
-                  ),
+                  imageBuilder: (_, ImageProvider<Object> imageProvider) {
+                    return RoundBorderWidget(
+                      radius: 360,
+                      widget: Image(image: imageProvider, fit: BoxFit.cover),
+                    );
+                  },
                   placeholder: (_, __) => const Skeleton(
                     width: Const.platformImageWith,
                     height: Const.platformImageHeight,

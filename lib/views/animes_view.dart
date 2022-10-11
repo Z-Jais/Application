@@ -19,14 +19,6 @@ class AnimesViewState extends State<AnimesView> {
   final SimulcastMapper _simulcastMapper = SimulcastMapper(listener: false);
   final AnimeMapper _animeMapper = AnimeMapper();
 
-  Future<void> rebuildAnimes({bool force = false}) async {
-    if (force) {
-      _animeMapper.clear();
-    }
-
-    await _animeMapper.updateCurrentPage();
-  }
-
   Future<void> scrollToEndSimulcasts() async {
     Future<dynamic>.delayed(const Duration(milliseconds: 100)).then((_) {
       if (!mounted) {
@@ -59,13 +51,13 @@ class AnimesViewState extends State<AnimesView> {
       final Simulcast simulcast =
           (_simulcastMapper.list.last as SimulcastWidget).simulcast;
       _animeMapper.simulcast = simulcast;
-      await rebuildAnimes();
+      _animeMapper.updateCurrentPage();
     }
   }
 
   @override
   Widget build(BuildContext context) => RefreshIndicator(
-        onRefresh: () async => init(),
+        onRefresh: init,
         child: SingleChildScrollView(
           controller: _animeMapper.scrollController,
           child: Column(
@@ -73,39 +65,38 @@ class AnimesViewState extends State<AnimesView> {
               ChangeNotifierProvider<SimulcastMapper>.value(
                 value: _simulcastMapper,
                 child: Consumer<SimulcastMapper>(
-                  builder: (
-                    BuildContext context,
-                    SimulcastMapper simulcastMapper,
-                    _,
-                  ) =>
-                      SimulcastList(
-                    scrollController: simulcastMapper.scrollController,
-                    children: simulcastMapper
-                        .toWidgetsSelected(_animeMapper.simulcast)
-                        .map(
-                          (Widget e) => e is SimulcastWidget
-                              ? GestureDetector(
-                                  onTap: () async {
-                                    _animeMapper.scrollController.jumpTo(0);
-                                    _animeMapper.simulcast = e.simulcast;
-                                    await rebuildAnimes(force: true);
-                                    setState(() {});
-                                  },
-                                  child: e,
-                                )
-                              : e,
-                        )
-                        .toList(),
-                  ),
+                  builder: (_, SimulcastMapper simulcastMapper, __) {
+                    return SimulcastList(
+                      scrollController: simulcastMapper.scrollController,
+                      children: <Widget>[
+                        ...simulcastMapper
+                            .toWidgetsSelected(_animeMapper.simulcast)
+                            .map(
+                              (Widget e) => e is SimulcastWidget
+                                  ? GestureDetector(
+                                      onTap: () async {
+                                        _animeMapper.scrollController.jumpTo(0);
+                                        _animeMapper.simulcast = e.simulcast;
+                                        _animeMapper.clear();
+                                        await _animeMapper.updateCurrentPage();
+                                        setState(() {});
+                                      },
+                                      child: e,
+                                    )
+                                  : e,
+                            )
+                      ],
+                    );
+                  },
                 ),
               ),
               ChangeNotifierProvider<AnimeMapper>.value(
                 value: _animeMapper,
                 child: Consumer<AnimeMapper>(
-                  builder: (BuildContext context, AnimeMapper animeMapper, _) =>
-                      AnimeList(
-                    children: animeMapper.list
-                        .map<Widget>(
+                  builder: (BuildContext context, AnimeMapper animeMapper, _) {
+                    return AnimeList(
+                      children: <Widget>[
+                        ...animeMapper.list.map<Widget>(
                           (Widget e) => GestureDetector(
                             child: e,
                             onTap: () async => e is AnimeWidget
@@ -117,8 +108,9 @@ class AnimesViewState extends State<AnimesView> {
                                 : null,
                           ),
                         )
-                        .toList(),
-                  ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],
