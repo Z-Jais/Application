@@ -43,7 +43,7 @@ class _EpisodesViewState extends State<EpisodesView> {
           builder: (_, EpisodeMapper episodeMapper, __) {
             return EpisodeList(
               key: _key,
-              scrollController: _episodeMapper.scrollController,
+              scrollController: episodeMapper.scrollController,
               children: episodeMapper.list,
             );
           },

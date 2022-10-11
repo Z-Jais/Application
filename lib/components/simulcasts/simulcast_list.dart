@@ -15,7 +15,9 @@ class SimulcastList extends StatelessWidget {
     return SingleChildScrollView(
       controller: scrollController,
       scrollDirection: Axis.horizontal,
-      child: Row(children: children),
+      child: Row(
+        children: <Widget>[...children],
+      ),
     );
   }
 }

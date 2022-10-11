@@ -64,6 +64,10 @@ class MangaWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontStyle: FontStyle.italic),
                 ),
+                const SizedBox(height: 10),
+                Text(
+                  'Il y a ${Utils.printTimeSinceDays(DateTime.parse(manga.releaseDate))}',
+                )
               ],
             ),
           ),
