@@ -23,6 +23,10 @@ class Dictionary {
           return 'Épisode';
         }
 
+        if (episodeType.name == 'SPECIAL') {
+          return 'Spécial';
+        }
+
         break;
       default:
         break;
