@@ -82,7 +82,7 @@ flutter {
 
 dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation platform('com.google.firebase:firebase-bom:30.4.1')
+    implementation platform('com.google.firebase:firebase-bom:30.5.0')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:multidex:1.0.3'
 }
