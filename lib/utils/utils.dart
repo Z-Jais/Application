@@ -104,9 +104,14 @@ class Utils {
 
       List<Widget> sublist = children.sublist(i, minV);
       sublist.addAll(List<Widget>.filled(rowCol - length, Container()));
-      sublist = sublist.map<Widget>((Widget e) => Expanded(child: e)).toList();
 
-      list.add(Row(children: sublist));
+      list.add(
+        Row(
+          children: <Widget>[
+            ...sublist.map<Widget>((Widget e) => Expanded(child: e))
+          ],
+        ),
+      );
     }
 
     return list;
