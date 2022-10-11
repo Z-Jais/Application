@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jais/components/platforms/platform_loader_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/mappers/display_mapper.dart';
 import 'package:jais/utils/const.dart';
@@ -21,10 +22,7 @@ class EpisodeLoaderWidget extends StatelessWidget {
         children: <Widget>[
           Row(
             children: const <Widget>[
-              Skeleton(
-                width: Const.platformImageWith,
-                height: Const.platformImageHeight,
-              ),
+              PlatformLoaderWidget(),
               SizedBox(width: 10),
               Expanded(child: Skeleton(height: Const.platformImageHeight)),
             ],

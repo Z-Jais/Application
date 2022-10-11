@@ -36,6 +36,10 @@ mixin _$Anime {
 
   List<Simulcast> get simulcasts => throw _privateConstructorUsedError;
 
+  List<Episode>? get episodes => throw _privateConstructorUsedError;
+
+  List<Manga>? get mangas => throw _privateConstructorUsedError;
+
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -55,7 +59,9 @@ abstract class $AnimeCopyWith<$Res> {
       String image,
       String? description,
       List<String> hashes,
-      List<Simulcast> simulcasts});
+      List<Simulcast> simulcasts,
+      List<Episode>? episodes,
+      List<Manga>? mangas});
 
   $CountryCopyWith<$Res> get country;
 }
@@ -79,6 +85,8 @@ class _$AnimeCopyWithImpl<$Res> implements $AnimeCopyWith<$Res> {
     Object? description = freezed,
     Object? hashes = freezed,
     Object? simulcasts = freezed,
+    Object? episodes = freezed,
+    Object? mangas = freezed,
   }) {
     return _then(_value.copyWith(
       uuid: uuid == freezed
@@ -113,6 +121,14 @@ class _$AnimeCopyWithImpl<$Res> implements $AnimeCopyWith<$Res> {
           ? _value.simulcasts
           : simulcasts // ignore: cast_nullable_to_non_nullable
               as List<Simulcast>,
+      episodes: episodes == freezed
+          ? _value.episodes
+          : episodes // ignore: cast_nullable_to_non_nullable
+              as List<Episode>?,
+      mangas: mangas == freezed
+          ? _value.mangas
+          : mangas // ignore: cast_nullable_to_non_nullable
+              as List<Manga>?,
     ));
   }
 
@@ -138,7 +154,9 @@ abstract class _$$_AnimeCopyWith<$Res> implements $AnimeCopyWith<$Res> {
       String image,
       String? description,
       List<String> hashes,
-      List<Simulcast> simulcasts});
+      List<Simulcast> simulcasts,
+      List<Episode>? episodes,
+      List<Manga>? mangas});
 
   @override
   $CountryCopyWith<$Res> get country;
@@ -163,6 +181,8 @@ class __$$_AnimeCopyWithImpl<$Res> extends _$AnimeCopyWithImpl<$Res>
     Object? description = freezed,
     Object? hashes = freezed,
     Object? simulcasts = freezed,
+    Object? episodes = freezed,
+    Object? mangas = freezed,
   }) {
     return _then(_$_Anime(
       uuid: uuid == freezed
@@ -197,6 +217,14 @@ class __$$_AnimeCopyWithImpl<$Res> extends _$AnimeCopyWithImpl<$Res>
           ? _value._simulcasts
           : simulcasts // ignore: cast_nullable_to_non_nullable
               as List<Simulcast>,
+      episodes: episodes == freezed
+          ? _value._episodes
+          : episodes // ignore: cast_nullable_to_non_nullable
+              as List<Episode>?,
+      mangas: mangas == freezed
+          ? _value._mangas
+          : mangas // ignore: cast_nullable_to_non_nullable
+              as List<Manga>?,
     ));
   }
 }
@@ -212,9 +240,13 @@ class _$_Anime implements _Anime {
       required this.image,
       required this.description,
       required final List<String> hashes,
-      required final List<Simulcast> simulcasts})
+      required final List<Simulcast> simulcasts,
+      final List<Episode>? episodes,
+      final List<Manga>? mangas})
       : _hashes = hashes,
-        _simulcasts = simulcasts;
+        _simulcasts = simulcasts,
+        _episodes = episodes,
+        _mangas = mangas;
 
   factory _$_Anime.fromJson(Map<String, dynamic> json) =>
       _$$_AnimeFromJson(json);
@@ -247,9 +279,29 @@ class _$_Anime implements _Anime {
     return EqualUnmodifiableListView(_simulcasts);
   }
 
+  final List<Episode>? _episodes;
+
+  @override
+  List<Episode>? get episodes {
+    final value = _episodes;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Manga>? _mangas;
+
+  @override
+  List<Manga>? get mangas {
+    final value = _mangas;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'Anime(uuid: $uuid, country: $country, name: $name, releaseDate: $releaseDate, image: $image, description: $description, hashes: $hashes, simulcasts: $simulcasts)';
+    return 'Anime(uuid: $uuid, country: $country, name: $name, releaseDate: $releaseDate, image: $image, description: $description, hashes: $hashes, simulcasts: $simulcasts, episodes: $episodes, mangas: $mangas)';
   }
 
   @override
@@ -267,7 +319,9 @@ class _$_Anime implements _Anime {
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other._hashes, _hashes) &&
             const DeepCollectionEquality()
-                .equals(other._simulcasts, _simulcasts));
+                .equals(other._simulcasts, _simulcasts) &&
+            const DeepCollectionEquality().equals(other._episodes, _episodes) &&
+            const DeepCollectionEquality().equals(other._mangas, _mangas));
   }
 
   @JsonKey(ignore: true)
@@ -281,7 +335,9 @@ class _$_Anime implements _Anime {
       const DeepCollectionEquality().hash(image),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(_hashes),
-      const DeepCollectionEquality().hash(_simulcasts));
+      const DeepCollectionEquality().hash(_simulcasts),
+      const DeepCollectionEquality().hash(_episodes),
+      const DeepCollectionEquality().hash(_mangas));
 
   @JsonKey(ignore: true)
   @override
@@ -305,7 +361,9 @@ abstract class _Anime implements Anime {
       required final String image,
       required final String? description,
       required final List<String> hashes,
-      required final List<Simulcast> simulcasts}) = _$_Anime;
+      required final List<Simulcast> simulcasts,
+      final List<Episode>? episodes,
+      final List<Manga>? mangas}) = _$_Anime;
 
   factory _Anime.fromJson(Map<String, dynamic> json) = _$_Anime.fromJson;
 
@@ -332,6 +390,12 @@ abstract class _Anime implements Anime {
 
   @override
   List<Simulcast> get simulcasts;
+
+  @override
+  List<Episode>? get episodes;
+
+  @override
+  List<Manga>? get mangas;
 
   @override
   @JsonKey(ignore: true)

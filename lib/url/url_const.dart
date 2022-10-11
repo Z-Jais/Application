@@ -1,3 +1,4 @@
+import 'package:jais/entities/anime.dart';
 import 'package:jais/entities/simulcast.dart';
 import 'package:jais/mappers/country_mapper.dart';
 
@@ -8,13 +9,18 @@ class UrlConst {
   static const String simulcasts = '${domain}simulcasts';
   static const String animes = '${domain}animes/';
   static const String mangas = '${domain}mangas/';
+  static const String platforms = '${domain}platforms/';
   static const String episodeAttachment = '${episodes}attachment/';
   static const String animeAttachment = '${animes}attachment/';
   static const String mangasAttachment = '${mangas}attachment/';
-  static const String platformImage = 'https://ziedelth.fr/images/platforms/';
+  static const String platformAttachment = '${platforms}attachment/';
 
   static String getEpisodesPage(int page, int limit) {
     return '${episodes}country/${CountryMapper.selectedCountry?.tag}/page/$page/limit/$limit';
+  }
+
+  static String getEpisodesAnimePage(Anime anime, int page, int limit) {
+    return '${episodes}anime/${anime.uuid}/page/$page/limit/$limit';
   }
 
   static String getAnimesPage(Simulcast simulcast, int page, int limit) {

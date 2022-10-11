@@ -10,6 +10,7 @@ import 'package:jais/mappers/display_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
 import 'package:jais/utils/ad_utils.dart';
 import 'package:jais/utils/color.dart';
+import 'package:jais/views/anime_detail_view.dart';
 import 'package:jais/views/animes_view.dart';
 import 'package:jais/views/episodes_view.dart';
 import 'package:jais/views/mangas_view.dart';
@@ -55,54 +56,62 @@ class MyApp extends StatelessWidget {
         primarySwatch: MaterialColor(_mainColor.value, mainColors),
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: SafeArea(
-        child: ChangeNotifierProvider<NavbarMapper>.value(
-          value: NavbarMapper.instance,
-          child: Consumer<NavbarMapper>(
-            builder: (BuildContext context, NavbarMapper navbarMapper, _) {
-              final bool onMobile = DisplayMapper.isOnMobile(context);
+      initialRoute: '/',
+      routes: <String, Widget Function(BuildContext)>{
+        '/': (BuildContext context) {
+          final bool onMobile = DisplayMapper.isOnMobile(context);
 
-              return Scaffold(
-                resizeToAvoidBottomInset: false,
-                body: Column(
-                  children: <Widget>[
-                    Navbar(
-                      onPageChanged: changePage,
-                      webWidgets: navbarMapper.itemsTopNavBar(changePage),
+          return SafeArea(
+            child: ChangeNotifierProvider<NavbarMapper>.value(
+              value: NavbarMapper.instance,
+              child: Consumer<NavbarMapper>(
+                builder: (_, NavbarMapper navbarMapper, __) {
+                  return Scaffold(
+                    resizeToAvoidBottomInset: false,
+                    body: Column(
+                      children: <Widget>[
+                        Navbar(
+                          onPageChanged: changePage,
+                          webWidgets: navbarMapper.itemsTopNavBar(changePage),
+                        ),
+                        Expanded(
+                          child: PageView(
+                            controller: navbarMapper.pageController,
+                            onPageChanged: changePage,
+                            children: <Widget>[
+                              const EpisodesView(),
+                              const MangasView(),
+                              Container(),
+                              const AnimesView(),
+                              Container(),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: PageView(
-                        controller: navbarMapper.pageController,
-                        onPageChanged: changePage,
-                        children: <Widget>[
-                          const EpisodesView(),
-                          const MangasView(),
-                          Container(),
-                          const AnimesView(),
-                          Container(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                bottomNavigationBar: ((kIsWeb && onMobile) || onMobile)
-                    ? BottomNavigationBar(
-                        showSelectedLabels: false,
-                        showUnselectedLabels: false,
-                        selectedItemColor: Theme.of(context).primaryColor,
-                        unselectedItemColor: Colors.grey,
-                        currentIndex: navbarMapper.currentPage,
-                        onTap: changePage,
-                        items: <BottomNavigationBarItem>[
-                          ...navbarMapper.itemsBottomNavBar
-                        ],
-                      )
-                    : null,
-              );
-            },
-          ),
-        ),
-      ),
+                    bottomNavigationBar: ((kIsWeb && onMobile) || onMobile)
+                        ? BottomNavigationBar(
+                            showSelectedLabels: false,
+                            showUnselectedLabels: false,
+                            selectedItemColor: Theme.of(context).primaryColor,
+                            unselectedItemColor: Colors.grey,
+                            currentIndex: navbarMapper.currentPage,
+                            onTap: changePage,
+                            items: <BottomNavigationBarItem>[
+                              ...navbarMapper.itemsBottomNavBar
+                            ],
+                          )
+                        : null,
+                  );
+                },
+              ),
+            ),
+          );
+        },
+        '/anime': (_) {
+          return const SafeArea(child: AnimeDetailView());
+        }
+      },
     );
   }
 }

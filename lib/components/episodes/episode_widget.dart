@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/ads/video_ad.dart';
+import 'package:jais/components/platforms/platform_widget.dart';
 import 'package:jais/components/roundborder_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/entities/episode.dart';
@@ -61,26 +62,7 @@ class EpisodeWidget extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                CachedNetworkImage(
-                  imageUrl:
-                      '${UrlConst.platformImage}${episode.platform.image}',
-                  imageBuilder: (_, ImageProvider<Object> imageProvider) {
-                    return RoundBorderWidget(
-                      radius: 360,
-                      widget: Image(image: imageProvider, fit: BoxFit.cover),
-                    );
-                  },
-                  placeholder: (_, __) => const Skeleton(
-                    width: Const.platformImageWith,
-                    height: Const.platformImageHeight,
-                  ),
-                  errorWidget: (_, __, ___) => const Skeleton(
-                    width: Const.platformImageWith,
-                    height: Const.platformImageHeight,
-                  ),
-                  width: Const.platformImageWith,
-                  height: Const.platformImageHeight,
-                ),
+                PlatformWidget(platform: episode.platform),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
