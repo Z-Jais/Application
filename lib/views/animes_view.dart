@@ -93,7 +93,7 @@ class AnimesViewState extends State<AnimesView> {
               ChangeNotifierProvider<AnimeMapper>.value(
                 value: _animeMapper,
                 child: Consumer<AnimeMapper>(
-                  builder: (BuildContext context, AnimeMapper animeMapper, _) {
+                  builder: (_, AnimeMapper animeMapper, __) {
                     return AnimeList(
                       children: <Widget>[
                         ...animeMapper.list.map<Widget>(

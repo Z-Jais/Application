@@ -93,7 +93,9 @@ class MyApp extends StatelessWidget {
                         unselectedItemColor: Colors.grey,
                         currentIndex: navbarMapper.currentPage,
                         onTap: changePage,
-                        items: <BottomNavigationBarItem>[...navbarMapper.itemsBottomNavBar],
+                        items: <BottomNavigationBarItem>[
+                          ...navbarMapper.itemsBottomNavBar
+                        ],
                       )
                     : null,
               );
