@@ -16,18 +16,20 @@ class EpisodeList extends StatelessWidget {
       final double width = MediaQuery.of(context).size.width;
 
       return GridView(
+        addAutomaticKeepAlives: false,
+        addRepaintBoundaries: false,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           childAspectRatio: -1.92 + 0.42 * log(width),
         ),
         controller: scrollController,
-        children: children,
+        children: <Widget>[...children],
       );
     }
 
     return JList(
       controller: scrollController,
-      children: children,
+      children: <Widget>[...children],
     );
   }
 }
