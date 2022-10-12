@@ -6,7 +6,6 @@ import 'package:jais/entities/simulcast.dart';
 import 'episode.dart';
 
 part 'anime.freezed.dart';
-
 part 'anime.g.dart';
 
 @freezed

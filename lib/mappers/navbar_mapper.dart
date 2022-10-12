@@ -29,15 +29,11 @@ class NavbarMapper extends ChangeNotifier {
         ),
         const NavbarLink(
           name: 'Mangas',
-          icon: Icon(Icons.book),
+          icon: Icon(Icons.menu_book),
         ),
         const NavbarLink(
           name: 'Animes',
           icon: Icon(Icons.live_tv),
-        ),
-        const NavbarLink(
-          name: 'Utilisateur',
-          icon: Icon(Icons.person),
         ),
       ];
 

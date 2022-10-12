@@ -74,18 +74,18 @@ class AnimesViewState extends State<AnimesView> {
                           .toWidgetsSelected(_animeMapper.simulcast)
                           .map(
                             (Widget e) => e is SimulcastWidget
-                            ? GestureDetector(
-                          onTap: () async {
-                            _animeMapper.scrollController.jumpTo(0);
-                            _animeMapper.simulcast = e.simulcast;
-                            _animeMapper.clear();
-                            await _animeMapper.updateCurrentPage();
-                            setState(() {});
-                          },
-                          child: e,
-                        )
-                            : e,
-                      )
+                                ? GestureDetector(
+                                    onTap: () async {
+                                      _animeMapper.scrollController.jumpTo(0);
+                                      _animeMapper.simulcast = e.simulcast;
+                                      _animeMapper.clear();
+                                      await _animeMapper.updateCurrentPage();
+                                      setState(() {});
+                                    },
+                                    child: e,
+                                  )
+                                : e,
+                          )
                     ],
                   );
                 },
@@ -98,14 +98,14 @@ class AnimesViewState extends State<AnimesView> {
                   return AnimeList(
                     children: <Widget>[
                       ...animeMapper.list.map<Widget>(
-                            (Widget e) => GestureDetector(
+                        (Widget e) => GestureDetector(
                           child: e,
                           onTap: () async => e is AnimeWidget
                               ? Navigator.pushNamed(
-                            context,
-                            '/anime',
-                            arguments: e.anime,
-                          )
+                                  context,
+                                  '/anime',
+                                  arguments: e.anime,
+                                )
                               : null,
                         ),
                       )

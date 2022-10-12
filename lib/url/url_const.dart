@@ -23,11 +23,15 @@ class UrlConst {
     return '${episodes}anime/${anime.uuid}/page/$page/limit/$limit';
   }
 
+  static String getMangasPage(int page, int limit) {
+    return '${mangas}country/${CountryMapper.selectedCountry?.tag}/page/$page/limit/$limit';
+  }
+
   static String getAnimesPage(Simulcast simulcast, int page, int limit) {
     return '${animes}country/${CountryMapper.selectedCountry?.tag}/simulcast/${simulcast.uuid}/page/$page/limit/$limit';
   }
 
-  static String getMangasPage(int page, int limit) {
-    return '${mangas}country/${CountryMapper.selectedCountry?.tag}/page/$page/limit/$limit';
+  static String getAnimesSearch(String query) {
+    return '${animes}country/${CountryMapper.selectedCountry?.tag}/search/name/$query';
   }
 }

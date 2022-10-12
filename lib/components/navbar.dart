@@ -9,10 +9,12 @@ import 'package:jais/mappers/display_mapper.dart';
 class Navbar extends StatelessWidget {
   final Function(int)? onPageChanged;
   final Iterable<Widget>? webWidgets;
+  final Iterable<Widget>? topWidgets;
 
   const Navbar({
     this.onPageChanged,
     this.webWidgets,
+    this.topWidgets,
     super.key,
   });
 
@@ -39,6 +41,7 @@ class Navbar extends StatelessWidget {
                 ? AdWidget(ad: globalBannerAd!)
                 : ColoredBox(color: Theme.of(context).backgroundColor),
           ),
+          ...?topWidgets,
           if (kIsWeb &&
               !DisplayMapper.isOnMobile(context) &&
               webWidgets != null) ...<Widget>[

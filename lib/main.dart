@@ -11,6 +11,7 @@ import 'package:jais/mappers/navbar_mapper.dart';
 import 'package:jais/utils/ad_utils.dart';
 import 'package:jais/utils/color.dart';
 import 'package:jais/views/anime_detail_view.dart';
+import 'package:jais/views/anime_search_view.dart';
 import 'package:jais/views/animes_view.dart';
 import 'package:jais/views/episodes_view.dart';
 import 'package:jais/views/mangas_view.dart';
@@ -73,16 +74,24 @@ class MyApp extends StatelessWidget {
                         Navbar(
                           onPageChanged: changePage,
                           webWidgets: navbarMapper.itemsTopNavBar(changePage),
+                          topWidgets: navbarMapper.currentPage == 2
+                              ? <Widget>[
+                                  IconButton(
+                                    onPressed: () async =>
+                                        Navigator.pushNamed(context, '/search'),
+                                    icon: const Icon(Icons.search),
+                                  ),
+                                ]
+                              : null,
                         ),
                         Expanded(
                           child: PageView(
                             controller: navbarMapper.pageController,
                             onPageChanged: changePage,
-                            children: <Widget>[
-                              const EpisodesView(),
-                              const MangasView(),
-                              const AnimesView(),
-                              Container(),
+                            children: const <Widget>[
+                              EpisodesView(),
+                              MangasView(),
+                              AnimesView(),
                             ],
                           ),
                         ),
@@ -109,6 +118,9 @@ class MyApp extends StatelessWidget {
         },
         '/anime': (_) {
           return const SafeArea(child: AnimeDetailView());
+        },
+        '/search': (_) {
+          return const SafeArea(child: AnimeSearchView());
         }
       },
     );
