@@ -37,6 +37,26 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(_anime?.name ?? ''),
+        actions: <Widget>[
+          if (_anime?.description != null &&
+              _anime?.description?.isNotEmpty == true)
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              onPressed: () async => showDialog(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: Text(_anime?.name ?? ''),
+                  content: Text(_anime?.description ?? ''),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('OK'),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
       ),
       body: Column(
         children: <Widget>[
