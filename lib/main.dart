@@ -81,7 +81,6 @@ class MyApp extends StatelessWidget {
                             children: <Widget>[
                               const EpisodesView(),
                               const MangasView(),
-                              Container(),
                               const AnimesView(),
                               Container(),
                             ],

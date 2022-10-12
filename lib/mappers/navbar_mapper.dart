@@ -32,10 +32,6 @@ class NavbarMapper extends ChangeNotifier {
           icon: Icon(Icons.book),
         ),
         const NavbarLink(
-          name: 'News',
-          icon: Icon(Icons.newspaper),
-        ),
-        const NavbarLink(
           name: 'Animes',
           icon: Icon(Icons.live_tv),
         ),
