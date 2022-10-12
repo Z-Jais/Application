@@ -12,6 +12,7 @@ class AnimeDetailView extends StatefulWidget {
 }
 
 class _AnimeDetailViewState extends State<AnimeDetailView> {
+  Anime? _anime;
   final AnimeEpisodeMapper _animeEpisodeMapper = AnimeEpisodeMapper();
 
   @override
@@ -26,13 +27,16 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
 
   @override
   Widget build(BuildContext context) {
-    final Anime anime = ModalRoute.of(context)!.settings.arguments as Anime;
-    _animeEpisodeMapper.anime = anime;
+    // If anime is not init
+    if (_anime == null) {
+      _anime = ModalRoute.of(context)!.settings.arguments as Anime;
+      _animeEpisodeMapper.anime = _anime;
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(anime.name),
+        title: Text(_anime?.name ?? ''),
       ),
       body: Column(
         children: <Widget>[
