@@ -45,7 +45,6 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
               onPressed: () async => showDialog(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
-                  title: Text(_anime?.name ?? ''),
                   content: Text(_anime?.description ?? ''),
                   actions: <Widget>[
                     TextButton(
