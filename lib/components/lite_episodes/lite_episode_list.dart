@@ -24,7 +24,7 @@ class LiteEpisodeList extends StatelessWidget {
         addRepaintBoundaries: false,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          childAspectRatio: 0.41 * log(width),
+          childAspectRatio: 0.35 * log(width),
         ),
         controller: scrollController,
         children: <Widget>[...children],

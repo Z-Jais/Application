@@ -41,7 +41,13 @@ class MyApp extends StatelessWidget {
 
   const MyApp({super.key});
 
-  void changePage(int page) => NavbarMapper.instance.currentPage = page;
+  void changePage(int page, {BuildContext? context}) {
+    if (kIsWeb && context != null) {
+      context.go('/$page');
+    }
+
+    NavbarMapper.instance.currentPage = page;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,12 +98,16 @@ class MyApp extends StatelessWidget {
                           children: <Widget>[
                             Navbar(
                               onPageChanged: changePage,
-                              webWidgets:
-                                  navbarMapper.itemsTopNavBar((int index) => context.go('/$index')),
-                              topWidgets: navbarMapper.currentPage == 2
+                              webWidgets: navbarMapper.itemsTopNavBar(
+                                (int page) =>
+                                    changePage(page, context: context),
+                              ),
+                              topWidgets: (kIsWeb && page == 2) ||
+                                      navbarMapper.currentPage == 2
                                   ? <Widget>[
                                       IconButton(
-                                        onPressed: () => context.go('/search'),
+                                        onPressed: () =>
+                                            context.go('/anime/search'),
                                         icon: const Icon(Icons.search),
                                       ),
                                     ]
@@ -106,7 +116,8 @@ class MyApp extends StatelessWidget {
                             Expanded(
                               child: PageView(
                                 controller: navbarMapper.pageController,
-                                onPageChanged: changePage,
+                                onPageChanged: (int page) =>
+                                    changePage(page, context: context),
                                 children: const <Widget>[
                                   EpisodesView(),
                                   MangasView(),
@@ -123,8 +134,10 @@ class MyApp extends StatelessWidget {
                                 selectedItemColor:
                                     Theme.of(context).primaryColor,
                                 unselectedItemColor: Colors.grey,
-                                currentIndex: navbarMapper.currentPage,
-                                onTap: changePage,
+                                currentIndex:
+                                    kIsWeb ? page : navbarMapper.currentPage,
+                                onTap: (int page) =>
+                                    changePage(page, context: context),
                                 items: <BottomNavigationBarItem>[
                                   ...navbarMapper.itemsBottomNavBar
                                 ],
@@ -138,7 +151,7 @@ class MyApp extends StatelessWidget {
             },
           ),
           GoRoute(
-            path: '/search',
+            path: '/anime/search',
             builder: (_, __) {
               return const SafeArea(child: AnimeSearchView());
             },

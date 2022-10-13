@@ -21,7 +21,7 @@ class _AnimeSearchViewState extends State<AnimeSearchView> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/'),
+          onPressed: () => context.go('/2'),
         ),
         title: TextField(
           decoration: const InputDecoration(
