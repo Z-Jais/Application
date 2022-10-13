@@ -40,7 +40,7 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
         title: Text(_anime?.name ?? ''),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/'),
+          onPressed: () => context.go('/2'),
         ),
         actions: <Widget>[
           if (_anime?.description != null &&

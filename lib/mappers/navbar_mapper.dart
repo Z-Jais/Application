@@ -3,7 +3,7 @@ import 'package:jais/utils/utils.dart';
 
 class NavbarMapper extends ChangeNotifier {
   static final NavbarMapper instance = NavbarMapper();
-  late final PageController pageController;
+  late PageController pageController;
 
   NavbarMapper({int defaultPage = 0})
       : pageController = PageController(initialPage: defaultPage);
@@ -17,7 +17,12 @@ class NavbarMapper extends ChangeNotifier {
   }
 
   set currentPage(int page) {
-    pageController.jumpToPage(page);
+    try {
+      pageController.jumpToPage(page);
+    } catch (_) {
+      pageController = PageController(initialPage: page);
+    }
+
     notifyListeners();
     Utils.clearImagesCache();
   }

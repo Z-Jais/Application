@@ -21,6 +21,10 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  FlutterError.onError = (FlutterErrorDetails details) {
+    debugPrint('Error: ${details.exception} StackTrace: ${details.stack}');
+  };
+
   if (AdUtils.canShowAd) {
     try {
       await MobileAds.instance.initialize();
@@ -59,18 +63,21 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
       ),
       routerConfig: GoRouter(
-        initialLocation: '/',
-        errorBuilder: (_, Object error) {
+        initialLocation: '/0',
+        errorBuilder: (_, GoRouterState state) {
           return Scaffold(
             body: Center(
-              child: Text(error.toString()),
+              child: Text('Error: ${state.location}\n\n${state.error}'),
             ),
           );
         },
         routes: <GoRoute>[
           GoRoute(
-            path: '/',
-            builder: (_, __) {
+            path: '/:page',
+            builder: (_, GoRouterState state) {
+              final int page = int.parse(state.params['page'] ?? '0');
+              changePage(page);
+
               return SafeArea(
                 child: ChangeNotifierProvider<NavbarMapper>.value(
                   value: NavbarMapper.instance,
@@ -86,7 +93,7 @@ class MyApp extends StatelessWidget {
                             Navbar(
                               onPageChanged: changePage,
                               webWidgets:
-                                  navbarMapper.itemsTopNavBar(changePage),
+                                  navbarMapper.itemsTopNavBar((int index) => context.go('/$index')),
                               topWidgets: navbarMapper.currentPage == 2
                                   ? <Widget>[
                                       IconButton(
