@@ -53,7 +53,6 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
               ? Container(
                   height: 100,
                   padding: const EdgeInsets.all(8),
-                  color: Colors.grey[200],
                   child: SingleChildScrollView(
                     child: Text(_anime?.description ?? ''),
                   ),
