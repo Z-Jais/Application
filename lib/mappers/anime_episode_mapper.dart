@@ -5,9 +5,9 @@ import 'package:jais/mappers/imapper.dart';
 import 'package:jais/url/url_const.dart';
 
 class AnimeEpisodeMapper extends IMapper<Episode> {
-  final String uuid;
+  String? uuid;
 
-  AnimeEpisodeMapper({required this.uuid})
+  AnimeEpisodeMapper()
       : super(
           limit: 24,
           loaderWidget: const LiteEpisodeLoaderWidget(),
@@ -17,6 +17,10 @@ class AnimeEpisodeMapper extends IMapper<Episode> {
 
   @override
   Future<bool> updateCurrentPage() async {
-    return await loadPage(UrlConst.getEpisodesAnimePage(uuid, page, limit));
+    if (uuid == null) {
+      return false;
+    }
+
+    return await loadPage(UrlConst.getEpisodesAnimePage(uuid!, page, limit));
   }
 }

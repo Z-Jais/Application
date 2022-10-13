@@ -1,4 +1,3 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/components/border_element.dart';
 import 'package:jais/components/platforms/platform_loader_widget.dart';
@@ -15,16 +14,19 @@ class LiteEpisodeLoaderWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: Badge(
-              position: BadgePosition.topEnd(top: 0, end: 0),
-              toAnimate: false,
-              badgeColor: Colors.white,
-              badgeContent: const PlatformLoaderWidget(),
-              child: Skeleton(
-                height: DisplayMapper.isOnMobile(context, 1200)
-                    ? Const.episodeImageHeight
-                    : null,
-              ),
+            child: Stack(
+              children: <Widget>[
+                Skeleton(
+                  height: DisplayMapper.isOnMobile(context)
+                      ? Const.episodeImageHeight / 2
+                      : null,
+                ),
+                const Positioned(
+                  top: 2,
+                  right: 3,
+                  child: PlatformLoaderWidget(),
+                )
+              ],
             ),
           ),
           const SizedBox(width: 10),
@@ -40,8 +42,6 @@ class LiteEpisodeLoaderWidget extends StatelessWidget {
                 Skeleton(width: 100, height: 20),
                 SizedBox(height: 5),
                 Skeleton(width: 100, height: 20),
-                SizedBox(height: 10),
-                Skeleton(width: 200, height: 20),
               ],
             ),
           ),

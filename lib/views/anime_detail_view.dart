@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jais/components/lite_episodes/lite_episode_list.dart';
-import 'package:jais/components/lite_episodes/lite_episode_widget.dart';
 import 'package:jais/entities/anime.dart';
 import 'package:jais/mappers/anime_episode_mapper.dart';
 import 'package:provider/provider.dart';
 
 class AnimeDetailView extends StatefulWidget {
-  final String uuid;
-
-  const AnimeDetailView({required this.uuid, super.key});
+  const AnimeDetailView({super.key});
 
   @override
   State<AnimeDetailView> createState() => _AnimeDetailViewState();
 }
 
 class _AnimeDetailViewState extends State<AnimeDetailView> {
-  late final AnimeEpisodeMapper _animeEpisodeMapper;
-  UniqueKey _key = UniqueKey();
+  final AnimeEpisodeMapper _animeEpisodeMapper = AnimeEpisodeMapper();
   Anime? _anime;
+  bool _isOpen = false;
 
   @override
   void initState() {
     super.initState();
-    _animeEpisodeMapper = AnimeEpisodeMapper(uuid: widget.uuid);
     _animeEpisodeMapper.clear();
 
     WidgetsBinding.instance.addPostFrameCallback(
@@ -33,34 +28,38 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    if (_anime == null) {
+      _anime = ModalRoute.of(context)!.settings.arguments as Anime;
+      _animeEpisodeMapper.uuid = _anime!.uuid;
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        key: _key,
         title: Text(_anime?.name ?? ''),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/2'),
-        ),
         actions: <Widget>[
-          if (_anime?.description != null &&
-              _anime?.description?.isNotEmpty == true)
-            IconButton(
-              icon: const Icon(Icons.info_outline),
-              onPressed: () async => showDialog(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  content: Text(_anime?.description ?? ''),
-                  actions: <Widget>[
-                    TextButton(
-                      child: const Text('OK'),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              setState(() {
+                _isOpen = !_isOpen;
+              });
+            },
+          ),
         ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(_isOpen ? 100 : 0),
+          child: _isOpen
+              ? Container(
+                  height: 100,
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[200],
+                  child: SingleChildScrollView(
+                    child: Text(_anime?.description ?? ''),
+                  ),
+                )
+              : const SizedBox(),
+        ),
       ),
       body: Column(
         children: <Widget>[
@@ -74,16 +73,6 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
                 value: _animeEpisodeMapper,
                 child: Consumer<AnimeEpisodeMapper>(
                   builder: (_, AnimeEpisodeMapper animeEpisodeMapper, __) {
-                    final Widget firstWidget = animeEpisodeMapper.list.first;
-
-                    if (firstWidget is LiteEpisodeWidget && _anime == null) {
-                      _anime = firstWidget.episode.anime;
-
-                      WidgetsBinding.instance.addPostFrameCallback(
-                        (_) => setState(() => _key = UniqueKey()),
-                      );
-                    }
-
                     return LiteEpisodeList(
                       scrollController: animeEpisodeMapper.scrollController,
                       children: animeEpisodeMapper.list,

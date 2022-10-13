@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jais/components/animes/anime_list.dart';
 import 'package:jais/mappers/anime_mapper.dart';
 import 'package:provider/provider.dart';
@@ -19,10 +18,6 @@ class _AnimeSearchViewState extends State<AnimeSearchView> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/2'),
-        ),
         title: TextField(
           decoration: const InputDecoration(
             hintText: 'Rechercher un anime',
