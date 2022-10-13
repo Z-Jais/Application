@@ -1,4 +1,7 @@
 import 'package:http/http.dart' as http;
+import 'package:jais/ads/video_ad.dart';
+import 'package:jais/utils/ad_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 extension UrlExtension on http.Response? {
   bool get isOk => this != null && this?.statusCode == 200;
@@ -46,6 +49,23 @@ class URL {
           .timeout(const Duration(seconds: 10));
     } catch (_) {
       return null;
+    }
+  }
+
+  static Future<void> goOnUrl(String url) async {
+    Future<bool> redirectToEpisode() async {
+      return launchUrl(
+        Uri.parse(url),
+        mode: LaunchMode.externalApplication,
+      );
+    }
+
+    if (AdUtils.canShowAd) {
+      showVideoAd(
+        callback: (_) async => redirectToEpisode(),
+      );
+    } else {
+      redirectToEpisode();
     }
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SimulcastList extends StatelessWidget {
   final ScrollController? scrollController;
-  final List<Widget> children;
+  final Iterable<Widget> children;
 
   const SimulcastList({
     required this.children,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/animes/anime_list.dart';
-import 'package:jais/components/animes/anime_widget.dart';
 import 'package:jais/components/simulcasts/simulcast_list.dart';
 import 'package:jais/components/simulcasts/simulcast_widget.dart';
 import 'package:jais/entities/simulcast.dart';
@@ -69,24 +68,22 @@ class AnimesViewState extends State<AnimesView> {
                 builder: (_, SimulcastMapper simulcastMapper, __) {
                   return SimulcastList(
                     scrollController: simulcastMapper.scrollController,
-                    children: <Widget>[
-                      ...simulcastMapper
-                          .toWidgetsSelected(_animeMapper.simulcast)
-                          .map(
-                            (Widget e) => e is SimulcastWidget
-                                ? GestureDetector(
-                                    onTap: () async {
-                                      _animeMapper.scrollController.jumpTo(0);
-                                      _animeMapper.simulcast = e.simulcast;
-                                      _animeMapper.clear();
-                                      await _animeMapper.updateCurrentPage();
-                                      setState(() {});
-                                    },
-                                    child: e,
-                                  )
-                                : e,
-                          )
-                    ],
+                    children: simulcastMapper
+                        .toWidgetsSelected(_animeMapper.simulcast)
+                        .map(
+                          (Widget e) => e is SimulcastWidget
+                              ? GestureDetector(
+                                  onTap: () async {
+                                    _animeMapper.scrollController.jumpTo(0);
+                                    _animeMapper.simulcast = e.simulcast;
+                                    _animeMapper.clear();
+                                    await _animeMapper.updateCurrentPage();
+                                    setState(() {});
+                                  },
+                                  child: e,
+                                )
+                              : e,
+                        ),
                   );
                 },
               ),
@@ -95,22 +92,7 @@ class AnimesViewState extends State<AnimesView> {
               value: _animeMapper,
               child: Consumer<AnimeMapper>(
                 builder: (_, AnimeMapper animeMapper, __) {
-                  return AnimeList(
-                    children: <Widget>[
-                      ...animeMapper.list.map<Widget>(
-                        (Widget e) => GestureDetector(
-                          child: e,
-                          onTap: () async => e is AnimeWidget
-                              ? Navigator.pushNamed(
-                                  context,
-                                  '/anime',
-                                  arguments: e.anime,
-                                )
-                              : null,
-                        ),
-                      )
-                    ],
-                  );
+                  return AnimeList(children: animeMapper.list);
                 },
               ),
             ),

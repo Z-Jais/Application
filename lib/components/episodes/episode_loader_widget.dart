@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jais/components/border_element.dart';
 import 'package:jais/components/platforms/platform_loader_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/mappers/display_mapper.dart';
@@ -9,13 +10,7 @@ class EpisodeLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).primaryColor),
-        borderRadius: BorderRadius.circular(8),
-      ),
+    return BorderElement(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

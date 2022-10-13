@@ -1,4 +1,3 @@
-import 'package:jais/entities/anime.dart';
 import 'package:jais/entities/simulcast.dart';
 import 'package:jais/mappers/country_mapper.dart';
 
@@ -19,8 +18,8 @@ class UrlConst {
     return '${episodes}country/${CountryMapper.selectedCountry?.tag}/page/$page/limit/$limit';
   }
 
-  static String getEpisodesAnimePage(Anime anime, int page, int limit) {
-    return '${episodes}anime/${anime.uuid}/page/$page/limit/$limit';
+  static String getEpisodesAnimePage(String uuid, int page, int limit) {
+    return '${episodes}anime/$uuid/page/$page/limit/$limit';
   }
 
   static String getMangasPage(int page, int limit) {
