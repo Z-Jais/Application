@@ -28,7 +28,7 @@ dev_dependencies:
   flutter_launcher_icons_maker: ^0.10.2
   flutter_lints: ^2.0.1
   flutter_native_splash: ^2.2.11
-  freezed: ^2.1.1
+  freezed: ^2.2.0
   json_serializable: ^6.5.1
 
 flutter_icons:
