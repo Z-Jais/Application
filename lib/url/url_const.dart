@@ -33,4 +33,8 @@ class UrlConst {
   static String getAnimesSearch(String query) {
     return '${animes}country/${CountryMapper.selectedCountry?.tag}/search/name/$query';
   }
+
+  static String getMangaSearch(String ean) {
+    return '${mangas}country/${CountryMapper.selectedCountry?.tag}/search/ean/$ean';
+  }
 }

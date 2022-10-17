@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/ads/banner_ad.dart';
 import 'package:jais/components/navbar.dart';
@@ -11,6 +12,7 @@ import 'package:jais/views/anime_detail_view.dart';
 import 'package:jais/views/anime_search_view.dart';
 import 'package:jais/views/animes_view.dart';
 import 'package:jais/views/episodes_view.dart';
+import 'package:jais/views/manga_search_view.dart';
 import 'package:jais/views/mangas_view.dart';
 import 'package:provider/provider.dart';
 
@@ -66,17 +68,37 @@ class MyApp extends StatelessWidget {
                       children: <Widget>[
                         Navbar(
                           onPageChanged: changePage,
-                          topWidgets: navbarMapper.currentPage == 2
-                              ? <Widget>[
-                                  IconButton(
-                                    onPressed: () async {
-                                      Navigator.of(context)
-                                          .pushNamed('/search');
-                                    },
-                                    icon: const Icon(Icons.search),
-                                  ),
-                                ]
-                              : null,
+                          topWidgets: <Widget>[
+                            if (navbarMapper.currentPage == 1)
+                              IconButton(
+                                onPressed: () async {
+                                  try {
+                                    final String ean =
+                                        await FlutterBarcodeScanner.scanBarcode(
+                                      '#ff6666',
+                                      'Annuler',
+                                      true,
+                                      ScanMode.BARCODE,
+                                    );
+
+                                    showModalBottomSheet<void>(
+                                      context: context,
+                                      builder: (_) {
+                                        return MangaSearchView(ean: ean);
+                                      },
+                                    );
+                                  } catch (_) {}
+                                },
+                                icon: const Icon(Icons.document_scanner),
+                              ),
+                            if (navbarMapper.currentPage == 2)
+                              IconButton(
+                                onPressed: () async {
+                                  Navigator.of(context).pushNamed('/search');
+                                },
+                                icon: const Icon(Icons.search),
+                              ),
+                          ],
                         ),
                         Expanded(
                           child: PageView(
