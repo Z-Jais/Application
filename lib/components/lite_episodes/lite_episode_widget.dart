@@ -35,61 +35,58 @@ class LiteEpisodeWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () async => URL.goOnUrl(episode.url),
       child: BorderElement(
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Stack(
-                  children: <Widget>[
-                    image(
-                      height: DisplayMapper.isOnMobile(context)
-                          ? Const.episodeImageHeight / 2
-                          : null,
-                    ),
-                    Positioned(
-                      top: 2,
-                      right: 3,
-                      child: PlatformWidget(platform: episode.platform),
-                    )
-                  ],
-                ),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Stack(
+                children: <Widget>[
+                  image(
+                    height: DisplayMapper.isOnMobile(context)
+                        ? Const.episodeImageHeight / 2
+                        : null,
+                  ),
+                  Positioned(
+                    top: 2,
+                    right: 3,
+                    child: PlatformWidget(platform: episode.platform),
+                  )
+                ],
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      episode.title.ifEmptyOrNull('＞﹏＜').replaceAll('\n', ' '),
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      '${Dictionary.getSeason()} ${episode.season}',
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      '${Dictionary.getEpisodeType(episode.episodeType)} ${episode.number} ${Dictionary.getLangType(episode.langType)}',
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        const Icon(Icons.movie),
-                        const SizedBox(width: 5),
-                        Text(
-                          Utils.printDuration(
-                            Duration(seconds: episode.duration),
-                          ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    episode.title.ifEmptyOrNull('＞﹏＜').replaceAll('\n', ' '),
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '${Dictionary.getSeason()} ${episode.season}',
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    '${Dictionary.getEpisodeType(episode.episodeType)} ${episode.number} ${Dictionary.getLangType(episode.langType)}',
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      const Icon(Icons.movie),
+                      const SizedBox(width: 5),
+                      Text(
+                        Utils.printDuration(
+                          Duration(seconds: episode.duration),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -7,8 +7,9 @@ import 'package:jais/components/roundborder_widget.dart';
 class Navbar extends StatelessWidget {
   final Function(int)? onPageChanged;
   final Iterable<Widget>? topWidgets;
+  final Future<void> _adFuture = createGlobalBanner();
 
-  const Navbar({
+  Navbar({
     this.onPageChanged,
     this.topWidgets,
     super.key,
@@ -33,9 +34,16 @@ class Navbar extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Expanded(
-            child: globalBannerAd != null
-                ? AdWidget(ad: globalBannerAd!)
-                : ColoredBox(color: Theme.of(context).backgroundColor),
+            child: FutureBuilder<void>(
+              future: _adFuture,
+              builder: (_, AsyncSnapshot<void> snapshot) {
+                if (snapshot.hasData) {
+                  return AdWidget(ad: globalBannerAd!);
+                }
+
+                return ColoredBox(color: Theme.of(context).backgroundColor);
+              },
+            ),
           ),
           ...?topWidgets,
         ],

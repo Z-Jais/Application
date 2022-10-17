@@ -34,35 +34,39 @@ mixin _$LangType {
 /// @nodoc
 abstract class $LangTypeCopyWith<$Res> {
   factory $LangTypeCopyWith(LangType value, $Res Function(LangType) then) =
-      _$LangTypeCopyWithImpl<$Res>;
+      _$LangTypeCopyWithImpl<$Res, LangType>;
 
+  @useResult
   $Res call({String uuid, String name});
 }
 
 /// @nodoc
-class _$LangTypeCopyWithImpl<$Res> implements $LangTypeCopyWith<$Res> {
+class _$LangTypeCopyWithImpl<$Res, $Val extends LangType>
+    implements $LangTypeCopyWith<$Res> {
   _$LangTypeCopyWithImpl(this._value, this._then);
 
-  final LangType _value;
+  // ignore: unused_field
+  final $Val _value;
 
   // ignore: unused_field
-  final $Res Function(LangType) _then;
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? name = freezed,
+    Object? uuid = null,
+    Object? name = null,
   }) {
     return _then(_value.copyWith(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -73,30 +77,30 @@ abstract class _$$_LangTypeCopyWith<$Res> implements $LangTypeCopyWith<$Res> {
       __$$_LangTypeCopyWithImpl<$Res>;
 
   @override
+  @useResult
   $Res call({String uuid, String name});
 }
 
 /// @nodoc
-class __$$_LangTypeCopyWithImpl<$Res> extends _$LangTypeCopyWithImpl<$Res>
+class __$$_LangTypeCopyWithImpl<$Res>
+    extends _$LangTypeCopyWithImpl<$Res, _$_LangType>
     implements _$$_LangTypeCopyWith<$Res> {
   __$$_LangTypeCopyWithImpl(
       _$_LangType _value, $Res Function(_$_LangType) _then)
-      : super(_value, (v) => _then(v as _$_LangType));
+      : super(_value, _then);
 
-  @override
-  _$_LangType get _value => super._value as _$_LangType;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? name = freezed,
+    Object? uuid = null,
+    Object? name = null,
   }) {
     return _then(_$_LangType(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -127,19 +131,17 @@ class _$_LangType implements _LangType {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LangType &&
-            const DeepCollectionEquality().equals(other.uuid, uuid) &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(uuid),
-      const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, uuid, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LangTypeCopyWith<_$_LangType> get copyWith =>
       __$$_LangTypeCopyWithImpl<_$_LangType>(this, _$identity);
 

@@ -20,54 +20,51 @@ class AnimeWidget extends StatelessWidget {
         Navigator.of(context).pushNamed('/anime', arguments: anime);
       },
       child: BorderElement(
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: Row(
-            children: <Widget>[
-              CachedNetworkImage(
-                imageUrl: '${UrlConst.animeAttachment}${anime.uuid}',
-                imageBuilder: (_, ImageProvider<Object> imageProvider) {
-                  return RoundBorderWidget(
-                    widget: Image(image: imageProvider, fit: BoxFit.cover),
-                  );
-                },
-                placeholder: (_, __) => const Skeleton(
-                  width: Const.animeImageWith,
-                  height: Const.animeImageHeight,
-                ),
-                errorWidget: (_, __, ___) => const Skeleton(
-                  width: Const.animeImageWith,
-                  height: Const.animeImageHeight,
-                ),
+        child: Row(
+          children: <Widget>[
+            CachedNetworkImage(
+              imageUrl: '${UrlConst.animeAttachment}${anime.uuid}',
+              imageBuilder: (_, ImageProvider<Object> imageProvider) {
+                return RoundBorderWidget(
+                  widget: Image(image: imageProvider, fit: BoxFit.cover),
+                );
+              },
+              placeholder: (_, __) => const Skeleton(
                 width: Const.animeImageWith,
                 height: Const.animeImageHeight,
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      anime.name,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      anime.description
-                          .ifEmptyOrNull('Aucune description pour le moment'),
-                      maxLines: 4,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
+              errorWidget: (_, __, ___) => const Skeleton(
+                width: Const.animeImageWith,
+                height: Const.animeImageHeight,
               ),
-            ],
-          ),
+              width: Const.animeImageWith,
+              height: Const.animeImageHeight,
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    anime.name,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    anime.description
+                        .ifEmptyOrNull('Aucune description pour le moment'),
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

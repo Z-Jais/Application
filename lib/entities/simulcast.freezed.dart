@@ -36,40 +36,44 @@ mixin _$Simulcast {
 /// @nodoc
 abstract class $SimulcastCopyWith<$Res> {
   factory $SimulcastCopyWith(Simulcast value, $Res Function(Simulcast) then) =
-      _$SimulcastCopyWithImpl<$Res>;
+      _$SimulcastCopyWithImpl<$Res, Simulcast>;
 
+  @useResult
   $Res call({String uuid, String season, int year});
 }
 
 /// @nodoc
-class _$SimulcastCopyWithImpl<$Res> implements $SimulcastCopyWith<$Res> {
+class _$SimulcastCopyWithImpl<$Res, $Val extends Simulcast>
+    implements $SimulcastCopyWith<$Res> {
   _$SimulcastCopyWithImpl(this._value, this._then);
 
-  final Simulcast _value;
+  // ignore: unused_field
+  final $Val _value;
 
   // ignore: unused_field
-  final $Res Function(Simulcast) _then;
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? season = freezed,
-    Object? year = freezed,
+    Object? uuid = null,
+    Object? season = null,
+    Object? year = null,
   }) {
     return _then(_value.copyWith(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      season: season == freezed
+      season: null == season
           ? _value.season
           : season // ignore: cast_nullable_to_non_nullable
               as String,
-      year: year == freezed
+      year: null == year
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -80,35 +84,35 @@ abstract class _$$_SimulcastCopyWith<$Res> implements $SimulcastCopyWith<$Res> {
       __$$_SimulcastCopyWithImpl<$Res>;
 
   @override
+  @useResult
   $Res call({String uuid, String season, int year});
 }
 
 /// @nodoc
-class __$$_SimulcastCopyWithImpl<$Res> extends _$SimulcastCopyWithImpl<$Res>
+class __$$_SimulcastCopyWithImpl<$Res>
+    extends _$SimulcastCopyWithImpl<$Res, _$_Simulcast>
     implements _$$_SimulcastCopyWith<$Res> {
   __$$_SimulcastCopyWithImpl(
       _$_Simulcast _value, $Res Function(_$_Simulcast) _then)
-      : super(_value, (v) => _then(v as _$_Simulcast));
+      : super(_value, _then);
 
-  @override
-  _$_Simulcast get _value => super._value as _$_Simulcast;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? season = freezed,
-    Object? year = freezed,
+    Object? uuid = null,
+    Object? season = null,
+    Object? year = null,
   }) {
     return _then(_$_Simulcast(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      season: season == freezed
+      season: null == season
           ? _value.season
           : season // ignore: cast_nullable_to_non_nullable
               as String,
-      year: year == freezed
+      year: null == year
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as int,
@@ -142,21 +146,18 @@ class _$_Simulcast implements _Simulcast {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Simulcast &&
-            const DeepCollectionEquality().equals(other.uuid, uuid) &&
-            const DeepCollectionEquality().equals(other.season, season) &&
-            const DeepCollectionEquality().equals(other.year, year));
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.season, season) || other.season == season) &&
+            (identical(other.year, year) || other.year == year));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(uuid),
-      const DeepCollectionEquality().hash(season),
-      const DeepCollectionEquality().hash(year));
+  int get hashCode => Object.hash(runtimeType, uuid, season, year);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SimulcastCopyWith<_$_Simulcast> get copyWith =>
       __$$_SimulcastCopyWithImpl<_$_Simulcast>(this, _$identity);
 

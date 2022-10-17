@@ -12,9 +12,9 @@ class MangaMapper extends IMapper<Manga> {
   MangaMapper()
       : super(
           limit: 24,
-    loaderWidget: const MangaLoaderWidget(),
-    fromJson: Manga.fromJson,
-    toWidget: (Manga manga) => MangaWidget(manga: manga),
+          loaderWidget: const MangaLoaderWidget(),
+          fromJson: Manga.fromJson,
+          toWidget: (Manga manga) => MangaWidget(manga: manga),
         ) {
     notifyListeners();
   }
@@ -34,6 +34,7 @@ class MangaMapper extends IMapper<Manga> {
     }
 
     return fromJson(
-        jsonDecode(utf8.decode(response!.bodyBytes)) as Map<String, dynamic>);
+      jsonDecode(utf8.decode(response!.bodyBytes)) as Map<String, dynamic>,
+    );
   }
 }

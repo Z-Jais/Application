@@ -14,5 +14,5 @@ Future<void> createGlobalBanner() async {
     ),
   );
 
-  await globalBannerAd?.load();
+  globalBannerAd?.load();
 }

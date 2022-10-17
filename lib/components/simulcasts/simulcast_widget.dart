@@ -35,14 +35,11 @@ class SimulcastWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         color: isSelected ? Theme.of(context).primaryColor : Colors.transparent,
       ),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          '${Dictionary.getNaturalSeason(simulcast)} ${simulcast.year}',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: isSelected ? FontWeight.bold : null,
-          ),
+      child: Text(
+        '${Dictionary.getNaturalSeason(simulcast)} ${simulcast.year}',
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: isSelected ? FontWeight.bold : null,
         ),
       ),
     );

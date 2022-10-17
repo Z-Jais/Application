@@ -26,15 +26,15 @@ class UrlConst {
     return '${mangas}country/${CountryMapper.selectedCountry?.tag}/page/$page/limit/$limit';
   }
 
+  static String getMangaSearch(String ean) {
+    return '${mangas}country/${CountryMapper.selectedCountry?.tag}/search/ean/$ean';
+  }
+
   static String getAnimesPage(Simulcast simulcast, int page, int limit) {
     return '${animes}country/${CountryMapper.selectedCountry?.tag}/simulcast/${simulcast.uuid}/page/$page/limit/$limit';
   }
 
   static String getAnimesSearch(String query) {
     return '${animes}country/${CountryMapper.selectedCountry?.tag}/search/name/$query';
-  }
-
-  static String getMangaSearch(String ean) {
-    return '${mangas}country/${CountryMapper.selectedCountry?.tag}/search/ean/$ean';
   }
 }

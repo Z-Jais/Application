@@ -57,60 +57,55 @@ class EpisodeWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () async => URL.goOnUrl(episode.url),
       child: BorderElement(
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  PlatformWidget(platform: episode.platform),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      episode.anime.name,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                PlatformWidget(platform: episode.platform),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    episode.anime.name,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ],
-              ),
-              Text(
-                episode.title.ifEmptyOrNull('＞﹏＜').replaceAll('\n', ' '),
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                Dictionary.getEpisodeDetails(episode),
-                overflow: TextOverflow.ellipsis,
-              ),
-              Row(
-                children: <Widget>[
-                  const Icon(Icons.movie),
-                  const SizedBox(width: 5),
-                  Text(
-                    Utils.printDuration(Duration(seconds: episode.duration)),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              if (DisplayMapper.isOnMobile(context))
-                image(height: Const.episodeImageHeight)
-              else
-                Expanded(
-                  child: image(),
                 ),
-              const SizedBox(height: 10),
-              Text(
-                'Il y a ${Utils.printTimeSince(DateTime.parse(episode.releaseDate))}',
-              ),
-            ],
-          ),
+              ],
+            ),
+            Text(
+              episode.title.ifEmptyOrNull('＞﹏＜').replaceAll('\n', ' '),
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              Dictionary.getEpisodeDetails(episode),
+              overflow: TextOverflow.ellipsis,
+            ),
+            Row(
+              children: <Widget>[
+                const Icon(Icons.movie),
+                const SizedBox(width: 5),
+                Text(
+                  Utils.printDuration(Duration(seconds: episode.duration)),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            if (DisplayMapper.isOnMobile(context))
+              image(height: Const.episodeImageHeight)
+            else
+              Expanded(child: image()),
+            const SizedBox(height: 10),
+            Text(
+              'Il y a ${Utils.printTimeSince(DateTime.parse(episode.releaseDate))}',
+            ),
+          ],
         ),
       ),
     );

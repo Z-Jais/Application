@@ -35,35 +35,39 @@ mixin _$EpisodeType {
 abstract class $EpisodeTypeCopyWith<$Res> {
   factory $EpisodeTypeCopyWith(
           EpisodeType value, $Res Function(EpisodeType) then) =
-      _$EpisodeTypeCopyWithImpl<$Res>;
+      _$EpisodeTypeCopyWithImpl<$Res, EpisodeType>;
 
+  @useResult
   $Res call({String uuid, String name});
 }
 
 /// @nodoc
-class _$EpisodeTypeCopyWithImpl<$Res> implements $EpisodeTypeCopyWith<$Res> {
+class _$EpisodeTypeCopyWithImpl<$Res, $Val extends EpisodeType>
+    implements $EpisodeTypeCopyWith<$Res> {
   _$EpisodeTypeCopyWithImpl(this._value, this._then);
 
-  final EpisodeType _value;
+  // ignore: unused_field
+  final $Val _value;
 
   // ignore: unused_field
-  final $Res Function(EpisodeType) _then;
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? name = freezed,
+    Object? uuid = null,
+    Object? name = null,
   }) {
     return _then(_value.copyWith(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -75,30 +79,30 @@ abstract class _$$_EpisodeTypeCopyWith<$Res>
       __$$_EpisodeTypeCopyWithImpl<$Res>;
 
   @override
+  @useResult
   $Res call({String uuid, String name});
 }
 
 /// @nodoc
-class __$$_EpisodeTypeCopyWithImpl<$Res> extends _$EpisodeTypeCopyWithImpl<$Res>
+class __$$_EpisodeTypeCopyWithImpl<$Res>
+    extends _$EpisodeTypeCopyWithImpl<$Res, _$_EpisodeType>
     implements _$$_EpisodeTypeCopyWith<$Res> {
   __$$_EpisodeTypeCopyWithImpl(
       _$_EpisodeType _value, $Res Function(_$_EpisodeType) _then)
-      : super(_value, (v) => _then(v as _$_EpisodeType));
+      : super(_value, _then);
 
-  @override
-  _$_EpisodeType get _value => super._value as _$_EpisodeType;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? name = freezed,
+    Object? uuid = null,
+    Object? name = null,
   }) {
     return _then(_$_EpisodeType(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -129,19 +133,17 @@ class _$_EpisodeType implements _EpisodeType {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EpisodeType &&
-            const DeepCollectionEquality().equals(other.uuid, uuid) &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(uuid),
-      const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, uuid, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_EpisodeTypeCopyWith<_$_EpisodeType> get copyWith =>
       __$$_EpisodeTypeCopyWithImpl<_$_EpisodeType>(this, _$identity);
 
