@@ -15,9 +15,7 @@ class MangaMapper extends IMapper<Manga> {
           loaderWidget: const MangaLoaderWidget(),
           fromJson: Manga.fromJson,
           toWidget: (Manga manga) => MangaWidget(manga: manga),
-        ) {
-    notifyListeners();
-  }
+        );
 
   @override
   Future<bool> updateCurrentPage() async {

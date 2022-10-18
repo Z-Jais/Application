@@ -45,10 +45,11 @@ class AnimesViewState extends State<AnimesView> {
     _animeMapper.clear();
     await _simulcastMapper.updateCurrentPage();
 
-    if (_simulcastMapper.list.last is SimulcastWidget) {
+    final Widget lastItem = _simulcastMapper.list.last;
+
+    if (lastItem is SimulcastWidget) {
       scrollToEndSimulcasts();
-      final Simulcast simulcast =
-          (_simulcastMapper.list.last as SimulcastWidget).simulcast;
+      final Simulcast simulcast = lastItem.simulcast;
       _animeMapper.simulcast = simulcast;
       _animeMapper.updateCurrentPage();
     }
