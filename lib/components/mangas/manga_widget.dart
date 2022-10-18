@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:jais/components/border_element.dart';
 import 'package:jais/components/roundborder_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/entities/manga.dart';
@@ -14,21 +15,16 @@ class MangaWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).primaryColor),
-        borderRadius: BorderRadius.circular(8),
-      ),
+    return BorderElement(
       child: Row(
         children: <Widget>[
           CachedNetworkImage(
             imageUrl: '${UrlConst.mangasAttachment}${manga.uuid}',
-            imageBuilder: (_, ImageProvider<Object> imageProvider) =>
-                RoundBorderWidget(
-              widget: Image(image: imageProvider, fit: BoxFit.cover),
-            ),
+            imageBuilder: (_, ImageProvider<Object> imageProvider) {
+              return RoundBorderWidget(
+                widget: Image(image: imageProvider, fit: BoxFit.cover),
+              );
+            },
             placeholder: (_, __) => const Skeleton(
               width: Const.mangaImageWith,
               height: Const.mangaImageHeight,
@@ -66,7 +62,9 @@ class MangaWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'Il y a ${Utils.printTimeSinceDays(DateTime.parse(manga.releaseDate))}',
+                  Utils.printTimeSinceDays(
+                    DateTime.parse(manga.releaseDate),
+                  ),
                 )
               ],
             ),

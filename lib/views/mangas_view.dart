@@ -12,22 +12,14 @@ class MangasView extends StatefulWidget {
 
 class _MangasViewState extends State<MangasView> {
   final MangaMapper _mangaMapper = MangaMapper();
-  UniqueKey _key = UniqueKey();
 
   @override
   void initState() {
     super.initState();
     _mangaMapper.clear();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _mangaMapper.updateCurrentPage();
-
-      if (!mounted) {
-        return;
-      }
-
-      setState(() => _key = UniqueKey());
-    });
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) async => _mangaMapper.updateCurrentPage());
   }
 
   @override
@@ -42,8 +34,7 @@ class _MangasViewState extends State<MangasView> {
         child: Consumer<MangaMapper>(
           builder: (_, MangaMapper mangaMapper, __) {
             return MangaList(
-              key: _key,
-              scrollController: _mangaMapper.scrollController,
+              scrollController: mangaMapper.scrollController,
               children: mangaMapper.list,
             );
           },

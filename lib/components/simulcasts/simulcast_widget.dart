@@ -28,22 +28,18 @@ class SimulcastWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         border: Border.all(color: Theme.of(context).primaryColor),
         borderRadius: BorderRadius.circular(8),
         color: isSelected ? Theme.of(context).primaryColor : Colors.transparent,
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Center(
-          child: Text(
-            '${Dictionary.getNaturalSeason(simulcast)} ${simulcast.year}',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: isSelected ? FontWeight.bold : null,
-            ),
-          ),
+      child: Text(
+        '${Dictionary.getNaturalSeason(simulcast)} ${simulcast.year}',
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: isSelected ? FontWeight.bold : null,
         ),
       ),
     );

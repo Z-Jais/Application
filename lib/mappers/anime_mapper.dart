@@ -24,4 +24,8 @@ class AnimeMapper extends IMapper<Anime> {
 
     return await loadPage(UrlConst.getAnimesPage(simulcast!, page, limit));
   }
+
+  Future<bool> search(String query) async {
+    return await loadPage(UrlConst.getAnimesSearch(query));
+  }
 }

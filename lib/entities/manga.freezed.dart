@@ -53,8 +53,9 @@ mixin _$Manga {
 /// @nodoc
 abstract class $MangaCopyWith<$Res> {
   factory $MangaCopyWith(Manga value, $Res Function(Manga) then) =
-      _$MangaCopyWithImpl<$Res>;
+      _$MangaCopyWithImpl<$Res, Manga>;
 
+  @useResult
   $Res call(
       {String uuid,
       Platform platform,
@@ -75,92 +76,97 @@ abstract class $MangaCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MangaCopyWithImpl<$Res> implements $MangaCopyWith<$Res> {
+class _$MangaCopyWithImpl<$Res, $Val extends Manga>
+    implements $MangaCopyWith<$Res> {
   _$MangaCopyWithImpl(this._value, this._then);
 
-  final Manga _value;
+  // ignore: unused_field
+  final $Val _value;
 
   // ignore: unused_field
-  final $Res Function(Manga) _then;
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? platform = freezed,
-    Object? anime = freezed,
-    Object? hash = freezed,
-    Object? releaseDate = freezed,
-    Object? url = freezed,
-    Object? cover = freezed,
-    Object? editor = freezed,
+    Object? uuid = null,
+    Object? platform = null,
+    Object? anime = null,
+    Object? hash = null,
+    Object? releaseDate = null,
+    Object? url = null,
+    Object? cover = null,
+    Object? editor = null,
     Object? ref = freezed,
     Object? ean = freezed,
     Object? age = freezed,
     Object? price = freezed,
   }) {
     return _then(_value.copyWith(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      platform: platform == freezed
+      platform: null == platform
           ? _value.platform
           : platform // ignore: cast_nullable_to_non_nullable
               as Platform,
-      anime: anime == freezed
+      anime: null == anime
           ? _value.anime
           : anime // ignore: cast_nullable_to_non_nullable
               as Anime,
-      hash: hash == freezed
+      hash: null == hash
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String,
-      releaseDate: releaseDate == freezed
+      releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      cover: cover == freezed
+      cover: null == cover
           ? _value.cover
           : cover // ignore: cast_nullable_to_non_nullable
               as String,
-      editor: editor == freezed
+      editor: null == editor
           ? _value.editor
           : editor // ignore: cast_nullable_to_non_nullable
               as String,
-      ref: ref == freezed
+      ref: freezed == ref
           ? _value.ref
           : ref // ignore: cast_nullable_to_non_nullable
               as String?,
-      ean: ean == freezed
+      ean: freezed == ean
           ? _value.ean
           : ean // ignore: cast_nullable_to_non_nullable
               as int?,
-      age: age == freezed
+      age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as int?,
-      price: price == freezed
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PlatformCopyWith<$Res> get platform {
     return $PlatformCopyWith<$Res>(_value.platform, (value) {
-      return _then(_value.copyWith(platform: value));
+      return _then(_value.copyWith(platform: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AnimeCopyWith<$Res> get anime {
     return $AnimeCopyWith<$Res>(_value.anime, (value) {
-      return _then(_value.copyWith(anime: value));
+      return _then(_value.copyWith(anime: value) as $Val);
     });
   }
 }
@@ -171,6 +177,7 @@ abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
       __$$_MangaCopyWithImpl<$Res>;
 
   @override
+  @useResult
   $Res call(
       {String uuid,
       Platform platform,
@@ -193,75 +200,73 @@ abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res>
+class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
     implements _$$_MangaCopyWith<$Res> {
   __$$_MangaCopyWithImpl(_$_Manga _value, $Res Function(_$_Manga) _then)
-      : super(_value, (v) => _then(v as _$_Manga));
+      : super(_value, _then);
 
-  @override
-  _$_Manga get _value => super._value as _$_Manga;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? platform = freezed,
-    Object? anime = freezed,
-    Object? hash = freezed,
-    Object? releaseDate = freezed,
-    Object? url = freezed,
-    Object? cover = freezed,
-    Object? editor = freezed,
+    Object? uuid = null,
+    Object? platform = null,
+    Object? anime = null,
+    Object? hash = null,
+    Object? releaseDate = null,
+    Object? url = null,
+    Object? cover = null,
+    Object? editor = null,
     Object? ref = freezed,
     Object? ean = freezed,
     Object? age = freezed,
     Object? price = freezed,
   }) {
     return _then(_$_Manga(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      platform: platform == freezed
+      platform: null == platform
           ? _value.platform
           : platform // ignore: cast_nullable_to_non_nullable
               as Platform,
-      anime: anime == freezed
+      anime: null == anime
           ? _value.anime
           : anime // ignore: cast_nullable_to_non_nullable
               as Anime,
-      hash: hash == freezed
+      hash: null == hash
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String,
-      releaseDate: releaseDate == freezed
+      releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      cover: cover == freezed
+      cover: null == cover
           ? _value.cover
           : cover // ignore: cast_nullable_to_non_nullable
               as String,
-      editor: editor == freezed
+      editor: null == editor
           ? _value.editor
           : editor // ignore: cast_nullable_to_non_nullable
               as String,
-      ref: ref == freezed
+      ref: freezed == ref
           ? _value.ref
           : ref // ignore: cast_nullable_to_non_nullable
               as String?,
-      ean: ean == freezed
+      ean: freezed == ean
           ? _value.ean
           : ean // ignore: cast_nullable_to_non_nullable
               as int?,
-      age: age == freezed
+      age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as int?,
-      price: price == freezed
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double?,
@@ -324,40 +329,30 @@ class _$_Manga implements _Manga {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Manga &&
-            const DeepCollectionEquality().equals(other.uuid, uuid) &&
-            const DeepCollectionEquality().equals(other.platform, platform) &&
-            const DeepCollectionEquality().equals(other.anime, anime) &&
-            const DeepCollectionEquality().equals(other.hash, hash) &&
-            const DeepCollectionEquality()
-                .equals(other.releaseDate, releaseDate) &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.cover, cover) &&
-            const DeepCollectionEquality().equals(other.editor, editor) &&
-            const DeepCollectionEquality().equals(other.ref, ref) &&
-            const DeepCollectionEquality().equals(other.ean, ean) &&
-            const DeepCollectionEquality().equals(other.age, age) &&
-            const DeepCollectionEquality().equals(other.price, price));
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.platform, platform) ||
+                other.platform == platform) &&
+            (identical(other.anime, anime) || other.anime == anime) &&
+            (identical(other.hash, hash) || other.hash == hash) &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.cover, cover) || other.cover == cover) &&
+            (identical(other.editor, editor) || other.editor == editor) &&
+            (identical(other.ref, ref) || other.ref == ref) &&
+            (identical(other.ean, ean) || other.ean == ean) &&
+            (identical(other.age, age) || other.age == age) &&
+            (identical(other.price, price) || other.price == price));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(uuid),
-      const DeepCollectionEquality().hash(platform),
-      const DeepCollectionEquality().hash(anime),
-      const DeepCollectionEquality().hash(hash),
-      const DeepCollectionEquality().hash(releaseDate),
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(cover),
-      const DeepCollectionEquality().hash(editor),
-      const DeepCollectionEquality().hash(ref),
-      const DeepCollectionEquality().hash(ean),
-      const DeepCollectionEquality().hash(age),
-      const DeepCollectionEquality().hash(price));
+  int get hashCode => Object.hash(runtimeType, uuid, platform, anime, hash,
+      releaseDate, url, cover, editor, ref, ean, age, price);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MangaCopyWith<_$_Manga> get copyWith =>
       __$$_MangaCopyWithImpl<_$_Manga>(this, _$identity);
 

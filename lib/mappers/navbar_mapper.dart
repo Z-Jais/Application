@@ -3,7 +3,7 @@ import 'package:jais/utils/utils.dart';
 
 class NavbarMapper extends ChangeNotifier {
   static final NavbarMapper instance = NavbarMapper();
-  late final PageController pageController;
+  late PageController pageController;
 
   NavbarMapper({int defaultPage = 0})
       : pageController = PageController(initialPage: defaultPage);
@@ -17,7 +17,12 @@ class NavbarMapper extends ChangeNotifier {
   }
 
   set currentPage(int page) {
-    pageController.jumpToPage(page);
+    try {
+      pageController.jumpToPage(page);
+    } catch (_) {
+      pageController = PageController(initialPage: page);
+    }
+
     notifyListeners();
     Utils.clearImagesCache();
   }
@@ -29,26 +34,18 @@ class NavbarMapper extends ChangeNotifier {
         ),
         const NavbarLink(
           name: 'Mangas',
-          icon: Icon(Icons.book),
-        ),
-        const NavbarLink(
-          name: 'News',
-          icon: Icon(Icons.newspaper),
+          icon: Icon(Icons.menu_book),
         ),
         const NavbarLink(
           name: 'Animes',
           icon: Icon(Icons.live_tv),
         ),
-        const NavbarLink(
-          name: 'Utilisateur',
-          icon: Icon(Icons.person),
-        ),
       ];
 
-  List<BottomNavigationBarItem> get itemsBottomNavBar =>
-      items.map((NavbarLink e) => e.toBottomNavigationBarItem()).toList();
+  Iterable<BottomNavigationBarItem> get itemsBottomNavBar =>
+      items.map((NavbarLink e) => e.toBottomNavigationBarItem());
 
-  List<Widget> itemsTopNavBar([Function(int)? callback]) => items
+  Iterable<Widget> itemsTopNavBar([Function(int)? callback]) => items
       .asMap()
       .map(
         (int i, NavbarLink e) => MapEntry<int, TextButton>(
@@ -56,8 +53,7 @@ class NavbarMapper extends ChangeNotifier {
           e.toTextButton(onPressed: () => callback?.call(i)),
         ),
       )
-      .values
-      .toList();
+      .values;
 }
 
 class NavbarLink {

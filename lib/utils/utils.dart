@@ -77,22 +77,22 @@ class Utils {
     double interval = seconds / 31536000;
 
     if (interval > 1) {
-      return '${interval.floor()} an${interval >= 2 ? 's' : ''}';
+      return 'Il y a ${interval.floor()} an${interval >= 2 ? 's' : ''}';
     }
 
     interval = seconds / 2592000;
 
     if (interval > 1) {
-      return '${interval.floor()} mois';
+      return 'Il y a ${interval.floor()} mois';
     }
 
     interval = seconds / 86400;
 
     if (interval > 1) {
-      return '${interval.floor()} jour${interval >= 2 ? 's' : ''}';
+      return 'Il y a ${interval.floor()} jour${interval >= 2 ? 's' : ''}';
     }
 
-    return "à l'instant";
+    return "Aujourd'hui";
   }
 
   static List<Widget> separate(List<Widget> children, {int rowCol = 3}) {
@@ -104,9 +104,14 @@ class Utils {
 
       List<Widget> sublist = children.sublist(i, minV);
       sublist.addAll(List<Widget>.filled(rowCol - length, Container()));
-      sublist = sublist.map<Widget>((Widget e) => Expanded(child: e)).toList();
 
-      list.add(Row(children: sublist));
+      list.add(
+        Row(
+          children: <Widget>[
+            ...sublist.map<Widget>((Widget e) => Expanded(child: e))
+          ],
+        ),
+      );
     }
 
     return list;

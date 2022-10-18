@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jais/components/jlist.dart';
 
-class SimulcastList extends StatelessWidget {
+class LiteEpisodeList extends StatelessWidget {
   final ScrollController? scrollController;
-  final Iterable<Widget> children;
+  final List<Widget> children;
 
-  const SimulcastList({
+  const LiteEpisodeList({
     required this.children,
     this.scrollController,
     super.key,
@@ -12,12 +13,9 @@ class SimulcastList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return JList(
       controller: scrollController,
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: <Widget>[...children],
-      ),
+      children: <Widget>[...children],
     );
   }
 }

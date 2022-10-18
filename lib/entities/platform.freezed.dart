@@ -38,45 +38,49 @@ mixin _$Platform {
 /// @nodoc
 abstract class $PlatformCopyWith<$Res> {
   factory $PlatformCopyWith(Platform value, $Res Function(Platform) then) =
-      _$PlatformCopyWithImpl<$Res>;
+      _$PlatformCopyWithImpl<$Res, Platform>;
 
+  @useResult
   $Res call({String uuid, String name, String url, String image});
 }
 
 /// @nodoc
-class _$PlatformCopyWithImpl<$Res> implements $PlatformCopyWith<$Res> {
+class _$PlatformCopyWithImpl<$Res, $Val extends Platform>
+    implements $PlatformCopyWith<$Res> {
   _$PlatformCopyWithImpl(this._value, this._then);
 
-  final Platform _value;
+  // ignore: unused_field
+  final $Val _value;
 
   // ignore: unused_field
-  final $Res Function(Platform) _then;
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? name = freezed,
-    Object? url = freezed,
-    Object? image = freezed,
+    Object? uuid = null,
+    Object? name = null,
+    Object? url = null,
+    Object? image = null,
   }) {
     return _then(_value.copyWith(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -87,40 +91,40 @@ abstract class _$$_PlatformCopyWith<$Res> implements $PlatformCopyWith<$Res> {
       __$$_PlatformCopyWithImpl<$Res>;
 
   @override
+  @useResult
   $Res call({String uuid, String name, String url, String image});
 }
 
 /// @nodoc
-class __$$_PlatformCopyWithImpl<$Res> extends _$PlatformCopyWithImpl<$Res>
+class __$$_PlatformCopyWithImpl<$Res>
+    extends _$PlatformCopyWithImpl<$Res, _$_Platform>
     implements _$$_PlatformCopyWith<$Res> {
   __$$_PlatformCopyWithImpl(
       _$_Platform _value, $Res Function(_$_Platform) _then)
-      : super(_value, (v) => _then(v as _$_Platform));
+      : super(_value, _then);
 
-  @override
-  _$_Platform get _value => super._value as _$_Platform;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? name = freezed,
-    Object? url = freezed,
-    Object? image = freezed,
+    Object? uuid = null,
+    Object? name = null,
+    Object? url = null,
+    Object? image = null,
   }) {
     return _then(_$_Platform(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
@@ -159,23 +163,19 @@ class _$_Platform implements _Platform {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Platform &&
-            const DeepCollectionEquality().equals(other.uuid, uuid) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.image, image));
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(uuid),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(image));
+  int get hashCode => Object.hash(runtimeType, uuid, name, url, image);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PlatformCopyWith<_$_Platform> get copyWith =>
       __$$_PlatformCopyWithImpl<_$_Platform>(this, _$identity);
 

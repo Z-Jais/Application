@@ -1,29 +1,28 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/ads/banner_ad.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/mappers/country_mapper.dart';
-import 'package:jais/mappers/display_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
-import 'package:jais/utils/ad_utils.dart';
 import 'package:jais/utils/color.dart';
+import 'package:jais/views/anime_detail_view.dart';
+import 'package:jais/views/anime_search_view.dart';
 import 'package:jais/views/animes_view.dart';
 import 'package:jais/views/episodes_view.dart';
+import 'package:jais/views/manga_search_view.dart';
 import 'package:jais/views/mangas_view.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (AdUtils.canShowAd) {
-    try {
-      await MobileAds.instance.initialize();
-      await createGlobalBanner();
-    } catch (_) {}
-  }
+  try {
+    await MobileAds.instance.initialize();
+    await createGlobalBanner();
+  } catch (_) {}
 
   await Future.wait(<Future<void>>[CountryMapper.instance.update()]);
   runApp(const MyApp());
@@ -33,6 +32,8 @@ class MyApp extends StatelessWidget {
   static final Color _mainColor = mainColors[900]!;
 
   const MyApp({super.key});
+
+  void changePage(int page) => NavbarMapper.instance.currentPage = page;
 
   @override
   Widget build(BuildContext context) {
@@ -53,55 +54,89 @@ class MyApp extends StatelessWidget {
         primarySwatch: MaterialColor(_mainColor.value, mainColors),
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: SafeArea(
-        child: ChangeNotifierProvider<NavbarMapper>.value(
-          value: NavbarMapper.instance,
-          child: Consumer<NavbarMapper>(
-            builder: (BuildContext context, NavbarMapper navbarMapper, _) {
-              return Scaffold(
-                resizeToAvoidBottomInset: false,
-                body: Column(
-                  children: <Widget>[
-                    Navbar(
-                      onPageChanged: (int page) =>
-                          navbarMapper.currentPage = page,
-                      webWidgets: navbarMapper.itemsTopNavBar(
-                        (int page) => navbarMapper.currentPage = page,
-                      ),
+      initialRoute: '/',
+      routes: <String, Widget Function(BuildContext)>{
+        '/': (_) {
+          return SafeArea(
+            child: ChangeNotifierProvider<NavbarMapper>.value(
+              value: NavbarMapper.instance,
+              child: Consumer<NavbarMapper>(
+                builder: (BuildContext context, NavbarMapper navbarMapper, __) {
+                  return Scaffold(
+                    resizeToAvoidBottomInset: false,
+                    body: Column(
+                      children: <Widget>[
+                        Navbar(
+                          onPageChanged: changePage,
+                          topWidgets: <Widget>[
+                            if (navbarMapper.currentPage == 1)
+                              IconButton(
+                                onPressed: () async {
+                                  try {
+                                    final String ean =
+                                        await FlutterBarcodeScanner.scanBarcode(
+                                      '#ff6666',
+                                      'Annuler',
+                                      true,
+                                      ScanMode.BARCODE,
+                                    );
+
+                                    showModalBottomSheet<void>(
+                                      context: context,
+                                      builder: (_) {
+                                        return MangaSearchView(ean: ean);
+                                      },
+                                    );
+                                  } catch (_) {}
+                                },
+                                icon: const Icon(Icons.document_scanner),
+                              ),
+                            if (navbarMapper.currentPage == 2)
+                              IconButton(
+                                onPressed: () async {
+                                  Navigator.of(context).pushNamed('/search');
+                                },
+                                icon: const Icon(Icons.search),
+                              ),
+                          ],
+                        ),
+                        Expanded(
+                          child: PageView(
+                            controller: navbarMapper.pageController,
+                            onPageChanged: changePage,
+                            children: const <Widget>[
+                              EpisodesView(),
+                              MangasView(),
+                              AnimesView(),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: PageView(
-                        controller: navbarMapper.pageController,
-                        onPageChanged: (int i) => navbarMapper.currentPage = i,
-                        children: <Widget>[
-                          const EpisodesView(),
-                          const MangasView(),
-                          Container(),
-                          const AnimesView(),
-                          Container(),
-                        ],
-                      ),
+                    bottomNavigationBar: BottomNavigationBar(
+                      showSelectedLabels: false,
+                      showUnselectedLabels: false,
+                      selectedItemColor: Theme.of(context).primaryColor,
+                      unselectedItemColor: Colors.grey,
+                      currentIndex: navbarMapper.currentPage,
+                      onTap: changePage,
+                      items: <BottomNavigationBarItem>[
+                        ...navbarMapper.itemsBottomNavBar
+                      ],
                     ),
-                  ],
-                ),
-                bottomNavigationBar: ((kIsWeb &&
-                            DisplayMapper.isOnMobile(context)) ||
-                        DisplayMapper.isOnMobile(context))
-                    ? BottomNavigationBar(
-                        showSelectedLabels: false,
-                        showUnselectedLabels: false,
-                        selectedItemColor: Theme.of(context).primaryColor,
-                        unselectedItemColor: Colors.grey,
-                        currentIndex: navbarMapper.currentPage,
-                        onTap: (int index) => navbarMapper.currentPage = index,
-                        items: navbarMapper.itemsBottomNavBar,
-                      )
-                    : null,
-              );
-            },
-          ),
-        ),
-      ),
+                  );
+                },
+              ),
+            ),
+          );
+        },
+        '/search': (_) {
+          return const SafeArea(child: AnimeSearchView());
+        },
+        '/anime': (_) {
+          return const SafeArea(child: AnimeDetailView());
+        },
+      },
     );
   }
 }

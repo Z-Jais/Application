@@ -55,8 +55,9 @@ mixin _$Episode {
 /// @nodoc
 abstract class $EpisodeCopyWith<$Res> {
   factory $EpisodeCopyWith(Episode value, $Res Function(Episode) then) =
-      _$EpisodeCopyWithImpl<$Res>;
+      _$EpisodeCopyWithImpl<$Res, Episode>;
 
+  @useResult
   $Res call(
       {String uuid,
       Platform platform,
@@ -82,111 +83,118 @@ abstract class $EpisodeCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$EpisodeCopyWithImpl<$Res> implements $EpisodeCopyWith<$Res> {
+class _$EpisodeCopyWithImpl<$Res, $Val extends Episode>
+    implements $EpisodeCopyWith<$Res> {
   _$EpisodeCopyWithImpl(this._value, this._then);
 
-  final Episode _value;
+  // ignore: unused_field
+  final $Val _value;
 
   // ignore: unused_field
-  final $Res Function(Episode) _then;
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? platform = freezed,
-    Object? anime = freezed,
-    Object? episodeType = freezed,
-    Object? langType = freezed,
-    Object? hash = freezed,
-    Object? releaseDate = freezed,
-    Object? season = freezed,
-    Object? number = freezed,
+    Object? uuid = null,
+    Object? platform = null,
+    Object? anime = null,
+    Object? episodeType = null,
+    Object? langType = null,
+    Object? hash = null,
+    Object? releaseDate = null,
+    Object? season = null,
+    Object? number = null,
     Object? title = freezed,
-    Object? url = freezed,
-    Object? image = freezed,
-    Object? duration = freezed,
+    Object? url = null,
+    Object? image = null,
+    Object? duration = null,
   }) {
     return _then(_value.copyWith(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      platform: platform == freezed
+      platform: null == platform
           ? _value.platform
           : platform // ignore: cast_nullable_to_non_nullable
               as Platform,
-      anime: anime == freezed
+      anime: null == anime
           ? _value.anime
           : anime // ignore: cast_nullable_to_non_nullable
               as Anime,
-      episodeType: episodeType == freezed
+      episodeType: null == episodeType
           ? _value.episodeType
           : episodeType // ignore: cast_nullable_to_non_nullable
               as EpisodeType,
-      langType: langType == freezed
+      langType: null == langType
           ? _value.langType
           : langType // ignore: cast_nullable_to_non_nullable
               as LangType,
-      hash: hash == freezed
+      hash: null == hash
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String,
-      releaseDate: releaseDate == freezed
+      releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String,
-      season: season == freezed
+      season: null == season
           ? _value.season
           : season // ignore: cast_nullable_to_non_nullable
               as int,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      duration: duration == freezed
+      duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PlatformCopyWith<$Res> get platform {
     return $PlatformCopyWith<$Res>(_value.platform, (value) {
-      return _then(_value.copyWith(platform: value));
+      return _then(_value.copyWith(platform: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AnimeCopyWith<$Res> get anime {
     return $AnimeCopyWith<$Res>(_value.anime, (value) {
-      return _then(_value.copyWith(anime: value));
+      return _then(_value.copyWith(anime: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $EpisodeTypeCopyWith<$Res> get episodeType {
     return $EpisodeTypeCopyWith<$Res>(_value.episodeType, (value) {
-      return _then(_value.copyWith(episodeType: value));
+      return _then(_value.copyWith(episodeType: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LangTypeCopyWith<$Res> get langType {
     return $LangTypeCopyWith<$Res>(_value.langType, (value) {
-      return _then(_value.copyWith(langType: value));
+      return _then(_value.copyWith(langType: value) as $Val);
     });
   }
 }
@@ -198,6 +206,7 @@ abstract class _$$_EpisodeCopyWith<$Res> implements $EpisodeCopyWith<$Res> {
       __$$_EpisodeCopyWithImpl<$Res>;
 
   @override
+  @useResult
   $Res call(
       {String uuid,
       Platform platform,
@@ -227,80 +236,79 @@ abstract class _$$_EpisodeCopyWith<$Res> implements $EpisodeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_EpisodeCopyWithImpl<$Res> extends _$EpisodeCopyWithImpl<$Res>
+class __$$_EpisodeCopyWithImpl<$Res>
+    extends _$EpisodeCopyWithImpl<$Res, _$_Episode>
     implements _$$_EpisodeCopyWith<$Res> {
   __$$_EpisodeCopyWithImpl(_$_Episode _value, $Res Function(_$_Episode) _then)
-      : super(_value, (v) => _then(v as _$_Episode));
+      : super(_value, _then);
 
-  @override
-  _$_Episode get _value => super._value as _$_Episode;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? platform = freezed,
-    Object? anime = freezed,
-    Object? episodeType = freezed,
-    Object? langType = freezed,
-    Object? hash = freezed,
-    Object? releaseDate = freezed,
-    Object? season = freezed,
-    Object? number = freezed,
+    Object? uuid = null,
+    Object? platform = null,
+    Object? anime = null,
+    Object? episodeType = null,
+    Object? langType = null,
+    Object? hash = null,
+    Object? releaseDate = null,
+    Object? season = null,
+    Object? number = null,
     Object? title = freezed,
-    Object? url = freezed,
-    Object? image = freezed,
-    Object? duration = freezed,
+    Object? url = null,
+    Object? image = null,
+    Object? duration = null,
   }) {
     return _then(_$_Episode(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      platform: platform == freezed
+      platform: null == platform
           ? _value.platform
           : platform // ignore: cast_nullable_to_non_nullable
               as Platform,
-      anime: anime == freezed
+      anime: null == anime
           ? _value.anime
           : anime // ignore: cast_nullable_to_non_nullable
               as Anime,
-      episodeType: episodeType == freezed
+      episodeType: null == episodeType
           ? _value.episodeType
           : episodeType // ignore: cast_nullable_to_non_nullable
               as EpisodeType,
-      langType: langType == freezed
+      langType: null == langType
           ? _value.langType
           : langType // ignore: cast_nullable_to_non_nullable
               as LangType,
-      hash: hash == freezed
+      hash: null == hash
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
               as String,
-      releaseDate: releaseDate == freezed
+      releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String,
-      season: season == freezed
+      season: null == season
           ? _value.season
           : season // ignore: cast_nullable_to_non_nullable
               as int,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      duration: duration == freezed
+      duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as int,
@@ -366,43 +374,47 @@ class _$_Episode implements _Episode {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Episode &&
-            const DeepCollectionEquality().equals(other.uuid, uuid) &&
-            const DeepCollectionEquality().equals(other.platform, platform) &&
-            const DeepCollectionEquality().equals(other.anime, anime) &&
-            const DeepCollectionEquality()
-                .equals(other.episodeType, episodeType) &&
-            const DeepCollectionEquality().equals(other.langType, langType) &&
-            const DeepCollectionEquality().equals(other.hash, hash) &&
-            const DeepCollectionEquality()
-                .equals(other.releaseDate, releaseDate) &&
-            const DeepCollectionEquality().equals(other.season, season) &&
-            const DeepCollectionEquality().equals(other.number, number) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
-            const DeepCollectionEquality().equals(other.duration, duration));
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.platform, platform) ||
+                other.platform == platform) &&
+            (identical(other.anime, anime) || other.anime == anime) &&
+            (identical(other.episodeType, episodeType) ||
+                other.episodeType == episodeType) &&
+            (identical(other.langType, langType) ||
+                other.langType == langType) &&
+            (identical(other.hash, hash) || other.hash == hash) &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate) &&
+            (identical(other.season, season) || other.season == season) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(uuid),
-      const DeepCollectionEquality().hash(platform),
-      const DeepCollectionEquality().hash(anime),
-      const DeepCollectionEquality().hash(episodeType),
-      const DeepCollectionEquality().hash(langType),
-      const DeepCollectionEquality().hash(hash),
-      const DeepCollectionEquality().hash(releaseDate),
-      const DeepCollectionEquality().hash(season),
-      const DeepCollectionEquality().hash(number),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(image),
-      const DeepCollectionEquality().hash(duration));
+      uuid,
+      platform,
+      anime,
+      episodeType,
+      langType,
+      hash,
+      releaseDate,
+      season,
+      number,
+      title,
+      url,
+      image,
+      duration);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_EpisodeCopyWith<_$_Episode> get copyWith =>
       __$$_EpisodeCopyWithImpl<_$_Episode>(this, _$identity);
 

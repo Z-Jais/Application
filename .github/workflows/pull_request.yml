@@ -1,0 +1,40 @@
+name: Pull request
+
+on:
+  pull_request:
+
+jobs:
+  format_and_analyze:
+    name: Format and Analyze
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Format
+        run: flutter format --set-exit-if-changed .
+
+      - name: Analyze
+        run: flutter analyze
+
+  test:
+    needs:
+      - format_and_analyze
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Test
+        run: flutter test -v
