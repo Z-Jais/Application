@@ -52,16 +52,17 @@ abstract class $AnimeCopyWith<$Res> {
       _$AnimeCopyWithImpl<$Res, Anime>;
 
   @useResult
-  $Res call({String uuid,
-    Country country,
-    String name,
-    String releaseDate,
-    String image,
-    String? description,
-    List<String> hashes,
-    List<Simulcast> simulcasts,
-    List<Episode>? episodes,
-    List<Manga>? mangas});
+  $Res call(
+      {String uuid,
+      Country country,
+      String name,
+      String releaseDate,
+      String image,
+      String? description,
+      List<String> hashes,
+      List<Simulcast> simulcasts,
+      List<Episode>? episodes,
+      List<Manga>? mangas});
 
   $CountryCopyWith<$Res> get country;
 }

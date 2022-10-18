@@ -58,19 +58,20 @@ abstract class $EpisodeCopyWith<$Res> {
       _$EpisodeCopyWithImpl<$Res, Episode>;
 
   @useResult
-  $Res call({String uuid,
-    Platform platform,
-    Anime anime,
-    EpisodeType episodeType,
-    LangType langType,
-    String hash,
-    String releaseDate,
-    int season,
-    int number,
-    String? title,
-    String url,
-    String image,
-    int duration});
+  $Res call(
+      {String uuid,
+      Platform platform,
+      Anime anime,
+      EpisodeType episodeType,
+      LangType langType,
+      String hash,
+      String releaseDate,
+      int season,
+      int number,
+      String? title,
+      String url,
+      String image,
+      int duration});
 
   $PlatformCopyWith<$Res> get platform;
 

@@ -56,18 +56,19 @@ abstract class $MangaCopyWith<$Res> {
       _$MangaCopyWithImpl<$Res, Manga>;
 
   @useResult
-  $Res call({String uuid,
-    Platform platform,
-    Anime anime,
-    String hash,
-    String releaseDate,
-    String url,
-    String cover,
-    String editor,
-    String? ref,
-    int? ean,
-    int? age,
-    double? price});
+  $Res call(
+      {String uuid,
+      Platform platform,
+      Anime anime,
+      String hash,
+      String releaseDate,
+      String url,
+      String cover,
+      String editor,
+      String? ref,
+      int? ean,
+      int? age,
+      double? price});
 
   $PlatformCopyWith<$Res> get platform;
 
