@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jais/mappers/display_mapper.dart';
+import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/utils/utils.dart';
 
 class AnimeList extends StatelessWidget {
@@ -10,7 +10,7 @@ class AnimeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!DisplayMapper.isOnMobile(context)) {
+    if (!DeviceMapper.isOnMobile(context)) {
       return Column(
         children: <Widget>[...Utils.separate(children, rowCol: rowCol)],
       );

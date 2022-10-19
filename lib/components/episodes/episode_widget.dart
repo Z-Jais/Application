@@ -5,7 +5,7 @@ import 'package:jais/components/platforms/platform_widget.dart';
 import 'package:jais/components/roundborder_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/entities/episode.dart';
-import 'package:jais/mappers/display_mapper.dart';
+import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/url/url.dart';
 import 'package:jais/url/url_const.dart';
 import 'package:jais/utils/const.dart';
@@ -97,7 +97,7 @@ class EpisodeWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            if (DisplayMapper.isOnMobile(context))
+            if (DeviceMapper.isOnMobile(context))
               image(height: Const.episodeImageHeight)
             else
               Expanded(child: image()),

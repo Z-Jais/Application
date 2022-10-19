@@ -9,6 +9,7 @@ class UrlConst {
   static const String animes = '${domain}animes/';
   static const String mangas = '${domain}mangas/';
   static const String platforms = '${domain}platforms/';
+  static const String devices = '${domain}devices/';
   static const String episodeAttachment = '${episodes}attachment/';
   static const String animeAttachment = '${animes}attachment/';
   static const String mangasAttachment = '${mangas}attachment/';

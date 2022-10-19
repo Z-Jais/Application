@@ -8,7 +8,6 @@ import 'package:jais/components/navbar.dart';
 import 'package:jais/mappers/country_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
 import 'package:jais/utils/color.dart';
-import 'package:jais/utils/device.dart';
 import 'package:jais/views/anime_detail_view.dart';
 import 'package:jais/views/anime_search_view.dart';
 import 'package:jais/views/animes_view.dart';
@@ -25,7 +24,6 @@ Future<void> main() async {
     await createGlobalBanner();
   } catch (_) {}
 
-  debugPrint('Launching app on ${await Device.getOS()}, ${await Device.getModel()}');
   await Future.wait(<Future<void>>[CountryMapper.instance.update()]);
   runApp(const MyApp());
 }
