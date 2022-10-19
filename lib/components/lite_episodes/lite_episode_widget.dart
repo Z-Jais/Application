@@ -33,7 +33,10 @@ class LiteEpisodeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async => URL.goOnUrl(episode.url),
+      onTap: () async {
+        URL.goOnUrl(episode.url);
+        DeviceMapper.createEpisodeRedirection(episode);
+      },
       child: BorderElement(
         child: Row(
           children: <Widget>[

@@ -6,6 +6,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/ads/banner_ad.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/mappers/country_mapper.dart';
+import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
 import 'package:jais/utils/color.dart';
 import 'package:jais/views/anime_detail_view.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
     await createGlobalBanner();
   } catch (_) {}
 
+  DeviceMapper.updateOriginDevice();
   await Future.wait(<Future<void>>[CountryMapper.instance.update()]);
   runApp(const MyApp());
 }
