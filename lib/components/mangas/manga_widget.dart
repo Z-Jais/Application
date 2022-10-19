@@ -18,7 +18,10 @@ class MangaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async => URL.goOnUrl('https://www.amazon.${CountryMapper.selectedCountry?.tag}/s?k=${manga.ean}', showAd: false),
+      onTap: () async => URL.goOnUrl(
+        'https://www.amazon.${CountryMapper.selectedCountry?.tag}/s?k=${manga.ean}',
+        showAd: false,
+      ),
       child: BorderElement(
         child: Row(
           children: <Widget>[
