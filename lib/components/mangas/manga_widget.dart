@@ -5,6 +5,7 @@ import 'package:jais/components/roundborder_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/entities/manga.dart';
 import 'package:jais/mappers/country_mapper.dart';
+import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/url/url.dart';
 import 'package:jais/url/url_const.dart';
 import 'package:jais/utils/const.dart';
@@ -18,10 +19,13 @@ class MangaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async => URL.goOnUrl(
-        'https://www.amazon.${CountryMapper.selectedCountry?.tag}/s?k=${manga.ean}',
-        showAd: false,
-      ),
+      onTap: () async {
+        URL.goOnUrl(
+          'https://www.amazon.${CountryMapper.selectedCountry?.tag}/s?k=${manga.ean}',
+          showAd: false,
+        );
+        DeviceMapper.createMangaRedirection(manga);
+      },
       child: BorderElement(
         child: Row(
           children: <Widget>[

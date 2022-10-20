@@ -12,6 +12,7 @@ class UrlConst {
   static const String devices = '${domain}devices/';
   static const String devicesEpisodeRedirection =
       '${devices}redirection/episode';
+  static const String devicesMangaRedirection = '${devices}redirection/manga';
   static const String episodeAttachment = '${episodes}attachment/';
   static const String animeAttachment = '${animes}attachment/';
   static const String mangasAttachment = '${mangas}attachment/';
