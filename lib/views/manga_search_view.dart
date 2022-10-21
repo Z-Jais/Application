@@ -28,13 +28,14 @@ class _MangaSearchViewState extends State<MangaSearchView> {
               }
 
               final String ean = barcode.rawValue!;
+              _isShowned = true;
               final Manga? manga = await _mangaMapper.search(ean);
 
               if (manga == null) {
+                _isShowned = false;
                 return;
               }
 
-              _isShowned = true;
               await showModalBottomSheet(
                 context: context,
                 builder: (_) {

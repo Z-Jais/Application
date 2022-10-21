@@ -5,7 +5,7 @@ class UrlConst {
   static const String domain = 'https://beta-api.ziedelth.fr/';
   static const String countries = '${domain}countries';
   static const String episodes = '${domain}episodes/';
-  static const String simulcasts = '${domain}simulcasts';
+  static const String simulcasts = '${domain}simulcasts/';
   static const String animes = '${domain}animes/';
   static const String mangas = '${domain}mangas/';
   static const String platforms = '${domain}platforms/';
