@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/ads/banner_ad.dart';
 import 'package:jais/components/navbar.dart';
@@ -74,22 +73,7 @@ class MyApp extends StatelessWidget {
                             if (navbarMapper.currentPage == 1)
                               IconButton(
                                 onPressed: () async {
-                                  try {
-                                    final String ean =
-                                        await FlutterBarcodeScanner.scanBarcode(
-                                      '#ff6666',
-                                      'Annuler',
-                                      true,
-                                      ScanMode.BARCODE,
-                                    );
-
-                                    showModalBottomSheet<void>(
-                                      context: context,
-                                      builder: (_) {
-                                        return MangaSearchView(ean: ean);
-                                      },
-                                    );
-                                  } catch (_) {}
+                                  Navigator.of(context).pushNamed('/scan');
                                 },
                                 icon: const Icon(Icons.document_scanner),
                               ),
@@ -137,6 +121,9 @@ class MyApp extends StatelessWidget {
         },
         '/anime': (_) {
           return const SafeArea(child: AnimeDetailView());
+        },
+        '/scan': (_) {
+          return const SafeArea(child: MangaSearchView());
         },
       },
     );
