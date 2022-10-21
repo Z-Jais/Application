@@ -34,6 +34,10 @@ class UrlConst {
     return '${mangas}country/${CountryMapper.selectedCountry?.tag}/search/ean/$ean';
   }
 
+  static String getSimulcasts() {
+    return '${simulcasts}country/${CountryMapper.selectedCountry?.tag}';
+  }
+
   static String getAnimesPage(Simulcast simulcast, int page, int limit) {
     return '${animes}country/${CountryMapper.selectedCountry?.tag}/simulcast/${simulcast.uuid}/page/$page/limit/$limit';
   }
