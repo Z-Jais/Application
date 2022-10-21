@@ -23,14 +23,14 @@ class DeviceMapper {
   @pragma('vm:entry-point')
   static Future<String> getOS() async {
     final AndroidDeviceInfo androidDeviceInfo =
-    await DeviceInfoPlugin().androidInfo;
+        await DeviceInfoPlugin().androidInfo;
     return 'Android ${androidDeviceInfo.version.release}';
   }
 
   @pragma('vm:entry-point')
   static Future<String> getModel() async {
     final AndroidDeviceInfo androidDeviceInfo =
-    await DeviceInfoPlugin().androidInfo;
+        await DeviceInfoPlugin().androidInfo;
     return '${androidDeviceInfo.manufacturer} ${androidDeviceInfo.model}';
   }
 
