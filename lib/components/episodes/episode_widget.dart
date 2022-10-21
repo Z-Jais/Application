@@ -57,7 +57,6 @@ class EpisodeWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         URL.goOnUrl(episode.url);
-        DeviceMapper.createEpisodeRedirection(episode);
       },
       child: BorderElement(
         child: Column(

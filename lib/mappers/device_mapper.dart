@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:jais/entities/episode.dart';
-import 'package:jais/entities/manga.dart';
 import 'package:jais/url/url.dart';
 import 'package:jais/url/url_const.dart';
 import 'package:platform_device_id_v3/platform_device_id.dart';
@@ -40,26 +38,6 @@ class DeviceMapper {
         'os': await getOS(),
         'model': await getModel(),
       }),
-    );
-  }
-
-  static Future<void> createEpisodeRedirection(Episode episode) async {
-    await URL().post(
-      UrlConst.devicesEpisodeRedirection,
-      headers: <String, String>{
-        'Device': await getId() ?? '',
-        'Episode': episode.uuid,
-      },
-    );
-  }
-
-  static Future<void> createMangaRedirection(Manga manga) async {
-    await URL().post(
-      UrlConst.devicesMangaRedirection,
-      headers: <String, String>{
-        'Device': await getId() ?? '',
-        'Manga': manga.uuid,
-      },
     );
   }
 }
