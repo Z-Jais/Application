@@ -5,7 +5,7 @@ import 'package:jais/components/platforms/platform_widget.dart';
 import 'package:jais/components/roundborder_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/entities/episode.dart';
-import 'package:jais/mappers/display_mapper.dart';
+import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/url/url.dart';
 import 'package:jais/url/url_const.dart';
 import 'package:jais/utils/const.dart';
@@ -33,7 +33,9 @@ class LiteEpisodeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async => URL.goOnUrl(episode.url),
+      onTap: () async {
+        URL.goOnUrl(episode.url);
+      },
       child: BorderElement(
         child: Row(
           children: <Widget>[
@@ -41,7 +43,7 @@ class LiteEpisodeWidget extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   image(
-                    height: DisplayMapper.isOnMobile(context)
+                    height: DeviceMapper.isOnMobile(context)
                         ? Const.episodeImageHeight / 2
                         : null,
                   ),

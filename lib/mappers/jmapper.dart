@@ -33,23 +33,24 @@ abstract class JMapper<T> {
     }
   }
 
-  Future<void> update() async {
+  Future<bool> update() async {
     if (this.list.isNotEmpty) {
-      return;
+      return true;
     }
 
     final Response? response = await URL().get(url);
 
     if (!response.isOk) {
-      return;
+      return false;
     }
 
     final List<T>? list = stringTo(response!.body);
 
     if (list == null || list.isEmpty) {
-      return;
+      return false;
     }
 
     this.list = list;
+    return true;
   }
 }

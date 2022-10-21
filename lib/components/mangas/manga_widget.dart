@@ -12,16 +12,23 @@ import 'package:jais/utils/utils.dart';
 
 class MangaWidget extends StatelessWidget {
   final Manga manga;
+  final bool redirect;
 
-  const MangaWidget({required this.manga, super.key});
+  const MangaWidget({required this.manga, this.redirect = true, super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async => URL.goOnUrl(
-        'https://www.amazon.${CountryMapper.selectedCountry?.tag}/s?k=${manga.ean}',
-        showAd: false,
-      ),
+      onTap: () async {
+        if (!redirect) {
+          return;
+        }
+
+        URL.goOnUrl(
+          'https://www.amazon.${CountryMapper.selectedCountry?.tag}/s?k=${manga.ean}',
+          showAd: false,
+        );
+      },
       child: BorderElement(
         child: Row(
           children: <Widget>[

@@ -99,7 +99,13 @@ abstract class IMapper<T> extends ChangeNotifier {
       return false;
     }
 
-    list.addAll(toWidgets(utf8.decode(response!.bodyBytes)));
+    final List<Widget> widgets = toWidgets(utf8.decode(response!.bodyBytes));
+
+    if (widgets.isEmpty) {
+      return false;
+    }
+
+    list.addAll(widgets);
     removeLoader();
     return true;
   }

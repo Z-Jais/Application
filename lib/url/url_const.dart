@@ -5,10 +5,11 @@ class UrlConst {
   static const String domain = 'https://beta-api.ziedelth.fr/';
   static const String countries = '${domain}countries';
   static const String episodes = '${domain}episodes/';
-  static const String simulcasts = '${domain}simulcasts';
+  static const String simulcasts = '${domain}simulcasts/';
   static const String animes = '${domain}animes/';
   static const String mangas = '${domain}mangas/';
   static const String platforms = '${domain}platforms/';
+  static const String devices = '${domain}devices/';
   static const String episodeAttachment = '${episodes}attachment/';
   static const String animeAttachment = '${animes}attachment/';
   static const String mangasAttachment = '${mangas}attachment/';
@@ -28,6 +29,10 @@ class UrlConst {
 
   static String getMangaSearch(String ean) {
     return '${mangas}country/${CountryMapper.selectedCountry?.tag}/search/ean/$ean';
+  }
+
+  static String getSimulcasts() {
+    return '${simulcasts}country/${CountryMapper.selectedCountry?.tag}';
   }
 
   static String getAnimesPage(Simulcast simulcast, int page, int limit) {
