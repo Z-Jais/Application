@@ -9,9 +9,13 @@ class CountryMapper extends JMapper<Country> {
   CountryMapper() : super(url: UrlConst.countries, fromJson: Country.fromJson);
 
   @override
-  Future<void> update() async {
-    await super.update();
-    // Set the selected country to the first one in the list
-    selectedCountry = list.first;
+  Future<bool> update() async {
+    final bool response = await super.update();
+
+    if (response) {
+      selectedCountry = list.first;
+    }
+
+    return response;
   }
 }

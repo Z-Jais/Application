@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:jais/components/jlist.dart';
-import 'package:jais/mappers/display_mapper.dart';
+import 'package:jais/mappers/device_mapper.dart';
 
 class EpisodeList extends StatelessWidget {
   final ScrollController? scrollController;
@@ -12,7 +12,7 @@ class EpisodeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!DisplayMapper.isOnMobile(context)) {
+    if (!DeviceMapper.isOnMobile(context)) {
       final double width = MediaQuery.of(context).size.width;
 
       return GridView(

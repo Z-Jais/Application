@@ -51,7 +51,7 @@ class URL {
     }
   }
 
-  static Future<void> goOnUrl(String url) async {
+  static Future<void> goOnUrl(String url, {bool showAd = true}) async {
     Future<bool> redirectToEpisode() async {
       return launchUrl(
         Uri.parse(url),
@@ -59,8 +59,12 @@ class URL {
       );
     }
 
-    showVideoAd(
-      callback: (_) async => redirectToEpisode(),
-    );
+    if (showAd) {
+      showVideoAd(
+        callback: (_) async => redirectToEpisode(),
+      );
+    } else {
+      await redirectToEpisode();
+    }
   }
 }
