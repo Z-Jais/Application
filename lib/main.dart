@@ -9,7 +9,7 @@ import 'package:jais/utils/color.dart';
 import 'package:jais/views/anime_detail_view.dart';
 import 'package:jais/views/anime_search_view.dart';
 import 'package:jais/views/home_view.dart';
-import 'package:jais/views/manga_search_view.dart';
+import 'package:jais/views/manga_scan_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
           return const SafeArea(child: AnimeDetailView());
         },
         '/scan': (_) {
-          return const SafeArea(child: MangaSearchView());
+          return const SafeArea(child: MangaScanView());
         },
       },
     );

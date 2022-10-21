@@ -4,14 +4,14 @@ import 'package:jais/entities/manga.dart';
 import 'package:jais/mappers/manga_mapper.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-class MangaSearchView extends StatefulWidget {
-  const MangaSearchView({super.key});
+class MangaScanView extends StatefulWidget {
+  const MangaScanView({super.key});
 
   @override
-  State<MangaSearchView> createState() => _MangaSearchViewState();
+  State<MangaScanView> createState() => _MangaSearchViewState();
 }
 
-class _MangaSearchViewState extends State<MangaSearchView> {
+class _MangaSearchViewState extends State<MangaScanView> {
   final MangaMapper _mangaMapper = MangaMapper();
   bool _isShowned = false;
 
@@ -39,7 +39,7 @@ class _MangaSearchViewState extends State<MangaSearchView> {
               await showModalBottomSheet(
                 context: context,
                 builder: (_) {
-                  return MangaWidget(manga: manga);
+                  return MangaWidget(manga: manga, redirect: false);
                 },
               );
               _isShowned = false;
