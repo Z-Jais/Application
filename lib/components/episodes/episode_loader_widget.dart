@@ -16,18 +16,38 @@ class EpisodeLoaderWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
-            children: const <Widget>[
-              PlatformLoaderWidget(),
-              SizedBox(width: 10),
-              Expanded(child: Skeleton(height: Const.platformImageHeight)),
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Row(
+                      children: const <Widget>[
+                        PlatformLoaderWidget(),
+                        SizedBox(width: 7.5),
+                        Skeleton(height: Const.platformImageHeight, width: 150),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    const Skeleton(height: 20),
+                    const SizedBox(height: 10),
+                    const Skeleton(width: 200, height: 20),
+                    const SizedBox(height: 5),
+                    const Skeleton(width: 250, height: 15),
+                    const SizedBox(height: 5),
+                    const Skeleton(width: 100, height: 15)
+                  ],
+                ),
+              ),
+              const SizedBox(width: 10),
+              const Skeleton(
+                width: Const.animeImageWith,
+                height: Const.animeImageHeight,
+              ),
             ],
           ),
-          const SizedBox(height: 10),
-          const Skeleton(width: 150, height: 20),
-          const SizedBox(height: 5),
-          const Skeleton(width: 250, height: 20),
-          const SizedBox(height: 5),
-          const Skeleton(width: 100, height: 20),
           const SizedBox(height: 10),
           if (DeviceMapper.isOnMobile(context))
             const Skeleton(height: Const.episodeImageHeight)

@@ -39,7 +39,10 @@ class _MangaSearchViewState extends State<MangaScanView> {
               await showModalBottomSheet(
                 context: context,
                 builder: (_) {
-                  return MangaWidget(manga: manga, redirect: false);
+                  return Container(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    child: MangaWidget(manga: manga, redirect: false),
+                  );
                 },
               );
               _isShowned = false;
