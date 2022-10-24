@@ -21,13 +21,10 @@ Simulcast _$SimulcastFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Simulcast {
   String get uuid => throw _privateConstructorUsedError;
-
   String get season => throw _privateConstructorUsedError;
-
   int get year => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $SimulcastCopyWith<Simulcast> get copyWith =>
       throw _privateConstructorUsedError;
@@ -37,7 +34,6 @@ mixin _$Simulcast {
 abstract class $SimulcastCopyWith<$Res> {
   factory $SimulcastCopyWith(Simulcast value, $Res Function(Simulcast) then) =
       _$SimulcastCopyWithImpl<$Res, Simulcast>;
-
   @useResult
   $Res call({String uuid, String season, int year});
 }
@@ -49,7 +45,6 @@ class _$SimulcastCopyWithImpl<$Res, $Val extends Simulcast>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -82,7 +77,6 @@ abstract class _$$_SimulcastCopyWith<$Res> implements $SimulcastCopyWith<$Res> {
   factory _$$_SimulcastCopyWith(
           _$_Simulcast value, $Res Function(_$_Simulcast) then) =
       __$$_SimulcastCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({String uuid, String season, int year});
@@ -180,13 +174,10 @@ abstract class _Simulcast implements Simulcast {
 
   @override
   String get uuid;
-
   @override
   String get season;
-
   @override
   int get year;
-
   @override
   @JsonKey(ignore: true)
   _$$_SimulcastCopyWith<_$_Simulcast> get copyWith =>
