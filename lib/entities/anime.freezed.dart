@@ -21,27 +21,17 @@ Anime _$AnimeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Anime {
   String get uuid => throw _privateConstructorUsedError;
-
   Country get country => throw _privateConstructorUsedError;
-
   String get name => throw _privateConstructorUsedError;
-
   String get releaseDate => throw _privateConstructorUsedError;
-
   String get image => throw _privateConstructorUsedError;
-
   String? get description => throw _privateConstructorUsedError;
-
   List<String> get hashes => throw _privateConstructorUsedError;
-
   List<Simulcast> get simulcasts => throw _privateConstructorUsedError;
-
   List<Episode>? get episodes => throw _privateConstructorUsedError;
-
   List<Manga>? get mangas => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $AnimeCopyWith<Anime> get copyWith => throw _privateConstructorUsedError;
 }
@@ -50,7 +40,6 @@ mixin _$Anime {
 abstract class $AnimeCopyWith<$Res> {
   factory $AnimeCopyWith(Anime value, $Res Function(Anime) then) =
       _$AnimeCopyWithImpl<$Res, Anime>;
-
   @useResult
   $Res call(
       {String uuid,
@@ -74,7 +63,6 @@ class _$AnimeCopyWithImpl<$Res, $Val extends Anime>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -149,7 +137,6 @@ class _$AnimeCopyWithImpl<$Res, $Val extends Anime>
 abstract class _$$_AnimeCopyWith<$Res> implements $AnimeCopyWith<$Res> {
   factory _$$_AnimeCopyWith(_$_Anime value, $Res Function(_$_Anime) then) =
       __$$_AnimeCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -268,7 +255,6 @@ class _$_Anime implements _Anime {
   @override
   final String? description;
   final List<String> _hashes;
-
   @override
   List<String> get hashes {
     // ignore: implicit_dynamic_type
@@ -276,7 +262,6 @@ class _$_Anime implements _Anime {
   }
 
   final List<Simulcast> _simulcasts;
-
   @override
   List<Simulcast> get simulcasts {
     // ignore: implicit_dynamic_type
@@ -284,7 +269,6 @@ class _$_Anime implements _Anime {
   }
 
   final List<Episode>? _episodes;
-
   @override
   List<Episode>? get episodes {
     final value = _episodes;
@@ -294,7 +278,6 @@ class _$_Anime implements _Anime {
   }
 
   final List<Manga>? _mangas;
-
   @override
   List<Manga>? get mangas {
     final value = _mangas;
@@ -374,34 +357,24 @@ abstract class _Anime implements Anime {
 
   @override
   String get uuid;
-
   @override
   Country get country;
-
   @override
   String get name;
-
   @override
   String get releaseDate;
-
   @override
   String get image;
-
   @override
   String? get description;
-
   @override
   List<String> get hashes;
-
   @override
   List<Simulcast> get simulcasts;
-
   @override
   List<Episode>? get episodes;
-
   @override
   List<Manga>? get mangas;
-
   @override
   @JsonKey(ignore: true)
   _$$_AnimeCopyWith<_$_Anime> get copyWith =>
