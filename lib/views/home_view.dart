@@ -110,7 +110,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       IconButton(
                         onPressed: () async {
-                          Navigator.of(context).pushNamed('/dairy');
+                          Navigator.of(context).pushNamed('/diary');
                         },
                         icon: const Icon(Icons.calendar_view_week),
                       ),

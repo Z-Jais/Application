@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
         '/scan': (_) {
           return const SafeArea(child: MangaScanView());
         },
-        '/dairy': (_) {
+        '/diary': (_) {
           return const SafeArea(child: DiaryView());
         },
       },
