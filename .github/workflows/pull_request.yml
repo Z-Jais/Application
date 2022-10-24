@@ -16,6 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Get
+        run: flutter pub get
+
       - name: Format
         run: flutter format --set-exit-if-changed .
 
@@ -33,6 +36,9 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Get
+        run: flutter pub get
 
       - name: Test
         run: flutter test -v
@@ -53,6 +59,9 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Get
+        run: flutter pub get
 
       - name: Flutter Native Splash
         run: flutter pub run flutter_native_splash:create
