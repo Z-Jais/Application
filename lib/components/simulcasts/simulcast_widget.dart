@@ -14,13 +14,10 @@ class SimulcastWidget extends StatelessWidget {
 
   // Copy function
   SimulcastWidget copyWith({
-    Key? key,
     Simulcast? simulcast,
     bool? isSelected,
-    Function(Simulcast)? onTap,
   }) =>
       SimulcastWidget(
-        key: key ?? this.key,
         simulcast: simulcast ?? this.simulcast,
         isSelected: isSelected ?? this.isSelected,
       );

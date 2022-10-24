@@ -30,20 +30,30 @@ class NavbarMapper extends ChangeNotifier {
   List<NavbarLink> get items => <NavbarLink>[
         const NavbarLink(
           name: 'Épisodes',
-          icon: Icon(Icons.subscriptions),
+          icon: Icon(Icons.subscriptions_outlined),
+          listIcon: Icon(Icons.checklist),
         ),
         const NavbarLink(
           name: 'Mangas',
           icon: Icon(Icons.menu_book),
+          listIcon: Icon(Icons.library_books),
         ),
         const NavbarLink(
           name: 'Animes',
           icon: Icon(Icons.live_tv),
+          listIcon: Icon(Icons.tv),
         ),
       ];
 
-  Iterable<BottomNavigationBarItem> get itemsBottomNavBar =>
-      items.map((NavbarLink e) => e.toBottomNavigationBarItem());
+  Iterable<BottomNavigationBarItem> itemsBottomNavBar(bool isList) => items
+      .asMap()
+      .map(
+        (int i, NavbarLink e) => MapEntry<int, BottomNavigationBarItem>(
+          i,
+          e.toBottomNavigationBarItem(currentPage == i && isList),
+        ),
+      )
+      .values;
 
   Iterable<Widget> itemsTopNavBar([Function(int)? callback]) => items
       .asMap()
@@ -59,15 +69,17 @@ class NavbarMapper extends ChangeNotifier {
 class NavbarLink {
   final String name;
   final Icon icon;
+  final Icon listIcon;
 
   const NavbarLink({
     required this.name,
     required this.icon,
+    required this.listIcon,
   });
 
-  BottomNavigationBarItem toBottomNavigationBarItem() =>
+  BottomNavigationBarItem toBottomNavigationBarItem(bool isList) =>
       BottomNavigationBarItem(
-        icon: icon,
+        icon: isList ? listIcon : icon,
         label: name,
       );
 

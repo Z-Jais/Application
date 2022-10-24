@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DeviceMapper {
   static final ReviewMapper reviewMapper = ReviewMapper();
+  static final WatchlistMapper watchlistMapper = WatchlistMapper();
 
   static bool isOnMobile(BuildContext context, [double width = 600]) {
     return MediaQuery.of(context).size.width < width;
@@ -68,5 +70,38 @@ class ReviewMapper {
   Future<void> neverReview() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('reviewType', 'never');
+  }
+}
+
+class WatchlistMapper {
+  final String _key = 'watchlist';
+
+  Future<List<String>> get() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList(_key) ?? <String>[];
+  }
+
+  Future<String> toGzip() async {
+    final List<String> watchlist = await get();
+    return base64Encode(gzip.encode(utf8.encode(jsonEncode(watchlist))));
+  }
+
+  Future<bool> has(String uuid) async {
+    final List<String> watchlist = await get();
+    return watchlist.contains(uuid);
+  }
+
+  Future<void> add(String uuid) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final List<String> watchlist = prefs.getStringList(_key) ?? <String>[];
+    watchlist.add(uuid);
+    await prefs.setStringList(_key, watchlist);
+  }
+
+  Future<void> remove(String uuid) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final List<String> watchlist = prefs.getStringList(_key) ?? <String>[];
+    watchlist.remove(uuid);
+    await prefs.setStringList(_key, watchlist);
   }
 }

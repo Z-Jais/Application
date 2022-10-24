@@ -21,11 +21,15 @@ Platform _$PlatformFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Platform {
   String get uuid => throw _privateConstructorUsedError;
+
   String get name => throw _privateConstructorUsedError;
+
   String get url => throw _privateConstructorUsedError;
+
   String get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $PlatformCopyWith<Platform> get copyWith =>
       throw _privateConstructorUsedError;
@@ -35,6 +39,7 @@ mixin _$Platform {
 abstract class $PlatformCopyWith<$Res> {
   factory $PlatformCopyWith(Platform value, $Res Function(Platform) then) =
       _$PlatformCopyWithImpl<$Res, Platform>;
+
   @useResult
   $Res call({String uuid, String name, String url, String image});
 }
@@ -46,6 +51,7 @@ class _$PlatformCopyWithImpl<$Res, $Val extends Platform>
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -83,6 +89,7 @@ abstract class _$$_PlatformCopyWith<$Res> implements $PlatformCopyWith<$Res> {
   factory _$$_PlatformCopyWith(
           _$_Platform value, $Res Function(_$_Platform) then) =
       __$$_PlatformCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({String uuid, String name, String url, String image});
@@ -191,12 +198,16 @@ abstract class _Platform implements Platform {
 
   @override
   String get uuid;
+
   @override
   String get name;
+
   @override
   String get url;
+
   @override
   String get image;
+
   @override
   @JsonKey(ignore: true)
   _$$_PlatformCopyWith<_$_Platform> get copyWith =>
