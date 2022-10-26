@@ -9,10 +9,12 @@ environment:
   flutter: ">=3.0.0"
 
 dependencies:
+  android_alarm_manager_plus: ^2.1.0
   cached_network_image: ^3.2.2
   device_info_plus: ^7.0.1
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^12.0.3
   freezed_annotation: ^2.2.0
   google_fonts: ^3.0.1
   google_mobile_ads: ^2.1.0
@@ -25,6 +27,7 @@ dependencies:
   shared_preferences: ^2.0.15
   shimmer: ^2.0.0
   url_launcher: ^6.1.6
+  web_socket_channel: ^2.2.0
 
 dev_dependencies:
   build_runner: ^2.3.2
@@ -33,7 +36,7 @@ dev_dependencies:
   flutter_native_splash: ^2.2.12
   flutter_test:
     sdk: flutter
-  freezed: ^2.2.0
+  freezed: ^2.2.1
   json_serializable: ^6.5.4
 
 flutter_icons:

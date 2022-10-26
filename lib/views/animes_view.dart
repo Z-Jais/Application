@@ -11,10 +11,10 @@ class AnimesView extends StatefulWidget {
   const AnimesView({super.key});
 
   @override
-  AnimesViewState createState() => AnimesViewState();
+  State<AnimesView> createState() => _AnimesViewState();
 }
 
-class AnimesViewState extends State<AnimesView> {
+class _AnimesViewState extends State<AnimesView> {
   final SimulcastMapper _simulcastMapper = SimulcastMapper(listener: false);
   final AnimeMapper _animeMapper = AnimeMapper();
 

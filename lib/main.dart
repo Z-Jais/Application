@@ -8,6 +8,7 @@ import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/utils/color.dart';
 import 'package:jais/views/anime_detail_view.dart';
 import 'package:jais/views/anime_search_view.dart';
+import 'package:jais/views/diary_view.dart';
 import 'package:jais/views/home_view.dart';
 import 'package:jais/views/manga_scan_view.dart';
 
@@ -61,6 +62,9 @@ class MyApp extends StatelessWidget {
         },
         '/scan': (_) {
           return const SafeArea(child: MangaScanView());
+        },
+        '/diary': (_) {
+          return const SafeArea(child: DiaryView());
         },
       },
     );

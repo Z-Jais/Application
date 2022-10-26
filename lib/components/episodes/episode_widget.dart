@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:jais/components/animes/anime_image.dart';
 import 'package:jais/components/border_element.dart';
 import 'package:jais/components/platforms/platform_widget.dart';
 import 'package:jais/components/roundborder_widget.dart';
@@ -24,7 +25,11 @@ class EpisodeWidget extends StatelessWidget {
         return RoundBorderWidget(
           widget: Stack(
             children: <Widget>[
-              Image(image: imageProvider, fit: BoxFit.cover),
+              Image(
+                image: imageProvider,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
               if (episode.season == 1 &&
                   episode.number == 1 &&
                   episode.anime.releaseDate == episode.releaseDate)
@@ -65,37 +70,66 @@ class EpisodeWidget extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                PlatformWidget(platform: episode.platform),
-                const SizedBox(width: 10),
                 Expanded(
-                  child: Text(
-                    episode.anime.name,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          PlatformWidget(platform: episode.platform),
+                          const SizedBox(width: 7.5),
+                          Expanded(
+                            child: Text(
+                              episode.platform.name,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        episode.anime.name,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        episode.title
+                            .ifEmptyOrNull('＞﹏＜')
+                            .replaceAll('\n', ' '),
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        Dictionary.getEpisodeDetails(episode),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          const Icon(Icons.movie),
+                          const SizedBox(width: 5),
+                          Text(
+                            Utils.printDuration(
+                              Duration(seconds: episode.duration),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            Text(
-              episode.title.ifEmptyOrNull('＞﹏＜').replaceAll('\n', ' '),
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(
-              Dictionary.getEpisodeDetails(episode),
-              overflow: TextOverflow.ellipsis,
-            ),
-            Row(
-              children: <Widget>[
-                const Icon(Icons.movie),
-                const SizedBox(width: 5),
-                Text(
-                  Utils.printDuration(Duration(seconds: episode.duration)),
-                ),
+                const SizedBox(width: 10),
+                AnimeImage(anime: episode.anime),
               ],
             ),
             const SizedBox(height: 10),

@@ -44,7 +44,7 @@ void main() {
       expect(find.byType(BottomNavigationBar), findsOneWidget);
 
       // Test episodes view
-      expect(find.byType(EpisodeLoaderWidget), findsNWidgets(3));
+      expect(find.byType(EpisodeLoaderWidget), findsNWidgets(2));
 
       await widgetTester.tap(find.text('Mangas'));
       await widgetTester.pump();

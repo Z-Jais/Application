@@ -10,6 +10,7 @@ class UrlConst {
   static const String mangas = '${domain}mangas/';
   static const String platforms = '${domain}platforms/';
   static const String devices = '${domain}devices/';
+  static const String diary = '${domain}diary/';
   static const String episodeAttachment = '${episodes}attachment/';
   static const String animeAttachment = '${animes}attachment/';
   static const String mangasAttachment = '${mangas}attachment/';
@@ -39,7 +40,15 @@ class UrlConst {
     return '${animes}country/${CountryMapper.selectedCountry?.tag}/simulcast/${simulcast.uuid}/page/$page/limit/$limit';
   }
 
+  static String getAnimesWatchlistPage(int page, int limit) {
+    return '${animes}watchlist/page/$page/limit/$limit';
+  }
+
   static String getAnimesSearch(String query) {
     return '${animes}country/${CountryMapper.selectedCountry?.tag}/search/name/$query';
+  }
+
+  static String getDiary(int day) {
+    return '${diary}country/${CountryMapper.selectedCountry?.tag}/day/$day';
   }
 }

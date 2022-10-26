@@ -3,7 +3,9 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
+import 'package:jais/mappers/notifications_mapper.dart';
 import 'package:jais/views/animes_view.dart';
+import 'package:jais/views/animes_watchlist_view.dart';
 import 'package:jais/views/episodes_view.dart';
 import 'package:jais/views/mangas_view.dart';
 import 'package:provider/provider.dart';
@@ -16,52 +18,100 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  void changePage(int page) => NavbarMapper.instance.currentPage = page;
+  bool _isList = false;
+
+  Future<void> _needsReview() async {
+    final bool showRequestReview =
+        await DeviceMapper.reviewMapper.canShowReview();
+
+    if (!mounted || !showRequestReview) {
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: const Text('Aimez-vous notre application ?'),
+          content: const Text('Voulez-vous laisser un avis ?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Non'),
+              onPressed: () async {
+                Navigator.pop(context);
+                await DeviceMapper.reviewMapper.neverReview();
+              },
+            ),
+            TextButton(
+              child: const Text('Plus tard'),
+              onPressed: () async {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: const Text('Oui'),
+              onPressed: () async {
+                Navigator.pop(context);
+                await DeviceMapper.reviewMapper.acceptReview();
+                InAppReview.instance.requestReview();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _notifications() async {
+    final bool success = await NotificationsMapper().setAlarm();
+
+    if (!mounted || success) {
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: const Text('Erreur'),
+          content: const Text(
+            'Une erreur est survenue lors de l\'initialisation des notifications.',
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () async {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  void changePage(int page, {bool fromNavBar = false}) {
+    if (fromNavBar && page == NavbarMapper.instance.currentPage) {
+      _isList = !_isList;
+      setState(() {});
+      return;
+    }
+
+    if (_isList) {
+      _isList = false;
+      setState(() {});
+    }
+
+    NavbarMapper.instance.currentPage = page;
+  }
 
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final bool showRequestReview =
-          await DeviceMapper.reviewMapper.canShowReview();
-
-      if (!mounted || !showRequestReview) {
-        return;
-      }
-
-      showDialog(
-        context: context,
-        builder: (_) {
-          return AlertDialog(
-            title: const Text('Aimez-vous notre application ?'),
-            content: const Text('Voulez-vous laisser un avis ?'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Non'),
-                onPressed: () async {
-                  Navigator.pop(context);
-                  await DeviceMapper.reviewMapper.neverReview();
-                },
-              ),
-              TextButton(
-                child: const Text('Plus tard'),
-                onPressed: () async {
-                  Navigator.pop(context);
-                },
-              ),
-              TextButton(
-                child: const Text('Oui'),
-                onPressed: () async {
-                  Navigator.pop(context);
-                  await DeviceMapper.reviewMapper.acceptReview();
-                  InAppReview.instance.requestReview();
-                },
-              )
-            ],
-          );
-        },
-      );
+      _needsReview();
+      _notifications();
     });
   }
 
@@ -85,23 +135,32 @@ class _HomeViewState extends State<HomeView> {
                         },
                         icon: const Icon(Icons.document_scanner),
                       ),
-                    if (navbarMapper.currentPage == 2)
+                    if (navbarMapper.currentPage == 2) ...<Widget>[
                       IconButton(
                         onPressed: () async {
                           Navigator.of(context).pushNamed('/search');
                         },
                         icon: const Icon(Icons.search),
                       ),
+                      IconButton(
+                        onPressed: () async {
+                          Navigator.of(context).pushNamed('/diary');
+                        },
+                        icon: const Icon(Icons.calendar_view_week),
+                      ),
+                    ],
                   ],
                 ),
                 Expanded(
                   child: PageView(
                     controller: navbarMapper.pageController,
                     onPageChanged: changePage,
-                    children: const <Widget>[
-                      EpisodesView(),
-                      MangasView(),
-                      AnimesView(),
+                    children: <Widget>[
+                      const EpisodesView(),
+                      const MangasView(),
+                      _isList
+                          ? const AnimesWatchlistView()
+                          : const AnimesView(),
                     ],
                   ),
                 ),
@@ -113,9 +172,11 @@ class _HomeViewState extends State<HomeView> {
               selectedItemColor: Theme.of(context).primaryColor,
               unselectedItemColor: Colors.grey,
               currentIndex: navbarMapper.currentPage,
-              onTap: changePage,
+              onTap: (int page) {
+                changePage(page, fromNavBar: true);
+              },
               items: <BottomNavigationBarItem>[
-                ...navbarMapper.itemsBottomNavBar
+                ...navbarMapper.itemsBottomNavBar(_isList),
               ],
             ),
           );

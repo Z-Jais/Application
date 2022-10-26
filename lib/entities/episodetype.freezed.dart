@@ -21,9 +21,11 @@ EpisodeType _$EpisodeTypeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$EpisodeType {
   String get uuid => throw _privateConstructorUsedError;
+
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $EpisodeTypeCopyWith<EpisodeType> get copyWith =>
       throw _privateConstructorUsedError;
@@ -34,6 +36,7 @@ abstract class $EpisodeTypeCopyWith<$Res> {
   factory $EpisodeTypeCopyWith(
           EpisodeType value, $Res Function(EpisodeType) then) =
       _$EpisodeTypeCopyWithImpl<$Res, EpisodeType>;
+
   @useResult
   $Res call({String uuid, String name});
 }
@@ -45,6 +48,7 @@ class _$EpisodeTypeCopyWithImpl<$Res, $Val extends EpisodeType>
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -73,6 +77,7 @@ abstract class _$$_EpisodeTypeCopyWith<$Res>
   factory _$$_EpisodeTypeCopyWith(
           _$_EpisodeType value, $Res Function(_$_EpisodeType) then) =
       __$$_EpisodeTypeCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({String uuid, String name});
@@ -160,8 +165,10 @@ abstract class _EpisodeType implements EpisodeType {
 
   @override
   String get uuid;
+
   @override
   String get name;
+
   @override
   @JsonKey(ignore: true)
   _$$_EpisodeTypeCopyWith<_$_EpisodeType> get copyWith =>
