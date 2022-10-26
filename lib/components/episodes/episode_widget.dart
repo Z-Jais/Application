@@ -25,7 +25,11 @@ class EpisodeWidget extends StatelessWidget {
         return RoundBorderWidget(
           widget: Stack(
             children: <Widget>[
-              Image(image: imageProvider, fit: BoxFit.cover),
+              Image(
+                image: imageProvider,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
               if (episode.season == 1 &&
                   episode.number == 1 &&
                   episode.anime.releaseDate == episode.releaseDate)
@@ -76,11 +80,13 @@ class EpisodeWidget extends StatelessWidget {
                         children: <Widget>[
                           PlatformWidget(platform: episode.platform),
                           const SizedBox(width: 7.5),
-                          Text(
-                            episode.platform.name,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
+                          Expanded(
+                            child: Text(
+                              episode.platform.name,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
