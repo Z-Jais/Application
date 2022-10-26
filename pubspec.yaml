@@ -34,7 +34,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.2.0
-  json_serializable: ^6.5.3
+  json_serializable: ^6.5.4
 
 flutter_icons:
   image_path: 'assets/icon.png'
