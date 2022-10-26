@@ -3,6 +3,7 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
+import 'package:jais/mappers/notifications_mapper.dart';
 import 'package:jais/views/animes_view.dart';
 import 'package:jais/views/animes_watchlist_view.dart';
 import 'package:jais/views/episodes_view.dart';
@@ -18,6 +19,76 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   bool _isList = false;
+
+  Future<void> _needsReview() async {
+    final bool showRequestReview =
+        await DeviceMapper.reviewMapper.canShowReview();
+
+    if (!mounted || !showRequestReview) {
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: const Text('Aimez-vous notre application ?'),
+          content: const Text('Voulez-vous laisser un avis ?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Non'),
+              onPressed: () async {
+                Navigator.pop(context);
+                await DeviceMapper.reviewMapper.neverReview();
+              },
+            ),
+            TextButton(
+              child: const Text('Plus tard'),
+              onPressed: () async {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: const Text('Oui'),
+              onPressed: () async {
+                Navigator.pop(context);
+                await DeviceMapper.reviewMapper.acceptReview();
+                InAppReview.instance.requestReview();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _notifications() async {
+    final bool success = await NotificationsMapper().setAlarm();
+
+    if (!mounted || success) {
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: const Text('Erreur'),
+          content: const Text(
+            'Une erreur est survenue lors de l\'initialisation des notifications.',
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () async {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
 
   void changePage(int page, {bool fromNavBar = false}) {
     if (fromNavBar && page == NavbarMapper.instance.currentPage) {
@@ -39,45 +110,8 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final bool showRequestReview =
-          await DeviceMapper.reviewMapper.canShowReview();
-
-      if (!mounted || !showRequestReview) {
-        return;
-      }
-
-      showDialog(
-        context: context,
-        builder: (_) {
-          return AlertDialog(
-            title: const Text('Aimez-vous notre application ?'),
-            content: const Text('Voulez-vous laisser un avis ?'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Non'),
-                onPressed: () async {
-                  Navigator.pop(context);
-                  await DeviceMapper.reviewMapper.neverReview();
-                },
-              ),
-              TextButton(
-                child: const Text('Plus tard'),
-                onPressed: () async {
-                  Navigator.pop(context);
-                },
-              ),
-              TextButton(
-                child: const Text('Oui'),
-                onPressed: () async {
-                  Navigator.pop(context);
-                  await DeviceMapper.reviewMapper.acceptReview();
-                  InAppReview.instance.requestReview();
-                },
-              )
-            ],
-          );
-        },
-      );
+      _needsReview();
+      _notifications();
     });
   }
 
