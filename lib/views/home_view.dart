@@ -62,11 +62,6 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Future<void> _notifications() async {
-    onBackgroundAlarm(notification: false);
-    await NotificationsMapper().setAlarm();
-  }
-
   void changePage(int page, {bool fromNavBar = false}) {
     if (fromNavBar && page == NavbarMapper.instance.currentPage) {
       _isList = !_isList;
@@ -88,7 +83,7 @@ class _HomeViewState extends State<HomeView> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _needsReview();
-      _notifications();
+      await NotificationsMapper().setAlarm();
     });
   }
 

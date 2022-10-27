@@ -45,46 +45,49 @@ Future<void> _show({
 }
 
 @pragma('vm:entry-point')
-Future<void> onBackgroundAlarm({bool notification = true}) async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final NotificationsMapper notificationsMapper = NotificationsMapper();
-  final List<String> checkedUuids = await notificationsMapper.getCheckedUuids();
-  final String lastCheck = await notificationsMapper.getLastCheck();
+void onBackgroundAlarm() {
+  Workmanager().executeTask((String task, __) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final NotificationsMapper notificationsMapper = NotificationsMapper();
+    final List<String> checkedUuids = await notificationsMapper.getCheckedUuids();
+    final String lastCheck = await notificationsMapper.getLastCheck();
 
-  final WebSocketChannel channel = WebSocketChannel.connect(
-    Uri.parse('wss://beta-api.ziedelth.fr/notifications'),
-  );
-  channel.sink.add('fr;$lastCheck');
-  final String response = await channel.stream.first;
-  await channel.sink.close();
+    final WebSocketChannel channel = WebSocketChannel.connect(
+      Uri.parse('wss://beta-api.ziedelth.fr/notifications'),
+    );
+    channel.sink.add('fr;$lastCheck');
+    final String response = await channel.stream.first;
+    await channel.sink.close();
 
-  final List<Map<String, dynamic>> data =
-      List<Map<String, dynamic>>.from(jsonDecode(response));
+    final List<Map<String, dynamic>> data =
+    List<Map<String, dynamic>>.from(jsonDecode(response));
 
-  final List<String> uuids = data
-      .map((Map<String, dynamic> element) => element['uuid'] as String)
-      .toList();
-  final String animes = data
-      .where(
-        (Map<String, dynamic> element) =>
-            !checkedUuids.contains(element['uuid']),
-      )
-      .map((Map<String, dynamic> element) => element['name'])
-      .join(', ');
+    final List<String> uuids = data
+        .map((Map<String, dynamic> element) => element['uuid'] as String)
+        .toList();
+    final String animes = data
+        .where(
+          (Map<String, dynamic> element) =>
+      !checkedUuids.contains(element['uuid']),
+    )
+        .map((Map<String, dynamic> element) => element['name'])
+        .join(', ');
 
-  if (animes.isNotEmpty && notification) {
-    try {
-      await _show(
-        id: 0,
-        channelId: 'notifications',
-        channelName: 'Notifications',
-        body: animes,
-      );
-    } catch (_) {}
-  }
+    if (animes.isNotEmpty && task != 'notifications_once') {
+      try {
+        await _show(
+            id: 0,
+            channelId: 'notifications',
+            channelName: 'Notifications',
+            body: animes,
+        );
+      } catch (_) {}
+    }
 
-  await notificationsMapper.setLastCheck();
-  await notificationsMapper.setCheckedUuids(uuids);
+    await notificationsMapper.setLastCheck();
+    await notificationsMapper.setCheckedUuids(uuids);
+    return Future<bool>.value(true);
+  });
 }
 
 class NotificationsMapper {
@@ -126,14 +129,15 @@ class NotificationsMapper {
 
     await workmanager.initialize(
       onBackgroundAlarm,
-      isInDebugMode: false,
+      isInDebugMode: true,
     );
     await workmanager.cancelByUniqueName(taskName);
+    await workmanager.registerOneOffTask('${taskName}_once', '${taskName}_once');
     await workmanager.registerPeriodicTask(
       taskName,
       taskName,
       frequency: const Duration(minutes: 15),
-      initialDelay: const Duration(minutes: 1),
+      initialDelay: const Duration(seconds: 30),
       constraints: Constraints(
         networkType: NetworkType.connected,
         requiresBatteryNotLow: true,
