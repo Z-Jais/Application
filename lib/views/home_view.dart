@@ -64,31 +64,7 @@ class _HomeViewState extends State<HomeView> {
 
   Future<void> _notifications() async {
     onBackgroundAlarm(notification: false);
-    final bool success = await NotificationsMapper().setAlarm();
-
-    if (!mounted || success) {
-      return;
-    }
-
-    showDialog(
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          title: const Text('Erreur'),
-          content: const Text(
-            'Une erreur est survenue lors de l\'initialisation des notifications.',
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () async {
-                Navigator.pop(context);
-              },
-            )
-          ],
-        );
-      },
-    );
+    await NotificationsMapper().setAlarm();
   }
 
   void changePage(int page, {bool fromNavBar = false}) {

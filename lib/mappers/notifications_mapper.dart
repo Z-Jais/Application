@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:workmanager/workmanager.dart';
 
-@pragma('vm:entry-point')
 Future<void> _show({
   required int id,
   required String channelId,
@@ -46,6 +46,7 @@ Future<void> _show({
 
 @pragma('vm:entry-point')
 Future<void> onBackgroundAlarm({bool notification = true}) async {
+  WidgetsFlutterBinding.ensureInitialized();
   final NotificationsMapper notificationsMapper = NotificationsMapper();
   final List<String> checkedUuids = await notificationsMapper.getCheckedUuids();
   final String lastCheck = await notificationsMapper.getLastCheck();
@@ -72,12 +73,14 @@ Future<void> onBackgroundAlarm({bool notification = true}) async {
       .join(', ');
 
   if (animes.isNotEmpty && notification) {
-    await _show(
-      id: 0,
-      channelId: 'notifications',
-      channelName: 'Notifications',
-      body: animes,
-    );
+    try {
+      await _show(
+        id: 0,
+        channelId: 'notifications',
+        channelName: 'Notifications',
+        body: animes,
+      );
+    } catch (_) {}
   }
 
   await notificationsMapper.setLastCheck();
@@ -99,7 +102,7 @@ class NotificationsMapper {
 
   Future<List<String>> getCheckedUuids() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList('checkedUuids') ?? <String>[];
+    return List<String>.from(prefs.getStringList('checkedUuids') ?? <String>[]);
   }
 
   Future<void> setCheckedUuids(List<String> uuids) async {
@@ -117,23 +120,24 @@ class NotificationsMapper {
     await prefs.setString(_lastCheckKey, getCurrentTime());
   }
 
-  Future<bool> setAlarm() async {
-    final bool response = await AndroidAlarmManager.initialize();
+  Future<void> setAlarm() async {
+    final Workmanager workmanager = Workmanager();
+    const String taskName = 'notifications';
 
-    if (!response) {
-      return false;
-    }
-
-    final bool set = await AndroidAlarmManager.periodic(
-      const Duration(minutes: 1),
-      0,
+    await workmanager.initialize(
       onBackgroundAlarm,
-      allowWhileIdle: true,
-      exact: true,
-      wakeup: true,
-      rescheduleOnReboot: true,
+      isInDebugMode: false,
     );
-
-    return set;
+    await workmanager.cancelByUniqueName(taskName);
+    await workmanager.registerPeriodicTask(
+      taskName,
+      taskName,
+      frequency: const Duration(minutes: 15),
+      initialDelay: const Duration(minutes: 1),
+      constraints: Constraints(
+        networkType: NetworkType.connected,
+        requiresBatteryNotLow: true,
+      ),
+    );
   }
 }
