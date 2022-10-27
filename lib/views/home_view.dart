@@ -63,6 +63,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Future<void> _notifications() async {
+    onBackgroundAlarm(notification: false);
     final bool success = await NotificationsMapper().setAlarm();
 
     if (!mounted || success) {

@@ -45,7 +45,7 @@ Future<void> _show({
 }
 
 @pragma('vm:entry-point')
-Future<void> _onBackgroundAlarm() async {
+Future<void> onBackgroundAlarm({bool notification = true}) async {
   final NotificationsMapper notificationsMapper = NotificationsMapper();
   final List<String> checkedUuids = await notificationsMapper.getCheckedUuids();
   final String lastCheck = await notificationsMapper.getLastCheck();
@@ -71,7 +71,7 @@ Future<void> _onBackgroundAlarm() async {
       .map((Map<String, dynamic> element) => element['name'])
       .join(', ');
 
-  if (animes.isNotEmpty) {
+  if (animes.isNotEmpty && notification) {
     await _show(
       id: 0,
       channelId: 'notifications',
@@ -127,7 +127,7 @@ class NotificationsMapper {
     final bool set = await AndroidAlarmManager.periodic(
       const Duration(minutes: 1),
       0,
-      _onBackgroundAlarm,
+      onBackgroundAlarm,
       allowWhileIdle: true,
       exact: true,
       wakeup: true,
