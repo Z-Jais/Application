@@ -50,12 +50,11 @@ void onBackgroundAlarm() {
     WidgetsFlutterBinding.ensureInitialized();
     final NotificationsMapper notificationsMapper = NotificationsMapper();
     final List<String> checkedUuids = await notificationsMapper.getCheckedUuids();
-    final String lastCheck = await notificationsMapper.getLastCheck();
 
     final WebSocketChannel channel = WebSocketChannel.connect(
       Uri.parse('wss://beta-api.ziedelth.fr/notifications'),
     );
-    channel.sink.add('fr;$lastCheck');
+    channel.sink.add('fr;${notificationsMapper.getCurrentTime()}');
     final String response = await channel.stream.first;
     await channel.sink.close();
 
@@ -84,15 +83,12 @@ void onBackgroundAlarm() {
       } catch (_) {}
     }
 
-    await notificationsMapper.setLastCheck();
     await notificationsMapper.setCheckedUuids(uuids);
     return Future<bool>.value(true);
   });
 }
 
 class NotificationsMapper {
-  final String _lastCheckKey = 'lastCheck';
-
   String getCurrentTime() {
     final String currentTime = DateTime.now().toUtc().toIso8601String();
 
@@ -111,16 +107,6 @@ class NotificationsMapper {
   Future<void> setCheckedUuids(List<String> uuids) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setStringList('checkedUuids', uuids);
-  }
-
-  Future<String> getLastCheck() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_lastCheckKey) ?? getCurrentTime();
-  }
-
-  Future<void> setLastCheck() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_lastCheckKey, getCurrentTime());
   }
 
   Future<void> setAlarm() async {
