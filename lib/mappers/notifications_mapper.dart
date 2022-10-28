@@ -110,16 +110,13 @@ class NotificationsMapper {
   }
 
   Future<void> setAlarm() async {
-    final Workmanager workmanager = Workmanager();
+    final Workmanager workManager = Workmanager();
     const String taskName = 'notifications';
 
-    await workmanager.initialize(
-      onBackgroundAlarm,
-      isInDebugMode: true,
-    );
-    await workmanager.cancelByUniqueName(taskName);
-    await workmanager.registerOneOffTask('${taskName}_once', '${taskName}_once');
-    await workmanager.registerPeriodicTask(
+    await workManager.initialize(onBackgroundAlarm);
+    await workManager.cancelByUniqueName(taskName);
+    await workManager.registerOneOffTask('${taskName}_once', '${taskName}_once');
+    await workManager.registerPeriodicTask(
       taskName,
       taskName,
       frequency: const Duration(minutes: 15),
