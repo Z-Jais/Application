@@ -37,6 +37,12 @@ class _AnimesViewState extends State<AnimesView> {
       final Simulcast simulcast = lastItem.simulcast;
       _animeMapper.simulcast = simulcast;
       _animeMapper.updateCurrentPage();
+
+      if (!mounted) {
+        return;
+      }
+
+      setState(() {});
     }
   }
 
@@ -50,7 +56,7 @@ class _AnimesViewState extends State<AnimesView> {
           children: <Widget>[
             InfiniteScroll<SimulcastMapper>(
               mapper: _simulcastMapper,
-              child: SimulcastList(
+              builder: () => SimulcastList(
                 scrollController: _simulcastMapper.scrollController,
                 children: _simulcastMapper
                     .toWidgetsSelected(_animeMapper.simulcast)
@@ -72,7 +78,7 @@ class _AnimesViewState extends State<AnimesView> {
             ),
             InfiniteScroll<AnimeMapper>(
               mapper: _animeMapper,
-              child: AnimeList(children: _animeMapper.list),
+              builder: () => AnimeList(children: _animeMapper.list),
             ),
           ],
         ),

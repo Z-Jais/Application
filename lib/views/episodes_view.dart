@@ -31,7 +31,7 @@ class _EpisodesViewState extends State<EpisodesView> {
       },
       child: InfiniteScroll<EpisodeMapper>(
         mapper: _episodeMapper,
-        child: EpisodeList(
+        builder: () => EpisodeList(
           scrollController: _episodeMapper.scrollController,
           children: _episodeMapper.list,
         ),

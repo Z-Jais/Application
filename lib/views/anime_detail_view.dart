@@ -103,7 +103,7 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
               },
               child: InfiniteScroll<AnimeEpisodeMapper>(
                 mapper: _animeEpisodeMapper,
-                child: LiteEpisodeList(
+                builder: () => LiteEpisodeList(
                   scrollController: _animeEpisodeMapper.scrollController,
                   children: _animeEpisodeMapper.list,
                 ),

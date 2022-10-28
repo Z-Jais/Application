@@ -35,7 +35,7 @@ class _AnimeSearchViewState extends State<AnimeSearchView> {
             child: SingleChildScrollView(
               child: InfiniteScroll<AnimeMapper>(
                 mapper: _animeMapper,
-                child: AnimeList(children: _animeMapper.list),
+                builder: () => AnimeList(children: _animeMapper.list),
               ),
             ),
           ),

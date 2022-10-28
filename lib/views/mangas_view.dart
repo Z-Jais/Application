@@ -31,7 +31,7 @@ class _MangasViewState extends State<MangasView> {
       },
       child: InfiniteScroll<MangaMapper>(
         mapper: _mangaMapper,
-        child: MangaList(
+        builder: () => MangaList(
           scrollController: _mangaMapper.scrollController,
           children: _mangaMapper.list,
         ),

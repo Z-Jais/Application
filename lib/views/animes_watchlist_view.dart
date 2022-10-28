@@ -61,7 +61,7 @@ class _AnimesWatchlistViewState extends State<AnimesWatchlistView> {
         controller: _animeMapper.scrollController,
         child: InfiniteScroll<AnimeMapper>(
           mapper: _animeMapper,
-          child: AnimeList(children: _animeMapper.list),
+          builder: () => AnimeList(children: _animeMapper.list),
         ),
       ),
     );

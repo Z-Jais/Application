@@ -92,7 +92,7 @@ class _DiaryViewState extends State<DiaryView> {
             const SizedBox(height: 10),
             InfiniteScroll<AnimeMapper>(
               mapper: _animeMapper,
-              child: AnimeList(children: _animeMapper.list),
+              builder: () => AnimeList(children: _animeMapper.list),
             ),
           ],
         ),
