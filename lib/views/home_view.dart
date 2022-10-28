@@ -3,7 +3,6 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
-import 'package:jais/mappers/notifications_mapper.dart';
 import 'package:jais/views/animes_view.dart';
 import 'package:jais/views/animes_watchlist_view.dart';
 import 'package:jais/views/episodes_view.dart';
@@ -83,7 +82,6 @@ class _HomeViewState extends State<HomeView> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _needsReview();
-      await NotificationsMapper().setAlarm();
     });
   }
 
