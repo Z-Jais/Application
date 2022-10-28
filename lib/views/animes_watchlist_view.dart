@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/animes/anime_list.dart';
+import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/mappers/anime_mapper.dart';
 import 'package:jais/utils/utils.dart';
-import 'package:provider/provider.dart';
 
 class AnimesWatchlistView extends StatefulWidget {
   const AnimesWatchlistView({super.key});
@@ -59,13 +59,9 @@ class _AnimesWatchlistViewState extends State<AnimesWatchlistView> {
       },
       child: SingleChildScrollView(
         controller: _animeMapper.scrollController,
-        child: ChangeNotifierProvider<AnimeMapper>.value(
-          value: _animeMapper,
-          child: Consumer<AnimeMapper>(
-            builder: (_, AnimeMapper animeMapper, __) {
-              return AnimeList(children: animeMapper.list);
-            },
-          ),
+        child: InfiniteScroll<AnimeMapper>(
+          mapper: _animeMapper,
+          child: AnimeList(children: _animeMapper.list),
         ),
       ),
     );

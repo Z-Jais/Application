@@ -49,7 +49,8 @@ void onBackgroundAlarm() {
   Workmanager().executeTask((String task, __) async {
     WidgetsFlutterBinding.ensureInitialized();
     final NotificationsMapper notificationsMapper = NotificationsMapper();
-    final List<String> checkedUuids = await notificationsMapper.getCheckedUuids();
+    final List<String> checkedUuids =
+        await notificationsMapper.getCheckedUuids();
 
     final WebSocketChannel channel = WebSocketChannel.connect(
       Uri.parse('wss://beta-api.ziedelth.fr/notifications'),
@@ -59,7 +60,7 @@ void onBackgroundAlarm() {
     await channel.sink.close();
 
     final List<Map<String, dynamic>> data =
-    List<Map<String, dynamic>>.from(jsonDecode(response));
+        List<Map<String, dynamic>>.from(jsonDecode(response));
 
     final List<String> uuids = data
         .map((Map<String, dynamic> element) => element['uuid'] as String)
@@ -67,18 +68,18 @@ void onBackgroundAlarm() {
     final String animes = data
         .where(
           (Map<String, dynamic> element) =>
-      !checkedUuids.contains(element['uuid']),
-    )
+              !checkedUuids.contains(element['uuid']),
+        )
         .map((Map<String, dynamic> element) => element['name'])
         .join(', ');
 
     if (animes.isNotEmpty && task != 'notifications_once') {
       try {
         await _show(
-            id: 0,
-            channelId: 'notifications',
-            channelName: 'Notifications',
-            body: animes,
+          id: 0,
+          channelId: 'notifications',
+          channelName: 'Notifications',
+          body: animes,
         );
       } catch (_) {}
     }
@@ -112,10 +113,12 @@ class NotificationsMapper {
   Future<void> setAlarm() async {
     final Workmanager workManager = Workmanager();
     const String taskName = 'notifications';
+    const String taskOnceName = '${taskName}_once';
 
     await workManager.initialize(onBackgroundAlarm);
     await workManager.cancelByUniqueName(taskName);
-    await workManager.registerOneOffTask('${taskName}_once', '${taskName}_once');
+
+    await workManager.registerOneOffTask(taskOnceName, taskOnceName);
     await workManager.registerPeriodicTask(
       taskName,
       taskName,

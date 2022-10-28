@@ -122,3 +122,22 @@ extension StringExt on String? {
   String ifEmptyOrNull(String replacement) =>
       (this == null || this?.isEmpty == true) ? replacement : this!;
 }
+
+extension ScrollControllerExt on ScrollController {
+  Future<void> scrollToEnd(State state) async {
+    await Future<dynamic>.delayed(const Duration(milliseconds: 100));
+
+    // If context is not mounted, it means that the widget has been disposed
+    if (!state.mounted) {
+      return;
+    }
+
+    try {
+      animateTo(
+        position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } catch (_) {}
+  }
+}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/components/mangas/manga_list.dart';
 import 'package:jais/mappers/manga_mapper.dart';
-import 'package:provider/provider.dart';
 
 class MangasView extends StatefulWidget {
   const MangasView({super.key});
@@ -29,15 +29,11 @@ class _MangasViewState extends State<MangasView> {
         _mangaMapper.clear();
         _mangaMapper.updateCurrentPage();
       },
-      child: ChangeNotifierProvider<MangaMapper>.value(
-        value: _mangaMapper,
-        child: Consumer<MangaMapper>(
-          builder: (_, MangaMapper mangaMapper, __) {
-            return MangaList(
-              scrollController: mangaMapper.scrollController,
-              children: mangaMapper.list,
-            );
-          },
+      child: InfiniteScroll<MangaMapper>(
+        mapper: _mangaMapper,
+        child: MangaList(
+          scrollController: _mangaMapper.scrollController,
+          children: _mangaMapper.list,
         ),
       ),
     );

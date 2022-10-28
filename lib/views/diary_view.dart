@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/animes/anime_list.dart';
+import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/mappers/anime_mapper.dart';
-import 'package:provider/provider.dart';
 
 class DiaryView extends StatefulWidget {
   const DiaryView({super.key});
@@ -90,13 +90,9 @@ class _DiaryViewState extends State<DiaryView> {
               ),
             ),
             const SizedBox(height: 10),
-            ChangeNotifierProvider<AnimeMapper>.value(
-              value: _animeMapper,
-              child: Consumer<AnimeMapper>(
-                builder: (_, AnimeMapper animeMapper, __) {
-                  return AnimeList(children: animeMapper.list);
-                },
-              ),
+            InfiniteScroll<AnimeMapper>(
+              mapper: _animeMapper,
+              child: AnimeList(children: _animeMapper.list),
             ),
           ],
         ),
