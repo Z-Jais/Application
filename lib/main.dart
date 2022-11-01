@@ -24,8 +24,9 @@ Future<void> main() async {
   DeviceMapper.updateOriginDevice();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((_) async =>
-          await FirebaseMessaging.instance.subscribeToTopic('all'));
+      .then(
+    (_) async => await FirebaseMessaging.instance.subscribeToTopic('all'),
+  );
 
   await Future.wait(<Future<void>>[CountryMapper.instance.update()]);
   runApp(const MyApp());
