@@ -47,6 +47,10 @@ class _DiaryViewState extends State<DiaryView> {
   Future<void> changeToDays({int? day}) async {
     day ??= DateTime.now().weekday;
 
+    if (day == 7) {
+      day = 0;
+    }
+
     final DayWidget dayWidget =
         _initial.firstWhere((DayWidget element) => element.dayNumber == day);
     final int index = _initial.indexOf(dayWidget);

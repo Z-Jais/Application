@@ -5,8 +5,11 @@ class InfiniteScroll<T extends ChangeNotifier?> extends StatelessWidget {
   final T mapper;
   final Widget Function() builder;
 
-  const InfiniteScroll(
-      {required this.mapper, required this.builder, super.key});
+  const InfiniteScroll({
+    required this.mapper,
+    required this.builder,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
