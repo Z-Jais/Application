@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:jais/ads/banner_ad.dart';
 import 'package:jais/firebase_options.dart';
 import 'package:jais/mappers/country_mapper.dart';
 import 'package:jais/mappers/device_mapper.dart';
@@ -19,13 +18,14 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
-    MobileAds.instance.initialize().then((_) => createGlobalBanner());
+    await MobileAds.instance.initialize();
   } catch (_) {}
 
   DeviceMapper.updateOriginDevice();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((_) => FirebaseMessaging.instance.subscribeToTopic('all'));
+      .then((_) async =>
+          await FirebaseMessaging.instance.subscribeToTopic('all'));
 
   await Future.wait(<Future<void>>[CountryMapper.instance.update()]);
   runApp(const MyApp());
