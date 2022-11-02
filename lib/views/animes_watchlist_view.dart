@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/animes/anime_list.dart';
+import 'package:jais/components/animes/anime_widget.dart';
 import 'package:jais/components/infinite_scroll.dart';
+import 'package:jais/components/no_element.dart';
 import 'package:jais/mappers/anime_mapper.dart';
 import 'package:jais/utils/utils.dart';
 
@@ -61,7 +63,11 @@ class _AnimesWatchlistViewState extends State<AnimesWatchlistView> {
         controller: _animeMapper.scrollController,
         child: InfiniteScroll<AnimeMapper>(
           mapper: _animeMapper,
-          builder: () => AnimeList(children: _animeMapper.list),
+          builder: () => _animeMapper.list.whereType<AnimeWidget>().isEmpty &&
+                  _animeMapper.page == 1 &&
+                  _animeMapper.lastPageError
+              ? const NoElement()
+              : AnimeList(children: _animeMapper.list),
         ),
       ),
     );

@@ -37,6 +37,7 @@ class AnimeMapper extends IMapper<Anime> {
   }
 
   Future<bool> updateWatchlistPage() async {
+    isLoading = true;
     addLoader();
     final Response? response = await URL().post(
       UrlConst.getAnimesWatchlistPage(page, limit),
@@ -44,17 +45,27 @@ class AnimeMapper extends IMapper<Anime> {
     );
 
     if (!response.isOk) {
+      isLoading = false;
+      canLoadMore = true;
+      lastPageError = true;
       return false;
     }
 
     final List<Widget> widgets = toWidgets(utf8.decode(response!.bodyBytes));
 
     if (widgets.isEmpty) {
+      lastPageError = true;
+      isLoading = false;
+      canLoadMore = false;
+      notifyListeners();
       return false;
     }
 
     list.addAll(widgets);
     removeLoader();
+    canLoadMore = list.length % limit == 0;
+    isLoading = false;
+    lastPageError = false;
     return true;
   }
 

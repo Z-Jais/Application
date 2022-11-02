@@ -1,12 +1,6 @@
 import 'dart:async';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:jais/firebase_options.dart';
-import 'package:jais/mappers/country_mapper.dart';
-import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/utils/color.dart';
 import 'package:jais/views/anime_detail_view.dart';
 import 'package:jais/views/anime_search_view.dart';
@@ -16,19 +10,6 @@ import 'package:jais/views/manga_scan_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  try {
-    await MobileAds.instance.initialize();
-  } catch (_) {}
-
-  DeviceMapper.updateOriginDevice();
-
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then(
-    (_) async => await FirebaseMessaging.instance.subscribeToTopic('all'),
-  );
-
-  await Future.wait(<Future<void>>[CountryMapper.instance.update()]);
   runApp(const MyApp());
 }
 
