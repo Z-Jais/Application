@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -10,6 +11,7 @@ import 'package:platform_device_id_v3/platform_device_id.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DeviceMapper {
+  static final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
   static final ReviewMapper reviewMapper = ReviewMapper();
   static final WatchlistMapper watchlistMapper = WatchlistMapper();
 
@@ -17,22 +19,19 @@ class DeviceMapper {
     return MediaQuery.of(context).size.width < width;
   }
 
-  @pragma('vm:entry-point')
   static Future<String?> getId() async {
     return PlatformDeviceId.getDeviceId;
   }
 
-  @pragma('vm:entry-point')
   static Future<String> getOS() async {
     final AndroidDeviceInfo androidDeviceInfo =
-        await DeviceInfoPlugin().androidInfo;
+        await _deviceInfoPlugin.androidInfo;
     return 'Android ${androidDeviceInfo.version.release}';
   }
 
-  @pragma('vm:entry-point')
   static Future<String> getModel() async {
     final AndroidDeviceInfo androidDeviceInfo =
-        await DeviceInfoPlugin().androidInfo;
+        await _deviceInfoPlugin.androidInfo;
     return '${androidDeviceInfo.manufacturer} ${androidDeviceInfo.model}';
   }
 
@@ -45,6 +44,23 @@ class DeviceMapper {
         'model': await getModel(),
       }),
     );
+  }
+
+  static Future<bool> hasInternet() async {
+    final ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+
+    if (connectivityResult == ConnectivityResult.none) {
+      return false;
+    }
+
+    try {
+      final List<InternetAddress> result =
+          await InternetAddress.lookup(UrlConst.domain);
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+    } on SocketException catch (_) {
+      return false;
+    }
   }
 }
 

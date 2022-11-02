@@ -11,7 +11,7 @@ import 'package:jais/utils/color.dart';
 import 'package:jais/views/anime_detail_view.dart';
 import 'package:jais/views/anime_search_view.dart';
 import 'package:jais/views/diary_view.dart';
-import 'package:jais/views/home_view.dart';
+import 'package:jais/views/initialization_view.dart';
 import 'package:jais/views/manga_scan_view.dart';
 
 Future<void> main() async {
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: <String, Widget Function(BuildContext)>{
         '/': (_) {
-          return const SafeArea(child: HomeView());
+          return const SafeArea(child: InitializationView());
         },
         '/search': (_) {
           return const SafeArea(child: AnimeSearchView());

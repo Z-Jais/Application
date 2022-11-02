@@ -2,15 +2,16 @@ import 'package:jais/entities/simulcast.dart';
 import 'package:jais/mappers/country_mapper.dart';
 
 class UrlConst {
-  static const String domain = 'https://beta-api.ziedelth.fr/';
-  static const String countries = '${domain}countries';
-  static const String episodes = '${domain}episodes/';
-  static const String simulcasts = '${domain}simulcasts/';
-  static const String animes = '${domain}animes/';
-  static const String mangas = '${domain}mangas/';
-  static const String platforms = '${domain}platforms/';
-  static const String devices = '${domain}devices';
-  static const String diary = '${domain}diary/';
+  static const String domain = 'beta-api.ziedelth.fr';
+  static const String baseUrl = 'https://$domain/';
+  static const String countries = '${baseUrl}countries';
+  static const String episodes = '${baseUrl}episodes/';
+  static const String simulcasts = '${baseUrl}simulcasts/';
+  static const String animes = '${baseUrl}animes/';
+  static const String mangas = '${baseUrl}mangas/';
+  static const String platforms = '${baseUrl}platforms/';
+  static const String devices = '${baseUrl}devices';
+  static const String diary = '${baseUrl}diary/';
   static const String episodeAttachment = '${episodes}attachment/';
   static const String animeAttachment = '${animes}attachment/';
   static const String mangasAttachment = '${mangas}attachment/';
