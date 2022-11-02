@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -45,6 +46,23 @@ class DeviceMapper {
         'model': await getModel(),
       }),
     );
+  }
+
+  static Future<bool> hasInternet() async {
+    final ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+
+    if (connectivityResult == ConnectivityResult.none) {
+      return false;
+    }
+
+    try {
+      final List<InternetAddress> result =
+          await InternetAddress.lookup('google.com');
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+    } on SocketException catch (_) {
+      return false;
+    }
   }
 }
 
