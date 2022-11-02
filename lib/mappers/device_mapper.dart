@@ -11,6 +11,7 @@ import 'package:platform_device_id_v3/platform_device_id.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DeviceMapper {
+  static final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
   static final ReviewMapper reviewMapper = ReviewMapper();
   static final WatchlistMapper watchlistMapper = WatchlistMapper();
 
@@ -18,22 +19,19 @@ class DeviceMapper {
     return MediaQuery.of(context).size.width < width;
   }
 
-  @pragma('vm:entry-point')
   static Future<String?> getId() async {
     return PlatformDeviceId.getDeviceId;
   }
 
-  @pragma('vm:entry-point')
   static Future<String> getOS() async {
     final AndroidDeviceInfo androidDeviceInfo =
-        await DeviceInfoPlugin().androidInfo;
+        await _deviceInfoPlugin.androidInfo;
     return 'Android ${androidDeviceInfo.version.release}';
   }
 
-  @pragma('vm:entry-point')
   static Future<String> getModel() async {
     final AndroidDeviceInfo androidDeviceInfo =
-        await DeviceInfoPlugin().androidInfo;
+        await _deviceInfoPlugin.androidInfo;
     return '${androidDeviceInfo.manufacturer} ${androidDeviceInfo.model}';
   }
 
