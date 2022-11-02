@@ -15,6 +15,7 @@ abstract class IMapper<T> extends ChangeNotifier {
   int page = 1;
   bool isLoading = false;
   bool canLoadMore = true;
+  bool lastPageError = false;
 
   IMapper({
     required this.limit,
@@ -92,21 +93,31 @@ abstract class IMapper<T> extends ChangeNotifier {
   }
 
   Future<bool> loadPage(String url) async {
+    isLoading = true;
     addLoader();
     final Response? response = await URL().get(url);
 
     if (!response.isOk) {
+      isLoading = false;
+      canLoadMore = true;
+      lastPageError = true;
       return false;
     }
 
     final List<Widget> widgets = toWidgets(utf8.decode(response!.bodyBytes));
 
     if (widgets.isEmpty) {
+      lastPageError = true;
+      isLoading = false;
+      canLoadMore = false;
       return false;
     }
 
     list.addAll(widgets);
     removeLoader();
+    canLoadMore = list.length % limit == 0;
+    isLoading = false;
+    lastPageError = false;
     return true;
   }
 

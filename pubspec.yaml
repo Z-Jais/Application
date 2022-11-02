@@ -55,3 +55,4 @@ flutter:
   assets:
     - 'assets/icon.png'
     - 'assets/no_connection.png'
+    - 'assets/no_element.png'

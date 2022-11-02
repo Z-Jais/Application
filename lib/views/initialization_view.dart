@@ -1,6 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:jais/components/no_connection.dart';
+import 'package:jais/firebase_options.dart';
+import 'package:jais/mappers/country_mapper.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/views/home_view.dart';
 
@@ -13,6 +18,7 @@ class InitializationView extends StatefulWidget {
 
 class _InitializationViewState extends State<InitializationView> {
   Future<bool> _hasInternet = DeviceMapper.hasInternet();
+  late Future<void> _i;
 
   Future<void> _needsReview() async {
     final bool showRequestReview =
@@ -56,12 +62,27 @@ class _InitializationViewState extends State<InitializationView> {
     );
   }
 
+  Future<void> init() async {
+    try {
+      MobileAds.instance.initialize();
+    } catch (_) {}
+
+    Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    ).then((_) async => FirebaseMessaging.instance.subscribeToTopic('all'));
+
+    DeviceMapper.updateOriginDevice();
+    await CountryMapper.instance.update();
+
+    _needsReview();
+  }
+
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _needsReview();
+      _i = init();
     });
   }
 
@@ -70,12 +91,14 @@ class _InitializationViewState extends State<InitializationView> {
     return FutureBuilder<bool>(
       future: _hasInternet,
       builder: (_, AsyncSnapshot<bool> snapshot) {
+        const Scaffold waiter = Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+
         if (snapshot.connectionState != ConnectionState.done) {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return waiter;
         }
 
         if (!snapshot.data!) {
@@ -83,13 +106,23 @@ class _InitializationViewState extends State<InitializationView> {
             body: NoConnection(
               onRetry: () async {
                 _hasInternet = DeviceMapper.hasInternet();
+                _i = init();
                 setState(() {});
               },
             ),
           );
         }
 
-        return const HomeView();
+        return FutureBuilder<void>(
+          future: _i,
+          builder: (_, AsyncSnapshot<void> snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return waiter;
+            }
+
+            return const HomeView();
+          },
+        );
       },
     );
   }
