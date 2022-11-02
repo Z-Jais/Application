@@ -58,7 +58,7 @@ class DeviceMapper {
 
     try {
       final List<InternetAddress> result =
-          await InternetAddress.lookup('google.com');
+          await InternetAddress.lookup(UrlConst.domain);
       return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
     } on SocketException catch (_) {
       return false;
