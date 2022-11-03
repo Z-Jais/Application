@@ -5,7 +5,7 @@ import 'package:jais/views/animes/animes_view.dart';
 import 'package:jais/views/animes/animes_watchlist_view.dart';
 import 'package:jais/views/episodes/episodes_view.dart';
 import 'package:jais/views/episodes/episodes_watchlist_view.dart';
-import 'package:jais/views/mangas_view.dart';
+import 'package:jais/views/mangas/mangas_view.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
