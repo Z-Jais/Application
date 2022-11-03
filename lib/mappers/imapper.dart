@@ -25,31 +25,40 @@ abstract class IMapper<T> extends ChangeNotifier {
     bool listener = true,
   }) {
     if (listener) {
-      scrollController.addListener(() async {
-        if (scrollController.position.extentAfter <= 0 &&
-            !isLoading &&
-            canLoadMore) {
-          isLoading = true;
-          Utils.clearImagesCache();
-          page++;
-          final bool correct = await updateCurrentPage();
+      scrollController.addListener(onInfiniteScroll);
+    }
+  }
 
-          if (!correct) {
-            page--;
-            canLoadMore = true;
-            removeLoader();
+  bool nothingToShow<R>() =>
+      list.whereType<R>().isEmpty && page == 1 && lastPageError;
 
-            Future<void>.delayed(const Duration(seconds: 1)).then((_) {
-              isLoading = false;
-            });
+  bool canInfiniteScroll() {
+    return scrollController.position.extentAfter <= 0 &&
+        !isLoading &&
+        canLoadMore;
+  }
 
-            return;
-          }
+  void onInfiniteScroll() async {
+    if (canInfiniteScroll()) {
+      isLoading = true;
+      Utils.clearImagesCache();
+      page++;
+      final bool correct = await updateCurrentPage();
 
+      if (!correct) {
+        page--;
+        canLoadMore = true;
+        removeLoader();
+
+        Future<void>.delayed(const Duration(seconds: 1)).then((_) {
           isLoading = false;
-          canLoadMore = list.length % limit == 0;
-        }
-      });
+        });
+
+        return;
+      }
+
+      isLoading = false;
+      canLoadMore = list.length % limit == 0;
     }
   }
 
@@ -92,10 +101,12 @@ abstract class IMapper<T> extends ChangeNotifier {
     }
   }
 
-  Future<bool> loadPage(String url) async {
+  Future<bool> loadPageWithFunction(
+    Future<Response?> Function() function,
+  ) async {
     isLoading = true;
     addLoader();
-    final Response? response = await URL().get(url);
+    final Response? response = await function();
 
     if (!response.isOk) {
       isLoading = false;
@@ -110,6 +121,7 @@ abstract class IMapper<T> extends ChangeNotifier {
       lastPageError = true;
       isLoading = false;
       canLoadMore = false;
+      notifyListeners();
       return false;
     }
 
@@ -120,6 +132,9 @@ abstract class IMapper<T> extends ChangeNotifier {
     lastPageError = false;
     return true;
   }
+
+  Future<bool> loadPageWithUrl(String url) async =>
+      loadPageWithFunction(() => URL().get(url));
 
   Future<bool> updateCurrentPage();
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/mangas/manga_widget.dart';
 import 'package:jais/entities/manga.dart';
+import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/manga_mapper.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -36,12 +37,44 @@ class _MangaSearchViewState extends State<MangaScanView> {
                 return;
               }
 
+              final bool inMangaCollec =
+                  await DeviceMapper.mangaCollecMapper.has(manga.uuid);
+
               await showModalBottomSheet(
                 context: context,
                 builder: (_) {
                   return Container(
                     color: Theme.of(context).scaffoldBackgroundColor,
-                    child: MangaWidget(manga: manga, redirect: false),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            const Spacer(),
+                            TextButton(
+                              onPressed: () async {
+                                if (inMangaCollec) {
+                                  await DeviceMapper.mangaCollecMapper
+                                      .remove(manga.uuid);
+                                } else {
+                                  await DeviceMapper.mangaCollecMapper
+                                      .add(manga.uuid);
+                                }
+
+                                if (!mounted) {
+                                  return;
+                                }
+
+                                Navigator.of(context).pop();
+                              },
+                              child:
+                                  Text(inMangaCollec ? 'Retirer' : 'Ajouter'),
+                            ),
+                          ],
+                        ),
+                        MangaWidget(manga: manga, redirect: false),
+                      ],
+                    ),
                   );
                 },
               );

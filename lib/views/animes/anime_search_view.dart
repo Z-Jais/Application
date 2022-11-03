@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/animes/anime_list.dart';
 import 'package:jais/components/infinite_scroll.dart';
-import 'package:jais/mappers/anime_mapper.dart';
+import 'package:jais/mappers/animes/anime_mapper.dart';
 
 class AnimeSearchView extends StatefulWidget {
   const AnimeSearchView({super.key});

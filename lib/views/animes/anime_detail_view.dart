@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/components/lite_episodes/lite_episode_list.dart';
 import 'package:jais/entities/anime.dart';
-import 'package:jais/mappers/anime_episode_mapper.dart';
+import 'package:jais/mappers/animes/anime_episode_mapper.dart';
 import 'package:jais/mappers/device_mapper.dart';
 
 class AnimeDetailView extends StatefulWidget {

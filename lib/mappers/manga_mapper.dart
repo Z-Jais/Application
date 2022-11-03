@@ -19,7 +19,7 @@ class MangaMapper extends IMapper<Manga> {
 
   @override
   Future<bool> updateCurrentPage() async {
-    return loadPage(
+    return loadPageWithUrl(
       UrlConst.getMangasPage(page, limit),
     );
   }

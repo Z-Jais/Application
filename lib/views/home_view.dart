@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
-import 'package:jais/views/animes_view.dart';
-import 'package:jais/views/animes_watchlist_view.dart';
-import 'package:jais/views/episodes_view.dart';
+import 'package:jais/views/animes/animes_view.dart';
+import 'package:jais/views/animes/animes_watchlist_view.dart';
+import 'package:jais/views/episodes/episodes_view.dart';
+import 'package:jais/views/episodes/episodes_watchlist_view.dart';
 import 'package:jais/views/mangas_view.dart';
 import 'package:provider/provider.dart';
 
@@ -73,7 +74,9 @@ class _HomeViewState extends State<HomeView> {
                     controller: navbarMapper.pageController,
                     onPageChanged: changePage,
                     children: <Widget>[
-                      const EpisodesView(),
+                      _isList
+                          ? const EpisodesWatchlistView()
+                          : const EpisodesView(),
                       const MangasView(),
                       _isList
                           ? const AnimesWatchlistView()

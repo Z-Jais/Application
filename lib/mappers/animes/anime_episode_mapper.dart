@@ -21,6 +21,6 @@ class AnimeEpisodeMapper extends IMapper<Episode> {
       return false;
     }
 
-    return await loadPage(UrlConst.getEpisodesAnimePage(uuid!, page, limit));
+    return loadPageWithUrl(UrlConst.getEpisodesAnimePage(uuid!, page, limit));
   }
 }
