@@ -71,7 +71,6 @@ class _InitializationViewState extends State<InitializationView> {
       options: DefaultFirebaseOptions.currentPlatform,
     ).then((_) async => FirebaseMessaging.instance.subscribeToTopic('all'));
 
-    DeviceMapper.updateOriginDevice();
     await CountryMapper.instance.update();
 
     _needsReview();

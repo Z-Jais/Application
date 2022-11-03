@@ -10,10 +10,8 @@ environment:
 
 dependencies:
   cached_network_image: ^3.2.2
-  connectivity_plus: ^3.0.2
-  device_info_plus: ^8.0.0
   firebase_core: ^2.1.1
-  firebase_messaging: ^14.0.3
+  firebase_messaging: ^14.0.4
   flutter:
     sdk: flutter
   freezed_annotation: ^2.2.0
@@ -21,9 +19,9 @@ dependencies:
   google_mobile_ads: ^2.2.0
   http: ^0.13.5
   in_app_review: ^2.0.4
+  internet_connection_checker: ^1.0.0+1
   json_annotation: ^4.7.0
   mobile_scanner: ^2.0.0
-  platform_device_id_v3: ^1.0.0
   provider: ^6.0.4
   shared_preferences: ^2.0.15
   shimmer: ^2.0.0

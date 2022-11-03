@@ -1,66 +1,46 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_review/in_app_review.dart';
-import 'package:jais/url/url.dart';
-import 'package:jais/url/url_const.dart';
-import 'package:platform_device_id_v3/platform_device_id.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DeviceMapper {
-  static final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
   static final ReviewMapper reviewMapper = ReviewMapper();
-  static final WatchlistMapper watchlistMapper = WatchlistMapper();
+  static final CollectionMapper watchlistMapper = CollectionMapper('watchlist');
+  static final CollectionMapper mangaCollecMapper =
+      CollectionMapper('mangaCollec');
+  static BannerAd? globalBannerAd;
 
   static bool isOnMobile(BuildContext context, [double width = 600]) {
     return MediaQuery.of(context).size.width < width;
   }
 
-  static Future<String?> getId() async {
-    return PlatformDeviceId.getDeviceId;
-  }
-
-  static Future<String> getOS() async {
-    final AndroidDeviceInfo androidDeviceInfo =
-        await _deviceInfoPlugin.androidInfo;
-    return 'Android ${androidDeviceInfo.version.release}';
-  }
-
-  static Future<String> getModel() async {
-    final AndroidDeviceInfo androidDeviceInfo =
-        await _deviceInfoPlugin.androidInfo;
-    return '${androidDeviceInfo.manufacturer} ${androidDeviceInfo.model}';
-  }
-
-  static Future<void> updateOriginDevice() async {
-    await URL().post(
-      UrlConst.devices,
-      body: jsonEncode(<String, dynamic>{
-        'name': await getId(),
-        'os': await getOS(),
-        'model': await getModel(),
-      }),
+  static Future<void> createGlobalBanner() async {
+    globalBannerAd = BannerAd(
+      adUnitId: 'ca-app-pub-5658764393995798/7021730383',
+      size: AdSize.banner,
+      request: const AdRequest(),
+      listener: BannerAdListener(
+        onAdFailedToLoad: (Ad ad, _) async {
+          ad.dispose();
+        },
+      ),
     );
+
+    globalBannerAd?.load();
   }
 
   static Future<bool> hasInternet() async {
-    final ConnectivityResult connectivityResult =
-        await (Connectivity().checkConnectivity());
+    final InternetConnectionChecker customInstance =
+        InternetConnectionChecker.createInstance(
+      checkTimeout: const Duration(milliseconds: 2500),
+      checkInterval: const Duration(seconds: 1),
+    );
 
-    if (connectivityResult == ConnectivityResult.none) {
-      return false;
-    }
-
-    try {
-      final List<InternetAddress> result =
-          await InternetAddress.lookup(UrlConst.domain);
-      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
-    } on SocketException catch (_) {
-      return false;
-    }
+    return customInstance.hasConnection;
   }
 }
 
@@ -89,35 +69,42 @@ class ReviewMapper {
   }
 }
 
-class WatchlistMapper {
-  final String _key = 'watchlist';
+class CollectionMapper {
+  final String key;
+  final Future<SharedPreferences> _sharedPreferences =
+      SharedPreferences.getInstance();
 
-  Future<List<String>> get() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList(_key) ?? <String>[];
-  }
+  CollectionMapper(this.key);
 
-  Future<String> toGzip() async {
-    final List<String> watchlist = await get();
-    return base64Encode(gzip.encode(utf8.encode(jsonEncode(watchlist))));
-  }
+  Future<List<String>> get() async =>
+      (await _sharedPreferences).getStringList(key) ?? <String>[];
 
-  Future<bool> has(String uuid) async {
-    final List<String> watchlist = await get();
-    return watchlist.contains(uuid);
-  }
+  Future<String> toGzip() async =>
+      base64Encode(gzip.encode(utf8.encode(jsonEncode(await get()))));
+
+  bool hasIn(List<String> list, String uuid) => list.contains(uuid);
+
+  Future<bool> has(String uuid) async => hasIn(await get(), uuid);
 
   Future<void> add(String uuid) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> watchlist = prefs.getStringList(_key) ?? <String>[];
+    final List<String> watchlist = await get();
+
+    if (hasIn(watchlist, uuid)) {
+      return;
+    }
+
     watchlist.add(uuid);
-    await prefs.setStringList(_key, watchlist);
+    await (await _sharedPreferences).setStringList(key, watchlist);
   }
 
   Future<void> remove(String uuid) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> watchlist = prefs.getStringList(_key) ?? <String>[];
+    final List<String> watchlist = await get();
+
+    if (!hasIn(watchlist, uuid)) {
+      return;
+    }
+
     watchlist.remove(uuid);
-    await prefs.setStringList(_key, watchlist);
+    await (await _sharedPreferences).setStringList(key, watchlist);
   }
 }

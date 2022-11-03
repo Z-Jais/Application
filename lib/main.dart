@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:jais/utils/color.dart';
-import 'package:jais/views/anime_detail_view.dart';
-import 'package:jais/views/anime_search_view.dart';
+import 'package:jais/views/animes/anime_detail_view.dart';
+import 'package:jais/views/animes/anime_search_view.dart';
 import 'package:jais/views/diary_view.dart';
 import 'package:jais/views/initialization_view.dart';
 import 'package:jais/views/manga_scan_view.dart';

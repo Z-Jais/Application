@@ -4,7 +4,7 @@ import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/components/simulcasts/simulcast_list.dart';
 import 'package:jais/components/simulcasts/simulcast_widget.dart';
 import 'package:jais/entities/simulcast.dart';
-import 'package:jais/mappers/anime_mapper.dart';
+import 'package:jais/mappers/animes/anime_mapper.dart';
 import 'package:jais/mappers/simulcast_mapper.dart';
 import 'package:jais/utils/utils.dart';
 

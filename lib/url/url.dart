@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-import 'package:jais/ads/video_ad.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 extension UrlExtension on http.Response? {
@@ -59,12 +58,14 @@ class URL {
       );
     }
 
-    if (showAd) {
-      showVideoAd(
-        callback: (_) async => redirectToEpisode(),
-      );
-    } else {
-      await redirectToEpisode();
-    }
+    // if (showAd) {
+    //   showVideoAd(
+    //     callback: (_) async => redirectToEpisode(),
+    //   );
+    // } else {
+    //   await redirectToEpisode();
+    // }
+
+    await redirectToEpisode();
   }
 }

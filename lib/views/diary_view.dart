@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/animes/anime_list.dart';
+import 'package:jais/components/animes/anime_widget.dart';
 import 'package:jais/components/infinite_scroll.dart';
-import 'package:jais/mappers/anime_mapper.dart';
+import 'package:jais/components/no_element.dart';
+import 'package:jais/mappers/animes/anime_mapper.dart';
 
 class DiaryView extends StatefulWidget {
   const DiaryView({super.key});
@@ -96,7 +98,9 @@ class _DiaryViewState extends State<DiaryView> {
             const SizedBox(height: 10),
             InfiniteScroll<AnimeMapper>(
               mapper: _animeMapper,
-              builder: () => AnimeList(children: _animeMapper.list),
+              builder: () => _animeMapper.nothingToShow<AnimeWidget>()
+                  ? const NoElement()
+                  : AnimeList(children: _animeMapper.list),
             ),
           ],
         ),

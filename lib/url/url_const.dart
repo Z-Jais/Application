@@ -25,6 +25,10 @@ class UrlConst {
     return '${episodes}anime/$uuid/page/$page/limit/$limit';
   }
 
+  static String getEpisodesWatchlistPage(int page, int limit) {
+    return '${episodes}watchlist/page/$page/limit/$limit';
+  }
+
   static String getMangasPage(int page, int limit) {
     return '${mangas}country/${CountryMapper.selectedCountry?.tag}/page/$page/limit/$limit';
   }
