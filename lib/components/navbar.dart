@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/components/roundborder_widget.dart';
-import 'package:jais/mappers/device_mapper.dart';
+
+import '../mappers/device_mapper.dart';
 
 class Navbar extends StatelessWidget {
   final Function(int)? onPageChanged;
@@ -43,7 +44,7 @@ class Navbar extends StatelessWidget {
                   );
                 }
 
-                return ColoredBox(color: Theme.of(context).backgroundColor);
+                return const ColoredBox(color: Colors.transparent);
               },
             ),
           ),

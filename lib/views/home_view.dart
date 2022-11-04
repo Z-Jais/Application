@@ -6,6 +6,7 @@ import 'package:jais/views/animes/animes_watchlist_view.dart';
 import 'package:jais/views/episodes/episodes_view.dart';
 import 'package:jais/views/episodes/episodes_watchlist_view.dart';
 import 'package:jais/views/mangas/mangas_view.dart';
+import 'package:jais/views/mangas/mangas_watchlist_view.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
@@ -57,7 +58,9 @@ class _HomeViewState extends State<HomeView> {
                       _isList
                           ? const EpisodesWatchlistView()
                           : const EpisodesView(),
-                      const MangasView(),
+                      _isList
+                          ? const MangasWatchlistView()
+                          : const MangasView(),
                       _isList
                           ? const AnimesWatchlistView()
                           : const AnimesView(),
@@ -76,7 +79,7 @@ class _HomeViewState extends State<HomeView> {
                 changePage(page, fromNavBar: true);
               },
               items: <BottomNavigationBarItem>[
-                ...navbarMapper.itemsBottomNavBar(context, _isList),
+                ...navbarMapper.itemsBottomNavBar(context),
               ],
             ),
           );

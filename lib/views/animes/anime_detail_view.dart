@@ -28,7 +28,8 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
         _animeEpisodeMapper.updateCurrentPage();
 
         if (_anime != null) {
-          _inWatchlist = await DeviceMapper.watchlistMapper.has(_anime!.uuid);
+          _inWatchlist =
+              await DeviceMapper.animeWatchlistData.has(_anime!.uuid);
 
           if (!mounted) {
             return;
@@ -61,9 +62,9 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
             ),
             onPressed: () async {
               if (_inWatchlist) {
-                await DeviceMapper.watchlistMapper.remove(_anime!.uuid);
+                await DeviceMapper.animeWatchlistData.remove(_anime!.uuid);
               } else {
-                await DeviceMapper.watchlistMapper.add(_anime!.uuid);
+                await DeviceMapper.animeWatchlistData.add(_anime!.uuid);
               }
 
               setState(() {

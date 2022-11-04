@@ -5,14 +5,14 @@ import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/components/no_element.dart';
 import 'package:jais/mappers/animes/anime_mapper.dart';
 
-class DiaryView extends StatefulWidget {
-  const DiaryView({super.key});
+class AnimeDiaryView extends StatefulWidget {
+  const AnimeDiaryView({super.key});
 
   @override
-  State<DiaryView> createState() => _DiaryViewState();
+  State<AnimeDiaryView> createState() => _AnimeDiaryViewState();
 }
 
-class _DiaryViewState extends State<DiaryView> {
+class _AnimeDiaryViewState extends State<AnimeDiaryView> {
   final AnimeMapper _animeMapper = AnimeMapper(listener: false);
   final List<DayWidget> _initial = const <DayWidget>[
     DayWidget(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jais/components/mangas/lite_manga_widget.dart';
 import 'package:jais/entities/manga.dart';
 import 'package:jais/mappers/device_mapper.dart';
-import 'package:jais/mappers/manga_mapper.dart';
+import 'package:jais/mappers/mangas/manga_mapper.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:vibration/vibration.dart';
 
@@ -85,7 +85,7 @@ class _MangaSearchViewState extends State<MangaScanView> {
                         const Spacer(),
                         TextButton(
                           onPressed: () async {
-                            await DeviceMapper.mangaCollecMapper.addAll(
+                            await DeviceMapper.mangaWatchlistData.addAll(
                               _mangas.map((final Manga manga) => manga.uuid),
                             );
 

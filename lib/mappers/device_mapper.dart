@@ -9,9 +9,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DeviceMapper {
   static final ReviewMapper reviewMapper = ReviewMapper();
-  static final CollectionMapper watchlistMapper = CollectionMapper('watchlist');
-  static final CollectionMapper mangaCollecMapper =
-      CollectionMapper('mangaCollec');
+  static final DataCollection animeWatchlistData =
+      DataCollection('animeWatchlist');
+  static final DataCollection mangaWatchlistData =
+      DataCollection('mangaWatchlist');
   static BannerAd? globalBannerAd;
 
   static bool isOnMobile(BuildContext context, [double width = 600]) {
@@ -69,12 +70,12 @@ class ReviewMapper {
   }
 }
 
-class CollectionMapper {
+class DataCollection {
   final String key;
   final Future<SharedPreferences> _sharedPreferences =
       SharedPreferences.getInstance();
 
-  CollectionMapper(this.key);
+  DataCollection(this.key);
 
   Future<List<String>> get() async =>
       (await _sharedPreferences).getStringList(key) ?? <String>[];

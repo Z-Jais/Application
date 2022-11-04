@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/components/mangas/manga_list.dart';
-import 'package:jais/mappers/manga_mapper.dart';
+import 'package:jais/mappers/mangas/manga_mapper.dart';
 
 class MangasView extends StatefulWidget {
   const MangasView({super.key});

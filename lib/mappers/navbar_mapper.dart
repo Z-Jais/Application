@@ -31,35 +31,38 @@ class NavbarMapper extends ChangeNotifier {
         const NavbarLink(
           name: 'Épisodes',
           icon: Icon(Icons.subscriptions_outlined),
-          listIcon: Icon(Icons.checklist),
         ),
         NavbarLink(
           name: 'Mangas',
           icon: const Icon(Icons.menu_book),
-          listIcon: const Icon(Icons.library_books),
           topWidgets: <Widget>[
             IconButton(
               onPressed: () async {
-                Navigator.of(context).pushNamed('/scan');
+                Navigator.of(context).pushNamed('/manga/scan');
               },
               icon: const Icon(Icons.document_scanner),
             ),
+            // IconButton(
+            //   onPressed: () async {
+            //     Navigator.of(context).pushNamed('/manga/planned');
+            //   },
+            //   icon: const Icon(Icons.calendar_month),
+            // ),
           ],
         ),
         NavbarLink(
           name: 'Animes',
           icon: const Icon(Icons.live_tv),
-          listIcon: const Icon(Icons.tv),
           topWidgets: <Widget>[
             IconButton(
               onPressed: () async {
-                Navigator.of(context).pushNamed('/search');
+                Navigator.of(context).pushNamed('/anime/search');
               },
               icon: const Icon(Icons.search),
             ),
             IconButton(
               onPressed: () async {
-                Navigator.of(context).pushNamed('/diary');
+                Navigator.of(context).pushNamed('/anime/diary');
               },
               icon: const Icon(Icons.calendar_view_week),
             ),
@@ -69,14 +72,13 @@ class NavbarMapper extends ChangeNotifier {
 
   Iterable<BottomNavigationBarItem> itemsBottomNavBar(
     BuildContext context,
-    bool isList,
   ) =>
       items(context)
           .asMap()
           .map(
             (int i, NavbarLink e) => MapEntry<int, BottomNavigationBarItem>(
               i,
-              e.toBottomNavigationBarItem(currentPage == i && isList),
+              e.toBottomNavigationBarItem,
             ),
           )
           .values;
@@ -85,19 +87,17 @@ class NavbarMapper extends ChangeNotifier {
 class NavbarLink {
   final String name;
   final Icon icon;
-  final Icon listIcon;
   final List<Widget>? topWidgets;
 
   const NavbarLink({
     required this.name,
     required this.icon,
-    required this.listIcon,
     this.topWidgets,
   });
 
-  BottomNavigationBarItem toBottomNavigationBarItem(bool isList) =>
+  BottomNavigationBarItem get toBottomNavigationBarItem =>
       BottomNavigationBarItem(
-        icon: isList ? listIcon : icon,
+        icon: icon,
         label: name,
       );
 }

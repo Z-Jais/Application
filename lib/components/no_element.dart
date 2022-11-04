@@ -7,8 +7,6 @@ class NoElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Image.asset('assets/no_element.png', width: 200),
           const SizedBox(height: 10),

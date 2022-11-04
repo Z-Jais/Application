@@ -13,7 +13,7 @@ class AnimeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        Navigator.of(context).pushNamed('/anime', arguments: anime);
+        Navigator.of(context).pushNamed('/anime/detail', arguments: anime);
       },
       child: BorderElement(
         child: Row(

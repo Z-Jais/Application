@@ -9,7 +9,6 @@ class NoConnection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Image.asset('assets/no_connection.png', width: 200),
