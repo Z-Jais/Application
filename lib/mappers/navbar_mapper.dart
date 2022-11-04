@@ -27,64 +27,77 @@ class NavbarMapper extends ChangeNotifier {
     Utils.clearImagesCache();
   }
 
-  List<NavbarLink> get items => <NavbarLink>[
+  List<NavbarLink> items(BuildContext context) => <NavbarLink>[
         const NavbarLink(
           name: 'Épisodes',
           icon: Icon(Icons.subscriptions_outlined),
           listIcon: Icon(Icons.checklist),
         ),
-        const NavbarLink(
+        NavbarLink(
           name: 'Mangas',
-          icon: Icon(Icons.menu_book),
-          listIcon: Icon(Icons.library_books),
+          icon: const Icon(Icons.menu_book),
+          listIcon: const Icon(Icons.library_books),
+          topWidgets: <Widget>[
+            IconButton(
+              onPressed: () async {
+                Navigator.of(context).pushNamed('/scan');
+              },
+              icon: const Icon(Icons.document_scanner),
+            ),
+          ],
         ),
-        const NavbarLink(
+        NavbarLink(
           name: 'Animes',
-          icon: Icon(Icons.live_tv),
-          listIcon: Icon(Icons.tv),
+          icon: const Icon(Icons.live_tv),
+          listIcon: const Icon(Icons.tv),
+          topWidgets: <Widget>[
+            IconButton(
+              onPressed: () async {
+                Navigator.of(context).pushNamed('/search');
+              },
+              icon: const Icon(Icons.search),
+            ),
+            IconButton(
+              onPressed: () async {
+                Navigator.of(context).pushNamed('/diary');
+              },
+              icon: const Icon(Icons.calendar_view_week),
+            ),
+          ],
         ),
       ];
 
-  Iterable<BottomNavigationBarItem> itemsBottomNavBar(bool isList) => items
-      .asMap()
-      .map(
-        (int i, NavbarLink e) => MapEntry<int, BottomNavigationBarItem>(
-          i,
-          e.toBottomNavigationBarItem(currentPage == i && isList),
-        ),
-      )
-      .values;
-
-  Iterable<Widget> itemsTopNavBar([Function(int)? callback]) => items
-      .asMap()
-      .map(
-        (int i, NavbarLink e) => MapEntry<int, TextButton>(
-          i,
-          e.toTextButton(onPressed: () => callback?.call(i)),
-        ),
-      )
-      .values;
+  Iterable<BottomNavigationBarItem> itemsBottomNavBar(
+    BuildContext context,
+    bool isList,
+  ) =>
+      items(context)
+          .asMap()
+          .map(
+            (int i, NavbarLink e) => MapEntry<int, BottomNavigationBarItem>(
+              i,
+              e.toBottomNavigationBarItem(currentPage == i && isList),
+            ),
+          )
+          .values;
 }
 
 class NavbarLink {
   final String name;
   final Icon icon;
   final Icon listIcon;
+  final List<Widget>? topWidgets;
 
   const NavbarLink({
     required this.name,
     required this.icon,
     required this.listIcon,
+    this.topWidgets,
   });
 
   BottomNavigationBarItem toBottomNavigationBarItem(bool isList) =>
       BottomNavigationBarItem(
         icon: isList ? listIcon : icon,
         label: name,
-      );
-
-  TextButton toTextButton({Function()? onPressed}) => TextButton(
-        onPressed: onPressed,
-        child: Text(name),
       );
 }

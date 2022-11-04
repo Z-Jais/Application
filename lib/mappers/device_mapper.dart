@@ -97,6 +97,20 @@ class CollectionMapper {
     await (await _sharedPreferences).setStringList(key, watchlist);
   }
 
+  Future<void> addAll(Iterable<String> uuids) async {
+    final List<String> watchlist = await get();
+
+    for (final String uuid in uuids) {
+      if (hasIn(watchlist, uuid)) {
+        continue;
+      }
+
+      watchlist.add(uuid);
+    }
+
+    await (await _sharedPreferences).setStringList(key, watchlist);
+  }
+
   Future<void> remove(String uuid) async {
     final List<String> watchlist = await get();
 
