@@ -23,7 +23,6 @@ class _MangaSearchViewState extends State<MangaScanView> {
       body: Stack(
         children: <Widget>[
           MobileScanner(
-            allowDuplicates: false,
             onDetect: (Barcode barcode, _) async {
               if (barcode.rawValue == null) {
                 return;
