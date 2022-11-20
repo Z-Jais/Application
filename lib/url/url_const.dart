@@ -37,6 +37,10 @@ class UrlConst {
     return '${mangas}country/${CountryMapper.selectedCountry?.tag}/search/ean/$ean';
   }
 
+  static String getMangasWatchlistPage(int page, int limit) {
+    return '${mangas}watchlist/page/$page/limit/$limit';
+  }
+
   static String getSimulcasts() {
     return '${simulcasts}country/${CountryMapper.selectedCountry?.tag}';
   }

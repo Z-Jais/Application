@@ -27,6 +27,7 @@ class AnimeMapper extends IMapper<Anime> {
   }
 
   Future<bool> search(String query) async {
+    clear();
     return loadPageWithUrl(UrlConst.getAnimesSearch(query));
   }
 

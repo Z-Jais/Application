@@ -1,5 +1,5 @@
-import 'package:jais/components/lite_episodes/lite_episode_loader_widget.dart';
-import 'package:jais/components/lite_episodes/lite_episode_widget.dart';
+import 'package:jais/components/episodes/lite_episode_loader_widget.dart';
+import 'package:jais/components/episodes/lite_episode_widget.dart';
 import 'package:jais/entities/episode.dart';
 import 'package:jais/mappers/imapper.dart';
 import 'package:jais/url/url_const.dart';

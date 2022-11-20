@@ -20,7 +20,7 @@ class AnimeWatchlistMapper extends IMapper<Anime> {
     return loadPageWithFunction(
       () async => URL().post(
         UrlConst.getAnimesWatchlistPage(page, limit),
-        body: await DeviceMapper.watchlistMapper.toGzip(),
+        body: await DeviceMapper.animeWatchlistData.toGzip(),
       ),
     );
   }

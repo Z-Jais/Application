@@ -6,6 +6,7 @@ import 'package:jais/views/animes/animes_watchlist_view.dart';
 import 'package:jais/views/episodes/episodes_view.dart';
 import 'package:jais/views/episodes/episodes_watchlist_view.dart';
 import 'package:jais/views/mangas/mangas_view.dart';
+import 'package:jais/views/mangas/mangas_watchlist_view.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
@@ -45,29 +46,9 @@ class _HomeViewState extends State<HomeView> {
               children: <Widget>[
                 Navbar(
                   onPageChanged: changePage,
-                  topWidgets: <Widget>[
-                    if (navbarMapper.currentPage == 1)
-                      IconButton(
-                        onPressed: () async {
-                          Navigator.of(context).pushNamed('/scan');
-                        },
-                        icon: const Icon(Icons.document_scanner),
-                      ),
-                    if (navbarMapper.currentPage == 2) ...<Widget>[
-                      IconButton(
-                        onPressed: () async {
-                          Navigator.of(context).pushNamed('/search');
-                        },
-                        icon: const Icon(Icons.search),
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          Navigator.of(context).pushNamed('/diary');
-                        },
-                        icon: const Icon(Icons.calendar_view_week),
-                      ),
-                    ],
-                  ],
+                  topWidgets: NavbarMapper.instance
+                      .items(context)[navbarMapper.currentPage]
+                      .topWidgets,
                 ),
                 Expanded(
                   child: PageView(
@@ -77,7 +58,9 @@ class _HomeViewState extends State<HomeView> {
                       _isList
                           ? const EpisodesWatchlistView()
                           : const EpisodesView(),
-                      const MangasView(),
+                      _isList
+                          ? const MangasWatchlistView()
+                          : const MangasView(),
                       _isList
                           ? const AnimesWatchlistView()
                           : const AnimesView(),
@@ -96,7 +79,7 @@ class _HomeViewState extends State<HomeView> {
                 changePage(page, fromNavBar: true);
               },
               items: <BottomNavigationBarItem>[
-                ...navbarMapper.itemsBottomNavBar(_isList),
+                ...navbarMapper.itemsBottomNavBar(context),
               ],
             ),
           );

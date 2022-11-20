@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:jais/utils/color.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
+import 'package:jais/views/animes/anime_diary_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
-import 'package:jais/views/diary_view.dart';
 import 'package:jais/views/initialization_view.dart';
 import 'package:jais/views/mangas/manga_scan_view.dart';
 
@@ -42,17 +42,17 @@ class MyApp extends StatelessWidget {
         '/': (_) {
           return const SafeArea(child: InitializationView());
         },
-        '/search': (_) {
-          return const SafeArea(child: AnimeSearchView());
-        },
-        '/anime': (_) {
-          return const SafeArea(child: AnimeDetailView());
-        },
-        '/scan': (_) {
+        '/manga/scan': (_) {
           return const SafeArea(child: MangaScanView());
         },
-        '/diary': (_) {
-          return const SafeArea(child: DiaryView());
+        '/anime/search': (_) {
+          return const SafeArea(child: AnimeSearchView());
+        },
+        '/anime/detail': (_) {
+          return const SafeArea(child: AnimeDetailView());
+        },
+        '/anime/diary': (_) {
+          return const SafeArea(child: AnimeDiaryView());
         },
       },
     );

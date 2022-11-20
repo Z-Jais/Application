@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jais/components/episodes/lite_episode_list.dart';
 import 'package:jais/components/infinite_scroll.dart';
-import 'package:jais/components/lite_episodes/lite_episode_list.dart';
 import 'package:jais/entities/anime.dart';
 import 'package:jais/mappers/animes/anime_episode_mapper.dart';
 import 'package:jais/mappers/device_mapper.dart';
@@ -28,7 +28,8 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
         _animeEpisodeMapper.updateCurrentPage();
 
         if (_anime != null) {
-          _inWatchlist = await DeviceMapper.watchlistMapper.has(_anime!.uuid);
+          _inWatchlist =
+              await DeviceMapper.animeWatchlistData.has(_anime!.uuid);
 
           if (!mounted) {
             return;
@@ -61,9 +62,9 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
             ),
             onPressed: () async {
               if (_inWatchlist) {
-                await DeviceMapper.watchlistMapper.remove(_anime!.uuid);
+                await DeviceMapper.animeWatchlistData.remove(_anime!.uuid);
               } else {
-                await DeviceMapper.watchlistMapper.add(_anime!.uuid);
+                await DeviceMapper.animeWatchlistData.add(_anime!.uuid);
               }
 
               setState(() {

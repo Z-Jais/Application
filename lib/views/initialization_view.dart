@@ -67,9 +67,11 @@ class _InitializationViewState extends State<InitializationView> {
       MobileAds.instance.initialize();
     } catch (_) {}
 
-    Firebase.initializeApp(
+    await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
-    ).then((_) async => FirebaseMessaging.instance.subscribeToTopic('all'));
+    ).then(
+      (_) async => await FirebaseMessaging.instance.subscribeToTopic('all'),
+    );
 
     await CountryMapper.instance.update();
 
