@@ -133,6 +133,11 @@ abstract class IMapper<T> extends ChangeNotifier {
     return true;
   }
 
+  Future<void> reset() async {
+    clear();
+    await updateCurrentPage();
+  }
+
   Future<bool> loadPageWithUrl(String url) async =>
       loadPageWithFunction(() => URL().get(url));
 

@@ -35,36 +35,40 @@ class NavbarMapper extends ChangeNotifier {
         NavbarLink(
           name: 'Mangas',
           icon: const Icon(Icons.menu_book),
-          topWidgets: <Widget>[
-            IconButton(
-              onPressed: () async {
+          topWidgets: <NavbarLink>[
+            NavbarLink(
+              name: 'Scan',
+              icon: const Icon(Icons.document_scanner),
+              onTap: () async {
                 Navigator.of(context).pushNamed('/manga/scan');
               },
-              icon: const Icon(Icons.document_scanner),
             ),
-            // IconButton(
-            //   onPressed: () async {
-            //     Navigator.of(context).pushNamed('/manga/planned');
-            //   },
-            //   icon: const Icon(Icons.calendar_month),
-            // ),
           ],
         ),
         NavbarLink(
           name: 'Animes',
           icon: const Icon(Icons.live_tv),
-          topWidgets: <Widget>[
-            IconButton(
-              onPressed: () async {
+          topWidgets: <NavbarLink>[
+            NavbarLink(
+              name: 'Rechercher',
+              icon: const Icon(Icons.search),
+              onTap: () async {
                 Navigator.of(context).pushNamed('/anime/search');
               },
-              icon: const Icon(Icons.search),
             ),
-            IconButton(
-              onPressed: () async {
+            NavbarLink(
+              name: 'Agenda',
+              icon: const Icon(Icons.calendar_view_week),
+              onTap: () async {
                 Navigator.of(context).pushNamed('/anime/diary');
               },
-              icon: const Icon(Icons.calendar_view_week),
+            ),
+            NavbarLink(
+              name: 'Recommandations',
+              icon: const Icon(Icons.star),
+              onTap: () async {
+                Navigator.of(context).pushNamed('/anime/recommendations');
+              },
             ),
           ],
         ),
@@ -87,17 +91,30 @@ class NavbarMapper extends ChangeNotifier {
 class NavbarLink {
   final String name;
   final Icon icon;
-  final List<Widget>? topWidgets;
+  final List<NavbarLink>? topWidgets;
+  final VoidCallback? onTap;
 
   const NavbarLink({
     required this.name,
     required this.icon,
     this.topWidgets,
+    this.onTap,
   });
 
   BottomNavigationBarItem get toBottomNavigationBarItem =>
       BottomNavigationBarItem(
         icon: icon,
         label: name,
+      );
+
+  IconButton get toIconButton => IconButton(
+        icon: icon,
+        onPressed: onTap,
+      );
+
+  ListTile get toListTile => ListTile(
+        leading: icon,
+        title: Text(name),
+        onTap: onTap,
       );
 }

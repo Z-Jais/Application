@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/animes/anime_list.dart';
+import 'package:jais/components/animes/anime_widget.dart';
 import 'package:jais/components/infinite_scroll.dart';
+import 'package:jais/components/no_element.dart';
 import 'package:jais/mappers/animes/anime_mapper.dart';
 
 class AnimeSearchView extends StatefulWidget {
@@ -35,7 +37,9 @@ class _AnimeSearchViewState extends State<AnimeSearchView> {
             child: SingleChildScrollView(
               child: InfiniteScroll<AnimeMapper>(
                 mapper: _animeMapper,
-                builder: () => AnimeList(children: _animeMapper.list),
+                builder: () => _animeMapper.nothingToShow<AnimeWidget>()
+                    ? const NoElement()
+                    : AnimeList(children: _animeMapper.list),
               ),
             ),
           ),

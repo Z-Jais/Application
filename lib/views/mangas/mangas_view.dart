@@ -25,10 +25,7 @@ class _MangasViewState extends State<MangasView> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async {
-        _mangaMapper.clear();
-        _mangaMapper.updateCurrentPage();
-      },
+      onRefresh: () async => _mangaMapper.reset(),
       child: InfiniteScroll<MangaMapper>(
         mapper: _mangaMapper,
         builder: () => MangaList(

@@ -25,10 +25,7 @@ class _EpisodesViewState extends State<EpisodesView> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async {
-        _episodeMapper.clear();
-        _episodeMapper.updateCurrentPage();
-      },
+      onRefresh: () async => _episodeMapper.reset(),
       child: InfiniteScroll<EpisodeMapper>(
         mapper: _episodeMapper,
         builder: () => EpisodeList(

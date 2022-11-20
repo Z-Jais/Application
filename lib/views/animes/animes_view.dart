@@ -26,9 +26,7 @@ class _AnimesViewState extends State<AnimesView> {
   }
 
   Future<void> init() async {
-    _simulcastMapper.clear();
-    _animeMapper.clear();
-    await _simulcastMapper.updateCurrentPage();
+    await _simulcastMapper.reset();
 
     final Widget lastItem = _simulcastMapper.list.last;
 
@@ -36,7 +34,7 @@ class _AnimesViewState extends State<AnimesView> {
       await _simulcastMapper.scrollController.scrollToEnd(this);
       final Simulcast simulcast = lastItem.simulcast;
       _animeMapper.simulcast = simulcast;
-      _animeMapper.updateCurrentPage();
+      await _animeMapper.reset();
 
       if (!mounted) {
         return;
@@ -66,8 +64,7 @@ class _AnimesViewState extends State<AnimesView> {
                               onTap: () async {
                                 _animeMapper.scrollController.jumpTo(0);
                                 _animeMapper.simulcast = e.simulcast;
-                                _animeMapper.clear();
-                                await _animeMapper.updateCurrentPage();
+                                await _animeMapper.reset();
                                 setState(() {});
                               },
                               child: e,

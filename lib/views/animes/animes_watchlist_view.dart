@@ -28,10 +28,7 @@ class _AnimesWatchlistViewState extends State<AnimesWatchlistView> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async {
-        _animeWatchlistMapper.clear();
-        _animeWatchlistMapper.updateCurrentPage();
-      },
+      onRefresh: () async => _animeWatchlistMapper.reset(),
       child: SingleChildScrollView(
         controller: _animeWatchlistMapper.scrollController,
         child: InfiniteScroll<AnimeWatchlistMapper>(
