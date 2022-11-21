@@ -46,38 +46,40 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50,
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Row(
-        children: <Widget>[
-          RoundBorderWidget(widget: Image.asset('assets/icon.png')),
-          const SizedBox(width: 10),
-          Text(
-            'Jaïs',
-            style: GoogleFonts.pacifico(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: <Widget>[
+            RoundBorderWidget(widget: Image.asset('assets/icon.png')),
+            const SizedBox(width: 10),
+            Text(
+              'Jaïs',
+              style: GoogleFonts.pacifico(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: FutureBuilder<void>(
-              future: _adFuture,
-              builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return AdWidget(
-                    ad: DeviceMapper.globalBannerAd!,
-                  );
-                }
+            const SizedBox(width: 10),
+            Expanded(
+              child: FutureBuilder<void>(
+                future: _adFuture,
+                builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return AdWidget(
+                      ad: DeviceMapper.globalBannerAd!,
+                    );
+                  }
 
-                return const ColoredBox(color: Colors.transparent);
-              },
+                  return const ColoredBox(color: Colors.transparent);
+                },
+              ),
             ),
-          ),
-          ...?calculcateTopWidgets,
-        ],
+            ...?calculcateTopWidgets,
+          ],
+        ),
       ),
     );
   }

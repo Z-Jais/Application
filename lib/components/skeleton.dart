@@ -12,13 +12,14 @@ class Skeleton extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: Colors.white,
       highlightColor: Colors.black,
-      child: Container(
-        width: width,
+      child: SizedBox(
+        width: width ?? double.infinity,
         height: height,
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(.09),
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(.09),
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+          ),
         ),
       ),
     );

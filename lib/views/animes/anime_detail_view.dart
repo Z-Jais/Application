@@ -84,11 +84,13 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(_isOpen ? 100 : 0),
           child: _isOpen
-              ? Container(
+              ? SizedBox(
                   height: 100,
-                  padding: const EdgeInsets.all(8),
-                  child: SingleChildScrollView(
-                    child: Text(_anime?.description ?? ''),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SingleChildScrollView(
+                      child: Text(_anime?.description ?? ''),
+                    ),
                   ),
                 )
               : const SizedBox(),

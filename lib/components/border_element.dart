@@ -7,14 +7,18 @@ class BorderElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).primaryColor),
-        borderRadius: BorderRadius.circular(8),
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: Theme.of(context).primaryColor),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: child,
+        ),
       ),
-      child: child,
     );
   }
 }
