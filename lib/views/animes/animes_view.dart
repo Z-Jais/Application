@@ -27,7 +27,6 @@ class _AnimesViewState extends State<AnimesView> {
 
   Future<void> init() async {
     await _simulcastMapper.reset();
-
     final Widget lastItem = _simulcastMapper.list.last;
 
     if (lastItem is SimulcastWidget) {
@@ -56,26 +55,29 @@ class _AnimesViewState extends State<AnimesView> {
               mapper: _simulcastMapper,
               builder: () => SimulcastList(
                 scrollController: _simulcastMapper.scrollController,
-                children: _simulcastMapper
-                    .toWidgetsSelected(_animeMapper.simulcast)
-                    .map(
-                      (Widget e) => e is SimulcastWidget
-                          ? GestureDetector(
-                              onTap: () async {
-                                _animeMapper.scrollController.jumpTo(0);
-                                _animeMapper.simulcast = e.simulcast;
-                                await _animeMapper.reset();
-                                setState(() {});
-                              },
-                              child: e,
-                            )
-                          : e,
-                    ),
+                children: <Widget>[
+                  ..._simulcastMapper
+                      .toWidgetsSelected(_animeMapper.simulcast)
+                      .map(
+                        (Widget e) => e is SimulcastWidget
+                            ? GestureDetector(
+                                onTap: () async {
+                                  _animeMapper.scrollController.jumpTo(0);
+                                  _animeMapper.simulcast = e.simulcast;
+                                  await _animeMapper.reset();
+                                  setState(() {});
+                                },
+                                child: e,
+                              )
+                            : e,
+                      ),
+                ],
               ),
             ),
             InfiniteScroll<AnimeMapper>(
               mapper: _animeMapper,
-              builder: () => AnimeList(children: _animeMapper.list),
+              builder: () =>
+                  AnimeList(children: <Widget>[..._animeMapper.list]),
             ),
           ],
         ),

@@ -19,13 +19,13 @@ class MangaList extends StatelessWidget {
           childAspectRatio: 2.28E-3 * width + 0.0772,
         ),
         controller: scrollController,
-        children: <Widget>[...children],
+        children: children,
       );
     }
 
     return JList(
       controller: scrollController,
-      children: <Widget>[...children],
+      children: children,
     );
   }
 }

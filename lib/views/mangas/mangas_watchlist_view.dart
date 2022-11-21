@@ -35,7 +35,7 @@ class _MangasWatchlistViewState extends State<MangasWatchlistView> {
             ? const NoElement()
             : MangaList(
                 scrollController: _mangaWatchlistMapper.scrollController,
-                children: _mangaWatchlistMapper.list,
+                children: <Widget>[..._mangaWatchlistMapper.list],
               ),
       ),
     );

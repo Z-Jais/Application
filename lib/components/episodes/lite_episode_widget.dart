@@ -5,7 +5,6 @@ import 'package:jais/components/platforms/platform_widget.dart';
 import 'package:jais/components/roundborder_widget.dart';
 import 'package:jais/components/skeleton.dart';
 import 'package:jais/entities/episode.dart';
-import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/url/url.dart';
 import 'package:jais/url/url_const.dart';
 import 'package:jais/utils/const.dart';
@@ -42,11 +41,7 @@ class LiteEpisodeWidget extends StatelessWidget {
             Expanded(
               child: Stack(
                 children: <Widget>[
-                  image(
-                    height: DeviceMapper.isOnMobile(context)
-                        ? Const.episodeImageHeight / 2
-                        : null,
-                  ),
+                  image(height: Const.episodeImageHeight / 2),
                   Positioned(
                     top: 2,
                     right: 3,

@@ -1,3 +1,4 @@
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/utils/utils.dart';
 
@@ -28,63 +29,74 @@ class NavbarMapper extends ChangeNotifier {
   }
 
   List<NavbarLink> items(BuildContext context) => <NavbarLink>[
-        const NavbarLink(
-          name: 'Épisodes',
-          icon: Icon(Icons.subscriptions_outlined),
+    const NavbarLink(
+      name: 'Épisodes',
+      icon: Icon(Icons.subscriptions_outlined),
+    ),
+    NavbarLink(
+      name: 'Mangas',
+      icon: const Icon(Icons.menu_book),
+      topWidgets: <NavbarLink>[
+        NavbarLink(
+          name: 'Scan',
+          icon: const Icon(Icons.document_scanner),
+          onTap: () async {
+            Navigator.of(context).pushNamed('/manga/scan');
+          },
+        ),
+      ],
+    ),
+    NavbarLink(
+      name: 'Animes',
+      icon: const Icon(Icons.live_tv),
+      topWidgets: <NavbarLink>[
+        NavbarLink(
+          name: 'Rechercher',
+          icon: const Icon(Icons.search),
+          onTap: () async {
+            Navigator.of(context).pushNamed('/anime/search');
+          },
         ),
         NavbarLink(
-          name: 'Mangas',
-          icon: const Icon(Icons.menu_book),
-          topWidgets: <NavbarLink>[
-            NavbarLink(
-              name: 'Scan',
-              icon: const Icon(Icons.document_scanner),
-              onTap: () async {
-                Navigator.of(context).pushNamed('/manga/scan');
-              },
-            ),
-          ],
+          name: 'Agenda',
+          icon: const Icon(Icons.calendar_view_week),
+          onTap: () async {
+            Navigator.of(context).pushNamed('/anime/diary');
+          },
         ),
         NavbarLink(
-          name: 'Animes',
-          icon: const Icon(Icons.live_tv),
-          topWidgets: <NavbarLink>[
-            NavbarLink(
-              name: 'Rechercher',
-              icon: const Icon(Icons.search),
-              onTap: () async {
-                Navigator.of(context).pushNamed('/anime/search');
-              },
-            ),
-            NavbarLink(
-              name: 'Agenda',
-              icon: const Icon(Icons.calendar_view_week),
-              onTap: () async {
-                Navigator.of(context).pushNamed('/anime/diary');
-              },
-            ),
-            NavbarLink(
-              name: 'Recommandations',
-              icon: const Icon(Icons.star),
-              onTap: () async {
-                Navigator.of(context).pushNamed('/anime/recommendations');
-              },
-            ),
-          ],
+          name: 'Recommandations',
+          icon: const Icon(Icons.star),
+          onTap: () async {
+            Navigator.of(context).pushNamed('/anime/recommendations');
+          },
         ),
-      ];
+      ],
+    ),
+  ];
 
-  Iterable<BottomNavigationBarItem> itemsBottomNavBar(
-    BuildContext context,
-  ) =>
+  Iterable<BottomNavigationBarItem> itemsBottomNavBar(BuildContext context,) =>
       items(context)
           .asMap()
           .map(
-            (int i, NavbarLink e) => MapEntry<int, BottomNavigationBarItem>(
+            (int i, NavbarLink e) =>
+            MapEntry<int, BottomNavigationBarItem>(
               i,
               e.toBottomNavigationBarItem,
             ),
-          )
+      )
+          .values;
+
+  Iterable<CustomNavigationBarItem> itemsCustomNavBar(BuildContext context,) =>
+      items(context)
+          .asMap()
+          .map(
+            (int i, NavbarLink e) =>
+            MapEntry<int, CustomNavigationBarItem>(
+              i,
+              e.toCustomNavigationBarItem,
+            ),
+      )
           .values;
 }
 
@@ -105,6 +117,12 @@ class NavbarLink {
       BottomNavigationBarItem(
         icon: icon,
         label: name,
+      );
+
+  CustomNavigationBarItem get toCustomNavigationBarItem =>
+      CustomNavigationBarItem(
+        icon: icon,
+        // title: Text(name),
       );
 
   IconButton get toIconButton => IconButton(

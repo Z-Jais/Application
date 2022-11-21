@@ -12,12 +12,10 @@ class AnimeList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (!DeviceMapper.isOnMobile(context)) {
       return Column(
-        children: <Widget>[...Utils.separate(children, rowCol: rowCol)],
+        children: Utils.separate(children, rowCol: rowCol),
       );
     }
 
-    return Column(
-      children: <Widget>[...children],
-    );
+    return Column(children: children);
   }
 }

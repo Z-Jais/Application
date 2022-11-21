@@ -30,7 +30,7 @@ class _MangasViewState extends State<MangasView> {
         mapper: _mangaMapper,
         builder: () => MangaList(
           scrollController: _mangaMapper.scrollController,
-          children: _mangaMapper.list,
+          children: <Widget>[..._mangaMapper.list],
         ),
       ),
     );

@@ -36,7 +36,7 @@ class _EpisodesWatchlistViewState extends State<EpisodesWatchlistView> {
             ? const NoElement()
             : EpisodeList(
                 scrollController: _episodeWatchlistMapper.scrollController,
-                children: _episodeWatchlistMapper.list,
+                children: <Widget>[..._episodeWatchlistMapper.list],
               ),
       ),
     );

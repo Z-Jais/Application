@@ -1,3 +1,4 @@
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
@@ -42,6 +43,7 @@ class _HomeViewState extends State<HomeView> {
         builder: (BuildContext context, NavbarMapper navbarMapper, __) {
           return Scaffold(
             resizeToAvoidBottomInset: false,
+            extendBody: true,
             body: Column(
               children: <Widget>[
                 Navbar(
@@ -69,18 +71,21 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ],
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              selectedItemColor: Theme.of(context).primaryColor,
-              unselectedItemColor: Colors.grey,
+            bottomNavigationBar: CustomNavigationBar(
+              selectedColor: Theme.of(context).primaryColor,
+              strokeColor: Theme.of(context).primaryColor,
+              unSelectedColor: Colors.grey,
               currentIndex: navbarMapper.currentPage,
+              backgroundColor:
+                  Theme.of(context).backgroundColor.withOpacity(0.95),
+              borderRadius: const Radius.circular(20),
               onTap: (int page) {
                 changePage(page, fromNavBar: true);
               },
-              items: <BottomNavigationBarItem>[
-                ...navbarMapper.itemsBottomNavBar(context),
+              items: <CustomNavigationBarItem>[
+                ...navbarMapper.itemsCustomNavBar(context),
               ],
+              isFloating: true,
             ),
           );
         },

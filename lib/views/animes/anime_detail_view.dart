@@ -98,15 +98,12 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
         children: <Widget>[
           Expanded(
             child: RefreshIndicator(
-              onRefresh: () async {
-                _animeEpisodeMapper.clear();
-                _animeEpisodeMapper.updateCurrentPage();
-              },
+              onRefresh: () async => _animeEpisodeMapper.reset(),
               child: InfiniteScroll<AnimeEpisodeMapper>(
                 mapper: _animeEpisodeMapper,
                 builder: () => LiteEpisodeList(
                   scrollController: _animeEpisodeMapper.scrollController,
-                  children: _animeEpisodeMapper.list,
+                  children: <Widget>[..._animeEpisodeMapper.list],
                 ),
               ),
             ),

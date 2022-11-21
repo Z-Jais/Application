@@ -30,7 +30,7 @@ class _EpisodesViewState extends State<EpisodesView> {
         mapper: _episodeMapper,
         builder: () => EpisodeList(
           scrollController: _episodeMapper.scrollController,
-          children: _episodeMapper.list,
+          children: <Widget>[..._episodeMapper.list],
         ),
       ),
     );

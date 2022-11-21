@@ -100,7 +100,7 @@ class _AnimeDiaryViewState extends State<AnimeDiaryView> {
               mapper: _animeMapper,
               builder: () => _animeMapper.nothingToShow<AnimeWidget>()
                   ? const NoElement()
-                  : AnimeList(children: _animeMapper.list),
+                  : AnimeList(children: <Widget>[..._animeMapper.list]),
             ),
           ],
         ),

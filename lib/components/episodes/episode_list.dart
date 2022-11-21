@@ -23,13 +23,13 @@ class EpisodeList extends StatelessWidget {
           childAspectRatio: -1.92 + 0.42 * log(width),
         ),
         controller: scrollController,
-        children: <Widget>[...children],
+        children: children,
       );
     }
 
     return JList(
       controller: scrollController,
-      children: <Widget>[...children],
+      children: children,
     );
   }
 }

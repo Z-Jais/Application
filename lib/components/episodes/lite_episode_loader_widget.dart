@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jais/components/border_element.dart';
 import 'package:jais/components/platforms/platform_loader_widget.dart';
 import 'package:jais/components/skeleton.dart';
-import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/utils/const.dart';
 
 class LiteEpisodeLoaderWidget extends StatelessWidget {
@@ -15,13 +14,9 @@ class LiteEpisodeLoaderWidget extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Stack(
-              children: <Widget>[
-                Skeleton(
-                  height: DeviceMapper.isOnMobile(context)
-                      ? Const.episodeImageHeight / 2
-                      : null,
-                ),
-                const Positioned(
+              children: const <Widget>[
+                Skeleton(height: Const.episodeImageHeight / 2),
+                Positioned(
                   top: 2,
                   right: 3,
                   child: PlatformLoaderWidget(),

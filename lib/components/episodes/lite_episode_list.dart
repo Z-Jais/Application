@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/jlist.dart';
+import 'package:jais/mappers/device_mapper.dart';
+import 'package:jais/utils/utils.dart';
 
 class LiteEpisodeList extends StatelessWidget {
   final ScrollController? scrollController;
@@ -13,9 +15,18 @@ class LiteEpisodeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!DeviceMapper.isOnMobile(context)) {
+      return SingleChildScrollView(
+        controller: scrollController,
+        child: Column(
+          children: Utils.separate(children, rowCol: 3),
+        ),
+      );
+    }
+
     return JList(
       controller: scrollController,
-      children: <Widget>[...children],
+      children: children,
     );
   }
 }

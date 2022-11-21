@@ -35,7 +35,7 @@ class _AnimesWatchlistViewState extends State<AnimesWatchlistView> {
           mapper: _animeWatchlistMapper,
           builder: () => _animeWatchlistMapper.nothingToShow<AnimeWidget>()
               ? const NoElement()
-              : AnimeList(children: _animeWatchlistMapper.list),
+              : AnimeList(children: <Widget>[..._animeWatchlistMapper.list]),
         ),
       ),
     );

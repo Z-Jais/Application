@@ -39,7 +39,7 @@ class _AnimeSearchViewState extends State<AnimeSearchView> {
                 mapper: _animeMapper,
                 builder: () => _animeMapper.nothingToShow<AnimeWidget>()
                     ? const NoElement()
-                    : AnimeList(children: _animeMapper.list),
+                    : AnimeList(children: <Widget>[..._animeMapper.list]),
               ),
             ),
           ),
