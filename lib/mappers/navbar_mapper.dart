@@ -29,74 +29,76 @@ class NavbarMapper extends ChangeNotifier {
   }
 
   List<NavbarLink> items(BuildContext context) => <NavbarLink>[
-    const NavbarLink(
-      name: 'Épisodes',
-      icon: Icon(Icons.subscriptions_outlined),
-    ),
-    NavbarLink(
-      name: 'Mangas',
-      icon: const Icon(Icons.menu_book),
-      topWidgets: <NavbarLink>[
-        NavbarLink(
-          name: 'Scan',
-          icon: const Icon(Icons.document_scanner),
-          onTap: () async {
-            Navigator.of(context).pushNamed('/manga/scan');
-          },
-        ),
-      ],
-    ),
-    NavbarLink(
-      name: 'Animes',
-      icon: const Icon(Icons.live_tv),
-      topWidgets: <NavbarLink>[
-        NavbarLink(
-          name: 'Rechercher',
-          icon: const Icon(Icons.search),
-          onTap: () async {
-            Navigator.of(context).pushNamed('/anime/search');
-          },
+        const NavbarLink(
+          name: 'Épisodes',
+          icon: Icon(Icons.subscriptions_outlined),
         ),
         NavbarLink(
-          name: 'Agenda',
-          icon: const Icon(Icons.calendar_view_week),
-          onTap: () async {
-            Navigator.of(context).pushNamed('/anime/diary');
-          },
+          name: 'Mangas',
+          icon: const Icon(Icons.menu_book),
+          topWidgets: <NavbarLink>[
+            NavbarLink(
+              name: 'Scan',
+              icon: const Icon(Icons.document_scanner),
+              onTap: () async {
+                Navigator.of(context).pushNamed('/manga/scan');
+              },
+            ),
+          ],
         ),
         NavbarLink(
-          name: 'Recommandations',
-          icon: const Icon(Icons.star),
-          onTap: () async {
-            Navigator.of(context).pushNamed('/anime/recommendations');
-          },
+          name: 'Animes',
+          icon: const Icon(Icons.live_tv),
+          topWidgets: <NavbarLink>[
+            NavbarLink(
+              name: 'Rechercher',
+              icon: const Icon(Icons.search),
+              onTap: () async {
+                Navigator.of(context).pushNamed('/anime/search');
+              },
+            ),
+            NavbarLink(
+              name: 'Agenda',
+              icon: const Icon(Icons.calendar_view_week),
+              onTap: () async {
+                Navigator.of(context).pushNamed('/anime/diary');
+              },
+            ),
+            NavbarLink(
+              name: 'Recommandations',
+              icon: const Icon(Icons.star),
+              onTap: () async {
+                Navigator.of(context).pushNamed('/anime/recommendations');
+              },
+            ),
+          ],
         ),
-      ],
-    ),
-  ];
+      ];
 
-  Iterable<BottomNavigationBarItem> itemsBottomNavBar(BuildContext context,) =>
+  Iterable<BottomNavigationBarItem> itemsBottomNavBar(
+    BuildContext context,
+  ) =>
       items(context)
           .asMap()
           .map(
-            (int i, NavbarLink e) =>
-            MapEntry<int, BottomNavigationBarItem>(
+            (int i, NavbarLink e) => MapEntry<int, BottomNavigationBarItem>(
               i,
               e.toBottomNavigationBarItem,
             ),
-      )
+          )
           .values;
 
-  Iterable<CustomNavigationBarItem> itemsCustomNavBar(BuildContext context,) =>
+  Iterable<CustomNavigationBarItem> itemsCustomNavBar(
+    BuildContext context,
+  ) =>
       items(context)
           .asMap()
           .map(
-            (int i, NavbarLink e) =>
-            MapEntry<int, CustomNavigationBarItem>(
+            (int i, NavbarLink e) => MapEntry<int, CustomNavigationBarItem>(
               i,
               e.toCustomNavigationBarItem,
             ),
-      )
+          )
           .values;
 }
 

@@ -26,7 +26,9 @@ class LiteEpisodeWidget extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   LiteEpisodeImage(
-                      episode: episode, height: Const.episodeImageHeight / 2),
+                    episode: episode,
+                    height: Const.episodeImageHeight / 2,
+                  ),
                   Positioned(
                     top: 2,
                     right: 3,
