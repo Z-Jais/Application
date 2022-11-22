@@ -11,7 +11,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 Pour modifier l'îcone de l'application
 
 ```
-flutter pub run flutter_launcher_icons_maker:main :main
+flutter pub run flutter_launcher_icons:main :main
 ```
 
 ---
