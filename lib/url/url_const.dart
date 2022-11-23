@@ -11,7 +11,6 @@ class UrlConst {
   static const String mangas = '${baseUrl}mangas/';
   static const String platforms = '${baseUrl}platforms/';
   static const String devices = '${baseUrl}devices';
-  static const String diary = '${baseUrl}diary/';
   static const String episodeAttachment = '${episodes}attachment/';
   static const String animeAttachment = '${animes}attachment/';
   static const String mangasAttachment = '${mangas}attachment/';
@@ -57,7 +56,7 @@ class UrlConst {
     return '${animes}country/${CountryMapper.selectedCountry?.tag}/search/name/$query';
   }
 
-  static String getDiary(int day) {
-    return '${diary}country/${CountryMapper.selectedCountry?.tag}/day/$day';
+  static String getAnimesDiary(int day) {
+    return '${animes}diary/country/${CountryMapper.selectedCountry?.tag}/day/$day';
   }
 }

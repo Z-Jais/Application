@@ -32,6 +32,6 @@ class AnimeMapper extends IMapper<Anime> {
   }
 
   Future<bool> getDiary(int day) async {
-    return loadPageWithUrl(UrlConst.getDiary(day));
+    return loadPageWithUrl(UrlConst.getAnimesDiary(day));
   }
 }
