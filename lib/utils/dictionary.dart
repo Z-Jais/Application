@@ -27,6 +27,10 @@ class Dictionary {
           return 'Spécial';
         }
 
+        if (episodeType.name == 'FILM') {
+          return 'Film';
+        }
+
         break;
       default:
         break;
