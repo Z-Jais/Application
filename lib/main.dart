@@ -7,6 +7,7 @@ import 'package:jais/utils/color.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_diary_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
+import 'package:jais/views/animes/animes_recommendation_view.dart';
 import 'package:jais/views/initialization_view.dart';
 import 'package:jais/views/mangas/manga_scan_view.dart';
 
@@ -62,6 +63,9 @@ class MyApp extends StatelessWidget {
         },
         '/anime/diary': (_) {
           return const SafeArea(child: AnimeDiaryView());
+        },
+        '/anime/recommendations': (_) {
+          return const SafeArea(child: AnimesRecommendationView());
         },
       },
     );

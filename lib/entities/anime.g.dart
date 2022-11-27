@@ -24,8 +24,7 @@ _$_Anime _$$_AnimeFromJson(Map<String, dynamic> json) => _$_Anime(
           .toList(),
     );
 
-Map<String, dynamic> _$$_AnimeToJson(_$_Anime instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_AnimeToJson(_$_Anime instance) => <String, dynamic>{
       'uuid': instance.uuid,
       'country': instance.country,
       'name': instance.name,
