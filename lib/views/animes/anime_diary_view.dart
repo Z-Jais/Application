@@ -3,6 +3,7 @@ import 'package:jais/components/animes/anime_list.dart';
 import 'package:jais/components/animes/anime_widget.dart';
 import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/components/no_element.dart';
+import 'package:jais/components/text_border.dart';
 import 'package:jais/mappers/animes/anime_mapper.dart';
 
 class AnimeDiaryView extends StatefulWidget {
@@ -95,7 +96,6 @@ class _AnimeDiaryViewState extends State<AnimeDiaryView> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
             InfiniteScroll<AnimeMapper>(
               mapper: _animeMapper,
               builder: () => _animeMapper.nothingToShow<AnimeWidget>()
@@ -135,21 +135,6 @@ class DayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).primaryColor),
-        borderRadius: BorderRadius.circular(8),
-        color: isSelected ? Theme.of(context).primaryColor : Colors.transparent,
-      ),
-      child: Text(
-        day,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: isSelected ? FontWeight.bold : null,
-        ),
-      ),
-    );
+    return TextBorder(text: day, isSelected: isSelected);
   }
 }

@@ -19,15 +19,13 @@ _$_Anime _$$_AnimeFromJson(Map<String, dynamic> json) => _$_Anime(
       simulcasts: (json['simulcasts'] as List<dynamic>)
           .map((dynamic e) => Simulcast.fromJson(e as Map<String, dynamic>))
           .toList(),
-      episodes: (json['episodes'] as List<dynamic>?)
-          ?.map((dynamic e) => Episode.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      mangas: (json['mangas'] as List<dynamic>?)
-          ?.map((dynamic e) => Manga.fromJson(e as Map<String, dynamic>))
+      genres: (json['genres'] as List<dynamic>)
+          .map((dynamic e) => Genre.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_AnimeToJson(_$_Anime instance) => <String, dynamic>{
+Map<String, dynamic> _$$_AnimeToJson(_$_Anime instance) =>
+    <String, dynamic>{
       'uuid': instance.uuid,
       'country': instance.country,
       'name': instance.name,
@@ -36,6 +34,5 @@ Map<String, dynamic> _$$_AnimeToJson(_$_Anime instance) => <String, dynamic>{
       'description': instance.description,
       'hashes': instance.hashes,
       'simulcasts': instance.simulcasts,
-      'episodes': instance.episodes,
-      'mangas': instance.mangas,
+      'genres': instance.genres,
     };

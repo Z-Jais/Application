@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jais/components/text_border.dart';
 import 'package:jais/entities/simulcast.dart';
 import 'package:jais/utils/dictionary.dart';
 
@@ -12,7 +13,6 @@ class SimulcastWidget extends StatelessWidget {
     super.key,
   });
 
-  // Copy function
   SimulcastWidget copyWith({
     Simulcast? simulcast,
     bool? isSelected,
@@ -24,26 +24,9 @@ class SimulcastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: Theme.of(context).primaryColor),
-          borderRadius: BorderRadius.circular(8),
-          color:
-              isSelected ? Theme.of(context).primaryColor : Colors.transparent,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Text(
-            '${Dictionary.getNaturalSeason(simulcast)} ${simulcast.year}',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: isSelected ? FontWeight.bold : null,
-            ),
-          ),
-        ),
-      ),
+    return TextBorder(
+      text: '${Dictionary.getNaturalSeason(simulcast)} ${simulcast.year}',
+      isSelected: isSelected,
     );
   }
 }

@@ -19,12 +19,6 @@ class _AnimesViewState extends State<AnimesView> {
   final SimulcastMapper _simulcastMapper = SimulcastMapper(listener: false);
   final AnimeMapper _animeMapper = AnimeMapper();
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async => init());
-  }
-
   Future<void> init() async {
     await _simulcastMapper.reset();
     final Widget lastItem = _simulcastMapper.list.last;
@@ -41,6 +35,12 @@ class _AnimesViewState extends State<AnimesView> {
 
       setState(() {});
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async => init());
   }
 
   @override
