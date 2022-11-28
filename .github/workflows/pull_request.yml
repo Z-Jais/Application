@@ -27,7 +27,7 @@ jobs:
 
   # Make a job with the title of pull request contains "flutter_native_splash" and only on opened pull request
   native_splash:
-    if: contains(github.event.pull_request.title, 'flutter_native_splash') && github.event.action == 'opened'
+    if: contains(github.event.pull_request.title, 'flutter_native_splash') && (github.event.action == 'opened' || github.event.action == 'synchronize')
     needs:
       - format_and_analyze
     name: Flutter Native Splash
