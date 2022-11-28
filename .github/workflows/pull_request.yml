@@ -48,15 +48,10 @@ jobs:
       - name: Flutter Native Splash
         run: flutter pub run flutter_native_splash:create
 
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
-
       - name: Commit
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m "flutter_native_splash" || exit 0
-          git push origin ${{ steps.extract_branch.outputs.branch }}
+          git push origin $GITHUB_HEAD_REF
