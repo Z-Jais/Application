@@ -41,6 +41,9 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Get
         run: flutter pub get
@@ -48,10 +51,7 @@ jobs:
       - name: Flutter Native Splash
         run: flutter pub run flutter_native_splash:create
 
-      - name: Commit
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add .
-          git commit -m "flutter_native_splash" || exit 0
-          git push origin $GITHUB_HEAD_REF
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: 'Update native splash'
