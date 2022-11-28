@@ -20,7 +20,7 @@ dependencies:
   google_fonts: ^3.0.1
   google_mobile_ads: ^2.3.0
   http: ^0.13.5
-  in_app_review: ^2.0.4
+  in_app_review: ^2.0.6
   internet_connection_checker: ^1.0.0+1
   json_annotation: ^4.7.0
   mobile_scanner: ^2.1.0
