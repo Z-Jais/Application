@@ -9,7 +9,7 @@ environment:
   flutter: ">=3.0.0"
 
 dependencies:
-  cached_network_image: ^3.2.2
+  cached_network_image: ^3.2.3
   custom_navigation_bar: ^0.8.2
   device_info_plus: ^8.0.0
   firebase_core: ^2.3.0
