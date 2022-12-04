@@ -64,7 +64,7 @@ class _InitializationViewState extends State<InitializationView> {
 
   Future<void> init() async {
     try {
-      MobileAds.instance.initialize();
+      await MobileAds.instance.initialize();
     } catch (_) {}
 
     await Firebase.initializeApp(
@@ -73,8 +73,11 @@ class _InitializationViewState extends State<InitializationView> {
       (_) async => await FirebaseMessaging.instance.subscribeToTopic('all'),
     );
 
-    await CountryMapper.instance.update();
+    await DeviceMapper.animeWatchlistData.init();
+    await DeviceMapper.mangaWatchlistData.init();
+    await DeviceMapper.recommendedAnimeData.init();
 
+    await CountryMapper.instance.update();
     _needsReview();
   }
 

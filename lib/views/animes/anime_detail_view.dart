@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/components/episodes/lite_episode_list.dart';
 import 'package:jais/components/infinite_scroll.dart';
+import 'package:jais/components/watchlist_button.dart';
 import 'package:jais/entities/anime.dart';
 import 'package:jais/mappers/animes/anime_episode_mapper.dart';
 import 'package:jais/mappers/device_mapper.dart';
@@ -16,7 +17,6 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
   final AnimeEpisodeMapper _animeEpisodeMapper = AnimeEpisodeMapper();
   Anime? _anime;
   bool _isOpen = false;
-  bool _inWatchlist = false;
 
   @override
   void initState() {
@@ -24,20 +24,7 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
     _animeEpisodeMapper.clear();
 
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) async {
-        _animeEpisodeMapper.updateCurrentPage();
-
-        if (_anime != null) {
-          _inWatchlist =
-              await DeviceMapper.animeWatchlistData.has(_anime!.uuid);
-
-          if (!mounted) {
-            return;
-          }
-
-          setState(() {});
-        }
-      },
+          (_) async => _animeEpisodeMapper.updateCurrentPage(),
     );
   }
 
@@ -53,24 +40,15 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
       appBar: AppBar(
         title: Text(_anime?.name ?? ''),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              _inWatchlist
-                  ? Icons.indeterminate_check_box_outlined
-                  : Icons.add_box_outlined,
-              color: _inWatchlist ? Colors.red : Colors.green,
-            ),
-            onPressed: () async {
-              if (_inWatchlist) {
+          WatchlistButton(
+            onToggle: (bool inWatchlist) async {
+              if (inWatchlist) {
                 await DeviceMapper.animeWatchlistData.remove(_anime!.uuid);
               } else {
                 await DeviceMapper.animeWatchlistData.add(_anime!.uuid);
               }
-
-              setState(() {
-                _inWatchlist = !_inWatchlist;
-              });
             },
+            inWatchlist: DeviceMapper.animeWatchlistData.hasIn(_anime!.uuid),
           ),
           IconButton(
             icon: const Icon(Icons.info_outline),

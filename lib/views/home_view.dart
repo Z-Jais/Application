@@ -2,6 +2,7 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
+import 'package:jais/utils/utils.dart';
 import 'package:jais/views/animes/animes_view.dart';
 import 'package:jais/views/animes/animes_watchlist_view.dart';
 import 'package:jais/views/episodes/episodes_view.dart';
@@ -22,6 +23,7 @@ class _HomeViewState extends State<HomeView> {
 
   void changePage(int page, {bool fromNavBar = false}) {
     if (fromNavBar && page == NavbarMapper.instance.currentPage) {
+      Utils.clearImagesCache();
       _isList = !_isList;
       setState(() {});
       return;
@@ -32,6 +34,7 @@ class _HomeViewState extends State<HomeView> {
       setState(() {});
     }
 
+    Utils.clearImagesCache();
     NavbarMapper.instance.currentPage = page;
   }
 

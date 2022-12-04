@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/anime_classifier.dart';
+import 'package:jais/components/animes/anime_classifier.dart';
 import 'package:jais/components/animes/anime_list.dart';
 import 'package:jais/components/animes/anime_widget.dart';
 import 'package:jais/components/infinite_scroll.dart';
@@ -102,9 +102,9 @@ class _AnimesRecommendationViewState extends State<AnimesRecommendationView> {
             icon: const Icon(Icons.build_circle),
             onPressed: () async {
               final int lovedSize =
-                  await DeviceMapper.recommendedAnimeData.count(true);
+                  DeviceMapper.recommendedAnimeData.count(true);
               final int hatedSize =
-                  await DeviceMapper.recommendedAnimeData.count(false);
+                  DeviceMapper.recommendedAnimeData.count(false);
 
               showDialog(
                 context: context,

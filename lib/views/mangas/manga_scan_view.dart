@@ -4,7 +4,6 @@ import 'package:jais/entities/manga.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/mangas/manga_mapper.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:vibration/vibration.dart';
 
 class MangaScanView extends StatefulWidget {
   const MangaScanView({super.key});
@@ -87,10 +86,6 @@ class _MangaSearchViewState extends State<MangaScanView> {
                             await DeviceMapper.mangaWatchlistData.addAll(
                               _mangas.map((final Manga manga) => manga.uuid),
                             );
-
-                            if (await Vibration.hasVibrator() == true) {
-                              await Vibration.vibrate();
-                            }
 
                             _mangas.clear();
                             setState(() {});
