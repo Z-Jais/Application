@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:jais/datas/abstract_data.dart';
+import 'package:jais/mappers/abstract_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DeviceMapper {
