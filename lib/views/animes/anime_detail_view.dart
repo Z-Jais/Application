@@ -24,7 +24,7 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
     _animeEpisodeMapper.clear();
 
     WidgetsBinding.instance.addPostFrameCallback(
-          (_) async => _animeEpisodeMapper.updateCurrentPage(),
+      (_) async => _animeEpisodeMapper.updateCurrentPage(),
     );
   }
 
