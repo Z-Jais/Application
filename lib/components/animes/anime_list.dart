@@ -10,9 +10,9 @@ class AnimeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!DeviceMapper.isOnMobile(context)) {
+    if (!DeviceMapper.instance.isOnMobile(context)) {
       return Column(
-        children: Utils.separate(children, rowCol: rowCol),
+        children: Utils.instance.separate(children, rowCol: rowCol),
       );
     }
 

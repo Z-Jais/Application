@@ -25,7 +25,8 @@ class SimulcastWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextBorder(
-      text: '${Dictionary.getNaturalSeason(simulcast)} ${simulcast.year}',
+      text:
+          '${Dictionary.instance.getNaturalSeason(simulcast)} ${simulcast.year}',
       isSelected: isSelected,
     );
   }

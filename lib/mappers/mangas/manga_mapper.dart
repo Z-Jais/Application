@@ -20,12 +20,13 @@ class MangaMapper extends IMapper<Manga> {
   @override
   Future<bool> updateCurrentPage() async {
     return loadPageWithUrl(
-      UrlConst.getMangasPage(page, limit),
+      UrlConst.instance.getMangasPage(page, limit),
     );
   }
 
   Future<Manga?> search(String ean) async {
-    final Response? response = await URL().get(UrlConst.getMangaSearch(ean));
+    final Response? response =
+        await URL().get(UrlConst.instance.getMangaSearch(ean));
 
     if (!response.isOk) {
       return null;

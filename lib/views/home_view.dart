@@ -23,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
 
   void changePage(int page, {bool fromNavBar = false}) {
     if (fromNavBar && page == NavbarMapper.instance.currentPage) {
-      Utils.clearImagesCache();
+      Utils.instance.clearImagesCache();
       _isList = !_isList;
       setState(() {});
       return;
@@ -34,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
       setState(() {});
     }
 
-    Utils.clearImagesCache();
+    Utils.instance.clearImagesCache();
     NavbarMapper.instance.currentPage = page;
   }
 

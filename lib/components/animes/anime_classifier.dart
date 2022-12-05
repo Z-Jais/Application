@@ -18,7 +18,8 @@ class AnimeClassifier extends StatefulWidget {
 
 class _AnimeClassifierState extends State<AnimeClassifier> {
   bool? get _value =>
-      DeviceMapper.recommendedAnimeData.data[widget.anime.uuid] as bool?;
+      DeviceMapper.instance.recommendedAnimeData.data[widget.anime.uuid]
+          as bool?;
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +45,10 @@ class _AnimeClassifierState extends State<AnimeClassifier> {
             ),
             onPressed: () async {
               if (_value == false) {
-                await DeviceMapper.recommendedAnimeData
+                await DeviceMapper.instance.recommendedAnimeData
                     .remove(widget.anime.uuid);
               } else {
-                await DeviceMapper.recommendedAnimeData
+                await DeviceMapper.instance.recommendedAnimeData
                     .add(widget.anime.uuid, false);
               }
 
@@ -74,10 +75,10 @@ class _AnimeClassifierState extends State<AnimeClassifier> {
             ),
             onPressed: () async {
               if (_value == true) {
-                await DeviceMapper.recommendedAnimeData
+                await DeviceMapper.instance.recommendedAnimeData
                     .remove(widget.anime.uuid);
               } else {
-                await DeviceMapper.recommendedAnimeData
+                await DeviceMapper.instance.recommendedAnimeData
                     .add(widget.anime.uuid, true);
               }
 

@@ -43,12 +43,15 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
           WatchlistButton(
             onToggle: (bool inWatchlist) async {
               if (inWatchlist) {
-                await DeviceMapper.animeWatchlistData.remove(_anime!.uuid);
+                await DeviceMapper.instance.animeWatchlistData
+                    .remove(_anime!.uuid);
               } else {
-                await DeviceMapper.animeWatchlistData.add(_anime!.uuid);
+                await DeviceMapper.instance.animeWatchlistData
+                    .add(_anime!.uuid);
               }
             },
-            inWatchlist: DeviceMapper.animeWatchlistData.hasIn(_anime!.uuid),
+            inWatchlist:
+                DeviceMapper.instance.animeWatchlistData.hasIn(_anime!.uuid),
           ),
           IconButton(
             icon: const Icon(Icons.info_outline),

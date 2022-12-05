@@ -15,11 +15,11 @@ class LiteEpisodeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!DeviceMapper.isOnMobile(context)) {
+    if (!DeviceMapper.instance.isOnMobile(context)) {
       return SingleChildScrollView(
         controller: scrollController,
         child: Column(
-          children: Utils.separate(children),
+          children: Utils.instance.separate(children),
         ),
       );
     }

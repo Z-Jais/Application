@@ -102,9 +102,9 @@ class _AnimesRecommendationViewState extends State<AnimesRecommendationView> {
             icon: const Icon(Icons.build_circle),
             onPressed: () async {
               final int lovedSize =
-                  DeviceMapper.recommendedAnimeData.count(true);
+                  DeviceMapper.instance.recommendedAnimeData.count(true);
               final int hatedSize =
-                  DeviceMapper.recommendedAnimeData.count(false);
+                  DeviceMapper.instance.recommendedAnimeData.count(false);
 
               showDialog(
                 context: context,

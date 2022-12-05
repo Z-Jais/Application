@@ -10,7 +10,7 @@ class MangaList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!DeviceMapper.isOnMobile(context)) {
+    if (!DeviceMapper.instance.isOnMobile(context)) {
       final double width = MediaQuery.of(context).size.width;
 
       return GridView(

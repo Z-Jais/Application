@@ -25,7 +25,7 @@ class NavbarMapper extends ChangeNotifier {
     }
 
     notifyListeners();
-    Utils.clearImagesCache();
+    Utils.instance.clearImagesCache();
   }
 
   List<NavbarLink> items(BuildContext context) => <NavbarLink>[

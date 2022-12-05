@@ -8,7 +8,7 @@ import 'package:jais/mappers/navbar_mapper.dart';
 class Navbar extends StatelessWidget {
   final Function(int)? onPageChanged;
   final Iterable<NavbarLink>? topWidgets;
-  final Future<void> _adFuture = DeviceMapper.createGlobalBanner();
+  final Future<void> _adFuture = DeviceMapper.instance.createGlobalBanner();
 
   Navbar({
     this.onPageChanged,
@@ -68,7 +68,7 @@ class Navbar extends StatelessWidget {
                 builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return AdWidget(
-                      ad: DeviceMapper.globalBannerAd!,
+                      ad: DeviceMapper.instance.globalBannerAd!,
                     );
                   }
 
