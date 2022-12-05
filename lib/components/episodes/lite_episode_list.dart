@@ -19,7 +19,7 @@ class LiteEpisodeList extends StatelessWidget {
       return SingleChildScrollView(
         controller: scrollController,
         child: Column(
-          children: Utils.separate(children, rowCol: 3),
+          children: Utils.separate(children),
         ),
       );
     }

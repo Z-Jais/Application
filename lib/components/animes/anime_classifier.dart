@@ -17,7 +17,8 @@ class AnimeClassifier extends StatefulWidget {
 }
 
 class _AnimeClassifierState extends State<AnimeClassifier> {
-  bool? get _value => DeviceMapper.recommendedAnimeData.data[widget.anime.uuid];
+  bool? get _value =>
+      DeviceMapper.recommendedAnimeData.data[widget.anime.uuid] as bool?;
 
   @override
   Widget build(BuildContext context) {

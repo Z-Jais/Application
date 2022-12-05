@@ -102,7 +102,7 @@ class Utils {
       final int minV = min(i + rowCol, children.length);
       final int length = minV - i;
 
-      List<Widget> sublist = children.sublist(i, minV);
+      final List<Widget> sublist = children.sublist(i, minV);
       sublist.addAll(List<Widget>.filled(rowCol - length, Container()));
 
       list.add(

@@ -70,7 +70,7 @@ class _InitializationViewState extends State<InitializationView> {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     ).then(
-      (_) async => await FirebaseMessaging.instance.subscribeToTopic('all'),
+      (_) async => FirebaseMessaging.instance.subscribeToTopic('all'),
     );
 
     await DeviceMapper.animeWatchlistData.init();

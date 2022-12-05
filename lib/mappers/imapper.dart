@@ -38,7 +38,7 @@ abstract class IMapper<T> extends ChangeNotifier {
         canLoadMore;
   }
 
-  void onInfiniteScroll() async {
+  Future<void> onInfiniteScroll() async {
     if (canInfiniteScroll()) {
       isLoading = true;
       Utils.clearImagesCache();

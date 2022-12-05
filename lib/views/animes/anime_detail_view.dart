@@ -31,7 +31,7 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
   @override
   Widget build(BuildContext context) {
     if (_anime == null) {
-      _anime = ModalRoute.of(context)!.settings.arguments as Anime;
+      _anime = ModalRoute.of(context)!.settings.arguments! as Anime;
       _animeEpisodeMapper.uuid = _anime!.uuid;
     }
 

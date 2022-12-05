@@ -99,7 +99,7 @@ class DataMap extends AbstractData<Map<String, dynamic>> {
       return <String, dynamic>{};
     }
 
-    return jsonDecode(data);
+    return jsonDecode(data) as Map<String, dynamic>;
   }
 
   @override

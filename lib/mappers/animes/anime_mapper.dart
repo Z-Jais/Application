@@ -8,7 +8,7 @@ import 'package:jais/url/url_const.dart';
 class AnimeMapper extends IMapper<Anime> {
   Simulcast? simulcast;
 
-  AnimeMapper({bool listener = true, bool clickable = true})
+  AnimeMapper({super.listener, bool clickable = true})
       : super(
           limit: 24,
           loaderWidget: const AnimeLoaderWidget(),
@@ -17,7 +17,6 @@ class AnimeMapper extends IMapper<Anime> {
             anime: anime,
             clickable: clickable,
           ),
-          listener: listener,
         );
 
   @override

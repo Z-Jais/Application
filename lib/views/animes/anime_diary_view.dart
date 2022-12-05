@@ -42,20 +42,19 @@ class _AnimeDiaryViewState extends State<AnimeDiaryView> {
     ),
     DayWidget(
       day: 'Dimanche',
-      dayNumber: 0,
     ),
   ];
   final List<DayWidget> _days = <DayWidget>[];
 
   Future<void> changeToDays({int? day}) async {
-    day ??= DateTime.now().weekday;
+    int dayNumber = day ?? DateTime.now().weekday;
 
-    if (day == 7) {
-      day = 0;
+    if (dayNumber == 7) {
+      dayNumber = 0;
     }
 
-    final DayWidget dayWidget =
-        _initial.firstWhere((DayWidget element) => element.dayNumber == day);
+    final DayWidget dayWidget = _initial
+        .firstWhere((DayWidget element) => element.dayNumber == dayNumber);
     final int index = _initial.indexOf(dayWidget);
 
     _days.clear();
@@ -64,7 +63,7 @@ class _AnimeDiaryViewState extends State<AnimeDiaryView> {
     setState(() {});
 
     _animeMapper.clear();
-    await _animeMapper.getDiary(day);
+    await _animeMapper.getDiary(dayNumber);
   }
 
   @override
