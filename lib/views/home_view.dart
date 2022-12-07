@@ -14,7 +14,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    throw Column(
+    return Column(
       children: [
         const Navbar(),
         Expanded(

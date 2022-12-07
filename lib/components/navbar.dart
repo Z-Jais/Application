@@ -37,53 +37,50 @@ class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            RoundBorderWidget(widget: Image.asset('assets/icon.png')),
-            const SizedBox(width: 10),
-            Text(
-              'Jaïs',
-              style: GoogleFonts.pacifico(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor,
-              ),
+      height: 40,
+      child: Row(
+        children: <Widget>[
+          RoundBorderWidget(widget: Image.asset('assets/icon.png')),
+          const SizedBox(width: 10),
+          Text(
+            'Jaïs',
+            style: GoogleFonts.pacifico(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
             ),
-            const SizedBox(width: 10),
-            // Expanded(
-            //   child: FutureBuilder<void>(
-            //     future: _adFuture,
-            //     builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-            //       if (snapshot.connectionState == ConnectionState.done) {
-            //         return AdWidget(
-            //           ad: DeviceMapper.instance.globalBannerAd!,
-            //         );
-            //       }
-            //
-            //       return const ColoredBox(color: Colors.transparent);
-            //     },
-            //   ),
-            // ),
-            ChangeNotifierProvider<NavbarMapper>.value(
-              value: NavbarMapper.instance,
-              child: Consumer<NavbarMapper>(
-                builder: (context, value, child) {
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ...?calculcateTopWidgets(
-                        value.items(context)[value.currentPage].topWidgets,
-                      )
-                    ],
-                  );
-                },
-              ),
+          ),
+          const Spacer(),
+          // Expanded(
+          //   child: FutureBuilder<void>(
+          //     future: _adFuture,
+          //     builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+          //       if (snapshot.connectionState == ConnectionState.done) {
+          //         return AdWidget(
+          //           ad: DeviceMapper.instance.globalBannerAd!,
+          //         );
+          //       }
+          //
+          //       return const ColoredBox(color: Colors.transparent);
+          //     },
+          //   ),
+          // ),
+          ChangeNotifierProvider<NavbarMapper>.value(
+            value: NavbarMapper.instance,
+            child: Consumer<NavbarMapper>(
+              builder: (context, value, child) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ...?calculcateTopWidgets(
+                      value.items(context)[value.currentPage].topWidgets,
+                    )
+                  ],
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
