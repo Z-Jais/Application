@@ -16,7 +16,7 @@ class EpisodeMapper extends IMapper<Episode> {
   @override
   Future<bool> updateCurrentPage() async {
     return loadPageWithUrl(
-      UrlConst.getEpisodesPage(page, limit),
+      UrlConst.instance.getEpisodesPage(page, limit),
     );
   }
 }

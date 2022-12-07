@@ -69,7 +69,7 @@ class _AnimesRecommendationViewState extends State<AnimesRecommendationView> {
                         ),
                         SizedBox(height: 20),
                         Text(
-                          'Plus vous marquez d\'animes, plus les recommandations seront précises.',
+                          "Plus vous marquez d'animes, plus les recommandations seront précises.",
                         ),
                         Text(
                           'Afin d\'obtenir de meilleures recommandations, il est préférable de marquer autant d\'animes "aimés" que "détestés".',
@@ -102,9 +102,9 @@ class _AnimesRecommendationViewState extends State<AnimesRecommendationView> {
             icon: const Icon(Icons.build_circle),
             onPressed: () async {
               final int lovedSize =
-                  DeviceMapper.recommendedAnimeData.count(true);
+                  DeviceMapper.instance.recommendedAnimeData.count(true);
               final int hatedSize =
-                  DeviceMapper.recommendedAnimeData.count(false);
+                  DeviceMapper.instance.recommendedAnimeData.count(false);
 
               showDialog(
                 context: context,
@@ -117,7 +117,7 @@ class _AnimesRecommendationViewState extends State<AnimesRecommendationView> {
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       Text(
-                        'Cette action peut prendre plusieurs minutes.\nVous pouvez continuer à utiliser l\'application pendant ce temps.',
+                        "Cette action peut prendre plusieurs minutes.\nVous pouvez continuer à utiliser l'application pendant ce temps.",
                         style: Theme.of(context).textTheme.caption,
                       ),
                       const SizedBox(height: 10),

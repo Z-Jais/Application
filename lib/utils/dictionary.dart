@@ -5,7 +5,9 @@ import 'package:jais/entities/simulcast.dart';
 import 'package:jais/mappers/country_mapper.dart';
 
 class Dictionary {
-  static String getSeason() {
+  static final Dictionary instance = Dictionary();
+
+  String getSeason() {
     switch (CountryMapper.selectedCountry?.tag) {
       case 'fr':
         return 'Saison';
@@ -16,7 +18,7 @@ class Dictionary {
     return '??';
   }
 
-  static String getEpisodeType(EpisodeType episodeType) {
+  String getEpisodeType(EpisodeType episodeType) {
     switch (CountryMapper.selectedCountry?.tag) {
       case 'fr':
         if (episodeType.name == 'EPISODE') {
@@ -39,7 +41,7 @@ class Dictionary {
     return '??';
   }
 
-  static String getLangType(LangType langType) {
+  String getLangType(LangType langType) {
     switch (CountryMapper.selectedCountry?.tag) {
       case 'fr':
         if (langType.name == 'SUBTITLES') {
@@ -58,7 +60,7 @@ class Dictionary {
     return '??';
   }
 
-  static String getNaturalSeason(Simulcast simulcast) {
+  String getNaturalSeason(Simulcast simulcast) {
     switch (CountryMapper.selectedCountry?.tag) {
       case 'fr':
         if (simulcast.season == 'WINTER') {
@@ -85,7 +87,7 @@ class Dictionary {
     return '??';
   }
 
-  static String getEpisodeDetails(Episode episode) {
+  String getEpisodeDetails(Episode episode) {
     // Saison 1 • Épisode 5 VOSTFR
     return '${getSeason()} ${episode.season} • ${getEpisodeType(episode.episodeType)} ${episode.number} ${getLangType(episode.langType)}';
   }

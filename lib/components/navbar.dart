@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/components/roundborder_widget.dart';
+import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
-
-import '../mappers/device_mapper.dart';
 
 class Navbar extends StatelessWidget {
   final Function(int)? onPageChanged;
   final Iterable<NavbarLink>? topWidgets;
-  final Future<void> _adFuture = DeviceMapper.createGlobalBanner();
+  final Future<void> _adFuture = DeviceMapper.instance.createGlobalBanner();
 
   Navbar({
     this.onPageChanged,
@@ -69,7 +68,7 @@ class Navbar extends StatelessWidget {
                 builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return AdWidget(
-                      ad: DeviceMapper.globalBannerAd!,
+                      ad: DeviceMapper.instance.globalBannerAd!,
                     );
                   }
 

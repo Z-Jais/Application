@@ -49,11 +49,11 @@ class LiteEpisodeWidget extends StatelessWidget {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '${Dictionary.getSeason()} ${episode.season}',
+                    '${Dictionary.instance.getSeason()} ${episode.season}',
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    '${Dictionary.getEpisodeType(episode.episodeType)} ${episode.number} ${Dictionary.getLangType(episode.langType)}',
+                    '${Dictionary.instance.getEpisodeType(episode.episodeType)} ${episode.number} ${Dictionary.instance.getLangType(episode.langType)}',
                     overflow: TextOverflow.ellipsis,
                   ),
                   Row(
@@ -61,7 +61,7 @@ class LiteEpisodeWidget extends StatelessWidget {
                       const Icon(Icons.movie),
                       const SizedBox(width: 5),
                       Text(
-                        Utils.printDuration(
+                        Utils.instance.printDuration(
                           Duration(seconds: episode.duration),
                         ),
                       ),

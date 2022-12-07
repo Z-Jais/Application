@@ -19,8 +19,8 @@ class MangaWatchlistMapper extends IMapper<Manga> {
   Future<bool> updateCurrentPage() async {
     return loadPageWithFunction(
       () async => URL().post(
-        UrlConst.getMangasWatchlistPage(page, limit),
-        body: DeviceMapper.mangaWatchlistData.toGzip(),
+        UrlConst.instance.getMangasWatchlistPage(page, limit),
+        body: DeviceMapper.instance.mangaWatchlistData.toGzip(),
       ),
     );
   }

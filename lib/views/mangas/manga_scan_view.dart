@@ -83,8 +83,9 @@ class _MangaSearchViewState extends State<MangaScanView> {
                         const Spacer(),
                         TextButton(
                           onPressed: () async {
-                            await DeviceMapper.mangaWatchlistData.addAll(
-                              _mangas.map((final Manga manga) => manga.uuid),
+                            await DeviceMapper.instance.mangaWatchlistData
+                                .addAll(
+                              _mangas.map((Manga manga) => manga.uuid),
                             );
 
                             _mangas.clear();

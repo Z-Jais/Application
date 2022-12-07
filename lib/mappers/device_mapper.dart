@@ -6,19 +6,19 @@ import 'package:jais/mappers/abstract_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DeviceMapper {
-  static final ReviewMapper reviewMapper = ReviewMapper();
-  static final DataCollection animeWatchlistData =
-      DataCollection('animeWatchlist');
-  static final DataCollection mangaWatchlistData =
-      DataCollection('mangaWatchlist');
-  static final DataMap recommendedAnimeData = DataMap('recommendedAnime');
-  static BannerAd? globalBannerAd;
+  static final DeviceMapper instance = DeviceMapper();
 
-  static bool isOnMobile(BuildContext context, [double width = 600]) {
+  final ReviewMapper reviewMapper = ReviewMapper();
+  final DataCollection animeWatchlistData = DataCollection('animeWatchlist');
+  final DataCollection mangaWatchlistData = DataCollection('mangaWatchlist');
+  final DataMap recommendedAnimeData = DataMap('recommendedAnime');
+  BannerAd? globalBannerAd;
+
+  bool isOnMobile(BuildContext context, [double width = 600]) {
     return MediaQuery.of(context).size.width < width;
   }
 
-  static Future<void> createGlobalBanner() async {
+  Future<void> createGlobalBanner() async {
     if (globalBannerAd != null) {
       await globalBannerAd?.load();
       return;
@@ -38,7 +38,7 @@ class DeviceMapper {
     await globalBannerAd?.load();
   }
 
-  static Future<bool> hasInternet() async {
+  Future<bool> hasInternet() async {
     final InternetConnectionChecker customInstance =
         InternetConnectionChecker.createInstance(
       checkTimeout: const Duration(milliseconds: 2500),

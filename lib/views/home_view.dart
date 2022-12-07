@@ -23,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
 
   void changePage(int page, {bool fromNavBar = false}) {
     if (fromNavBar && page == NavbarMapper.instance.currentPage) {
-      Utils.clearImagesCache();
+      Utils.instance.clearImagesCache();
       _isList = !_isList;
       setState(() {});
       return;
@@ -34,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
       setState(() {});
     }
 
-    Utils.clearImagesCache();
+    Utils.instance.clearImagesCache();
     NavbarMapper.instance.currentPage = page;
   }
 
@@ -60,15 +60,18 @@ class _HomeViewState extends State<HomeView> {
                     controller: navbarMapper.pageController,
                     onPageChanged: changePage,
                     children: <Widget>[
-                      _isList
-                          ? const EpisodesWatchlistView()
-                          : const EpisodesView(),
-                      _isList
-                          ? const MangasWatchlistView()
-                          : const MangasView(),
-                      _isList
-                          ? const AnimesWatchlistView()
-                          : const AnimesView(),
+                      if (_isList)
+                        const EpisodesWatchlistView()
+                      else
+                        const EpisodesView(),
+                      if (_isList)
+                        const MangasWatchlistView()
+                      else
+                        const MangasView(),
+                      if (_isList)
+                        const AnimesWatchlistView()
+                      else
+                        const AnimesView(),
                     ],
                   ),
                 ),

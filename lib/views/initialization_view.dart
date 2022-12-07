@@ -17,12 +17,12 @@ class InitializationView extends StatefulWidget {
 }
 
 class _InitializationViewState extends State<InitializationView> {
-  Future<bool> _hasInternet = DeviceMapper.hasInternet();
+  Future<bool> _hasInternet = DeviceMapper.instance.hasInternet();
   late Future<void> _i;
 
   Future<void> _needsReview() async {
     final bool showRequestReview =
-        await DeviceMapper.reviewMapper.canShowReview();
+        await DeviceMapper.instance.reviewMapper.canShowReview();
 
     if (!mounted || !showRequestReview) {
       return;
@@ -39,7 +39,7 @@ class _InitializationViewState extends State<InitializationView> {
               child: const Text('Non'),
               onPressed: () async {
                 Navigator.pop(context);
-                await DeviceMapper.reviewMapper.neverReview();
+                await DeviceMapper.instance.reviewMapper.neverReview();
               },
             ),
             TextButton(
@@ -52,7 +52,7 @@ class _InitializationViewState extends State<InitializationView> {
               child: const Text('Oui'),
               onPressed: () async {
                 Navigator.pop(context);
-                await DeviceMapper.reviewMapper.acceptReview();
+                await DeviceMapper.instance.reviewMapper.acceptReview();
                 InAppReview.instance.requestReview();
               },
             )
@@ -70,12 +70,12 @@ class _InitializationViewState extends State<InitializationView> {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     ).then(
-      (_) async => await FirebaseMessaging.instance.subscribeToTopic('all'),
+      (_) async => FirebaseMessaging.instance.subscribeToTopic('all'),
     );
 
-    await DeviceMapper.animeWatchlistData.init();
-    await DeviceMapper.mangaWatchlistData.init();
-    await DeviceMapper.recommendedAnimeData.init();
+    await DeviceMapper.instance.animeWatchlistData.init();
+    await DeviceMapper.instance.mangaWatchlistData.init();
+    await DeviceMapper.instance.recommendedAnimeData.init();
 
     await CountryMapper.instance.update();
     _needsReview();
@@ -109,7 +109,7 @@ class _InitializationViewState extends State<InitializationView> {
           return Scaffold(
             body: NoConnection(
               onRetry: () async {
-                _hasInternet = DeviceMapper.hasInternet();
+                _hasInternet = DeviceMapper.instance.hasInternet();
                 _i = init();
                 setState(() {});
               },

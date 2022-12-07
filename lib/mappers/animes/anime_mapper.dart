@@ -8,7 +8,7 @@ import 'package:jais/url/url_const.dart';
 class AnimeMapper extends IMapper<Anime> {
   Simulcast? simulcast;
 
-  AnimeMapper({bool listener = true, bool clickable = true})
+  AnimeMapper({super.listener, bool clickable = true})
       : super(
           limit: 24,
           loaderWidget: const AnimeLoaderWidget(),
@@ -17,7 +17,6 @@ class AnimeMapper extends IMapper<Anime> {
             anime: anime,
             clickable: clickable,
           ),
-          listener: listener,
         );
 
   @override
@@ -26,15 +25,17 @@ class AnimeMapper extends IMapper<Anime> {
       return false;
     }
 
-    return loadPageWithUrl(UrlConst.getAnimesPage(simulcast!, page, limit));
+    return loadPageWithUrl(
+      UrlConst.instance.getAnimesPage(simulcast!, page, limit),
+    );
   }
 
   Future<bool> search(String query) async {
     clear();
-    return loadPageWithUrl(UrlConst.getAnimesSearch(query));
+    return loadPageWithUrl(UrlConst.instance.getAnimesSearch(query));
   }
 
   Future<bool> getDiary(int day) async {
-    return loadPageWithUrl(UrlConst.getAnimesDiary(day));
+    return loadPageWithUrl(UrlConst.instance.getAnimesDiary(day));
   }
 }

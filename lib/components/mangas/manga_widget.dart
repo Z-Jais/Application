@@ -76,7 +76,7 @@ class MangaWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    Utils.printTimeSinceDays(
+                    Utils.instance.printTimeSinceDays(
                       DateTime.parse(manga.releaseDate),
                     ),
                   )

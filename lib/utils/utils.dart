@@ -3,12 +3,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class Utils {
-  static void clearImagesCache() {
+  static final Utils instance = Utils();
+
+  void clearImagesCache() {
     PaintingBinding.instance.imageCache.clear();
     PaintingBinding.instance.imageCache.clearLiveImages();
   }
 
-  static String printDuration(Duration duration) {
+  String printDuration(Duration duration) {
     if (duration.isNegative) {
       return '??:??';
     }
@@ -25,7 +27,7 @@ class Utils {
     }
   }
 
-  static String printTimeSince(DateTime? dateTime) {
+  String printTimeSince(DateTime? dateTime) {
     if (dateTime == null) {
       return 'erreur';
     }
@@ -66,7 +68,7 @@ class Utils {
     return "à l'instant";
   }
 
-  static String printTimeSinceDays(DateTime? dateTime) {
+  String printTimeSinceDays(DateTime? dateTime) {
     if (dateTime == null) {
       return 'erreur';
     }
@@ -95,14 +97,14 @@ class Utils {
     return "Aujourd'hui";
   }
 
-  static List<Widget> separate(List<Widget> children, {int rowCol = 3}) {
+  List<Widget> separate(List<Widget> children, {int rowCol = 3}) {
     final List<Widget> list = <Widget>[];
 
     for (int i = 0; i < children.length; i += rowCol) {
       final int minV = min(i + rowCol, children.length);
       final int length = minV - i;
 
-      List<Widget> sublist = children.sublist(i, minV);
+      final List<Widget> sublist = children.sublist(i, minV);
       sublist.addAll(List<Widget>.filled(rowCol - length, Container()));
 
       list.add(

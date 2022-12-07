@@ -20,7 +20,6 @@ class EpisodeLoaderWidget extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Row(
@@ -54,7 +53,7 @@ class EpisodeLoaderWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          if (DeviceMapper.isOnMobile(context))
+          if (DeviceMapper.instance.isOnMobile(context))
             const Skeleton(height: Const.episodeImageHeight)
           else
             const Expanded(child: Skeleton()),

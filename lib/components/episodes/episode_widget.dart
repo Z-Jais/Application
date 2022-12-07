@@ -31,7 +31,6 @@ class EpisodeWidget extends StatelessWidget {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Row(
@@ -69,7 +68,7 @@ class EpisodeWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        Dictionary.getEpisodeDetails(episode),
+                        Dictionary.instance.getEpisodeDetails(episode),
                         overflow: TextOverflow.ellipsis,
                       ),
                       Row(
@@ -77,7 +76,7 @@ class EpisodeWidget extends StatelessWidget {
                           const Icon(Icons.movie),
                           const SizedBox(width: 5),
                           Text(
-                            Utils.printDuration(
+                            Utils.instance.printDuration(
                               Duration(seconds: episode.duration),
                             ),
                           ),
@@ -91,13 +90,13 @@ class EpisodeWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            if (DeviceMapper.isOnMobile(context))
+            if (DeviceMapper.instance.isOnMobile(context))
               EpisodeImage(episode: episode, height: Const.episodeImageHeight)
             else
               Expanded(child: EpisodeImage(episode: episode)),
             const SizedBox(height: 10),
             Text(
-              'Il y a ${Utils.printTimeSince(DateTime.parse(episode.releaseDate))}',
+              'Il y a ${Utils.instance.printTimeSince(DateTime.parse(episode.releaseDate))}',
             ),
           ],
         ),
