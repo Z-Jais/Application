@@ -7,24 +7,22 @@ class NoConnection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Image.asset('assets/no_connection.png', width: 200),
-          const SizedBox(height: 10),
-          Text(
-            'Mince !',
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          const Text('Impossible de se connecter à Jaïs.'),
-          const SizedBox(height: 10),
-          TextButton(
-            onPressed: onRetry,
-            child: const Text('Réessayer'),
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Image.asset('assets/no_connection.png', width: 200),
+        const SizedBox(height: 10),
+        Text(
+          'Mince !',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        const Text('Impossible de se connecter à Jaïs.'),
+        const SizedBox(height: 10),
+        TextButton(
+          onPressed: onRetry,
+          child: const Text('Réessayer'),
+        ),
+      ],
     );
   }
 }

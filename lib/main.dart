@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:jais/utils/color.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_diary_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
@@ -9,13 +6,13 @@ import 'package:jais/views/animes/animes_recommendation_view.dart';
 import 'package:jais/views/initialization_view.dart';
 import 'package:jais/views/mangas/manga_scan_view.dart';
 
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  static final Color _mainColor = mainColors[900]!;
+  static const Color _mainColor = Color(0xFFF2B05E);
 
   const MyApp({super.key});
 
@@ -35,14 +32,20 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         useMaterial3: true,
         primaryColor: _mainColor,
-        primarySwatch: MaterialColor(_mainColor.value, mainColors),
+        primarySwatch: MaterialColor(_mainColor.value, {
+          for (var i = 50; i <= 900; i += 50)
+            i: Color.fromRGBO(
+              _mainColor.red,
+              _mainColor.green,
+              _mainColor.blue,
+              i / 100,
+            ),
+        }),
         scaffoldBackgroundColor: Colors.black,
       ),
       initialRoute: '/',
-      routes: <String, Widget Function(BuildContext)>{
-        '/': (_) {
-          return const SafeArea(child: InitializationView());
-        },
+      routes: {
+        '/': (context) => const InitializationView(),
         '/manga/scan': (_) {
           return const SafeArea(child: MangaScanView());
         },

@@ -1,38 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/components/roundborder_widget.dart';
-import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
+import 'package:provider/provider.dart';
 
 class Navbar extends StatelessWidget {
-  final Function(int)? onPageChanged;
-  final Iterable<NavbarLink>? topWidgets;
-  final Future<void> _adFuture = DeviceMapper.instance.createGlobalBanner();
+  const Navbar({super.key});
 
-  Navbar({
-    this.onPageChanged,
-    this.topWidgets,
-    super.key,
-  });
-
-  Iterable<Widget>? get calculcateTopWidgets {
-    if (topWidgets == null || topWidgets!.isEmpty) {
+  Iterable<Widget>? calculcateTopWidgets(Iterable<NavbarLink>? topWidgets) {
+    if (topWidgets == null || topWidgets.isEmpty) {
       return null;
     }
 
-    final int length = topWidgets!.length;
+    final int length = topWidgets.length;
 
     if (length > 2) {
       return <Widget>[
-        topWidgets!.first.toIconButton,
+        topWidgets.first.toIconButton,
         PopupMenuButton<int>(
           itemBuilder: (BuildContext context) {
             return <PopupMenuEntry<int>>[
               for (int i = 1; i < length; i++)
                 PopupMenuItem<int>(
                   value: i - 1,
-                  child: topWidgets!.elementAt(i).toListTile,
+                  child: topWidgets.elementAt(i).toListTile,
                 ),
             ];
           },
@@ -40,7 +31,7 @@ class Navbar extends StatelessWidget {
       ];
     }
 
-    return topWidgets!.map((NavbarLink navbarLink) => navbarLink.toIconButton);
+    return topWidgets.map((NavbarLink navbarLink) => navbarLink.toIconButton);
   }
 
   @override
@@ -62,21 +53,35 @@ class Navbar extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            Expanded(
-              child: FutureBuilder<void>(
-                future: _adFuture,
-                builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return AdWidget(
-                      ad: DeviceMapper.instance.globalBannerAd!,
-                    );
-                  }
-
-                  return const ColoredBox(color: Colors.transparent);
+            // Expanded(
+            //   child: FutureBuilder<void>(
+            //     future: _adFuture,
+            //     builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+            //       if (snapshot.connectionState == ConnectionState.done) {
+            //         return AdWidget(
+            //           ad: DeviceMapper.instance.globalBannerAd!,
+            //         );
+            //       }
+            //
+            //       return const ColoredBox(color: Colors.transparent);
+            //     },
+            //   ),
+            // ),
+            ChangeNotifierProvider<NavbarMapper>.value(
+              value: NavbarMapper.instance,
+              child: Consumer<NavbarMapper>(
+                builder: (context, value, child) {
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ...?calculcateTopWidgets(
+                        value.items(context)[value.currentPage].topWidgets,
+                      )
+                    ],
+                  );
                 },
               ),
             ),
-            ...?calculcateTopWidgets,
           ],
         ),
       ),

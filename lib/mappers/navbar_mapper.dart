@@ -1,10 +1,10 @@
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/utils/utils.dart';
 
 class NavbarMapper extends ChangeNotifier {
   static final NavbarMapper instance = NavbarMapper();
   late PageController pageController;
+  bool _isList = false;
 
   NavbarMapper({int defaultPage = 0})
       : pageController = PageController(initialPage: defaultPage);
@@ -17,6 +17,8 @@ class NavbarMapper extends ChangeNotifier {
     }
   }
 
+  bool get isList => _isList;
+
   set currentPage(int page) {
     try {
       pageController.jumpToPage(page);
@@ -26,6 +28,22 @@ class NavbarMapper extends ChangeNotifier {
 
     notifyListeners();
     Utils.instance.clearImagesCache();
+  }
+
+  void changePage(int page, {bool fromNavBar = false}) {
+    if (fromNavBar && page == currentPage) {
+      Utils.instance.clearImagesCache();
+      _isList = !_isList;
+      notifyListeners();
+      return;
+    }
+
+    if (_isList) {
+      _isList = false;
+    }
+
+    Utils.instance.clearImagesCache();
+    currentPage = page;
   }
 
   List<NavbarLink> items(BuildContext context) => <NavbarLink>[
@@ -75,31 +93,8 @@ class NavbarMapper extends ChangeNotifier {
         ),
       ];
 
-  Iterable<BottomNavigationBarItem> itemsBottomNavBar(
-    BuildContext context,
-  ) =>
-      items(context)
-          .asMap()
-          .map(
-            (int i, NavbarLink e) => MapEntry<int, BottomNavigationBarItem>(
-              i,
-              e.toBottomNavigationBarItem,
-            ),
-          )
-          .values;
-
-  Iterable<CustomNavigationBarItem> itemsCustomNavBar(
-    BuildContext context,
-  ) =>
-      items(context)
-          .asMap()
-          .map(
-            (int i, NavbarLink e) => MapEntry<int, CustomNavigationBarItem>(
-              i,
-              e.toCustomNavigationBarItem,
-            ),
-          )
-          .values;
+  Iterable<BottomNavigationBarItem> itemsBottomNavBar(BuildContext context) =>
+      items(context).map((e) => e.toBottomNavigationBarItem);
 }
 
 class NavbarLink {
@@ -119,12 +114,6 @@ class NavbarLink {
       BottomNavigationBarItem(
         icon: icon,
         label: name,
-      );
-
-  CustomNavigationBarItem get toCustomNavigationBarItem =>
-      CustomNavigationBarItem(
-        icon: icon,
-        // title: Text(name),
       );
 
   IconButton get toIconButton => IconButton(
