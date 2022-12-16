@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/components/roundborder_widget.dart';
+import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
 import 'package:provider/provider.dart';
 
@@ -51,20 +53,6 @@ class Navbar extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          // Expanded(
-          //   child: FutureBuilder<void>(
-          //     future: _adFuture,
-          //     builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-          //       if (snapshot.connectionState == ConnectionState.done) {
-          //         return AdWidget(
-          //           ad: DeviceMapper.instance.globalBannerAd!,
-          //         );
-          //       }
-          //
-          //       return const ColoredBox(color: Colors.transparent);
-          //     },
-          //   ),
-          // ),
           ChangeNotifierProvider<NavbarMapper>.value(
             value: NavbarMapper.instance,
             child: Consumer<NavbarMapper>(

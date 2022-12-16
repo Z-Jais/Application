@@ -22,7 +22,7 @@ class DeviceMapper {
 
     globalBannerAd = BannerAd(
       adUnitId: 'ca-app-pub-5658764393995798/7021730383',
-      size: AdSize.banner,
+      size: AdSize.fullBanner,
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdFailedToLoad: (Ad ad, _) async {
