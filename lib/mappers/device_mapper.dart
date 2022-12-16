@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:in_app_review/in_app_review.dart';
 import 'package:jais/mappers/abstract_data.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DeviceMapper {
   static final DeviceMapper instance = DeviceMapper();
 
-  final ReviewMapper reviewMapper = ReviewMapper();
   final DataCollection animeWatchlistData = DataCollection('animeWatchlist');
   final DataCollection mangaWatchlistData = DataCollection('mangaWatchlist');
   final DataMap recommendedAnimeData = DataMap('recommendedAnime');
@@ -35,30 +32,5 @@ class DeviceMapper {
     );
 
     await globalBannerAd?.load();
-  }
-}
-
-class ReviewMapper {
-  Future<bool> canShowReview() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String reviewType = prefs.getString('reviewType') ?? 'pending';
-
-    if (reviewType == 'never' || reviewType == 'accepted') {
-      return false;
-    }
-
-    final int reviewCount = ((prefs.getInt('reviewCount') ?? 0) + 1) % 5;
-    await prefs.setInt('reviewCount', reviewCount);
-    return reviewCount == 0 && (await InAppReview.instance.isAvailable());
-  }
-
-  Future<void> acceptReview() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('reviewType', 'accepted');
-  }
-
-  Future<void> neverReview() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('reviewType', 'never');
   }
 }

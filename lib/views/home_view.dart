@@ -24,14 +24,12 @@ class HomeView extends StatelessWidget {
                   controller: value.pageController,
                   onPageChanged: value.changePage,
                   children: <Widget>[
-                    if (value.isList)
-                      EpisodesWatchlistView()
-                    else
-                      EpisodesView(),
+                    EpisodesView(),
                     if (value.isList)
                       AnimesWatchlistView()
                     else
-                      const AnimesView(),
+                      EpisodesWatchlistView(),
+                    const AnimesView(),
                   ],
                 );
               },

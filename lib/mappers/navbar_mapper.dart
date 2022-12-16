@@ -51,6 +51,13 @@ class NavbarMapper extends ChangeNotifier {
           name: 'Épisodes',
           icon: Icon(Icons.subscriptions_outlined),
         ),
+        const NavbarLink(
+          name: 'Watchlist',
+          icon: Icon(Icons.list),
+          topWidgets: <NavbarLink>[
+
+          ],
+        ),
         NavbarLink(
           name: 'Animes',
           icon: const Icon(Icons.live_tv),
