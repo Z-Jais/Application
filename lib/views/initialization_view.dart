@@ -13,7 +13,6 @@ class InitializationView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        extendBody: true,
         body: Center(
           child: ChangeNotifierProvider<InitializationMapper>.value(
             value: InitializationMapper(),

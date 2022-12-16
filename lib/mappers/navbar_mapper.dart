@@ -52,19 +52,6 @@ class NavbarMapper extends ChangeNotifier {
           icon: Icon(Icons.subscriptions_outlined),
         ),
         NavbarLink(
-          name: 'Mangas',
-          icon: const Icon(Icons.menu_book),
-          topWidgets: <NavbarLink>[
-            NavbarLink(
-              name: 'Scan',
-              icon: const Icon(Icons.document_scanner),
-              onTap: () async {
-                Navigator.of(context).pushNamed('/manga/scan');
-              },
-            ),
-          ],
-        ),
-        NavbarLink(
           name: 'Animes',
           icon: const Icon(Icons.live_tv),
           topWidgets: <NavbarLink>[

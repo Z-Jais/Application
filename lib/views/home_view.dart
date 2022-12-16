@@ -5,8 +5,6 @@ import 'package:jais/views/animes/animes_view.dart';
 import 'package:jais/views/animes/animes_watchlist_view.dart';
 import 'package:jais/views/episodes/episodes_view.dart';
 import 'package:jais/views/episodes/episodes_watchlist_view.dart';
-import 'package:jais/views/mangas/mangas_view.dart';
-import 'package:jais/views/mangas/mangas_watchlist_view.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
@@ -30,10 +28,6 @@ class HomeView extends StatelessWidget {
                       EpisodesWatchlistView()
                     else
                       EpisodesView(),
-                    if (value.isList)
-                      MangasWatchlistView()
-                    else
-                      MangasView(),
                     if (value.isList)
                       AnimesWatchlistView()
                     else

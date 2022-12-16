@@ -3,7 +3,6 @@ import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_diary_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
 import 'package:jais/views/initialization_view.dart';
-import 'package:jais/views/mangas/manga_scan_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,9 +44,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const InitializationView(),
-        '/manga/scan': (_) {
-          return const SafeArea(child: MangaScanView());
-        },
         '/anime/search': (_) {
           return const SafeArea(child: AnimeSearchView());
         },
