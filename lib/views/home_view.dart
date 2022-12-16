@@ -27,15 +27,15 @@ class HomeView extends StatelessWidget {
                   onPageChanged: value.changePage,
                   children: <Widget>[
                     if (value.isList)
-                      const EpisodesWatchlistView()
+                      EpisodesWatchlistView()
                     else
-                      const EpisodesView(),
+                      EpisodesView(),
                     if (value.isList)
-                      const MangasWatchlistView()
+                      MangasWatchlistView()
                     else
-                      const MangasView(),
+                      MangasView(),
                     if (value.isList)
-                      const AnimesWatchlistView()
+                      AnimesWatchlistView()
                     else
                       const AnimesView(),
                   ],

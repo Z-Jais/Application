@@ -3,24 +3,10 @@ import 'package:jais/components/episodes/episode_list.dart';
 import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/mappers/episodes/episode_mapper.dart';
 
-class EpisodesView extends StatefulWidget {
-  const EpisodesView({super.key});
-
-  @override
-  State<EpisodesView> createState() => _EpisodesViewState();
-}
-
-class _EpisodesViewState extends State<EpisodesView> {
+class EpisodesView extends StatelessWidget {
   final EpisodeMapper _episodeMapper = EpisodeMapper();
 
-  @override
-  void initState() {
-    super.initState();
-    _episodeMapper.clear();
-
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) async => _episodeMapper.updateCurrentPage());
-  }
+  EpisodesView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,26 +5,10 @@ import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/components/no_element.dart';
 import 'package:jais/mappers/episodes/episode_watchlist_mapper.dart';
 
-class EpisodesWatchlistView extends StatefulWidget {
-  const EpisodesWatchlistView({super.key});
+class EpisodesWatchlistView extends StatelessWidget {
+  final EpisodeWatchlistMapper _episodeWatchlistMapper = EpisodeWatchlistMapper();
 
-  @override
-  State<EpisodesWatchlistView> createState() => _EpisodesWatchlistViewState();
-}
-
-class _EpisodesWatchlistViewState extends State<EpisodesWatchlistView> {
-  final EpisodeWatchlistMapper _episodeWatchlistMapper =
-      EpisodeWatchlistMapper();
-
-  @override
-  void initState() {
-    super.initState();
-    _episodeWatchlistMapper.clear();
-
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => _episodeWatchlistMapper.updateCurrentPage(),
-    );
-  }
+  EpisodesWatchlistView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +19,9 @@ class _EpisodesWatchlistViewState extends State<EpisodesWatchlistView> {
         builder: () => _episodeWatchlistMapper.nothingToShow<EpisodeWidget>()
             ? const NoElement()
             : EpisodeList(
-                scrollController: _episodeWatchlistMapper.scrollController,
-                children: <Widget>[..._episodeWatchlistMapper.list],
-              ),
+          scrollController: _episodeWatchlistMapper.scrollController,
+          children: <Widget>[..._episodeWatchlistMapper.list],
+        ),
       ),
     );
   }

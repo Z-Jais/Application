@@ -13,7 +13,9 @@ class AnimeWatchlistMapper extends IMapper<Anime> {
           loaderWidget: const AnimeLoaderWidget(),
           fromJson: Anime.fromJson,
           toWidget: (Anime anime) => AnimeWidget(anime: anime),
-        );
+        ) {
+    updateCurrentPage();
+  }
 
   @override
   Future<bool> updateCurrentPage() async {

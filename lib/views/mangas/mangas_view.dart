@@ -3,24 +3,10 @@ import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/components/mangas/manga_list.dart';
 import 'package:jais/mappers/mangas/manga_mapper.dart';
 
-class MangasView extends StatefulWidget {
-  const MangasView({super.key});
-
-  @override
-  State<MangasView> createState() => _MangasViewState();
-}
-
-class _MangasViewState extends State<MangasView> {
+class MangasView extends StatelessWidget {
   final MangaMapper _mangaMapper = MangaMapper();
 
-  @override
-  void initState() {
-    super.initState();
-    _mangaMapper.clear();
-
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) async => _mangaMapper.updateCurrentPage());
-  }
+  MangasView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,25 +5,10 @@ import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/components/no_element.dart';
 import 'package:jais/mappers/animes/anime_watchlist_mapper.dart';
 
-class AnimesWatchlistView extends StatefulWidget {
-  const AnimesWatchlistView({super.key});
-
-  @override
-  State<AnimesWatchlistView> createState() => _AnimesWatchlistViewState();
-}
-
-class _AnimesWatchlistViewState extends State<AnimesWatchlistView> {
+class AnimesWatchlistView extends StatelessWidget {
   final AnimeWatchlistMapper _animeWatchlistMapper = AnimeWatchlistMapper();
 
-  @override
-  void initState() {
-    super.initState();
-    _animeWatchlistMapper.clear();
-
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => _animeWatchlistMapper.updateCurrentPage(),
-    );
-  }
+  AnimesWatchlistView({super.key});
 
   @override
   Widget build(BuildContext context) {

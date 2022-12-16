@@ -5,25 +5,10 @@ import 'package:jais/components/mangas/manga_widget.dart';
 import 'package:jais/components/no_element.dart';
 import 'package:jais/mappers/mangas/manga_watchlist_mapper.dart';
 
-class MangasWatchlistView extends StatefulWidget {
-  const MangasWatchlistView({super.key});
-
-  @override
-  State<MangasWatchlistView> createState() => _MangasWatchlistViewState();
-}
-
-class _MangasWatchlistViewState extends State<MangasWatchlistView> {
+class MangasWatchlistView extends StatelessWidget {
   final MangaWatchlistMapper _mangaWatchlistMapper = MangaWatchlistMapper();
 
-  @override
-  void initState() {
-    super.initState();
-    _mangaWatchlistMapper.clear();
-
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async => _mangaWatchlistMapper.updateCurrentPage(),
-    );
-  }
+  MangasWatchlistView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +19,9 @@ class _MangasWatchlistViewState extends State<MangasWatchlistView> {
         builder: () => _mangaWatchlistMapper.nothingToShow<MangaWidget>()
             ? const NoElement()
             : MangaList(
-                scrollController: _mangaWatchlistMapper.scrollController,
-                children: <Widget>[..._mangaWatchlistMapper.list],
-              ),
+          scrollController: _mangaWatchlistMapper.scrollController,
+          children: <Widget>[..._mangaWatchlistMapper.list],
+        ),
       ),
     );
   }

@@ -82,13 +82,6 @@ class NavbarMapper extends ChangeNotifier {
                 Navigator.of(context).pushNamed('/anime/diary');
               },
             ),
-            NavbarLink(
-              name: 'Recommandations',
-              icon: const Icon(Icons.star),
-              onTap: () async {
-                Navigator.of(context).pushNamed('/anime/recommendations');
-              },
-            ),
           ],
         ),
       ];

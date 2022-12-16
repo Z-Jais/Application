@@ -13,7 +13,9 @@ class EpisodeWatchlistMapper extends IMapper<Episode> {
           loaderWidget: const EpisodeLoaderWidget(),
           fromJson: Episode.fromJson,
           toWidget: (Episode episode) => EpisodeWidget(episode: episode),
-        );
+        ) {
+    updateCurrentPage();
+  }
 
   @override
   Future<bool> updateCurrentPage() async {
