@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:jais/mappers/device_mapper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 extension UrlExtension on http.Response? {
@@ -51,21 +52,21 @@ class URL {
   }
 
   static Future<void> goOnUrl(String url, {bool showAd = true}) async {
-    Future<bool> redirectToEpisode() async {
+    Future<bool> redirectTo() async {
       return launchUrl(
         Uri.parse(url),
         mode: LaunchMode.externalApplication,
       );
     }
 
-    // if (showAd) {
-    //   showVideoAd(
-    //     callback: (_) async => redirectToEpisode(),
-    //   );
-    // } else {
-    //   await redirectToEpisode();
-    // }
+    if (showAd) {
+      DeviceMapper.instance.showVideoAd(
+        callback: (_) async => redirectTo(),
+      );
+    } else {
+      await redirectTo();
+    }
 
-    await redirectToEpisode();
+    // await redirectToEpisode();
   }
 }

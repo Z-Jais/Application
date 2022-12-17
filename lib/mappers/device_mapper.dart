@@ -9,6 +9,7 @@ class DeviceMapper {
   final DataCollection mangaWatchlistData = DataCollection('mangaWatchlist');
   final DataMap recommendedAnimeData = DataMap('recommendedAnime');
   BannerAd? globalBannerAd;
+  bool _showAds = true;
 
   bool isOnMobile(BuildContext context, [double width = 600]) {
     return MediaQuery.of(context).size.width < width;
@@ -32,5 +33,41 @@ class DeviceMapper {
     );
 
     await globalBannerAd?.load();
+  }
+
+  Future<void> showVideoAd({void Function(bool)? callback}) async {
+    if (!_showAds) {
+      return;
+    }
+
+    _showAds = false;
+
+    await RewardedAd.load(
+      adUnitId: 'ca-app-pub-5658764393995798/3650456466',
+      request: const AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (RewardedAd ad) async {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (RewardedAd ad) {
+              ad.dispose();
+              callback?.call(true);
+            },
+            onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+              ad.dispose();
+            },
+          );
+
+          await ad.show(
+            onUserEarnedReward: (_, __) {
+              _showAds = true;
+            },
+          );
+        },
+        onAdFailedToLoad: (_) {
+          callback?.call(false);
+          _showAds = true;
+        },
+      ),
+    );
   }
 }

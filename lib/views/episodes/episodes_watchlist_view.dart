@@ -6,7 +6,8 @@ import 'package:jais/components/no_element.dart';
 import 'package:jais/mappers/episodes/episode_watchlist_mapper.dart';
 
 class EpisodesWatchlistView extends StatelessWidget {
-  final EpisodeWatchlistMapper _episodeWatchlistMapper = EpisodeWatchlistMapper();
+  final EpisodeWatchlistMapper _episodeWatchlistMapper =
+      EpisodeWatchlistMapper();
 
   EpisodesWatchlistView({super.key});
 
@@ -19,9 +20,9 @@ class EpisodesWatchlistView extends StatelessWidget {
         builder: () => _episodeWatchlistMapper.nothingToShow<EpisodeWidget>()
             ? const NoElement()
             : EpisodeList(
-          scrollController: _episodeWatchlistMapper.scrollController,
-          children: <Widget>[..._episodeWatchlistMapper.list],
-        ),
+                scrollController: _episodeWatchlistMapper.scrollController,
+                children: <Widget>[..._episodeWatchlistMapper.list],
+              ),
       ),
     );
   }

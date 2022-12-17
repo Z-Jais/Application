@@ -16,21 +16,6 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FutureBuilder<void>(
-          future: DeviceMapper.instance.createGlobalBanner(),
-          builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return SizedBox(
-                height: 50,
-                child: AdWidget(
-                  ad: DeviceMapper.instance.globalBannerAd!,
-                ),
-              );
-            }
-
-            return const ColoredBox(color: Colors.transparent);
-          },
-        ),
         const Navbar(),
         Expanded(
           child: ChangeNotifierProvider<NavbarMapper>.value(

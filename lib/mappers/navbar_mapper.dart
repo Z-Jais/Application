@@ -54,9 +54,7 @@ class NavbarMapper extends ChangeNotifier {
         const NavbarLink(
           name: 'Watchlist',
           icon: Icon(Icons.list),
-          topWidgets: <NavbarLink>[
-
-          ],
+          topWidgets: <NavbarLink>[],
         ),
         NavbarLink(
           name: 'Animes',

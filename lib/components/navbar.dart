@@ -52,7 +52,21 @@ class Navbar extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
           ),
-          const Spacer(),
+          const SizedBox(width: 10),
+          Expanded(
+            child: FutureBuilder<void>(
+              future: DeviceMapper.instance.createGlobalBanner(),
+              builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return AdWidget(
+                    ad: DeviceMapper.instance.globalBannerAd!,
+                  );
+                }
+
+                return const ColoredBox(color: Colors.transparent);
+              },
+            ),
+          ),
           ChangeNotifierProvider<NavbarMapper>.value(
             value: NavbarMapper.instance,
             child: Consumer<NavbarMapper>(
