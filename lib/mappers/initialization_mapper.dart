@@ -46,9 +46,6 @@ class InitializationMapper extends ChangeNotifier {
     await FirebaseMessaging.instance.subscribeToTopic('all');
 
     await DeviceMapper.instance.animeWatchlistData.init();
-    await DeviceMapper.instance.mangaWatchlistData.init();
-    await DeviceMapper.instance.recommendedAnimeData.init();
-
     await CountryMapper.instance.update();
 
     _model.hasInternet = true;

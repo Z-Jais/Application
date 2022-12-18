@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/components/navbar.dart';
-import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
 import 'package:jais/views/animes/animes_view.dart';
 import 'package:jais/views/animes/animes_watchlist_view.dart';

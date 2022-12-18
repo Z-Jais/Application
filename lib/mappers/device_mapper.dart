@@ -6,8 +6,6 @@ class DeviceMapper {
   static final DeviceMapper instance = DeviceMapper();
 
   final DataCollection animeWatchlistData = DataCollection('animeWatchlist');
-  final DataCollection mangaWatchlistData = DataCollection('mangaWatchlist');
-  final DataMap recommendedAnimeData = DataMap('recommendedAnime');
   BannerAd? globalBannerAd;
   bool _showAds = true;
 
