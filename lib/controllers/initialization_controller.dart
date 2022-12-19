@@ -10,6 +10,7 @@ class InitializationController {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
+    await FirebaseMessaging.instance.requestPermission();
     await FirebaseMessaging.instance.subscribeToTopic('all');
     await DeviceMapper.instance.animeWatchlistData.init();
     await CountryMapper.instance.update();
