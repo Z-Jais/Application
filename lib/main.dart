@@ -1,12 +1,23 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/initialization_controller.dart';
+import 'package:jais/controllers/network_controller.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_diary_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
 import 'package:jais/views/initialization_view.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => NetworkController(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,6 +27,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('MyApp.build()');
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -43,7 +56,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const InitializationView(),
+        '/': (context) =>
+            InitializationView(controller: InitializationController()),
         '/anime/search': (_) {
           return const SafeArea(child: AnimeSearchView());
         },

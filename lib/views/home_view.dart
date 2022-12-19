@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:jais/components/navbar.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
@@ -12,6 +14,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('HomeView.build()');
+
     return Column(
       children: [
         const Navbar(),
