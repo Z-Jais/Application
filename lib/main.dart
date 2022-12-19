@@ -7,11 +7,12 @@ import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_diary_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
 import 'package:jais/views/initialization_view.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
+  Permission.notification.request();
   runApp(
     ChangeNotifierProvider(
       create: (_) => NetworkController(),
