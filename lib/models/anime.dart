@@ -17,7 +17,7 @@ class Anime {
   final List<Simulcast> simulcasts;
   final List<Genre> genres;
 
-Anime({
+  Anime({
     required this.uuid,
     required this.country,
     required this.name,

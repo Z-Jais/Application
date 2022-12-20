@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/animes/anime_controller.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class AnimeList extends StatelessWidget {
-  final List<Widget> children;
-  final int rowCol;
+  final AnimeController controller;
 
-  const AnimeList({required this.children, this.rowCol = 3, super.key});
+  const AnimeList({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
     if (!DeviceMapper.instance.isOnMobile(context)) {
-      return Column(
-        children: Utils.instance.separate(children, rowCol: rowCol),
+      return ChangeNotifierProvider.value(
+        value: controller,
+        child: Consumer<AnimeController>(
+          builder: (_, value, ___) => Column(
+            children: Utils.instance.separate(value.list),
+          ),
+        ),
       );
     }
 
-    return Column(children: children);
+    return ChangeNotifierProvider.value(
+      value: controller,
+      child: Consumer<AnimeController>(
+        builder: (_, value, ___) => Column(
+          children: value.list,
+        ),
+      ),
+    );
   }
 }

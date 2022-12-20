@@ -27,4 +27,14 @@ class NavigationBarItem {
           }
         },
       );
+
+  ListTile toListTile(BuildContext context) => ListTile(
+        leading: icon,
+        title: Text(name),
+        onTap: () {
+          if (route != null) {
+            Navigator.of(context).pushNamed(route!);
+          }
+        },
+      );
 }

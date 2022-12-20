@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jais/mappers/animes/anime_mapper.dart';
 import 'package:jais/widgets/animes/anime_list.dart';
 import 'package:jais/widgets/animes/anime_widget.dart';
+import 'package:jais/widgets/decoration/text_border_decoration.dart';
 import 'package:jais/widgets/infinite_scroll.dart';
 import 'package:jais/widgets/no_element.dart';
-import 'package:jais/widgets/decoration/text_border_decoration.dart';
 
 class AnimeDiaryView extends StatefulWidget {
   const AnimeDiaryView({super.key});

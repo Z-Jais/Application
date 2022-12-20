@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/data_controller.dart';
+import 'package:jais/widgets/no_element.dart';
 import 'package:provider/provider.dart';
 
-class InfiniteScroll<T extends ChangeNotifier?> extends StatelessWidget {
+class InfiniteScroll<T extends DataController> extends StatelessWidget {
   final T controller;
   final Widget Function() builder;
 
@@ -16,7 +18,8 @@ class InfiniteScroll<T extends ChangeNotifier?> extends StatelessWidget {
     return ChangeNotifierProvider<T>.value(
       value: controller,
       child: Consumer<T>(
-        builder: (_, __, ___) => builder(),
+        builder: (_, __, ___) =>
+            controller.nothingToShow() ? const NoElement() : builder(),
       ),
     );
   }

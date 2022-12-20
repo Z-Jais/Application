@@ -1,13 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/episode_controller.dart';
+import 'package:jais/controllers/animes/anime_watchlist_controller.dart';
+import 'package:jais/controllers/episodes/episode_controller.dart';
+import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/views/animes/animes_view.dart';
-import 'package:jais/views/animes/animes_watchlist_view.dart';
-import 'package:jais/views/episodes/episodes_watchlist_view.dart';
-import 'package:jais/widgets/episodes/episode_list2.dart';
-import 'package:jais/widgets/navbar.dart';
+import 'package:jais/widgets/animes/anime_list.dart';
+import 'package:jais/widgets/episodes/episode_list.dart';
+import 'package:jais/widgets/top_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
@@ -22,7 +23,7 @@ class HomeView extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: Column(
           children: [
-            const Navbar(),
+            const TopNavigationBar(),
             Expanded(
               child: ChangeNotifierProvider.value(
                 value: NavigationController.instance,
@@ -32,13 +33,17 @@ class HomeView extends StatelessWidget {
                       controller: value.pageController,
                       onPageChanged: value.setCurrentPage,
                       children: [
-                        EpisodeList2(
-                          episodeController: EpisodeController(limit: 12),
+                        EpisodeList(
+                          controller: EpisodeController(),
                         ),
                         if (value.advancedView)
-                          AnimesWatchlistView()
+                          AnimeList(
+                            controller: AnimeWatchlistController(),
+                          )
                         else
-                          EpisodesWatchlistView(),
+                          EpisodeList(
+                            controller: EpisodeWatchlistController(),
+                          ),
                         const AnimesView(),
                       ],
                     );

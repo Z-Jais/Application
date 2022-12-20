@@ -61,4 +61,6 @@ class NavigationController with ChangeNotifier {
 
   Iterable<BottomNavigationBarItem> get bottomNavigationBarItems =>
       _items.map((NavigationBarItem item) => item.toBottomNavigationBarItem());
+  List<NavigationBarItem>? get currentTopNavigationBarItems =>
+      _items[currentPage].topWidgets;
 }

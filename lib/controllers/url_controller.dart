@@ -10,6 +10,16 @@ class URLController {
       return null;
     }
   }
+
+  Future<http.Response?> post(String url, {Object? body}) async {
+    try {
+      return await http
+          .post(Uri.parse(url), body: body)
+          .timeout(const Duration(seconds: 10));
+    } catch (_) {
+      return null;
+    }
+  }
 }
 
 extension ResponseNullableExtension on http.Response? {
