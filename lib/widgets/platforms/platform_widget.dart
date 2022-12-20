@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:jais/components/platforms/platform_loader_widget.dart';
-import 'package:jais/components/roundborder_widget.dart';
-import 'package:jais/entities/platform.dart';
+import 'package:jais/models/platform.dart';
 import 'package:jais/url/url_const.dart';
 import 'package:jais/utils/const.dart';
+import 'package:jais/widgets/platforms/platform_loader_widget.dart';
+import 'package:jais/widgets/roundborder_widget.dart';
 
 class PlatformWidget extends StatelessWidget {
   final Platform platform;

@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jais/entities/anime.dart';
-import 'package:jais/entities/episodetype.dart';
-import 'package:jais/entities/langtype.dart';
-import 'package:jais/entities/platform.dart';
+import 'package:jais/models/anime.dart';
+import 'package:jais/models/episodetype.dart';
+import 'package:jais/models/langtype.dart';
+import 'package:jais/models/platform.dart';
 
 part 'episode.freezed.dart';
 part 'episode.g.dart';

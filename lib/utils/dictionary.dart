@@ -1,8 +1,8 @@
-import 'package:jais/entities/episode.dart';
-import 'package:jais/entities/episodetype.dart';
-import 'package:jais/entities/langtype.dart';
-import 'package:jais/entities/simulcast.dart';
 import 'package:jais/mappers/country_mapper.dart';
+import 'package:jais/models/episode.dart';
+import 'package:jais/models/episodetype.dart';
+import 'package:jais/models/langtype.dart';
+import 'package:jais/models/simulcast.dart';
 
 class Dictionary {
   static final Dictionary instance = Dictionary();

@@ -1,5 +1,5 @@
-import 'package:jais/entities/simulcast.dart';
 import 'package:jais/mappers/country_mapper.dart';
+import 'package:jais/models/simulcast.dart';
 
 class UrlConst {
   static final UrlConst instance = UrlConst();

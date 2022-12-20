@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/animes/anime_image.dart';
-import 'package:jais/components/border_element.dart';
-import 'package:jais/entities/anime.dart';
+import 'package:jais/models/anime.dart';
 import 'package:jais/utils/utils.dart';
+import 'package:jais/widgets/animes/anime_image.dart';
+import 'package:jais/widgets/border_element.dart';
 
 class AnimeWidget extends StatelessWidget {
   final Anime anime;

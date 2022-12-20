@@ -1,9 +1,9 @@
-import 'package:jais/components/animes/anime_loader_widget.dart';
-import 'package:jais/components/animes/anime_widget.dart';
-import 'package:jais/entities/anime.dart';
-import 'package:jais/entities/simulcast.dart';
 import 'package:jais/mappers/imapper.dart';
+import 'package:jais/models/anime.dart';
+import 'package:jais/models/simulcast.dart';
 import 'package:jais/url/url_const.dart';
+import 'package:jais/widgets/animes/anime_loader_widget.dart';
+import 'package:jais/widgets/animes/anime_widget.dart';
 
 class AnimeMapper extends IMapper<Anime> {
   Simulcast? simulcast;

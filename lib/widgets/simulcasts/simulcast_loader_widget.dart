@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/skeleton.dart';
+import 'package:jais/widgets/skeleton.dart';
 
 class SimulcastLoaderWidget extends StatelessWidget {
   const SimulcastLoaderWidget({super.key});

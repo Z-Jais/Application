@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/animes/anime_image.dart';
-import 'package:jais/components/border_element.dart';
-import 'package:jais/components/episodes/episode_image.dart';
-import 'package:jais/components/platforms/platform_widget.dart';
-import 'package:jais/entities/episode.dart';
 import 'package:jais/mappers/device_mapper.dart';
+import 'package:jais/models/episode.dart';
 import 'package:jais/url/url.dart';
 import 'package:jais/utils/const.dart';
 import 'package:jais/utils/dictionary.dart';
 import 'package:jais/utils/utils.dart';
+import 'package:jais/widgets/animes/anime_image.dart';
+import 'package:jais/widgets/border_element.dart';
+import 'package:jais/widgets/episodes/episode_image.dart';
+import 'package:jais/widgets/platforms/platform_widget.dart';
 
 class EpisodeWidget extends StatelessWidget {
   final Episode episode;

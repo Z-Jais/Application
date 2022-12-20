@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/text_border.dart';
-import 'package:jais/entities/simulcast.dart';
+import 'package:jais/models/simulcast.dart';
 import 'package:jais/utils/dictionary.dart';
+import 'package:jais/widgets/text_border.dart';
 
 class SimulcastWidget extends StatelessWidget {
   final Simulcast simulcast;

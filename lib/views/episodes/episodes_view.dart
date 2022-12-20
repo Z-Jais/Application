@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/episodes/episode_list.dart';
-import 'package:jais/components/infinite_scroll.dart';
 import 'package:jais/mappers/episodes/episode_mapper.dart';
+import 'package:jais/widgets/episodes/episode_list.dart';
+import 'package:jais/widgets/infinite_scroll.dart';
 
 class EpisodesView extends StatelessWidget {
   final EpisodeMapper _episodeMapper = EpisodeMapper();

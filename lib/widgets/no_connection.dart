@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class NoConnection extends StatelessWidget {
@@ -7,9 +9,11 @@ class NoConnection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('NoConnection.build()');
+
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
+      children: [
         Image.asset('assets/no_connection.png', width: 200),
         const SizedBox(height: 10),
         Text(

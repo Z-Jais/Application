@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/episodes/episode_list.dart';
-import 'package:jais/components/episodes/episode_widget.dart';
-import 'package:jais/components/infinite_scroll.dart';
-import 'package:jais/components/no_element.dart';
 import 'package:jais/mappers/episodes/episode_watchlist_mapper.dart';
+import 'package:jais/widgets/episodes/episode_list.dart';
+import 'package:jais/widgets/episodes/episode_widget.dart';
+import 'package:jais/widgets/infinite_scroll.dart';
+import 'package:jais/widgets/no_element.dart';
 
 class EpisodesWatchlistView extends StatelessWidget {
   final EpisodeWatchlistMapper _episodeWatchlistMapper =

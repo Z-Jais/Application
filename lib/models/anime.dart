@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jais/entities/country.dart';
-import 'package:jais/entities/genre.dart';
-import 'package:jais/entities/simulcast.dart';
+import 'package:jais/models/country.dart';
+import 'package:jais/models/genre.dart';
+import 'package:jais/models/simulcast.dart';
 
 part 'anime.freezed.dart';
 part 'anime.g.dart';

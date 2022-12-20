@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/border_element.dart';
-import 'package:jais/components/skeleton.dart';
 import 'package:jais/utils/const.dart';
+import 'package:jais/widgets/border_element.dart';
+import 'package:jais/widgets/skeleton.dart';
 
 class AnimeLoaderWidget extends StatelessWidget {
   const AnimeLoaderWidget({super.key});

@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:jais/components/jlist.dart';
 import 'package:jais/mappers/device_mapper.dart';
+import 'package:jais/widgets/jlist.dart';
 
 class EpisodeList extends StatelessWidget {
   final ScrollController? scrollController;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/skeleton.dart';
 import 'package:jais/utils/const.dart';
+import 'package:jais/widgets/skeleton.dart';
 
 class PlatformLoaderWidget extends StatelessWidget {
   const PlatformLoaderWidget({super.key});

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/episodes/lite_episode_list.dart';
-import 'package:jais/components/infinite_scroll.dart';
-import 'package:jais/components/watchlist_button.dart';
-import 'package:jais/entities/anime.dart';
 import 'package:jais/mappers/animes/anime_episode_mapper.dart';
 import 'package:jais/mappers/device_mapper.dart';
+import 'package:jais/models/anime.dart';
+import 'package:jais/widgets/episodes/lite_episode_list.dart';
+import 'package:jais/widgets/infinite_scroll.dart';
+import 'package:jais/widgets/watchlist_button.dart';
 
 class AnimeDetailView extends StatefulWidget {
   const AnimeDetailView({super.key});

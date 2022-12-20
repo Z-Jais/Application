@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/border_element.dart';
-import 'package:jais/components/platforms/platform_loader_widget.dart';
-import 'package:jais/components/skeleton.dart';
 import 'package:jais/utils/const.dart';
+import 'package:jais/widgets/border_element.dart';
+import 'package:jais/widgets/platforms/platform_loader_widget.dart';
+import 'package:jais/widgets/skeleton.dart';
 
 class LiteEpisodeLoaderWidget extends StatelessWidget {
   const LiteEpisodeLoaderWidget({super.key});

@@ -1,8 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/initialization_controller.dart';
-import 'package:jais/controllers/network_controller.dart';
+import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_diary_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
@@ -14,7 +13,7 @@ void main() {
 
   runApp(
     ChangeNotifierProvider(
-      create: (_) => NetworkController(),
+      create: (_) => AppController(),
       child: const MyApp(),
     ),
   );
@@ -56,8 +55,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) =>
-            InitializationView(controller: InitializationController()),
+        '/': (context) => const InitializationView(),
         '/anime/search': (_) {
           return const SafeArea(child: AnimeSearchView());
         },

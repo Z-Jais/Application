@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/animes/anime_list.dart';
-import 'package:jais/components/infinite_scroll.dart';
-import 'package:jais/components/simulcasts/simulcast_list.dart';
-import 'package:jais/components/simulcasts/simulcast_widget.dart';
-import 'package:jais/entities/simulcast.dart';
 import 'package:jais/mappers/animes/anime_mapper.dart';
 import 'package:jais/mappers/simulcast_mapper.dart';
+import 'package:jais/models/simulcast.dart';
 import 'package:jais/utils/utils.dart';
+import 'package:jais/widgets/animes/anime_list.dart';
+import 'package:jais/widgets/infinite_scroll.dart';
+import 'package:jais/widgets/simulcasts/simulcast_list.dart';
+import 'package:jais/widgets/simulcasts/simulcast_widget.dart';
 
 class AnimesView extends StatefulWidget {
   const AnimesView({super.key});

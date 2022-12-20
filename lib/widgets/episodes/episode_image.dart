@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:jais/components/roundborder_widget.dart';
-import 'package:jais/components/skeleton.dart';
-import 'package:jais/entities/episode.dart';
+import 'package:jais/models/episode.dart';
 import 'package:jais/url/url_const.dart';
+import 'package:jais/widgets/roundborder_widget.dart';
+import 'package:jais/widgets/skeleton.dart';
 
 class EpisodeImage extends StatelessWidget {
   final Episode episode;

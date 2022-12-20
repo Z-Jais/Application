@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/jlist.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/utils/utils.dart';
+import 'package:jais/widgets/jlist.dart';
 
 class LiteEpisodeList extends StatelessWidget {
   final ScrollController? scrollController;

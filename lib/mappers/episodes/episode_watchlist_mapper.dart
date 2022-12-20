@@ -1,10 +1,10 @@
-import 'package:jais/components/episodes/episode_loader_widget.dart';
-import 'package:jais/components/episodes/episode_widget.dart';
-import 'package:jais/entities/episode.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/imapper.dart';
+import 'package:jais/models/episode.dart';
 import 'package:jais/url/url.dart';
 import 'package:jais/url/url_const.dart';
+import 'package:jais/widgets/episodes/episode_loader_widget.dart';
+import 'package:jais/widgets/episodes/episode_widget.dart';
 
 class EpisodeWatchlistMapper extends IMapper<Episode> {
   EpisodeWatchlistMapper()

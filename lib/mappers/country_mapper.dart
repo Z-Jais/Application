@@ -1,5 +1,5 @@
-import 'package:jais/entities/country.dart';
 import 'package:jais/mappers/jmapper.dart';
+import 'package:jais/models/country.dart';
 import 'package:jais/url/url_const.dart';
 
 class CountryMapper extends JMapper<Country> {
