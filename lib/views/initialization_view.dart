@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/views/home_view.dart';
-import 'package:jais/widgets/jnavigation_bar.dart';
 import 'package:jais/widgets/no_connection.dart';
 import 'package:provider/provider.dart';
 
@@ -44,13 +43,7 @@ class InitializationView extends StatelessWidget {
           );
         }
 
-        return const SafeArea(
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: HomeView(),
-            bottomNavigationBar: JNavigationBar(),
-          ),
-        );
+        return const HomeView();
       },
     );
   }

@@ -17,7 +17,6 @@ class AppController with ChangeNotifier {
     checkInternetConnection();
   }
 
-  /// It checks if the device has internet connection.
   Future<void> checkInternetConnection() async {
     _inProgress = true;
     notifyListeners();
@@ -31,8 +30,6 @@ class AppController with ChangeNotifier {
     notifyListeners();
   }
 
-  /// It initializes the Firebase app, requests permission to send notifications,
-  /// subscribes to the 'all' topic, and initializes the anime watchlist data
   Future<void> initialize() async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
