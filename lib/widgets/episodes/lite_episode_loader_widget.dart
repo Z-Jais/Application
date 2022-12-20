@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jais/utils/const.dart';
-import 'package:jais/widgets/border_element.dart';
+import 'package:jais/widgets/decoration/border_decoration.dart';
 import 'package:jais/widgets/platforms/platform_loader_widget.dart';
 import 'package:jais/widgets/skeleton.dart';
 
@@ -9,7 +9,7 @@ class LiteEpisodeLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BorderElement(
+    return BorderDecoration(
       child: Row(
         children: <Widget>[
           Expanded(

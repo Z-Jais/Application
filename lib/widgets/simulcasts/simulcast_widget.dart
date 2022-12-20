@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/models/simulcast.dart';
 import 'package:jais/utils/dictionary.dart';
-import 'package:jais/widgets/text_border.dart';
+import 'package:jais/widgets/decoration/text_border_decoration.dart';
 
 class SimulcastWidget extends StatelessWidget {
   final Simulcast simulcast;
@@ -24,7 +24,7 @@ class SimulcastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextBorder(
+    return TextBorderDecoration(
       text:
           '${Dictionary.instance.getNaturalSeason(simulcast)} ${simulcast.year}',
       isSelected: isSelected,

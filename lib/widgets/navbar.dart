@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/mappers/navbar_mapper.dart';
-import 'package:jais/widgets/roundborder_widget.dart';
+import 'package:jais/widgets/decoration/round_border_decoration.dart';
 import 'package:provider/provider.dart';
 
 class Navbar extends StatelessWidget {
@@ -42,7 +42,7 @@ class Navbar extends StatelessWidget {
       height: 40,
       child: Row(
         children: <Widget>[
-          RoundBorderWidget(widget: Image.asset('assets/icon.png')),
+          RoundBorderDecoration(widget: Image.asset('assets/icon.png')),
           const SizedBox(width: 10),
           Text(
             'Jaïs',

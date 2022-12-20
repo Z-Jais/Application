@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jais/models/anime.dart';
 import 'package:jais/utils/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
-import 'package:jais/widgets/border_element.dart';
+import 'package:jais/widgets/decoration/border_decoration.dart';
 
 class AnimeWidget extends StatelessWidget {
   final Anime anime;
@@ -11,7 +11,7 @@ class AnimeWidget extends StatelessWidget {
   const AnimeWidget({required this.anime, this.clickable = true, super.key});
 
   Widget _widget(BuildContext context) {
-    return BorderElement(
+    return BorderDecoration(
       child: Row(
         children: <Widget>[
           AnimeImage(anime: anime),

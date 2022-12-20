@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jais/utils/const.dart';
-import 'package:jais/widgets/border_element.dart';
+import 'package:jais/widgets/decoration/border_decoration.dart';
 import 'package:jais/widgets/skeleton.dart';
 
 class AnimeLoaderWidget extends StatelessWidget {
@@ -8,7 +8,7 @@ class AnimeLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BorderElement(
+    return BorderDecoration(
       child: Row(
         children: <Widget>[
           const Skeleton(

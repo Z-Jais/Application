@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/url/url_const.dart';
-import 'package:jais/widgets/roundborder_widget.dart';
+import 'package:jais/widgets/decoration/round_border_decoration.dart';
 import 'package:jais/widgets/skeleton.dart';
 
 class LiteEpisodeImage extends StatelessWidget {
@@ -16,7 +16,7 @@ class LiteEpisodeImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: '${UrlConst.episodeAttachment}${episode.uuid}',
       imageBuilder: (_, ImageProvider<Object> imageProvider) {
-        return RoundBorderWidget(
+        return RoundBorderDecoration(
           widget: Image(image: imageProvider, fit: BoxFit.cover),
         );
       },

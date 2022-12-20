@@ -4,7 +4,7 @@ import 'package:jais/widgets/animes/anime_list.dart';
 import 'package:jais/widgets/animes/anime_widget.dart';
 import 'package:jais/widgets/infinite_scroll.dart';
 import 'package:jais/widgets/no_element.dart';
-import 'package:jais/widgets/text_border.dart';
+import 'package:jais/widgets/decoration/text_border_decoration.dart';
 
 class AnimeDiaryView extends StatefulWidget {
   const AnimeDiaryView({super.key});
@@ -134,6 +134,6 @@ class DayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextBorder(text: day, isSelected: isSelected);
+    return TextBorderDecoration(text: day, isSelected: isSelected);
   }
 }

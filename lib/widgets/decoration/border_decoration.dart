@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class BorderElement extends StatelessWidget {
+class BorderDecoration extends StatelessWidget {
   final Widget? child;
 
-  const BorderElement({this.child, super.key});
+  const BorderDecoration({this.child, super.key});
 
   @override
   Widget build(BuildContext context) {

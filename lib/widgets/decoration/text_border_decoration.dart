@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class TextBorder extends StatelessWidget {
+class TextBorderDecoration extends StatelessWidget {
   final String text;
   final bool isSelected;
 
-  const TextBorder({
+  const TextBorderDecoration({
     required this.text,
     this.isSelected = false,
     super.key,
   });
 
-  TextBorder copyWith({
+  TextBorderDecoration copyWith({
     bool? isSelected,
   }) =>
-      TextBorder(
+      TextBorderDecoration(
         isSelected: isSelected ?? this.isSelected,
         text: text,
       );

@@ -4,7 +4,7 @@ import 'package:jais/models/platform.dart';
 import 'package:jais/url/url_const.dart';
 import 'package:jais/utils/const.dart';
 import 'package:jais/widgets/platforms/platform_loader_widget.dart';
-import 'package:jais/widgets/roundborder_widget.dart';
+import 'package:jais/widgets/decoration/round_border_decoration.dart';
 
 class PlatformWidget extends StatelessWidget {
   final Platform platform;
@@ -16,7 +16,7 @@ class PlatformWidget extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: '${UrlConst.platformAttachment}${platform.uuid}',
       imageBuilder: (_, ImageProvider<Object> imageProvider) {
-        return RoundBorderWidget(
+        return RoundBorderDecoration(
           radius: 360,
           widget: Image(image: imageProvider, fit: BoxFit.cover),
         );

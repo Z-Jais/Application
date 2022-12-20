@@ -6,7 +6,6 @@ import 'package:jais/views/animes/animes_view.dart';
 import 'package:jais/views/animes/animes_watchlist_view.dart';
 import 'package:jais/views/episodes/episodes_view.dart';
 import 'package:jais/views/episodes/episodes_watchlist_view.dart';
-import 'package:jais/widgets/jnavigation_bar.dart';
 import 'package:jais/widgets/navbar.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +45,23 @@ class HomeView extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: const JNavigationBar(),
+        bottomNavigationBar: ChangeNotifierProvider.value(
+          value: NavigationController.instance,
+          child: Consumer<NavigationController>(
+            builder: (_, value, __) {
+              return BottomNavigationBar(
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                selectedItemColor: Theme.of(context).primaryColor,
+                unselectedItemColor: Colors.grey,
+                currentIndex: value.currentPage,
+                onTap: (page) =>
+                    value.setCurrentPage(page, fromNavigationBar: true),
+                items: value.bottomNavigationBarItems.toList(),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

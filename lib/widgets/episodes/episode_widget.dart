@@ -6,7 +6,7 @@ import 'package:jais/utils/const.dart';
 import 'package:jais/utils/dictionary.dart';
 import 'package:jais/utils/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
-import 'package:jais/widgets/border_element.dart';
+import 'package:jais/widgets/decoration/border_decoration.dart';
 import 'package:jais/widgets/episodes/episode_image.dart';
 import 'package:jais/widgets/platforms/platform_widget.dart';
 
@@ -21,7 +21,7 @@ class EpisodeWidget extends StatelessWidget {
       onTap: () async {
         URL.goOnUrl(episode.url);
       },
-      child: BorderElement(
+      child: BorderDecoration(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

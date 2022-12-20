@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/url/url_const.dart';
-import 'package:jais/widgets/roundborder_widget.dart';
+import 'package:jais/widgets/decoration/round_border_decoration.dart';
 import 'package:jais/widgets/skeleton.dart';
 
 class EpisodeImage extends StatelessWidget {
@@ -20,7 +20,7 @@ class EpisodeImage extends StatelessWidget {
             episode.number == 1 &&
             episode.anime.releaseDate == episode.releaseDate;
 
-        return RoundBorderWidget(
+        return RoundBorderDecoration(
           widget: needStack
               ? Stack(
                   children: <Widget>[
@@ -32,7 +32,7 @@ class EpisodeImage extends StatelessWidget {
                     Positioned(
                       top: 0,
                       right: 0,
-                      child: RoundBorderWidget(
+                      child: RoundBorderDecoration(
                         widget: ColoredBox(
                           color: Colors.red[800]!,
                           child: const Padding(
