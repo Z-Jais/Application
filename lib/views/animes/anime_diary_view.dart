@@ -96,7 +96,7 @@ class _AnimeDiaryViewState extends State<AnimeDiaryView> {
               ),
             ),
             InfiniteScroll<AnimeMapper>(
-              mapper: _animeMapper,
+              controller: _animeMapper,
               builder: () => _animeMapper.nothingToShow<AnimeWidget>()
                   ? const NoElement()
                   : AnimeList(children: <Widget>[..._animeMapper.list]),

@@ -52,7 +52,7 @@ class _AnimesViewState extends State<AnimesView> {
         child: Column(
           children: <Widget>[
             InfiniteScroll<SimulcastMapper>(
-              mapper: _simulcastMapper,
+              controller: _simulcastMapper,
               builder: () => SimulcastList(
                 scrollController: _simulcastMapper.scrollController,
                 children: <Widget>[
@@ -75,7 +75,7 @@ class _AnimesViewState extends State<AnimesView> {
               ),
             ),
             InfiniteScroll<AnimeMapper>(
-              mapper: _animeMapper,
+              controller: _animeMapper,
               builder: () =>
                   AnimeList(children: <Widget>[..._animeMapper.list]),
             ),

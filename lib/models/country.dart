@@ -1,16 +1,20 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'country.freezed.dart';
 part 'country.g.dart';
 
-@freezed
-class Country with _$Country {
-  const factory Country({
-    required String uuid,
-    required String tag,
-    required String name,
-  }) = _Country;
+@JsonSerializable(explicitToJson: true)
+class Country {
+  final String uuid;
+  final String tag;
+  final String name;
+
+  Country({
+    required this.uuid,
+    required this.tag,
+    required this.name,
+  });
 
   factory Country.fromJson(Map<String, dynamic> json) =>
       _$CountryFromJson(json);
+  Map<String, dynamic> toJson() => _$CountryToJson(this);
 }

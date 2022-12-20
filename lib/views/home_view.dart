@@ -1,11 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/episode_controller.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/views/animes/animes_view.dart';
 import 'package:jais/views/animes/animes_watchlist_view.dart';
-import 'package:jais/views/episodes/episodes_view.dart';
 import 'package:jais/views/episodes/episodes_watchlist_view.dart';
+import 'package:jais/widgets/episodes/episode_list2.dart';
 import 'package:jais/widgets/navbar.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,9 @@ class HomeView extends StatelessWidget {
                       controller: value.pageController,
                       onPageChanged: value.setCurrentPage,
                       children: [
-                        EpisodesView(),
+                        EpisodeList2(
+                          episodeController: EpisodeController(limit: 12),
+                        ),
                         if (value.advancedView)
                           AnimesWatchlistView()
                         else

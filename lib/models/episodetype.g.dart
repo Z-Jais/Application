@@ -6,13 +6,12 @@ part of 'episodetype.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_EpisodeType _$$_EpisodeTypeFromJson(Map<String, dynamic> json) =>
-    _$_EpisodeType(
+EpisodeType _$EpisodeTypeFromJson(Map<String, dynamic> json) => EpisodeType(
       uuid: json['uuid'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$_EpisodeTypeToJson(_$_EpisodeType instance) =>
+Map<String, dynamic> _$EpisodeTypeToJson(EpisodeType instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
       'name': instance.name,

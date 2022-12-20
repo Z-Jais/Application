@@ -36,7 +36,7 @@ class _AnimeSearchViewState extends State<AnimeSearchView> {
           Expanded(
             child: SingleChildScrollView(
               child: InfiniteScroll<AnimeMapper>(
-                mapper: _animeMapper,
+                controller: _animeMapper,
                 builder: () => _animeMapper.nothingToShow<AnimeWidget>()
                     ? const NoElement()
                     : AnimeList(children: <Widget>[..._animeMapper.list]),

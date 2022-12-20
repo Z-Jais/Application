@@ -13,7 +13,7 @@ class EpisodesView extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: () async => _episodeMapper.reset(),
       child: InfiniteScroll<EpisodeMapper>(
-        mapper: _episodeMapper,
+        controller: _episodeMapper,
         builder: () => EpisodeList(
           scrollController: _episodeMapper.scrollController,
           children: <Widget>[..._episodeMapper.list],

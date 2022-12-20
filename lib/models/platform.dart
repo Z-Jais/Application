@@ -1,17 +1,22 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'platform.freezed.dart';
 part 'platform.g.dart';
 
-@freezed
-class Platform with _$Platform {
-  const factory Platform({
-    required String uuid,
-    required String name,
-    required String url,
-    required String image,
-  }) = _Platform;
+@JsonSerializable(explicitToJson: true)
+class Platform {
+  final String uuid;
+  final String name;
+  final String url;
+  final String image;
+
+  Platform({
+    required this.uuid,
+    required this.name,
+    required this.url,
+    required this.image,
+  });
 
   factory Platform.fromJson(Map<String, dynamic> json) =>
       _$PlatformFromJson(json);
+  Map<String, dynamic> toJson() => _$PlatformToJson(this);
 }

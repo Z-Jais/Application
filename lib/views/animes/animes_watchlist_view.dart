@@ -17,7 +17,7 @@ class AnimesWatchlistView extends StatelessWidget {
       child: SingleChildScrollView(
         controller: _animeWatchlistMapper.scrollController,
         child: InfiniteScroll<AnimeWatchlistMapper>(
-          mapper: _animeWatchlistMapper,
+          controller: _animeWatchlistMapper,
           builder: () => _animeWatchlistMapper.nothingToShow<AnimeWidget>()
               ? const NoElement()
               : AnimeList(children: <Widget>[..._animeWatchlistMapper.list]),

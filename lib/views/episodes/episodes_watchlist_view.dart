@@ -16,7 +16,7 @@ class EpisodesWatchlistView extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: () async => _episodeWatchlistMapper.reset(),
       child: InfiniteScroll<EpisodeWatchlistMapper>(
-        mapper: _episodeWatchlistMapper,
+        controller: _episodeWatchlistMapper,
         builder: () => _episodeWatchlistMapper.nothingToShow<EpisodeWidget>()
             ? const NoElement()
             : EpisodeList(

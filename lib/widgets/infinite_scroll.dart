@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class InfiniteScroll<T extends ChangeNotifier?> extends StatelessWidget {
-  final T mapper;
+  final T controller;
   final Widget Function() builder;
 
   const InfiniteScroll({
-    required this.mapper,
+    required this.controller,
     required this.builder,
     super.key,
   });
@@ -14,7 +14,7 @@ class InfiniteScroll<T extends ChangeNotifier?> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<T>.value(
-      value: mapper,
+      value: controller,
       child: Consumer<T>(
         builder: (_, __, ___) => builder(),
       ),
