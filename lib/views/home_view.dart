@@ -1,12 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/animes/anime_controller.dart';
 import 'package:jais/controllers/animes/anime_watchlist_controller.dart';
 import 'package:jais/controllers/episodes/episode_controller.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
 import 'package:jais/controllers/navigation_controller.dart';
-import 'package:jais/views/animes/animes_view.dart';
+import 'package:jais/controllers/simulcast_controller.dart';
 import 'package:jais/widgets/animes/anime_list.dart';
+import 'package:jais/widgets/animes/anime_tab.dart';
 import 'package:jais/widgets/episodes/episode_list.dart';
 import 'package:jais/widgets/top_navigation_bar.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +46,10 @@ class HomeView extends StatelessWidget {
                           EpisodeList(
                             controller: EpisodeWatchlistController(),
                           ),
-                        const AnimesView(),
+                        AnimeTab(
+                          simulcastController: SimulcastController(),
+                          animeController: AnimeController(firstLoad: false),
+                        ),
                       ],
                     );
                   },

@@ -9,7 +9,7 @@ class AnimeController
     extends DataController<Anime, AnimeLoaderWidget, AnimeWidget> {
   Simulcast? simulcast;
 
-  AnimeController()
+  AnimeController({super.firstLoad = true})
       : super(
           limit: 24,
           loadingWidget: const AnimeLoaderWidget(),

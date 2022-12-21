@@ -15,16 +15,27 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
   bool _isLoading = false;
   int page = 1;
   bool _canLoadMore = true;
-  bool _lastPageError = false;
+  bool lastPageError = false;
 
   DataController({
+    bool firstLoad = true,
+    bool listener = true,
     required this.limit,
     required this.loadingWidget,
     required this.fromJson,
     required this.toWidget,
   }) {
-    load();
-    scrollController.addListener(_onInfiniteScroll);
+    if (firstLoad) {
+      load();
+    }
+
+    if (listener) {
+      scrollController.addListener(_onInfiniteScroll);
+    }
+  }
+
+  void notify() {
+    notifyListeners();
   }
 
   Future<void> _onInfiniteScroll() async {
@@ -37,7 +48,7 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
   }
 
   bool nothingToShow() =>
-      list.whereType<ModelWidget>().isEmpty && page == 1 && _lastPageError;
+      list.whereType<ModelWidget>().isEmpty && page == 1 && lastPageError;
 
   List<ModelLoadingWidget> get _loaders =>
       List<ModelLoadingWidget>.generate(12, (_) => loadingWidget);
@@ -68,9 +79,9 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
       _removeLoader();
       list.addAll(widgets);
       _canLoadMore = widgets.length == limit;
-      _lastPageError = false;
+      lastPageError = false;
     } catch (exception, stackTrace) {
-      _lastPageError = true;
+      lastPageError = true;
 
       log(
         'Error while loading ${Model.runtimeType.toString()}',
