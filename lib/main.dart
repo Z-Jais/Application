@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/animes/anime_search_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_diary_view.dart';
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const InitializationView(),
         '/anime/search': (_) {
-          return const SafeArea(child: AnimeSearchView());
+          return AnimeSearchView(controller: AnimeSearchController());
         },
         '/anime/detail': (_) {
           return const SafeArea(child: AnimeDetailView());
