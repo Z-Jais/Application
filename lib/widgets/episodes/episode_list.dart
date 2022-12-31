@@ -32,7 +32,7 @@ class EpisodeList extends StatelessWidget {
               childAspectRatio: -1.92 + 0.42 * log(width),
             ),
             controller: controller.scrollController,
-            children: controller.list,
+            children: [...controller.list],
           ),
         ),
       );

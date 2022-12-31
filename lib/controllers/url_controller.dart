@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:jais/mappers/device_mapper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class URLController {
   Future<http.Response?> get(String url) async {
@@ -19,6 +21,25 @@ class URLController {
     } catch (_) {
       return null;
     }
+  }
+
+  Future<void> goOnUrl(String url, {bool showAd = true}) async {
+    Future<bool> redirectTo() async {
+      return launchUrl(
+        Uri.parse(url),
+        mode: LaunchMode.externalApplication,
+      );
+    }
+
+    if (showAd) {
+      DeviceMapper.instance.showVideoAd(
+        callback: (_) async => redirectTo(),
+      );
+    } else {
+      await redirectTo();
+    }
+
+    // await redirectToEpisode();
   }
 }
 

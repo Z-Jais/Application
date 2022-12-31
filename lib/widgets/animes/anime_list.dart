@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_controller.dart';
+import 'package:jais/controllers/animes/anime_diary_controller.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/utils/utils.dart';
+import 'package:jais/widgets/no_element.dart';
 import 'package:provider/provider.dart';
 
 class AnimeList extends StatelessWidget {
@@ -16,9 +18,18 @@ class AnimeList extends StatelessWidget {
       return ChangeNotifierProvider.value(
         value: controller,
         child: Consumer<AnimeController>(
-          builder: (_, value, ___) => Column(
-            children: Utils.instance.separate(value.list),
-          ),
+          builder: (_, value, ___) => (value.nothingToShow() ||
+                  (controller is AnimeDiaryController && value.list.isEmpty))
+              ? const NoElement()
+              : listView
+                  ? SingleChildScrollView(
+                      child: Column(
+                        children: Utils.instance.separate(value.list),
+                      ),
+                    )
+                  : Column(
+                      children: Utils.instance.separate(value.list),
+                    ),
         ),
       );
     }
@@ -26,17 +37,20 @@ class AnimeList extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: controller,
       child: Consumer<AnimeController>(
-        builder: (_, value, ___) => listView
-            ? ListView.builder(
-                addAutomaticKeepAlives: false,
-                addRepaintBoundaries: false,
-                controller: controller.scrollController,
-                itemCount: controller.list.length,
-                itemBuilder: (_, int index) => controller.list[index],
-              )
-            : Column(
-                children: value.list,
-              ),
+        builder: (_, value, ___) => (value.nothingToShow() ||
+                (controller is AnimeDiaryController && value.list.isEmpty))
+            ? const NoElement()
+            : listView
+                ? ListView.builder(
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
+                    controller: value.scrollController,
+                    itemCount: value.list.length,
+                    itemBuilder: (_, int index) => value.list[index],
+                  )
+                : Column(
+                    children: value.list,
+                  ),
       ),
     );
   }

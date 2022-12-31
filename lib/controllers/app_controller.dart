@@ -3,7 +3,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:jais/firebase_options.dart';
-import 'package:jais/mappers/country_mapper.dart';
 import 'package:jais/mappers/device_mapper.dart';
 
 class AppController with ChangeNotifier {
@@ -38,6 +37,5 @@ class AppController with ChangeNotifier {
     await FirebaseMessaging.instance.requestPermission();
     await FirebaseMessaging.instance.subscribeToTopic('all');
     await DeviceMapper.instance.animeWatchlistData.init();
-    await CountryMapper.instance.update();
   }
 }

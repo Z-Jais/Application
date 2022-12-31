@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/animes/anime_detail_controller.dart';
+import 'package:jais/controllers/animes/anime_diary_controller.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
@@ -61,10 +63,10 @@ class MyApp extends StatelessWidget {
           return AnimeSearchView(controller: AnimeSearchController());
         },
         '/anime/detail': (_) {
-          return const SafeArea(child: AnimeDetailView());
+          return AnimeDetailView(controller: AnimeDetailController());
         },
         '/anime/diary': (_) {
-          return const SafeArea(child: AnimeDiaryView());
+          return AnimeDiaryView(controller: AnimeDiaryController());
         },
       },
     );

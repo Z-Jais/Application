@@ -21,17 +21,14 @@ class AnimeSearchView extends StatelessWidget {
             autofocus: true,
             onSubmitted: (String value) async {
               controller.query = value;
+              controller.reset();
               await controller.load();
             },
           ),
         ),
         body: Column(
           children: <Widget>[
-            Expanded(
-              child: SingleChildScrollView(
-                child: AnimeList(controller: controller),
-              ),
-            ),
+            Expanded(child: AnimeList(controller: controller)),
           ],
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/models/anime.dart';
-import 'package:jais/url/url_const.dart';
 import 'package:jais/utils/const.dart';
 import 'package:jais/widgets/decoration/round_border_decoration.dart';
 import 'package:jais/widgets/skeleton.dart';
@@ -14,7 +13,7 @@ class AnimeImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: '${UrlConst.animeAttachment}${anime.uuid}',
+      imageUrl: 'https://beta-api.ziedelth.fr/animes/attachment/${anime.uuid}',
       imageBuilder: (_, ImageProvider<Object> imageProvider) {
         return RoundBorderDecoration(
           widget: Image(image: imageProvider, fit: BoxFit.cover),

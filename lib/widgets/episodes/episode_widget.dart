@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/models/episode.dart';
-import 'package:jais/url/url.dart';
 import 'package:jais/utils/const.dart';
-import 'package:jais/utils/dictionary.dart';
 import 'package:jais/utils/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
 import 'package:jais/widgets/decoration/border_decoration.dart';
@@ -15,11 +14,39 @@ class EpisodeWidget extends StatelessWidget {
 
   const EpisodeWidget({required this.episode, super.key});
 
+  String getEpisodeType() {
+    if (episode.episodeType.name == 'EPISODE') {
+      return 'Épisode';
+    }
+
+    if (episode.episodeType.name == 'SPECIAL') {
+      return 'Spécial';
+    }
+
+    if (episode.episodeType.name == 'FILM') {
+      return 'Film';
+    }
+
+    return '??';
+  }
+
+  String getLangType() {
+    if (episode.langType.name == 'SUBTITLES') {
+      return 'VOSTFR';
+    }
+
+    if (episode.langType.name == 'VOICE') {
+      return 'VF';
+    }
+
+    return '??';
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        URL.goOnUrl(episode.url);
+        URLController().goOnUrl(episode.url);
       },
       child: BorderDecoration(
         child: Column(
@@ -68,7 +95,7 @@ class EpisodeWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        Dictionary.instance.getEpisodeDetails(episode),
+                        'Saison ${episode.season} • ${getEpisodeType()} ${episode.number} ${getLangType()}',
                         overflow: TextOverflow.ellipsis,
                       ),
                       Row(
