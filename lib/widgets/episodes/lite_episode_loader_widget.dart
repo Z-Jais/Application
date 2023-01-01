@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jais/utils/const.dart';
+import 'package:jais/utils.dart';
 import 'package:jais/widgets/decoration/border_decoration.dart';
 import 'package:jais/widgets/platforms/platform_loader_widget.dart';
 import 'package:jais/widgets/skeleton.dart';

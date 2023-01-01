@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jais/mappers/device_mapper.dart';
-import 'package:jais/utils/const.dart';
+import 'package:jais/controllers/device_controller.dart';
+import 'package:jais/utils.dart';
 import 'package:jais/widgets/decoration/border_decoration.dart';
 import 'package:jais/widgets/platforms/platform_loader_widget.dart';
 import 'package:jais/widgets/skeleton.dart';
@@ -53,7 +53,7 @@ class EpisodeLoaderWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          if (DeviceMapper.instance.isOnMobile(context))
+          if (DeviceController.instance.isOnMobile(context))
             const Skeleton(height: Const.episodeImageHeight)
           else
             const Expanded(child: Skeleton()),

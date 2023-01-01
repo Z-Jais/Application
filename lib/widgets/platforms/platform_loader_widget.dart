@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jais/utils/const.dart';
+import 'package:jais/utils.dart';
 import 'package:jais/widgets/skeleton.dart';
 
 class PlatformLoaderWidget extends StatelessWidget {

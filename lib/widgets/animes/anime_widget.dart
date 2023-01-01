@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jais/models/anime.dart';
-import 'package:jais/utils/utils.dart';
+import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
 import 'package:jais/widgets/decoration/border_decoration.dart';
 

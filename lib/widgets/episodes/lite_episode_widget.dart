@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/episode.dart';
-import 'package:jais/utils/const.dart';
-import 'package:jais/utils/utils.dart';
+import 'package:jais/utils.dart';
 import 'package:jais/widgets/decoration/border_decoration.dart';
 import 'package:jais/widgets/episodes/lite_episode_image.dart';
 import 'package:jais/widgets/platforms/platform_widget.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_controller.dart';
 import 'package:jais/controllers/simulcast_controller.dart';
-import 'package:jais/utils/utils.dart';
+import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_list.dart';
 import 'package:jais/widgets/simulcasts/simulcast_list.dart';
 import 'package:jais/widgets/simulcasts/simulcast_widget.dart';

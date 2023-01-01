@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/device_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
-import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/models/episode.dart';
-import 'package:jais/utils/const.dart';
-import 'package:jais/utils/utils.dart';
+import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
 import 'package:jais/widgets/decoration/border_decoration.dart';
 import 'package:jais/widgets/episodes/episode_image.dart';
@@ -117,7 +116,7 @@ class EpisodeWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            if (DeviceMapper.instance.isOnMobile(context))
+            if (DeviceController.instance.isOnMobile(context))
               EpisodeImage(episode: episode, height: Const.episodeImageHeight)
             else
               Expanded(child: EpisodeImage(episode: episode)),

@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/device_controller.dart';
 import 'package:jais/controllers/episodes/episode_controller.dart';
-import 'package:jais/mappers/device_mapper.dart';
 import 'package:jais/widgets/infinite_scroll.dart';
 
 class EpisodeList extends StatelessWidget {
@@ -17,7 +17,7 @@ class EpisodeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!DeviceMapper.instance.isOnMobile(context)) {
+    if (!DeviceController.instance.isOnMobile(context)) {
       final double width = MediaQuery.of(context).size.width;
 
       return RefreshIndicator(
