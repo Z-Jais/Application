@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/device_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
 import 'package:jais/widgets/decoration/border_decoration.dart';
 import 'package:jais/widgets/episodes/episode_image.dart';
+import 'package:jais/widgets/episodes/episode_see_widget.dart';
 import 'package:jais/widgets/platforms/platform_widget.dart';
 
 class EpisodeWidget extends StatelessWidget {
   final Episode episode;
+  final bool showActions;
 
-  const EpisodeWidget({required this.episode, super.key});
+  const EpisodeWidget({
+    required this.episode,
+    this.showActions = false,
+    super.key,
+  });
 
   String getEpisodeType() {
     if (episode.episodeType.name == 'EPISODE') {
@@ -116,14 +121,20 @@ class EpisodeWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            if (DeviceController.instance.isOnMobile(context))
+            if (context.isOnMobile)
               EpisodeImage(episode: episode, height: Const.episodeImageHeight)
             else
               Expanded(child: EpisodeImage(episode: episode)),
             const SizedBox(height: 10),
-            Text(
-              'Il y a ${Utils.instance.printTimeSince(DateTime.parse(episode.releaseDate))}',
-            ),
+            Row(
+              children: [
+                Text(
+                  'Il y a ${Utils.instance.printTimeSince(DateTime.parse(episode.releaseDate))}',
+                ),
+                const Spacer(),
+                if (showActions) EpisodeSeeWidget(episode: episode),
+              ],
+            )
           ],
         ),
       ),

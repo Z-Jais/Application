@@ -1,50 +1,27 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:jais/controllers/datas/abstract_data_controller.dart';
 
-abstract class AbstractData<T> {
-  final String key;
-  late final SharedPreferences _sharedPreferences;
-  bool _isInit = false;
-  late T data;
-
-  AbstractData(this.key);
-
-  Future<void> init() async {
-    if (_isInit) {
-      return;
-    }
-
-    _sharedPreferences = await SharedPreferences.getInstance();
-    _isInit = true;
-    data = load();
-  }
-
-  T load();
-
-  Future<void> save();
-}
-
-class DataCollection extends AbstractData<List<String>> {
-  DataCollection(super.key);
+class DataCollectionController extends AbstractDataController<List<String>> {
+  DataCollectionController(super.key);
 
   @override
   List<String> load() {
-    if (!_isInit) {
+    if (!isInit) {
       throw Exception('DataCollection is not initialized');
     }
 
-    return _sharedPreferences.getStringList(key) ?? <String>[];
+    return sharedPreferences.getStringList(key) ?? <String>[];
   }
 
   @override
   Future<void> save() async {
-    if (!_isInit) {
+    if (!isInit) {
       throw Exception('DataCollection is not initialized');
     }
 
-    await _sharedPreferences.setStringList(key, data);
+    await sharedPreferences.setStringList(key, data);
   }
 
   bool hasIn(String uuid) => data.contains(uuid);

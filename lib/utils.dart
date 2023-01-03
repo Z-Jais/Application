@@ -163,3 +163,9 @@ extension ListExt<T> on List<T> {
     }
   }
 }
+
+extension BuildContextExt on BuildContext {
+  bool get isOnMobile {
+    return MediaQuery.of(this).size.width < 768;
+  }
+}

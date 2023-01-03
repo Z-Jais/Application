@@ -3,13 +3,16 @@ import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/decoration/border_decoration.dart';
+import 'package:jais/widgets/episodes/episode_see_widget.dart';
 import 'package:jais/widgets/episodes/lite_episode_image.dart';
 import 'package:jais/widgets/platforms/platform_widget.dart';
 
 class LiteEpisodeWidget extends StatelessWidget {
   final Episode episode;
+  final bool showActions;
 
-  const LiteEpisodeWidget({required this.episode, super.key});
+  const LiteEpisodeWidget(
+      {required this.episode, this.showActions = false, super.key});
 
   String getEpisodeType() {
     if (episode.episodeType.name == 'EPISODE') {
@@ -93,6 +96,13 @@ class LiteEpisodeWidget extends StatelessWidget {
                       ),
                     ],
                   ),
+                  if (showActions)
+                    Row(
+                      children: <Widget>[
+                        const Spacer(),
+                        EpisodeSeeWidget(episode: episode),
+                      ],
+                    ),
                 ],
               ),
             ),

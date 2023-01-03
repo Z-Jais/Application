@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_controller.dart';
 import 'package:jais/controllers/animes/anime_diary_controller.dart';
-import 'package:jais/controllers/device_controller.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/no_element.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +13,7 @@ class AnimeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!DeviceController.instance.isOnMobile(context)) {
+    if (!context.isOnMobile) {
       return ChangeNotifierProvider.value(
         value: controller,
         child: Consumer<AnimeController>(

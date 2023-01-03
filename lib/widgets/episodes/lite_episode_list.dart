@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_detail_controller.dart';
-import 'package:jais/controllers/device_controller.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/infinite_scroll.dart';
 
@@ -16,7 +15,7 @@ class LiteEpisodeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!DeviceController.instance.isOnMobile(context)) {
+    if (!context.isOnMobile) {
       return RefreshIndicator(
         onRefresh: reset,
         child: InfiniteScroll(

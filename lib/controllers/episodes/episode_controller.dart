@@ -6,12 +6,15 @@ import 'package:jais/widgets/episodes/episode_widget.dart';
 
 class EpisodeController
     extends DataController<Episode, EpisodeLoaderWidget, EpisodeWidget> {
-  EpisodeController()
+  EpisodeController({bool showActions = false})
       : super(
           limit: 12,
           loadingWidget: const EpisodeLoaderWidget(),
           fromJson: (json) => Episode.fromJson(json),
-          toWidget: (episode) => EpisodeWidget(episode: episode),
+          toWidget: (episode) => EpisodeWidget(
+            episode: episode,
+            showActions: showActions,
+          ),
         );
 
   @override
