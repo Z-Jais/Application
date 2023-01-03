@@ -16,31 +16,25 @@ class LiteEpisodeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!context.isOnMobile) {
-      return RefreshIndicator(
-        onRefresh: reset,
-        child: InfiniteScroll(
-          controller: controller,
-          builder: () => SingleChildScrollView(
-            controller: controller.scrollController,
-            child: Column(
-              children: Utils.instance.separate(controller.list),
-            ),
+      return InfiniteScroll(
+        controller: controller,
+        builder: () => SingleChildScrollView(
+          controller: controller.scrollController,
+          child: Column(
+            children: Utils.instance.separate(controller.list),
           ),
         ),
       );
     }
 
-    return RefreshIndicator(
-      onRefresh: reset,
-      child: InfiniteScroll(
-        controller: controller,
-        builder: () => ListView.builder(
-          addAutomaticKeepAlives: false,
-          addRepaintBoundaries: false,
-          controller: controller.scrollController,
-          itemCount: controller.list.length,
-          itemBuilder: (_, int index) => controller.list[index],
-        ),
+    return InfiniteScroll(
+      controller: controller,
+      builder: () => ListView.builder(
+        addAutomaticKeepAlives: false,
+        addRepaintBoundaries: false,
+        controller: controller.scrollController,
+        itemCount: controller.list.length,
+        itemBuilder: (_, int index) => controller.list[index],
       ),
     );
   }

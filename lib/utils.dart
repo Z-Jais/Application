@@ -136,13 +136,8 @@ extension StringExt on String? {
 }
 
 extension ScrollControllerExt on ScrollController {
-  Future<void> scrollToEnd(State state) async {
+  Future<void> scrollToEnd() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 100));
-
-    // If context is not mounted, it means that the widget has been disposed
-    if (!state.mounted) {
-      return;
-    }
 
     try {
       animateTo(

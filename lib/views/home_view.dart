@@ -1,12 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/animes/anime_controller.dart';
+import 'package:jais/controllers/anime_tab_controller.dart';
 import 'package:jais/controllers/animes/anime_watchlist_controller.dart';
 import 'package:jais/controllers/episodes/episode_controller.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
 import 'package:jais/controllers/navigation_controller.dart';
-import 'package:jais/controllers/simulcast_controller.dart';
 import 'package:jais/widgets/animes/anime_list.dart';
 import 'package:jais/widgets/animes/anime_tab.dart';
 import 'package:jais/widgets/episodes/episode_list.dart';
@@ -27,26 +26,32 @@ class HomeView extends StatelessWidget {
           children: [
             const TopNavigationBar(),
             Expanded(
-              child: PageView(
-                controller: NavigationController.instance.pageController,
-                onPageChanged: NavigationController.instance.setCurrentPage,
-                children: [
-                  EpisodeList(
-                    controller: EpisodeController(),
-                  ),
-                  if (NavigationController.instance.advancedView)
-                    AnimeList(
-                      controller: AnimeWatchlistController(),
-                    )
-                  else
-                    EpisodeList(
-                      controller: EpisodeWatchlistController(),
-                    ),
-                  AnimeTab(
-                    simulcastController: SimulcastController(),
-                    animeController: AnimeController(firstLoad: false),
-                  ),
-                ],
+              child: ChangeNotifierProvider.value(
+                value: NavigationController.instance,
+                child: Consumer<NavigationController>(
+                  builder: (_, value, __) {
+                    return PageView(
+                      controller: value.pageController,
+                      onPageChanged: value.setCurrentPage,
+                      children: [
+                        EpisodeList(
+                          controller: EpisodeController(),
+                        ),
+                        if (value.advancedView)
+                          AnimeList(
+                            controller: AnimeWatchlistController(),
+                          )
+                        else
+                          EpisodeList(
+                            controller: EpisodeWatchlistController(),
+                          ),
+                        AnimeTab(
+                          controller: AnimeTabController(),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ],

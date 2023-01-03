@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_controller.dart';
 import 'package:jais/controllers/animes/anime_diary_controller.dart';
@@ -15,8 +13,6 @@ class AnimeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('AnimeList.build()');
-
     if (!context.isOnMobile) {
       return ChangeNotifierProvider.value(
         value: controller,
