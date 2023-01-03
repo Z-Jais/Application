@@ -11,8 +11,11 @@ class LiteEpisodeWidget extends StatelessWidget {
   final Episode episode;
   final bool showActions;
 
-  const LiteEpisodeWidget(
-      {required this.episode, this.showActions = false, super.key});
+  const LiteEpisodeWidget({
+    required this.episode,
+    this.showActions = false,
+    super.key,
+  });
 
   String getEpisodeType() {
     if (episode.episodeType.name == 'EPISODE') {
