@@ -27,33 +27,26 @@ class HomeView extends StatelessWidget {
           children: [
             const TopNavigationBar(),
             Expanded(
-              child: ChangeNotifierProvider.value(
-                value: NavigationController.instance,
-                child: Consumer<NavigationController>(
-                  builder: (_, value, __) {
-                    return PageView(
-                      controller: value.pageController,
-                      onPageChanged: value.setCurrentPage,
-                      children: [
-                        EpisodeList(
-                          controller: EpisodeController(),
-                        ),
-                        if (value.advancedView)
-                          AnimeList(
-                            controller: AnimeWatchlistController(),
-                          )
-                        else
-                          EpisodeList(
-                            controller: EpisodeWatchlistController(),
-                          ),
-                        AnimeTab(
-                          simulcastController: SimulcastController(),
-                          animeController: AnimeController(firstLoad: false),
-                        ),
-                      ],
-                    );
-                  },
-                ),
+              child: PageView(
+                controller: NavigationController.instance.pageController,
+                onPageChanged: NavigationController.instance.setCurrentPage,
+                children: [
+                  EpisodeList(
+                    controller: EpisodeController(),
+                  ),
+                  if (NavigationController.instance.advancedView)
+                    AnimeList(
+                      controller: AnimeWatchlistController(),
+                    )
+                  else
+                    EpisodeList(
+                      controller: EpisodeWatchlistController(),
+                    ),
+                  AnimeTab(
+                    simulcastController: SimulcastController(),
+                    animeController: AnimeController(firstLoad: false),
+                  ),
+                ],
               ),
             ),
           ],

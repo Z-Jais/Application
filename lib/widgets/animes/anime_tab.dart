@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_controller.dart';
 import 'package:jais/controllers/simulcast_controller.dart';
@@ -66,5 +68,11 @@ class _AnimeTabState extends State<AnimeTab> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    log('AnimeTab.dispose()');
   }
 }

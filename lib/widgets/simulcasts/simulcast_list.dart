@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_controller.dart';
 import 'package:jais/controllers/simulcast_controller.dart';
@@ -16,6 +18,8 @@ class SimulcastList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('SimulcastList.build()');
+
     return SingleChildScrollView(
       controller: simulcastController.scrollController,
       scrollDirection: Axis.horizontal,

@@ -48,10 +48,11 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
   }
 
   bool nothingToShow() =>
-      list.whereType<ModelWidget>().isEmpty && page == 1 && lastPageError;
+      (list.whereType<ModelWidget>().isEmpty && page == 1 && lastPageError) ||
+      (!_isLoading && list.whereType<ModelWidget>().isEmpty && !_canLoadMore);
 
   List<ModelLoadingWidget> get _loaders =>
-      List<ModelLoadingWidget>.generate(12, (_) => loadingWidget);
+      List<ModelLoadingWidget>.generate(limit, (_) => loadingWidget);
 
   void _removeLoader() {
     list.removeWhere((element) => element is ModelLoadingWidget);

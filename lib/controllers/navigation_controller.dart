@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:jais/models/navigation_bar_item.dart';
 
@@ -54,7 +56,13 @@ class NavigationController with ChangeNotifier {
     try {
       pageController.jumpToPage(page);
       notifyListeners();
-    } catch (_) {}
+    } catch (exception, stacktrace) {
+      log(
+        'Error while changing page',
+        error: exception,
+        stackTrace: stacktrace,
+      );
+    }
   }
 
   bool get advancedView => _advancedView;
