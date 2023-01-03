@@ -1,49 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/animes/anime_list.dart';
-import 'package:jais/components/animes/anime_widget.dart';
-import 'package:jais/components/infinite_scroll.dart';
-import 'package:jais/components/no_element.dart';
-import 'package:jais/mappers/animes/anime_mapper.dart';
+import 'package:jais/controllers/animes/anime_search_controller.dart';
+import 'package:jais/widgets/animes/anime_list.dart';
 
-class AnimeSearchView extends StatefulWidget {
-  const AnimeSearchView({super.key});
+class AnimeSearchView extends StatelessWidget {
+  final AnimeSearchController controller;
 
-  @override
-  State<AnimeSearchView> createState() => _AnimeSearchViewState();
-}
-
-class _AnimeSearchViewState extends State<AnimeSearchView> {
-  final AnimeMapper _animeMapper = AnimeMapper();
+  const AnimeSearchView({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: TextField(
-          decoration: const InputDecoration(
-            hintText: 'Rechercher un anime',
-            border: InputBorder.none,
-          ),
-          autofocus: true,
-          onSubmitted: (String value) async {
-            await _animeMapper.search(value);
-          },
-        ),
-      ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: SingleChildScrollView(
-              child: InfiniteScroll<AnimeMapper>(
-                mapper: _animeMapper,
-                builder: () => _animeMapper.nothingToShow<AnimeWidget>()
-                    ? const NoElement()
-                    : AnimeList(children: <Widget>[..._animeMapper.list]),
-              ),
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: TextField(
+            decoration: const InputDecoration(
+              hintText: 'Rechercher un anime',
+              border: InputBorder.none,
             ),
+            autofocus: true,
+            onSubmitted: (String value) async {
+              controller.query = value;
+              controller.reset();
+              await controller.load();
+            },
           ),
-        ],
+        ),
+        body: Column(
+          children: <Widget>[
+            Expanded(child: AnimeList(controller: controller)),
+          ],
+        ),
       ),
     );
   }

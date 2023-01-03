@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:jais/components/no_connection.dart';
-import 'package:jais/mappers/initialization_mapper.dart';
-import 'package:jais/mappers/navbar_mapper.dart';
+import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/views/home_view.dart';
+import 'package:jais/widgets/no_connection.dart';
 import 'package:provider/provider.dart';
 
 class InitializationView extends StatelessWidget {
@@ -10,46 +11,40 @@ class InitializationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
+    log('InitializationView.build()');
+    final appController = Provider.of<AppController>(context);
+
+    if (appController.inProgress) {
+      return const Scaffold(
         body: Center(
-          child: ChangeNotifierProvider<InitializationMapper>.value(
-            value: InitializationMapper(),
-            child: Consumer<InitializationMapper>(
-              builder: (context, value, child) {
-                if (value.model.inProgress) {
-                  return const CircularProgressIndicator();
-                }
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
 
-                if (!value.model.hasInternet) {
-                  return NoConnection(
-                    onRetry: () => value.initialize(),
-                  );
-                }
+    if (!appController.hasInternet) {
+      return Scaffold(
+        body: Center(
+          child: NoConnection(
+            onRetry: appController.checkInternetConnection,
+          ),
+        ),
+      );
+    }
 
-                return const HomeView();
-              },
+    return FutureBuilder(
+      future: appController.initialize(),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
-        ),
-        bottomNavigationBar: ChangeNotifierProvider<NavbarMapper>.value(
-          value: NavbarMapper.instance,
-          child: Consumer<NavbarMapper>(
-            builder: (context, value, child) {
-              return BottomNavigationBar(
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                selectedItemColor: Theme.of(context).primaryColor,
-                unselectedItemColor: Colors.grey,
-                currentIndex: value.currentPage,
-                onTap: (page) => value.changePage(page, fromNavBar: true),
-                items: [...value.itemsBottomNavBar(context)],
-              );
-            },
-          ),
-        ),
-      ),
+          );
+        }
+
+        return const HomeView();
+      },
     );
   }
 }

@@ -1,139 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:jais/components/animes/anime_list.dart';
-import 'package:jais/components/animes/anime_widget.dart';
-import 'package:jais/components/infinite_scroll.dart';
-import 'package:jais/components/no_element.dart';
-import 'package:jais/components/text_border.dart';
-import 'package:jais/mappers/animes/anime_mapper.dart';
+import 'package:jais/controllers/animes/anime_diary_controller.dart';
+import 'package:jais/widgets/animes/anime_list.dart';
+import 'package:jais/widgets/day_widget.dart';
+import 'package:provider/provider.dart';
 
-class AnimeDiaryView extends StatefulWidget {
-  const AnimeDiaryView({super.key});
+class AnimeDiaryView extends StatelessWidget {
+  final AnimeDiaryController controller;
 
-  @override
-  State<AnimeDiaryView> createState() => _AnimeDiaryViewState();
-}
-
-class _AnimeDiaryViewState extends State<AnimeDiaryView> {
-  final AnimeMapper _animeMapper = AnimeMapper(listener: false);
-  final List<DayWidget> _initial = const <DayWidget>[
-    DayWidget(
-      day: 'Lundi',
-      dayNumber: 1,
-    ),
-    DayWidget(
-      day: 'Mardi',
-      dayNumber: 2,
-    ),
-    DayWidget(
-      day: 'Mercredi',
-      dayNumber: 3,
-    ),
-    DayWidget(
-      day: 'Jeudi',
-      dayNumber: 4,
-    ),
-    DayWidget(
-      day: 'Vendredi',
-      dayNumber: 5,
-    ),
-    DayWidget(
-      day: 'Samedi',
-      dayNumber: 6,
-    ),
-    DayWidget(
-      day: 'Dimanche',
-    ),
-  ];
-  final List<DayWidget> _days = <DayWidget>[];
-
-  Future<void> changeToDays({int? day}) async {
-    int dayNumber = day ?? DateTime.now().weekday;
-
-    if (dayNumber == 7) {
-      dayNumber = 0;
-    }
-
-    final DayWidget dayWidget = _initial
-        .firstWhere((DayWidget element) => element.dayNumber == dayNumber);
-    final int index = _initial.indexOf(dayWidget);
-
-    _days.clear();
-    _days.addAll(_initial);
-    _days[index] = dayWidget.copyWith(isSelected: true);
-    setState(() {});
-
-    _animeMapper.clear();
-    await _animeMapper.getDiary(dayNumber);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async => changeToDays());
-  }
+  const AnimeDiaryView({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Agenda'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Agenda'),
+        ),
+        body: Column(
           children: <Widget>[
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                children: <Widget>[
-                  ..._days.map(
-                    (DayWidget e) => GestureDetector(
-                      child: e,
-                      onTap: () async => changeToDays(day: e.dayNumber),
-                    ),
+              child: ChangeNotifierProvider.value(
+                value: controller,
+                child: Consumer<AnimeDiaryController>(
+                  builder: (_, value, ___) => Row(
+                    children: [
+                      ...controller.days.map(
+                        (DayWidget e) => GestureDetector(
+                          child: e,
+                          onTap: () async => controller.day = e.dayNumber,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-            InfiniteScroll<AnimeMapper>(
-              mapper: _animeMapper,
-              builder: () => _animeMapper.nothingToShow<AnimeWidget>()
-                  ? const NoElement()
-                  : AnimeList(children: <Widget>[..._animeMapper.list]),
+            Expanded(
+              child: AnimeList(controller: controller),
             ),
           ],
         ),
       ),
     );
-  }
-}
-
-class DayWidget extends StatelessWidget {
-  final String day;
-  final int dayNumber;
-  final bool isSelected;
-
-  const DayWidget({
-    required this.day,
-    this.dayNumber = 0,
-    this.isSelected = false,
-    super.key,
-  });
-
-  DayWidget copyWith({
-    String? day,
-    int? dayNumber,
-    bool? isSelected,
-  }) {
-    return DayWidget(
-      day: day ?? this.day,
-      dayNumber: dayNumber ?? this.dayNumber,
-      isSelected: isSelected ?? this.isSelected,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TextBorder(text: day, isSelected: isSelected);
   }
 }
