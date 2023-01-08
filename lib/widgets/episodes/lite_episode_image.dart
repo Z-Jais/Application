@@ -12,16 +12,18 @@ class LiteEpisodeImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl:
-          'https://beta-api.ziedelth.fr/episodes/attachment/${episode.uuid}',
-      imageBuilder: (_, ImageProvider<Object> imageProvider) {
-        return RoundBorderDecoration(
-          widget: Image(image: imageProvider, fit: BoxFit.cover),
-        );
-      },
-      placeholder: (_, __) => Skeleton(height: height),
-      errorWidget: (_, __, ___) => Skeleton(height: height),
+    return RepaintBoundary(
+      child: CachedNetworkImage(
+        imageUrl:
+            'https://beta-api.ziedelth.fr/episodes/attachment/${episode.uuid}',
+        imageBuilder: (_, ImageProvider<Object> imageProvider) {
+          return RoundBorderDecoration(
+            widget: Image(image: imageProvider, fit: BoxFit.cover),
+          );
+        },
+        placeholder: (_, __) => Skeleton(height: height),
+        errorWidget: (_, __, ___) => Skeleton(height: height),
+      ),
     );
   }
 }
