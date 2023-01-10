@@ -18,7 +18,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   if (Platform.isWindows) {
-    await WindowsPlatformController().init();
+    await WindowsPlatformController.instance.init();
   }
 
   runApp(

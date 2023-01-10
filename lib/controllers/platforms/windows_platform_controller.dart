@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:local_notifier/local_notifier.dart';
 import 'package:system_tray/system_tray.dart';
 import 'package:window_manager/window_manager.dart';
 
 class WindowsPlatformController {
+  static final WindowsPlatformController instance = WindowsPlatformController();
+
   Future<void> init() async {
     await windowManager.ensureInitialized();
 
@@ -56,5 +59,8 @@ class WindowsPlatformController {
             : windowManager.show();
       }
     });
+
+    await localNotifier.setup(appName: 'Jaïs');
+    await LocalNotification(title: 'test', body: 'test').show();
   }
 }
