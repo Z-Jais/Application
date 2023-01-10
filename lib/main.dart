@@ -99,7 +99,7 @@ class _MyAppState extends State<MyApp> with WindowListener {
 
   @override
   void onWindowRestore() {
-    setState(() { });
+    setState(() {});
     super.onWindowRestore();
   }
 }
