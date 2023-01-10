@@ -611,6 +611,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.5"
+  screen_retriever:
+    dependency: transitive
+    description:
+      name: screen_retriever
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.5"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -763,6 +770,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0+3"
+  system_tray:
+    dependency: "direct main"
+    description:
+      name: system_tray
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   term_glyph:
     dependency: transitive
     description:
@@ -896,15 +910,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-  window_size:
+  window_manager:
     dependency: "direct main"
     description:
-      path: "plugins/window_size"
-      ref: HEAD
-      resolved-ref: "6c66ad23ee79749f30a8eece542cf54eaf157ed8"
-      url: "https://github.com/google/flutter-desktop-embedding.git"
-    source: git
-    version: "0.1.0"
+      name: window_manager
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   xdg_directories:
     dependency: transitive
     description:

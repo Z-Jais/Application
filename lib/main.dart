@@ -6,37 +6,49 @@ import 'package:jais/controllers/animes/anime_detail_controller.dart';
 import 'package:jais/controllers/animes/anime_diary_controller.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
+import 'package:jais/controllers/platforms/windows_platform_controller.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_diary_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
 import 'package:jais/views/initialization_view.dart';
 import 'package:provider/provider.dart';
-import 'package:window_size/window_size.dart';
+import 'package:window_manager/window_manager.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   if (Platform.isWindows) {
-    setWindowTitle('Jaïs');
-    setWindowMinSize(const Size(800, 600));
+    await WindowsPlatformController().init();
   }
 
   runApp(
     ChangeNotifierProvider(
       create: (_) => AppController(),
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget with WindowListener {
+  MyApp({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WindowListener {
   static const Color _mainColor = Color(0xFFF2B05E);
 
-  const MyApp({super.key});
+  @override
+  void initState() {
+    log('_MyAppState.initState()');
+    windowManager.addListener(this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    log('MyApp.build()');
+    log('_MyAppState.build()');
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -77,5 +89,17 @@ class MyApp extends StatelessWidget {
         },
       },
     );
+  }
+
+  @override
+  void onWindowMinimize() {
+    windowManager.hide();
+    super.onWindowMinimize();
+  }
+
+  @override
+  void onWindowRestore() {
+    setState(() { });
+    super.onWindowRestore();
   }
 }
