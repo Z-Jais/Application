@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/anime_tab_controller.dart';
 import 'package:jais/controllers/animes/anime_watchlist_controller.dart';
+import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/episodes/episode_controller.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
 import 'package:jais/controllers/navigation_controller.dart';
@@ -30,24 +31,22 @@ class HomeView extends StatelessWidget {
                 value: NavigationController.instance,
                 child: Consumer<NavigationController>(
                   builder: (_, value, __) {
-                    return PageView(
-                      controller: value.pageController,
-                      onPageChanged: value.setCurrentPage,
+                    if (AppController.isAndroidOrIOS) {
+                      return MyPage(controller: value);
+                    }
+
+                    return Row(
                       children: [
-                        EpisodeList(
-                          controller: EpisodeController(),
-                        ),
-                        if (value.advancedView)
-                          AnimeList(
-                            controller: AnimeWatchlistController(),
-                          )
-                        else
-                          EpisodeList(
-                            controller: EpisodeWatchlistController(),
+                        ColoredBox(
+                          color: Theme.of(context).selectedRowColor,
+                          child: Column(
+                            children: [
+                              const Padding(padding: EdgeInsets.only(top: 8)),
+                              ...value.slideButtons(context),
+                            ],
                           ),
-                        AnimeTab(
-                          controller: AnimeTabController(),
                         ),
+                        Expanded(child: MyPage(controller: value)),
                       ],
                     );
                   },
@@ -56,24 +55,56 @@ class HomeView extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: ChangeNotifierProvider.value(
-          value: NavigationController.instance,
-          child: Consumer<NavigationController>(
-            builder: (_, value, __) {
-              return BottomNavigationBar(
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                selectedItemColor: Theme.of(context).primaryColor,
-                unselectedItemColor: Colors.grey,
-                currentIndex: value.currentPage,
-                onTap: (page) =>
-                    value.setCurrentPage(page, fromNavigationBar: true),
-                items: value.bottomNavigationBarItems.toList(),
-              );
-            },
-          ),
-        ),
+        bottomNavigationBar: AppController.isAndroidOrIOS
+            ? ChangeNotifierProvider.value(
+                value: NavigationController.instance,
+                child: Consumer<NavigationController>(
+                  builder: (_, value, __) {
+                    return BottomNavigationBar(
+                      showSelectedLabels: false,
+                      showUnselectedLabels: false,
+                      selectedItemColor: Theme.of(context).primaryColor,
+                      unselectedItemColor: Colors.grey,
+                      currentIndex: value.currentPage,
+                      onTap: (page) =>
+                          value.setCurrentPage(page, fromNavigationBar: true),
+                      items: value.bottomNavigationBarItems.toList(),
+                    );
+                  },
+                ),
+              )
+            : null,
       ),
+    );
+  }
+}
+
+class MyPage extends StatelessWidget {
+  final NavigationController controller;
+
+  const MyPage({required this.controller, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView(
+      controller: controller.pageController,
+      onPageChanged: controller.setCurrentPage,
+      children: [
+        EpisodeList(
+          controller: EpisodeController(),
+        ),
+        if (controller.advancedView)
+          AnimeList(
+            controller: AnimeWatchlistController(),
+          )
+        else
+          EpisodeList(
+            controller: EpisodeWatchlistController(),
+          ),
+        AnimeTab(
+          controller: AnimeTabController(),
+        ),
+      ],
     );
   }
 }

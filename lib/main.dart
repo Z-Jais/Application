@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_detail_controller.dart';
@@ -10,9 +11,15 @@ import 'package:jais/views/animes/anime_diary_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
 import 'package:jais/views/initialization_view.dart';
 import 'package:provider/provider.dart';
+import 'package:window_size/window_size.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isWindows) {
+    setWindowTitle('Jaïs');
+    setWindowMinSize(const Size(800, 600));
+  }
 
   runApp(
     ChangeNotifierProvider(

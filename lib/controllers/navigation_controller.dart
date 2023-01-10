@@ -71,4 +71,23 @@ class NavigationController with ChangeNotifier {
       _items.map((NavigationBarItem item) => item.toBottomNavigationBarItem());
   List<NavigationBarItem>? get currentTopNavigationBarItems =>
       _items[currentPage].topWidgets;
+
+  List<Widget> slideButtons(BuildContext context) => _items.map(
+        (NavigationBarItem item) {
+          final int index = _items.indexOf(item);
+
+          return IconButton(
+            onPressed: () => setCurrentPage(index),
+            padding: const EdgeInsets.all(16),
+            color: currentPage == index ? Theme.of(context).primaryColor : null,
+            icon: Flex(
+              direction: Axis.vertical,
+              children: [
+                item.icon,
+                Text(item.name),
+              ],
+            ),
+          );
+        },
+      ).toList();
 }

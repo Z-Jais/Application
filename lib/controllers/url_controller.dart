@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
+import 'package:jais/controllers/app_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AdController {
@@ -85,18 +86,18 @@ class URLController {
     }
   }
 
-  Future<void> goOnUrl(String url, {bool showAd = true}) async {
-    Future<bool> redirectTo() async {
-      return launchUrl(
-        Uri.parse(url),
-        mode: LaunchMode.externalApplication,
-      );
-    }
+  Future<bool> redirectTo(String url) async {
+    return launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    );
+  }
 
-    if (showAd) {
-      await AdController.instance.show(callback: (_) async => redirectTo());
+  Future<void> goOnUrl(String url, {bool showAd = true}) async {
+    if (showAd && AppController.isAndroidOrIOS) {
+      await AdController.instance.show(callback: (_) async => redirectTo(url));
     } else {
-      await redirectTo();
+      await redirectTo(url);
     }
   }
 }

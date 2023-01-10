@@ -85,7 +85,7 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
       lastPageError = true;
 
       log(
-        'Error while loading ${Model.runtimeType.toString()}',
+        'Error while loading $runtimeType',
         error: exception,
         stackTrace: stackTrace,
       );

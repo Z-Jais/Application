@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,8 @@ class AppController with ChangeNotifier {
       DataCollectionController('animeWatchlist');
   static final DataCollectionController seen =
       DataCollectionController('episodesSeen');
+
+  static bool get isAndroidOrIOS => Platform.isAndroid || Platform.isIOS;
 
   bool _inProgress = true;
   bool _hasInternet = false;
@@ -36,14 +40,18 @@ class AppController with ChangeNotifier {
   }
 
   Future<void> initialize() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    if (isAndroidOrIOS) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
 
-    await FirebaseMessaging.instance.requestPermission();
-    await FirebaseMessaging.instance.subscribeToTopic('all');
+      await FirebaseMessaging.instance.requestPermission();
+      await FirebaseMessaging.instance.subscribeToTopic('all');
+
+      await AdController.instance.init();
+    }
+
     await watchlist.init();
     await seen.init();
-    await AdController.instance.init();
   }
 }
