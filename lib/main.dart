@@ -34,27 +34,28 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        backgroundColor: Colors.white,
         brightness: Brightness.light,
         useMaterial3: true,
         primaryColor: _mainColor,
-        colorScheme: ColorScheme.fromSeed(seedColor: _mainColor),
+        colorScheme: ColorScheme.fromSeed(seedColor: _mainColor)
+            .copyWith(background: Colors.white),
       ),
       darkTheme: ThemeData(
-        backgroundColor: Colors.black,
         brightness: Brightness.dark,
         useMaterial3: true,
         primaryColor: _mainColor,
-        primarySwatch: MaterialColor(_mainColor.value, {
-          for (var i = 50; i <= 900; i += 50)
-            i: Color.fromRGBO(
-              _mainColor.red,
-              _mainColor.green,
-              _mainColor.blue,
-              i / 100,
-            ),
-        }),
         scaffoldBackgroundColor: Colors.black,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: MaterialColor(_mainColor.value, {
+            for (var i = 50; i <= 900; i += 50)
+              i: Color.fromRGBO(
+                _mainColor.red,
+                _mainColor.green,
+                _mainColor.blue,
+                i / 100,
+              ),
+          }),
+        ).copyWith(background: Colors.black),
       ),
       initialRoute: '/',
       routes: {
