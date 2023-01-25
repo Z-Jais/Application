@@ -44,11 +44,41 @@ class TopNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 50,
       child: Row(
         children: <Widget>[
-          RoundBorderDecoration(widget: Image.asset('assets/icon.png')),
-          const SizedBox(width: 10),
+          GestureDetector(
+            onLongPress: () {
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Développé par :',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Text('• Ziedelth'),
+                      SizedBox(height: 10),
+                      Divider(),
+                      SizedBox(height: 10),
+                      Text(
+                        'Contributeurs :',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Text('• SputNikPlop'),
+                    ],
+                  ),
+                ),
+              );
+            },
+            child: RoundBorderDecoration(widget: Image.asset('assets/icon.png')),
+          ),
+          const SizedBox(width: 5),
           Text(
             'Jaïs',
             style: GoogleFonts.pacifico(
