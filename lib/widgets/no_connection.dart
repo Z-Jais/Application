@@ -18,7 +18,7 @@ class NoConnection extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           'Mince !',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         const Text('Impossible de se connecter à Jaïs.'),
         const SizedBox(height: 10),
