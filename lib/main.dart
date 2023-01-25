@@ -53,14 +53,14 @@ class _MyAppState extends State<MyApp> with WindowListener {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.light,
         useMaterial3: true,
         primaryColor: _mainColor,
-        colorScheme: ColorScheme.fromSeed(seedColor: _mainColor)
-            .copyWith(background: Colors.white),
+        colorScheme: ColorScheme.fromSeed(seedColor: _mainColor).copyWith(
+          brightness: Brightness.light,
+          background: Colors.white,
+        ),
       ),
       darkTheme: ThemeData(
-        brightness: Brightness.dark,
         useMaterial3: true,
         primaryColor: _mainColor,
         scaffoldBackgroundColor: Colors.black,
@@ -74,7 +74,10 @@ class _MyAppState extends State<MyApp> with WindowListener {
                 i / 100,
               ),
           }),
-        ).copyWith(background: Colors.black),
+        ).copyWith(
+          brightness: Brightness.dark,
+          background: Colors.black,
+        ),
       ),
       initialRoute: '/',
       routes: {

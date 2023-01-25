@@ -37,19 +37,16 @@ class HomeView extends StatelessWidget {
 
                     return Row(
                       children: [
-                        ColoredBox(
-                          color: Theme.of(context).backgroundColor,
-                          child: Column(
-                            children: [
-                              const Padding(padding: EdgeInsets.only(top: 8)),
-                              ...value.slideButtons(context),
-                            ],
-                          ),
+                        Column(
+                          children: [
+                            const Padding(padding: EdgeInsets.only(top: 8)),
+                            ...value.slideButtons(context),
+                          ],
                         ),
                         VerticalDivider(
                           width: 1,
                           thickness: 1,
-                          color: Theme.of(context).dividerColor,
+                          color: Theme.of(context).primaryColor,
                         ),
                         Expanded(child: MyPage(controller: value)),
                       ],
