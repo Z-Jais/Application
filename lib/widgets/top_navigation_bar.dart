@@ -66,7 +66,15 @@ class TopNavigationBar extends StatelessWidget {
                       Divider(),
                       SizedBox(height: 10),
                       Text(
-                        'Contributeurs :',
+                        'Partenariat :',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Text('• Kitsune No Baguette'),
+                      Divider(),
+                      SizedBox(height: 10),
+                      Text(
+                        'Contributeur :',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 10),
