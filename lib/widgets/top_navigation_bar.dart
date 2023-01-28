@@ -85,7 +85,8 @@ class TopNavigationBar extends StatelessWidget {
                 ),
               );
             },
-            child: RoundBorderDecoration(widget: Image.asset('assets/icon.png')),
+            child:
+                RoundBorderDecoration(widget: Image.asset('assets/icon.png')),
           ),
           const SizedBox(width: 5),
           Text(
