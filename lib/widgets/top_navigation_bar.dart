@@ -71,6 +71,7 @@ class TopNavigationBar extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       Text('• Kitsune No Baguette'),
+                      SizedBox(height: 10),
                       Divider(),
                       SizedBox(height: 10),
                       Text(
