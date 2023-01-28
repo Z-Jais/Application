@@ -36,16 +36,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         primaryColor: _mainColor,
-        colorScheme: ColorScheme.fromSeed(seedColor: _mainColor).copyWith(
-          brightness: Brightness.light,
-          background: Colors.white,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: _mainColor),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
         primaryColor: _mainColor,
         scaffoldBackgroundColor: Colors.black,
         colorScheme: ColorScheme.fromSwatch(
+          backgroundColor: Colors.black,
+          brightness: Brightness.dark,
           primarySwatch: MaterialColor(_mainColor.value, {
             for (var i = 50; i <= 900; i += 50)
               i: Color.fromRGBO(
@@ -55,9 +54,6 @@ class MyApp extends StatelessWidget {
                 i / 100,
               ),
           }),
-        ).copyWith(
-          brightness: Brightness.dark,
-          background: Colors.black,
         ),
       ),
       initialRoute: '/',
