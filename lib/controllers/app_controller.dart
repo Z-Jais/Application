@@ -6,13 +6,6 @@ import 'package:jais/controllers/datas/data_collection_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/firebase_options.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-}
-
 class AppController with ChangeNotifier {
   static final DataCollectionController watchlist =
       DataCollectionController('animeWatchlist');
