@@ -61,6 +61,6 @@ class WindowsPlatformController {
     });
 
     await localNotifier.setup(appName: 'Jaïs');
-    await LocalNotification(title: 'test', body: 'test').show();
+    // await LocalNotification(title: 'test', body: 'test').show();
   }
 }
