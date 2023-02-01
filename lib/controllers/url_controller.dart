@@ -1,70 +1,8 @@
 import 'dart:convert';
-import 'dart:developer';
 
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
+import 'package:jais/controllers/ad_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-class AdController {
-  static final AdController instance = AdController();
-
-  bool _initialized = false;
-  bool _canWatchAd = true;
-  RewardedAd? _ad;
-
-  bool get canWatchAd => _canWatchAd;
-
-  Future<void> init() async {
-    await RewardedAd.load(
-      adUnitId: 'ca-app-pub-5658764393995798/3650456466',
-      request: const AdRequest(),
-      rewardedAdLoadCallback: RewardedAdLoadCallback(
-        onAdLoaded: (RewardedAd ad) async {
-          _ad = ad;
-          _initialized = true;
-          log('Ad loaded');
-        },
-        onAdFailedToLoad: (LoadAdError error) {
-          _initialized = false;
-          log('Ad failed to load: $error');
-        },
-      ),
-    );
-  }
-
-  Future<void> show({void Function(bool)? callback}) async {
-    // Wait for the ad to be initialized
-    while (!_initialized) {
-      await Future.delayed(const Duration(milliseconds: 100));
-    }
-
-    if (_ad == null) {
-      callback?.call(false);
-      return;
-    }
-
-    if (!_canWatchAd) {
-      return;
-    }
-
-    _canWatchAd = false;
-
-    _ad?.fullScreenContentCallback = FullScreenContentCallback(
-      onAdDismissedFullScreenContent: (RewardedAd ad) {
-        ad.dispose();
-        callback?.call(true);
-        _canWatchAd = true;
-      },
-      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-        ad.dispose();
-      },
-    );
-
-    await _ad?.show(
-      onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {},
-    );
-  }
-}
 
 class URLController {
   Future<http.Response?> get(String url) async {
@@ -85,18 +23,18 @@ class URLController {
     }
   }
 
-  Future<void> goOnUrl(String url, {bool showAd = true}) async {
-    Future<bool> redirectTo() async {
-      return launchUrl(
-        Uri.parse(url),
-        mode: LaunchMode.externalApplication,
-      );
-    }
+  Future<bool> _redirectTo(String url) async {
+    return launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    );
+  }
 
+  Future<void> goOnUrl(String url, {bool showAd = true}) async {
     if (showAd) {
-      await AdController.instance.show(callback: (_) async => redirectTo());
+      await AdController.instance.show(callback: (_) async => _redirectTo(url));
     } else {
-      await redirectTo();
+      await _redirectTo(url);
     }
   }
 }

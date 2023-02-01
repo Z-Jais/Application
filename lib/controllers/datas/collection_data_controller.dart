@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:jais/controllers/datas/abstract_data_controller.dart';
 
-class DataCollectionController extends AbstractDataController<List<String>> {
-  DataCollectionController(super.key);
+class CollectionDataController extends AbstractDataController<List<String>> {
+  CollectionDataController(super.key);
 
   @override
   List<String> load() {
