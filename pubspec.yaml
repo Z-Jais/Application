@@ -2,7 +2,7 @@ name: jais
 description: A Flutter application by Ziedelth for mobile members
 
 publish_to: 'none'
-version: 1.2.0+11
+version: 2.0.0+12
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
@@ -15,7 +15,7 @@ dependencies:
   flutter:
     sdk: flutter
   freezed_annotation: ^2.2.0
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.0
   google_mobile_ads: ^2.3.0
   http: ^0.13.5
   internet_connection_checker: ^1.0.0+1

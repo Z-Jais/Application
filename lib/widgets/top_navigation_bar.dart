@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:jais/controllers/ad_controller.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/models/navigation_bar_item.dart';
 import 'package:jais/widgets/decoration/round_border_decoration.dart';
@@ -44,11 +46,51 @@ class TopNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 50,
       child: Row(
         children: <Widget>[
-          RoundBorderDecoration(widget: Image.asset('assets/icon.png')),
-          const SizedBox(width: 10),
+          GestureDetector(
+            onLongPress: () {
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Développé par :',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Text('• Ziedelth'),
+                      SizedBox(height: 10),
+                      Divider(),
+                      SizedBox(height: 10),
+                      Text(
+                        'Partenariat :',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Text('• Kitsune No Baguette'),
+                      SizedBox(height: 10),
+                      Divider(),
+                      SizedBox(height: 10),
+                      Text(
+                        'Contributeur :',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Text('• SputNikPlop'),
+                    ],
+                  ),
+                ),
+              );
+            },
+            child:
+                RoundBorderDecoration(widget: Image.asset('assets/icon.png')),
+          ),
+          const SizedBox(width: 5),
           Text(
             'Jaïs',
             style: GoogleFonts.pacifico(
@@ -57,7 +99,20 @@ class TopNavigationBar extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
           ),
-          const Spacer(),
+          if (AdController.instance.bannerAd != null)
+            Expanded(
+              child: ColoredBox(
+                color: Colors.transparent,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: AdWidget(
+                    ad: AdController.instance.bannerAd!,
+                  ),
+                ),
+              ),
+            )
+          else
+            const Spacer(),
           ChangeNotifierProvider.value(
             value: NavigationController.instance,
             child: Consumer<NavigationController>(
