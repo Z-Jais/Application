@@ -3,11 +3,13 @@ import 'dart:developer';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
+import 'package:jais/controllers/datas/int_data_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AdController {
   static final AdController instance = AdController();
 
+  final IntDataController _adRatio = IntDataController('adRatio');
   bool _initialized = false;
   bool _canWatchAd = true;
   RewardedAd? _ad;
@@ -39,6 +41,16 @@ class AdController {
     }
 
     if (_ad == null) {
+      callback?.call(false);
+      return;
+    }
+
+    _adRatio.data++;
+    await _adRatio.save();
+
+    if (_adRatio.data % 3 == 0) {
+      _adRatio.data = 0;
+      await _adRatio.save();
       callback?.call(false);
       return;
     }
@@ -85,18 +97,18 @@ class URLController {
     }
   }
 
-  Future<void> goOnUrl(String url, {bool showAd = true}) async {
-    Future<bool> redirectTo() async {
-      return launchUrl(
-        Uri.parse(url),
-        mode: LaunchMode.externalApplication,
-      );
-    }
+  Future<bool> _redirectTo(String url) async {
+    return launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    );
+  }
 
+  Future<void> goOnUrl(String url, {bool showAd = true}) async {
     if (showAd) {
-      await AdController.instance.show(callback: (_) async => redirectTo());
+      await AdController.instance.show(callback: (_) async => _redirectTo(url));
     } else {
-      await redirectTo();
+      await _redirectTo(url);
     }
   }
 }
