@@ -47,69 +47,72 @@ class LiteEpisodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        URLController().goOnUrl(episode.url);
-      },
-      child: BorderDecoration(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Stack(
-                children: <Widget>[
-                  LiteEpisodeImage(
-                    episode: episode,
-                    height: Const.episodeImageHeight / 2,
-                  ),
-                  Positioned(
-                    top: 2,
-                    right: 3,
-                    child: PlatformWidget(platform: episode.platform),
-                  )
-                ],
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () async {
+          URLController().goOnUrl(episode.url);
+        },
+        child: BorderDecoration(
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Stack(
+                  children: <Widget>[
+                    LiteEpisodeImage(
+                      episode: episode,
+                      height: Const.episodeImageHeight / 2,
+                    ),
+                    Positioned(
+                      top: 2,
+                      right: 3,
+                      child: PlatformWidget(platform: episode.platform),
+                    )
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    episode.title.ifEmptyOrNull('＞﹏＜').replaceAll('\n', ' '),
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    'Saison ${episode.season}',
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    '${getEpisodeType()} ${episode.number} ${getLangType()}',
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      const Icon(Icons.movie),
-                      const SizedBox(width: 5),
-                      Text(
-                        Utils.instance.printDuration(
-                          Duration(seconds: episode.duration),
-                        ),
-                      ),
-                    ],
-                  ),
-                  if (showActions)
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      episode.title.ifEmptyOrNull('＞﹏＜').replaceAll('\n', ' '),
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Saison ${episode.season}',
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      '${getEpisodeType()} ${episode.number} ${getLangType()}',
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     Row(
                       children: <Widget>[
-                        const Spacer(),
-                        EpisodeSeeWidget(episode: episode),
+                        const Icon(Icons.movie),
+                        const SizedBox(width: 5),
+                        Text(
+                          Utils.instance.printDuration(
+                            Duration(seconds: episode.duration),
+                          ),
+                        ),
                       ],
                     ),
-                ],
+                    if (showActions)
+                      Row(
+                        children: <Widget>[
+                          const Spacer(),
+                          EpisodeSeeWidget(episode: episode),
+                        ],
+                      ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

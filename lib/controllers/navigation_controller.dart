@@ -77,7 +77,7 @@ class NavigationController with ChangeNotifier {
           final int index = _items.indexOf(item);
 
           return IconButton(
-            onPressed: () => setCurrentPage(index),
+            onPressed: () => setCurrentPage(index, fromNavigationBar: true),
             padding: const EdgeInsets.all(16),
             color: currentPage == index ? Theme.of(context).primaryColor : null,
             icon: Flex(

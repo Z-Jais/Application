@@ -48,94 +48,97 @@ class EpisodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        URLController().goOnUrl(episode.url);
-      },
-      child: BorderDecoration(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          PlatformWidget(platform: episode.platform),
-                          const SizedBox(width: 7.5),
-                          Expanded(
-                            child: Text(
-                              episode.platform.name,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () async {
+          URLController().goOnUrl(episode.url);
+        },
+        child: BorderDecoration(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            PlatformWidget(platform: episode.platform),
+                            const SizedBox(width: 7.5),
+                            Expanded(
+                              child: Text(
+                                episode.platform.name,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          episode.anime.name,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        episode.anime.name,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        episode.title
-                            .ifEmptyOrNull('＞﹏＜')
-                            .replaceAll('\n', ' '),
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                        const SizedBox(height: 5),
+                        Text(
+                          episode.title
+                              .ifEmptyOrNull('＞﹏＜')
+                              .replaceAll('\n', ' '),
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Saison ${episode.season} • ${getEpisodeType()} ${episode.number} ${getLangType()}',
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          const Icon(Icons.movie),
-                          const SizedBox(width: 5),
-                          Text(
-                            Utils.instance.printDuration(
-                              Duration(seconds: episode.duration),
+                        Text(
+                          'Saison ${episode.season} • ${getEpisodeType()} ${episode.number} ${getLangType()}',
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            const Icon(Icons.movie),
+                            const SizedBox(width: 5),
+                            Text(
+                              Utils.instance.printDuration(
+                                Duration(seconds: episode.duration),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                AnimeImage(anime: episode.anime),
-              ],
-            ),
-            const SizedBox(height: 10),
-            if (context.isOnMobile)
-              EpisodeImage(episode: episode, height: Const.episodeImageHeight)
-            else
-              Expanded(child: EpisodeImage(episode: episode)),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Text(
-                  'Il y a ${Utils.instance.printTimeSince(DateTime.parse(episode.releaseDate))}',
-                ),
-                const Spacer(),
-                if (showActions) EpisodeSeeWidget(episode: episode),
-              ],
-            )
-          ],
+                  const SizedBox(width: 10),
+                  AnimeImage(anime: episode.anime),
+                ],
+              ),
+              const SizedBox(height: 10),
+              if (context.isOnMobile)
+                EpisodeImage(episode: episode, height: Const.episodeImageHeight)
+              else
+                Expanded(child: EpisodeImage(episode: episode)),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Text(
+                    'Il y a ${Utils.instance.printTimeSince(DateTime.parse(episode.releaseDate))}',
+                  ),
+                  const Spacer(),
+                  if (showActions) EpisodeSeeWidget(episode: episode),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,8 +1,6 @@
-import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:jais/controllers/ad_controller.dart';
 import 'package:jais/controllers/datas/collection_data_controller.dart';
@@ -14,7 +12,9 @@ class AppController with ChangeNotifier {
   static final CollectionDataController seen =
       CollectionDataController('episodesSeen');
 
-  static bool get isAndroidOrIOS => Platform.isAndroid || Platform.isIOS;
+  static bool get isAndroidOrIOS =>
+      defaultTargetPlatform == TargetPlatform.android ||
+      defaultTargetPlatform == TargetPlatform.iOS;
 
   bool _inProgress = true;
   bool _hasInternet = false;

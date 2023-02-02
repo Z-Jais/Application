@@ -43,9 +43,12 @@ class SimulcastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextBorderDecoration(
-      text: '${getNaturalSeason()} ${simulcast.year}',
-      isSelected: isSelected,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: TextBorderDecoration(
+        text: '${getNaturalSeason()} ${simulcast.year}',
+        isSelected: isSelected,
+      ),
     );
   }
 }
