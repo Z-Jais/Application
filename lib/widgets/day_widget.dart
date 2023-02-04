@@ -16,12 +16,12 @@ class DayWidget extends StatelessWidget {
   DayWidget copyWith({
     String? day,
     int? dayNumber,
-    bool? isSelected,
+    required bool isSelected,
   }) {
     return DayWidget(
       day: day ?? this.day,
       dayNumber: dayNumber ?? this.dayNumber,
-      isSelected: isSelected ?? this.isSelected,
+      isSelected: isSelected,
     );
   }
 

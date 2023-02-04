@@ -22,8 +22,20 @@ jobs:
       - name: Format
         run: dart format --set-exit-if-changed .
 
-      - name: Analyze
+      - name: Dart Analyze
         run: dart analyze
+
+      - name: Check nullable code
+        run: flutter pub run dart_code_metrics:metrics check-unnecessary-nullable lib
+
+      - name: Check unused files
+        run: flutter pub run dart_code_metrics:metrics check-unused-files lib
+
+      - name: Check unused localizations
+        run: flutter pub run dart_code_metrics:metrics check-unused-l10n lib
+
+      - name: Check unused code
+        run: flutter pub run dart_code_metrics:metrics check-unused-code lib
 
   # Make a job with the title of pull request contains "flutter_native_splash" and only on opened pull request
   native_splash:
