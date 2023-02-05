@@ -50,14 +50,14 @@ class AdController {
     await _bannerAd?.load();
   }
 
-  Future<void> show({void Function(bool)? callback}) async {
+  Future<void> show(void Function(bool) callback) async {
     // Wait for the ad to be initialized
     while (!_initialized) {
       return;
     }
 
     if (_ad == null) {
-      callback?.call(false);
+      callback.call(false);
       return;
     }
 
@@ -74,7 +74,7 @@ class AdController {
     await _adRatio.save();
 
     if (!needToShowAd) {
-      callback?.call(false);
+      callback.call(false);
       return;
     }
 
@@ -87,7 +87,7 @@ class AdController {
     _ad?.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (RewardedAd ad) {
         ad.dispose();
-        callback?.call(true);
+        callback.call(true);
         _canWatchAd = true;
       },
       onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {

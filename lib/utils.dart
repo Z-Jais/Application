@@ -15,11 +15,6 @@ class Const {
 class Utils {
   static final Utils instance = Utils();
 
-  void clearImagesCache() {
-    PaintingBinding.instance.imageCache.clear();
-    PaintingBinding.instance.imageCache.clearLiveImages();
-  }
-
   String printDuration(Duration duration) {
     if (duration.isNegative) {
       return '??:??';
@@ -37,11 +32,7 @@ class Utils {
     }
   }
 
-  String printTimeSince(DateTime? dateTime) {
-    if (dateTime == null) {
-      return 'erreur';
-    }
-
+  String printTimeSince(DateTime dateTime) {
     final double seconds = (DateTime.now().millisecondsSinceEpoch -
             dateTime.millisecondsSinceEpoch) /
         1000;
@@ -146,16 +137,6 @@ extension ScrollControllerExt on ScrollController {
         curve: Curves.easeInOut,
       );
     } catch (_) {}
-  }
-}
-
-extension ListExt<T> on List<T> {
-  void toggle(T element) {
-    if (contains(element)) {
-      remove(element);
-    } else {
-      add(element);
-    }
   }
 }
 

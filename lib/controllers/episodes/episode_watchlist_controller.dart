@@ -11,7 +11,7 @@ class EpisodeWatchlistController extends EpisodeController {
     return URLController()
         .post(
           'https://beta-api.ziedelth.fr/episodes/watchlist/page/$page/limit/$limit',
-          body: AppController.watchlist.toGzip(),
+          AppController.watchlist.toGzip(),
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }
