@@ -9,7 +9,7 @@ class AnimeWatchlistController extends AnimeController {
     return URLController()
         .post(
           'https://beta-api.ziedelth.fr/animes/watchlist/page/$page/limit/$limit',
-          body: AppController.watchlist.toGzip(),
+          AppController.watchlist.toGzip(),
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }
