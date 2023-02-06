@@ -14,7 +14,7 @@ class URLController {
     }
   }
 
-  Future<http.Response?> post(String url, {Object? body}) async {
+  Future<http.Response?> post(String url, Object body) async {
     try {
       return await http
           .post(Uri.parse(url), body: body)
@@ -33,7 +33,7 @@ class URLController {
 
   Future<void> goOnUrl(String url, {bool showAd = true}) async {
     if (showAd && AppController.isAndroidOrIOS) {
-      await AdController.instance.show(callback: (_) async => _redirectTo(url));
+      await AdController.instance.show((_) async => _redirectTo(url));
     } else {
       await _redirectTo(url);
     }

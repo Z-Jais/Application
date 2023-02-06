@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 class NoConnection extends StatelessWidget {
-  final VoidCallback? onRetry;
+  final VoidCallback onRetry;
 
-  const NoConnection({this.onRetry, super.key});
+  const NoConnection({required this.onRetry, super.key});
 
   @override
   Widget build(BuildContext context) {

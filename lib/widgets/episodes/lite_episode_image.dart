@@ -6,9 +6,13 @@ import 'package:jais/widgets/skeleton.dart';
 
 class LiteEpisodeImage extends StatelessWidget {
   final Episode episode;
-  final double? height;
+  final double height;
 
-  const LiteEpisodeImage({required this.episode, this.height, super.key});
+  const LiteEpisodeImage({
+    required this.episode,
+    required this.height,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
