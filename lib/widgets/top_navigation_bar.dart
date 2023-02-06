@@ -100,7 +100,8 @@ class TopNavigationBar extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
           ),
-          if (AdController.instance.bannerAd != null && AppController.isAndroidOrIOS)
+          if (AdController.instance.bannerAd != null &&
+              AppController.isAndroidOrIOS)
             Expanded(
               child: ColoredBox(
                 color: Colors.transparent,
