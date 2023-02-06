@@ -15,7 +15,7 @@ class AnimeImage extends StatelessWidget {
     return RepaintBoundary(
       child: CachedNetworkImage(
         imageUrl:
-            'https://beta-api.ziedelth.fr/animes/attachment/${anime.uuid}',
+            'https://${Const.serverUrl}/animes/attachment/${anime.uuid}',
         imageBuilder: (_, ImageProvider<Object> imageProvider) {
           return RoundBorderDecoration(
             widget: Image(image: imageProvider, fit: BoxFit.cover),

@@ -1,8 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:jais/models/notification.dart';
+import 'package:jais/utils.dart';
 import 'package:local_notifier/local_notifier.dart';
 import 'package:system_tray/system_tray.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:window_manager/window_manager.dart';
 
 class WindowsPlatformController {
@@ -62,5 +66,19 @@ class WindowsPlatformController {
 
     await localNotifier.setup(appName: 'Jaïs');
     // await LocalNotification(title: 'test', body: 'test').show();
+
+    final WebSocketChannel webSocketChannel =
+        WebSocketChannel.connect(Uri.parse('wss://${Const.serverUrl}/'));
+
+    webSocketChannel.stream.listen((message) async {
+      final Notification notification = Notification.fromJson(
+        jsonDecode(message as String) as Map<String, dynamic>,
+      );
+
+      await LocalNotification(
+        title: notification.title ?? 'Jaïs',
+        body: notification.body,
+      ).show();
+    });
   }
 }

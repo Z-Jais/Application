@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:jais/controllers/data_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/simulcast.dart';
+import 'package:jais/utils.dart';
 import 'package:jais/widgets/simulcasts/simulcast_loader_widget.dart';
 import 'package:jais/widgets/simulcasts/simulcast_widget.dart';
 
@@ -21,7 +22,7 @@ class SimulcastController
   Future<List<SimulcastWidget>> widgets() async {
     return URLController()
         .get(
-          'https://beta-api.ziedelth.fr/simulcasts/country/fr',
+          'https://${Const.serverUrl}/simulcasts/country/fr',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }

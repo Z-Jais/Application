@@ -10,6 +10,9 @@ class Const {
   static const double animeImageHeight = 100;
   static const double mangaImageWith = 75;
   static const double mangaImageHeight = 100;
+
+  // static const String serverUrl = "beta-api.ziedelth.fr";
+  static const String serverUrl = "alpha-api.ziedelth.fr";
 }
 
 class Utils {
