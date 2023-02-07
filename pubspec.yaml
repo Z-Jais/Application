@@ -36,6 +36,7 @@ dev_dependencies:
   flutter_native_splash: ^2.2.16
   json_serializable: ^6.6.1
   lint: ^2.0.1
+  msix: ^3.7.0
 
 flutter_icons:
   image_path: 'assets/icon.png'
@@ -59,3 +60,11 @@ flutter:
     - 'assets/icon.ico'
     - 'assets/no_connection.png'
     - 'assets/no_element.png'
+
+msix_config:
+  display_name: Jais
+  publisher_display_name: Ziedelth
+  identity_name: Ziedelth.Jais
+  msix_version: 2.0.1.0
+  logo_path: assets/icon.png
+  capabilities: internetClient
