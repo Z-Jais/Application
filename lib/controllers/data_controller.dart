@@ -25,6 +25,8 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
     required this.fromJson,
     required this.toWidget,
   }) {
+    list.addAll(_loaders);
+
     if (firstLoad) {
       load();
     }
@@ -85,7 +87,7 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
       lastPageError = true;
 
       log(
-        'Error while loading ${Model.runtimeType}',
+        'Error while loading $runtimeType',
         error: exception,
         stackTrace: stackTrace,
       );
