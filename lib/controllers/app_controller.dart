@@ -22,8 +22,7 @@ class AppController with ChangeNotifier {
   static bool get isAndroidOrIOS =>
       defaultTargetPlatform == TargetPlatform.android ||
       defaultTargetPlatform == TargetPlatform.iOS;
-  static bool get isWindows =>
-      defaultTargetPlatform == TargetPlatform.windows;
+  static bool get isWindows => defaultTargetPlatform == TargetPlatform.windows;
 
   bool _inProgress = true;
   bool _hasInternet = false;
@@ -67,7 +66,7 @@ class AppController with ChangeNotifier {
       // await LocalNotification(title: 'test', body: 'test').show();
 
       final WebSocketChannel webSocketChannel =
-      WebSocketChannel.connect(Uri.parse('wss://${Const.serverUrl}/'));
+          WebSocketChannel.connect(Uri.parse('wss://${Const.serverUrl}/'));
 
       webSocketChannel.stream.listen((message) async {
         final Notification notification = Notification.fromJson(
