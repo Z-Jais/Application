@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -50,6 +51,9 @@ class AppController with ChangeNotifier {
   }
 
   Future<void> initialize() async {
+    await watchlist.init();
+    await seen.init();
+
     if (isAndroidOrIOS) {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
@@ -62,25 +66,23 @@ class AppController with ChangeNotifier {
     }
 
     if (isWindows) {
-      await localNotifier.setup(appName: 'Jaïs');
-      // await LocalNotification(title: 'test', body: 'test').show();
+      try {
+        final WebSocketChannel webSocketChannel =
+            WebSocketChannel.connect(Uri.parse('wss://${Const.serverUrl}/'));
 
-      final WebSocketChannel webSocketChannel =
-          WebSocketChannel.connect(Uri.parse('wss://${Const.serverUrl}/'));
+        webSocketChannel.stream.listen((message) async {
+          final Notification notification = Notification.fromJson(
+            jsonDecode(message as String) as Map<String, dynamic>,
+          );
 
-      webSocketChannel.stream.listen((message) async {
-        final Notification notification = Notification.fromJson(
-          jsonDecode(message as String) as Map<String, dynamic>,
-        );
-
-        await LocalNotification(
-          title: notification.title ?? 'Jaïs',
-          body: notification.body,
-        ).show();
-      });
+          await LocalNotification(
+            title: notification.title ?? 'Jaïs',
+            body: notification.body,
+          ).show();
+        });
+      } catch (e) {
+        log('Could not connect to WebSocket server: $e');
+      }
     }
-
-    await watchlist.init();
-    await seen.init();
   }
 }

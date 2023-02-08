@@ -1,6 +1,7 @@
-import 'dart:io';
 import 'dart:ui';
 
+import 'package:jais/controllers/app_controller.dart';
+import 'package:local_notifier/local_notifier.dart';
 import 'package:system_tray/system_tray.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -49,14 +50,16 @@ class WindowsPlatformController {
 
     systemTray.registerSystemTrayEventHandler((eventName) {
       if (eventName == kSystemTrayEventClick) {
-        Platform.isWindows
+        AppController.isWindows
             ? windowManager.show()
             : systemTray.popUpContextMenu();
       } else if (eventName == kSystemTrayEventRightClick) {
-        Platform.isWindows
+        AppController.isWindows
             ? systemTray.popUpContextMenu()
             : windowManager.show();
       }
     });
+
+    await localNotifier.setup(appName: 'Jaïs');
   }
 }
