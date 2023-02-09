@@ -26,7 +26,7 @@ class AnimeDiaryView extends StatelessWidget {
                   builder: (_, value, ___) => Row(
                     children: [
                       ...controller.days.map(
-                            (DayWidget e) => GestureDetector(
+                        (DayWidget e) => GestureDetector(
                           child: e,
                           onTap: () async => controller.day = e.dayNumber,
                         ),
