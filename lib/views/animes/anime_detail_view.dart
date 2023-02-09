@@ -22,50 +22,50 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
     widget.controller.anime ??=
         ModalRoute.of(context)!.settings.arguments! as Anime;
 
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(widget.controller.anime?.name ?? ''),
-          actions: <Widget>[
-            WatchlistButton(
-              onToggle: (bool inWatchlist) async {
-                if (inWatchlist) {
-                  await AppController.watchlist
-                      .remove(widget.controller.anime!.uuid);
-                } else {
-                  await AppController.watchlist
-                      .add(widget.controller.anime!.uuid);
-                }
-              },
-              inWatchlist:
-                  AppController.watchlist.hasIn(widget.controller.anime!.uuid),
-            ),
-            IconButton(
-              icon: const Icon(Icons.info_outline),
-              onPressed: () {
-                setState(() {
-                  _isOpen = !_isOpen;
-                });
-              },
-            ),
-          ],
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(_isOpen ? 100 : 0),
-            child: _isOpen
-                ? SizedBox(
-                    height: 100,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: SingleChildScrollView(
-                        child: Text(widget.controller.anime?.description ?? ''),
-                      ),
-                    ),
-                  )
-                : const SizedBox(),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text(widget.controller.anime?.name ?? ''),
+        actions: <Widget>[
+          WatchlistButton(
+            onToggle: (bool inWatchlist) async {
+              if (inWatchlist) {
+                await AppController.watchlist
+                    .remove(widget.controller.anime!.uuid);
+              } else {
+                await AppController.watchlist
+                    .add(widget.controller.anime!.uuid);
+              }
+            },
+            inWatchlist:
+                AppController.watchlist.hasIn(widget.controller.anime!.uuid),
           ),
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              setState(() {
+                _isOpen = !_isOpen;
+              });
+            },
+          ),
+        ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(_isOpen ? 100 : 0),
+          child: _isOpen
+              ? SizedBox(
+                  height: 100,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SingleChildScrollView(
+                      child: Text(widget.controller.anime?.description ?? ''),
+                    ),
+                  ),
+                )
+              : const SizedBox(),
         ),
-        body: Column(
+      ),
+      body: SafeArea(
+        child: Column(
           children: <Widget>[
             Expanded(child: LiteEpisodeList(controller: widget.controller))
           ],

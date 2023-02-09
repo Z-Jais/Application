@@ -11,12 +11,12 @@ class AnimeDiaryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Agenda'),
-        ),
-        body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Agenda'),
+      ),
+      body: SafeArea(
+        child: Column(
           children: <Widget>[
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -26,7 +26,7 @@ class AnimeDiaryView extends StatelessWidget {
                   builder: (_, value, ___) => Row(
                     children: [
                       ...controller.days.map(
-                        (DayWidget e) => GestureDetector(
+                            (DayWidget e) => GestureDetector(
                           child: e,
                           onTap: () async => controller.day = e.dayNumber,
                         ),
