@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jais/models/simulcast.dart';
 import 'package:jais/widgets/decoration/text_border_decoration.dart';
 
-class SimulcastWidget extends StatelessWidget {
+class SimulcastWidget extends StatefulWidget {
   final Simulcast simulcast;
   final bool isSelected;
 
@@ -42,12 +42,27 @@ class SimulcastWidget extends StatelessWidget {
   }
 
   @override
+  State<StatefulWidget> createState() => _SimulcastWidgetState();
+}
+
+class _SimulcastWidgetState extends State<SimulcastWidget> {
+  bool _isHover = false;
+
+  @override
   Widget build(BuildContext context) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      child: TextBorderDecoration(
-        text: '${getNaturalSeason()} ${simulcast.year}',
-        isSelected: isSelected,
+      onEnter: (_) => setState(() => _isHover = true),
+      onExit: (_) => setState(() => _isHover = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        transform: (_isHover && !widget.isSelected)
+            ? Matrix4.translationValues(0, -4, 0)
+            : null,
+        child: TextBorderDecoration(
+          text: '${widget.getNaturalSeason()} ${widget.simulcast.year}',
+          isSelected: widget.isSelected,
+        ),
       ),
     );
   }

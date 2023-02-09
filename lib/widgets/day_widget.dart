@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/widgets/decoration/text_border_decoration.dart';
 
-class DayWidget extends StatelessWidget {
+class DayWidget extends StatefulWidget {
   final String day;
   final int dayNumber;
   final bool isSelected;
@@ -26,10 +26,28 @@ class DayWidget extends StatelessWidget {
   }
 
   @override
+  State<StatefulWidget> createState() => _DayWidgetState();
+}
+
+class _DayWidgetState extends State<DayWidget> {
+  bool _isHover = false;
+
+  @override
   Widget build(BuildContext context) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      child: TextBorderDecoration(text: day, isSelected: isSelected),
+      onEnter: (_) => setState(() => _isHover = true),
+      onExit: (_) => setState(() => _isHover = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        transform: (_isHover && !widget.isSelected)
+            ? Matrix4.translationValues(0, -4, 0)
+            : null,
+        child: TextBorderDecoration(
+          text: widget.day,
+          isSelected: widget.isSelected,
+        ),
+      ),
     );
   }
 }
