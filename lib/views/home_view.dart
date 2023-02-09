@@ -19,10 +19,10 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     log('HomeView.build()');
 
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Column(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+        child: Column(
           children: [
             const TopNavigationBar(),
             Expanded(
@@ -56,22 +56,22 @@ class HomeView extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: ChangeNotifierProvider.value(
-          value: NavigationController.instance,
-          child: Consumer<NavigationController>(
-            builder: (_, value, __) {
-              return BottomNavigationBar(
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                selectedItemColor: Theme.of(context).primaryColor,
-                unselectedItemColor: Colors.grey,
-                currentIndex: value.currentPage,
-                onTap: (page) =>
-                    value.setCurrentPage(page, fromNavigationBar: true),
-                items: value.bottomNavigationBarItems.toList(),
-              );
-            },
-          ),
+      ),
+      bottomNavigationBar: ChangeNotifierProvider.value(
+        value: NavigationController.instance,
+        child: Consumer<NavigationController>(
+          builder: (_, value, __) {
+            return BottomNavigationBar(
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              selectedItemColor: Theme.of(context).primaryColor,
+              unselectedItemColor: Colors.grey,
+              currentIndex: value.currentPage,
+              onTap: (page) =>
+                  value.setCurrentPage(page, fromNavigationBar: true),
+              items: value.bottomNavigationBarItems.toList(),
+            );
+          },
         ),
       ),
     );
