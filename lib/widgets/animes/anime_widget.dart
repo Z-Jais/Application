@@ -11,13 +11,13 @@ class AnimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () async {
-          Navigator.of(context).pushNamed('/anime/detail', arguments: anime);
-        },
+    return GestureDetector(
+      onTap: () async {
+        Navigator.of(context).pushNamed('/anime/detail', arguments: anime);
+      },
+      child: RepaintBoundary(
         child: BorderDecoration(
+          hoverListener: true,
           child: Row(
             children: <Widget>[
               AnimeImage(anime: anime),

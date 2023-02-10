@@ -48,13 +48,13 @@ class EpisodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () async {
-          URLController().goOnUrl(episode.url);
-        },
+    return GestureDetector(
+      onTap: () async {
+        URLController().goOnUrl(episode.url);
+      },
+      child: RepaintBoundary(
         child: BorderDecoration(
+          hoverListener: true,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
