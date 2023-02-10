@@ -1,5 +1,6 @@
 import 'package:jais/controllers/animes/anime_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
+import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_widget.dart';
 import 'package:jais/widgets/day_widget.dart';
 
@@ -71,7 +72,7 @@ class AnimeDiaryController extends AnimeController {
   Future<List<AnimeWidget>> widgets() async {
     return URLController()
         .get(
-          'https://beta-api.ziedelth.fr/animes/diary/country/fr/day/$_day',
+          'https://${Const.serverUrl}/animes/diary/country/fr/day/$_day',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }
