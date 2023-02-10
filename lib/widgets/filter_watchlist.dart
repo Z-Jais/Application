@@ -4,9 +4,9 @@ import 'package:jais/models/episodetype.dart';
 import 'package:jais/models/langtype.dart';
 
 class FilterWatchlist extends StatefulWidget {
-  final VoidCallback? onFilterChanged;
+  final VoidCallback onFilterChanged;
 
-  const FilterWatchlist({this.onFilterChanged, super.key});
+  const FilterWatchlist({required this.onFilterChanged, super.key});
 
   @override
   _FilterWatchlistState createState() => _FilterWatchlistState();
@@ -21,7 +21,7 @@ class _FilterWatchlistState extends State<FilterWatchlist> {
       childrenPadding: const EdgeInsets.only(left: 16, right: 16),
       onExpansionChanged: (value) {
         if (value == false) {
-          widget.onFilterChanged?.call();
+          widget.onFilterChanged.call();
         }
       },
       title: const Text('Filtres'),
