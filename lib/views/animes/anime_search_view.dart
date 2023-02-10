@@ -9,24 +9,24 @@ class AnimeSearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: TextField(
-            decoration: const InputDecoration(
-              hintText: 'Rechercher un anime',
-              border: InputBorder.none,
-            ),
-            autofocus: true,
-            onSubmitted: (String value) async {
-              controller.query = value;
-              controller.reset();
-              await controller.load();
-            },
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: TextField(
+          decoration: const InputDecoration(
+            hintText: 'Rechercher un anime',
+            border: InputBorder.none,
           ),
+          autofocus: true,
+          onSubmitted: (String value) async {
+            controller.query = value;
+            controller.reset();
+            await controller.load();
+          },
         ),
-        body: Column(
+      ),
+      body: SafeArea(
+        child: Column(
           children: <Widget>[
             Expanded(child: AnimeList(controller: controller)),
           ],

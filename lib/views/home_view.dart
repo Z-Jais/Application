@@ -20,10 +20,10 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     log('HomeView.build()');
 
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Column(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+        child: Column(
           children: [
             const TopNavigationBar(),
             Expanded(
