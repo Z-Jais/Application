@@ -6,10 +6,12 @@ import 'package:jais/controllers/animes/anime_watchlist_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/episodes/episode_controller.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
+import 'package:jais/controllers/episodes/episode_watchlist_filter_controller.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/widgets/animes/anime_list.dart';
 import 'package:jais/widgets/animes/anime_tab.dart';
 import 'package:jais/widgets/episodes/episode_list.dart';
+import 'package:jais/widgets/episodes/episode_watchlist_tab.dart';
 import 'package:jais/widgets/top_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -57,26 +59,26 @@ class HomeView extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: AppController.isAndroidOrIOS
-            ? ChangeNotifierProvider.value(
-                value: NavigationController.instance,
-                child: Consumer<NavigationController>(
-                  builder: (_, value, __) {
-                    return BottomNavigationBar(
-                      showSelectedLabels: false,
-                      showUnselectedLabels: false,
-                      selectedItemColor: Theme.of(context).primaryColor,
-                      unselectedItemColor: Colors.grey,
-                      currentIndex: value.currentPage,
-                      onTap: (page) =>
-                          value.setCurrentPage(page, fromNavigationBar: true),
-                      items: value.bottomNavigationBarItems.toList(),
-                    );
-                  },
-                ),
-              )
-            : null,
       ),
+      bottomNavigationBar: AppController.isAndroidOrIOS
+          ? ChangeNotifierProvider.value(
+              value: NavigationController.instance,
+              child: Consumer<NavigationController>(
+                builder: (_, value, __) {
+                  return BottomNavigationBar(
+                    showSelectedLabels: false,
+                    showUnselectedLabels: false,
+                    selectedItemColor: Theme.of(context).primaryColor,
+                    unselectedItemColor: Colors.grey,
+                    currentIndex: value.currentPage,
+                    onTap: (page) =>
+                        value.setCurrentPage(page, fromNavigationBar: true),
+                    items: value.bottomNavigationBarItems.toList(),
+                  );
+                },
+              ),
+            )
+          : null,
     );
   }
 }
@@ -92,20 +94,18 @@ class MyPage extends StatelessWidget {
       controller: controller.pageController,
       onPageChanged: controller.setCurrentPage,
       children: [
-        EpisodeList(
-          controller: EpisodeController(),
-        ),
+        // EPISODES TAB
+        EpisodeList(controller: EpisodeController()),
+        // WATCHLIST TAB
         if (controller.advancedView)
-          AnimeList(
-            controller: AnimeWatchlistController(),
-          )
+          EpisodeList(controller: EpisodeWatchlistController())
         else
-          EpisodeList(
-            controller: EpisodeWatchlistController(),
-          ),
-        AnimeTab(
-          controller: AnimeTabController(),
-        ),
+          EpisodeWatchlistTab(controller: EpisodeWatchlistFilterController()),
+        // ANIME TAB
+        if (controller.advancedView)
+          AnimeList(controller: AnimeWatchlistController())
+        else
+          AnimeTab(controller: AnimeTabController()),
       ],
     );
   }

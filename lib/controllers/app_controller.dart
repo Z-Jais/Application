@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:jais/controllers/ad_controller.dart';
 import 'package:jais/controllers/datas/collection_data_controller.dart';
+import 'package:jais/controllers/filter_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/firebase_options.dart';
 import 'package:jais/models/notification.dart';
@@ -53,6 +54,7 @@ class AppController with ChangeNotifier {
   Future<void> initialize() async {
     await watchlist.init();
     await seen.init();
+    await FilterController.instance.init();
 
     if (isAndroidOrIOS) {
       await Firebase.initializeApp(

@@ -15,4 +15,21 @@ class EpisodeType {
   factory EpisodeType.fromJson(Map<String, dynamic> json) =>
       _$EpisodeTypeFromJson(json);
   Map<String, dynamic> toJson() => _$EpisodeTypeToJson(this);
+
+  @override
+  String toString() {
+    if (name == 'EPISODE') {
+      return 'Épisode';
+    }
+
+    if (name == 'SPECIAL') {
+      return 'Spécial';
+    }
+
+    if (name == 'FILM') {
+      return 'Film';
+    }
+
+    return '??';
+  }
 }

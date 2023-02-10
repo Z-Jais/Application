@@ -12,23 +12,25 @@ class AnimeImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: 'https://${Const.serverUrl}/animes/attachment/${anime.uuid}',
-      imageBuilder: (_, ImageProvider<Object> imageProvider) {
-        return RoundBorderDecoration(
-          widget: Image(image: imageProvider, fit: BoxFit.cover),
-        );
-      },
-      placeholder: (_, __) => const Skeleton(
+    return RepaintBoundary(
+      child: CachedNetworkImage(
+        imageUrl: 'https://${Const.serverUrl}/animes/attachment/${anime.uuid}',
+        imageBuilder: (_, ImageProvider<Object> imageProvider) {
+          return RoundBorderDecoration(
+            widget: Image(image: imageProvider, fit: BoxFit.cover),
+          );
+        },
+        placeholder: (_, __) => const Skeleton(
+          width: Const.animeImageWith,
+          height: Const.animeImageHeight,
+        ),
+        errorWidget: (_, __, ___) => const Skeleton(
+          width: Const.animeImageWith,
+          height: Const.animeImageHeight,
+        ),
         width: Const.animeImageWith,
         height: Const.animeImageHeight,
       ),
-      errorWidget: (_, __, ___) => const Skeleton(
-        width: Const.animeImageWith,
-        height: Const.animeImageHeight,
-      ),
-      width: Const.animeImageWith,
-      height: Const.animeImageHeight,
     );
   }
 }
