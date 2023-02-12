@@ -14,7 +14,7 @@ class PlatformWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl:
-          'https://beta-api.ziedelth.fr/platforms/attachment/${platform.uuid}',
+          'https://${Const.serverUrl}/platforms/attachment/${platform.uuid}',
       imageBuilder: (_, ImageProvider<Object> imageProvider) {
         return RoundBorderDecoration(
           radius: 360,

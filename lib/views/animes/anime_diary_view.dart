@@ -11,12 +11,12 @@ class AnimeDiaryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Agenda'),
-        ),
-        body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Agenda'),
+      ),
+      body: SafeArea(
+        child: Column(
           children: <Widget>[
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,

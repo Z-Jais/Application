@@ -67,3 +67,22 @@ jobs:
         with:
           default_author: github_actions
           message: 'Update native splash'
+
+  # Check if environment is correct
+  check_env:
+    needs:
+      - format_and_analyze
+    name: Check environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check environment
+        run: |
+          result=$(cat lib/utils.dart | grep -v "//" | grep "serverUrl" | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//' | sed 's/.*"\(.*\)".*/\1/')
+          
+          if [ "$result" != "beta-api.ziedelth.fr" ]; then
+            echo "Environment is not correct"
+            exit 1
+          fi

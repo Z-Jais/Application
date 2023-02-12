@@ -27,6 +27,9 @@ class DayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextBorderDecoration(text: day, isSelected: isSelected);
+    return TextBorderDecoration(
+      text: day,
+      isSelected: isSelected,
+    );
   }
 }

@@ -18,34 +18,6 @@ class EpisodeWidget extends StatelessWidget {
     super.key,
   });
 
-  String getEpisodeType() {
-    if (episode.episodeType.name == 'EPISODE') {
-      return 'Épisode';
-    }
-
-    if (episode.episodeType.name == 'SPECIAL') {
-      return 'Spécial';
-    }
-
-    if (episode.episodeType.name == 'FILM') {
-      return 'Film';
-    }
-
-    return '??';
-  }
-
-  String getLangType() {
-    if (episode.langType.name == 'SUBTITLES') {
-      return 'VOSTFR';
-    }
-
-    if (episode.langType.name == 'VOICE') {
-      return 'VF';
-    }
-
-    return '??';
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -53,6 +25,7 @@ class EpisodeWidget extends StatelessWidget {
         URLController().goOnUrl(episode.url);
       },
       child: BorderDecoration(
+        hoverListener: true,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +72,7 @@ class EpisodeWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Saison ${episode.season} • ${getEpisodeType()} ${episode.number} ${getLangType()}',
+                        'Saison ${episode.season} • ${episode.episodeType} ${episode.number} ${episode.langType}',
                         overflow: TextOverflow.ellipsis,
                       ),
                       Row(
