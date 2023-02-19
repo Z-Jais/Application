@@ -20,12 +20,15 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
   DataController({
     bool firstLoad = true,
     bool listener = true,
+    bool addDefaultLoader = true,
     required this.limit,
     required this.loadingWidget,
     required this.fromJson,
     required this.toWidget,
   }) {
-    list.addAll(_loaders);
+    if (addDefaultLoader) {
+      list.addAll(_loaders);
+    }
 
     if (firstLoad) {
       load();
@@ -79,8 +82,8 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
 
     try {
       final List<ModelWidget> widgets = await this.widgets();
-      _removeLoader();
-      list.addAll(widgets);
+      // _removeLoader();
+      // list.addAll(widgets);
       _canLoadMore = widgets.length == limit;
       lastPageError = false;
     } catch (exception, stackTrace) {

@@ -10,6 +10,7 @@ class AnimeSearchController extends AnimeController {
       : super(
           firstLoad: false,
           listener: false,
+          addDefaultLoader: false,
         );
 
   @override

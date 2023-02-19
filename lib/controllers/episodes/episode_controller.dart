@@ -7,7 +7,7 @@ import 'package:jais/widgets/episodes/episode_widget.dart';
 
 class EpisodeController
     extends DataController<Episode, EpisodeLoaderWidget, EpisodeWidget> {
-  EpisodeController({bool showActions = false})
+  EpisodeController({bool showActions = false, super.firstLoad = true})
       : super(
           limit: 12,
           loadingWidget: const EpisodeLoaderWidget(),
