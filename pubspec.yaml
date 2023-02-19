@@ -2,7 +2,7 @@ name: jais
 description: A Flutter application by Ziedelth for mobile members
 
 publish_to: 'none'
-version: 2.1.0+14
+version: 2.1.1+15
 
 environment:
   sdk: ">=2.19.0 <4.0.0"
@@ -15,7 +15,6 @@ dependencies:
   flutter:
     sdk: flutter
   freezed_annotation: ^2.2.0
-  google_fonts: ^4.0.3
   google_mobile_ads: ^2.3.0
   http: ^0.13.5
   internet_connection_checker: ^1.0.0+1
@@ -61,10 +60,15 @@ flutter:
     - 'assets/no_connection.png'
     - 'assets/no_element.png'
 
+  fonts:
+    - family: 'Pacifico'
+      fonts:
+        - asset: 'assets/fonts/Pacifico-Regular.ttf'
+
 msix_config:
   display_name: Jais
   publisher_display_name: Ziedelth
   identity_name: Ziedelth.Jais
-  msix_version: 2.1.0.0
+  msix_version: 2.1.1.0
   logo_path: assets/icon.png
   capabilities: internetClient

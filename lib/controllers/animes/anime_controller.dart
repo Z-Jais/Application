@@ -10,8 +10,11 @@ class AnimeController
     extends DataController<Anime, AnimeLoaderWidget, AnimeWidget> {
   Simulcast? simulcast;
 
-  AnimeController({super.firstLoad = true, super.listener = true})
-      : super(
+  AnimeController({
+    super.firstLoad = true,
+    super.listener = true,
+    super.addDefaultLoader = true,
+  }) : super(
           limit: 24,
           loadingWidget: const AnimeLoaderWidget(),
           fromJson: (json) => Anime.fromJson(json),

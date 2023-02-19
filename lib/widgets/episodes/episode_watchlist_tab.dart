@@ -10,16 +10,21 @@ class EpisodeWatchlistTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        FilterWatchlist(
-          onFilterChanged: () async {
-            controller.reset();
-            await controller.load();
-          },
-        ),
-        Expanded(child: EpisodeList(controller: controller)),
-      ],
+    return FutureBuilder(
+      future: controller.load(),
+      builder: (context, snapshot) {
+        return Column(
+          children: [
+            FilterWatchlist(
+              onFilterChanged: () async {
+                controller.reset();
+                await controller.load();
+              },
+            ),
+            Expanded(child: EpisodeList(controller: controller)),
+          ],
+        );
+      },
     );
   }
 }

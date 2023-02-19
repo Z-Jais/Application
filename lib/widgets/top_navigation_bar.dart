@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/controllers/ad_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
@@ -94,10 +93,11 @@ class TopNavigationBar extends StatelessWidget {
           const SizedBox(width: 5),
           Text(
             'Jaïs',
-            style: GoogleFonts.pacifico(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).primaryColor,
+              fontFamily: 'Pacifico',
             ),
           ),
           if (AdController.instance.bannerAd != null &&

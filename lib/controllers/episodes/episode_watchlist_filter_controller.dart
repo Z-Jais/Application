@@ -10,7 +10,8 @@ import 'package:jais/utils.dart';
 import 'package:jais/widgets/episodes/episode_widget.dart';
 
 class EpisodeWatchlistFilterController extends EpisodeController {
-  EpisodeWatchlistFilterController() : super(showActions: true);
+  EpisodeWatchlistFilterController()
+      : super(showActions: true, firstLoad: false);
 
   String toGzip() {
     final String base64 = base64Encode(
