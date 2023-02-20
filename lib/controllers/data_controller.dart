@@ -82,8 +82,8 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
 
     try {
       final List<ModelWidget> widgets = await this.widgets();
-      // _removeLoader();
-      // list.addAll(widgets);
+      _removeLoader();
+      list.addAll(widgets);
       _canLoadMore = widgets.length == limit;
       lastPageError = false;
     } catch (exception, stackTrace) {
