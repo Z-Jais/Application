@@ -1,8 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:jais/controllers/animes/anime_detail_controller.dart';
 import 'package:jais/controllers/animes/anime_diary_controller.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
@@ -18,7 +16,7 @@ import 'package:window_manager/window_manager.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  debugRepaintRainbowEnabled = kDebugMode;
+  // debugRepaintRainbowEnabled = kDebugMode;
   // debugRepaintTextRainbowEnabled = kDebugMode;
 
   if (AppController.isWindows) {
