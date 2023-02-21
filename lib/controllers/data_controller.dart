@@ -18,7 +18,6 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
   bool lastPageError = false;
 
   DataController({
-    bool firstLoad = true,
     bool listener = true,
     bool addDefaultLoader = true,
     required this.limit,
@@ -28,10 +27,6 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
   }) {
     if (addDefaultLoader) {
       list.addAll(_loaders);
-    }
-
-    if (firstLoad) {
-      load();
     }
 
     if (listener) {

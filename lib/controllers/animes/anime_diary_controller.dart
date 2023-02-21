@@ -39,7 +39,6 @@ class AnimeDiaryController extends AnimeController {
 
   AnimeDiaryController()
       : super(
-          firstLoad: false,
           listener: false,
         ) {
     day = DateTime.now().weekday;

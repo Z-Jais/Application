@@ -8,7 +8,6 @@ class AnimeSearchController extends AnimeController {
 
   AnimeSearchController()
       : super(
-          firstLoad: false,
           listener: false,
           addDefaultLoader: false,
         );

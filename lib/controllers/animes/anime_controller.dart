@@ -11,7 +11,6 @@ class AnimeController
   Simulcast? simulcast;
 
   AnimeController({
-    super.firstLoad = false,
     super.listener = true,
     super.addDefaultLoader = true,
   }) : super(

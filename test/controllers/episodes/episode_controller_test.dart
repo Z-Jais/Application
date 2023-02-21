@@ -15,6 +15,7 @@ void main() {
     
     test('Load', () async {
       final controller = EpisodeController();
+      await controller.load();
       await Future.delayed(const Duration(seconds: 1));
 
       expect(controller.list, isNotEmpty);

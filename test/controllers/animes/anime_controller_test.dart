@@ -4,8 +4,6 @@ import 'package:jais/controllers/simulcast_controller.dart';
 import 'package:jais/widgets/simulcasts/simulcast_widget.dart';
 
 void main() {
-
-
   group('AnimeController', () {
     test('Init', () async {
       final controller = AnimeController();
@@ -25,7 +23,7 @@ void main() {
       final controller = AnimeController();
       controller.simulcast = (simulcastController.list.last as SimulcastWidget).simulcast;
       await controller.load();
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
 
       expect(controller.list, isNotEmpty);
       expect(controller.list, isNot(contains(controller.loadingWidget)));

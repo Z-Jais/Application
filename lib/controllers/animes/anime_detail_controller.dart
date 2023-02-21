@@ -19,7 +19,6 @@ class AnimeDetailController extends DataController<Episode,
             episode: episode,
             showActions: true,
           ),
-          firstLoad: false,
         );
 
   Anime? get anime => _anime;
