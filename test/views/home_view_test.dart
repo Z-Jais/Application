@@ -39,14 +39,49 @@ void nockUrl() {
       );
 }
 
+Future<void> testEpisodeTab(WidgetTester widgetTester, int atLeast) async {
+  expect(find.byType(TopNavigationBar), findsOneWidget);
+  expect(find.byType(EpisodeList), findsOneWidget);
+  expect(find.byType(EpisodeLoaderWidget), findsAtLeastNWidgets(atLeast));
+  expect(find.byType(BottomNavigationBar), findsOneWidget);
+  await widgetTester.pump();
+  expect(find.byType(TopNavigationBar), findsOneWidget);
+  expect(find.byType(EpisodeList), findsOneWidget);
+  expect(find.byType(EpisodeWidget), findsAtLeastNWidgets(atLeast));
+  expect(find.byType(BottomNavigationBar), findsOneWidget);
+}
+
+Future<void> testAnimeTab(
+  WidgetTester widgetTester,
+  int atLeastSimulcast,
+  int atLeastAnime,
+) async {
+  expect(find.byType(TopNavigationBar), findsOneWidget);
+  expect(find.byType(SimulcastList), findsOneWidget);
+  expect(
+    find.byType(SimulcastLoaderWidget),
+    findsAtLeastNWidgets(atLeastSimulcast),
+  );
+  expect(find.byType(AnimeList), findsOneWidget);
+  expect(find.byType(AnimeLoaderWidget), findsAtLeastNWidgets(atLeastAnime));
+  expect(find.byType(BottomNavigationBar), findsOneWidget);
+  await widgetTester.pump();
+  expect(find.byType(TopNavigationBar), findsOneWidget);
+  expect(find.byType(SimulcastList), findsOneWidget);
+  expect(find.byType(SimulcastWidget), findsAtLeastNWidgets(atLeastSimulcast));
+  expect(find.byType(AnimeList), findsOneWidget);
+  expect(find.byType(AnimeWidget), findsAtLeastNWidgets(atLeastAnime));
+  expect(find.byType(BottomNavigationBar), findsOneWidget);
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUpAll(nock.init);
   setUp(nock.cleanAll);
 
-  group('HomeView Android', () {
-    testWidgets('Launch on Mobile', (widgetTester) async {
+  group('HomeView on Android', () {
+    testWidgets('Smartphone', (widgetTester) async {
       nockUrl();
 
       widgetTester.binding.window.physicalSizeTestValue = const Size(360, 640);
@@ -56,37 +91,32 @@ void main() {
       await widgetTester.pumpWidget(const MaterialApp(home: HomeView()));
       debugDefaultTargetPlatformOverride = null;
 
-      expect(find.byType(TopNavigationBar), findsOneWidget);
-      expect(find.byType(VerticalDivider), findsNothing);
-      expect(find.byType(EpisodeList), findsOneWidget);
-      expect(find.byType(EpisodeLoaderWidget), findsAtLeastNWidgets(1));
-      expect(find.byType(BottomNavigationBar), findsOneWidget);
-      await widgetTester.pump();
-      expect(find.byType(TopNavigationBar), findsOneWidget);
-      expect(find.byType(VerticalDivider), findsNothing);
-      expect(find.byType(EpisodeList), findsOneWidget);
-      expect(find.byType(EpisodeWidget), findsAtLeastNWidgets(1));
-      expect(find.byType(BottomNavigationBar), findsOneWidget);
+      await testEpisodeTab(widgetTester, 2);
 
       log('HomeViewTest', 'Tap on anime tab');
       await widgetTester.tap(find.byIcon(Icons.live_tv));
       await widgetTester.pump();
 
-      expect(find.byType(TopNavigationBar), findsOneWidget);
-      expect(find.byType(VerticalDivider), findsNothing);
-      expect(find.byType(SimulcastList), findsOneWidget);
-      expect(find.byType(SimulcastLoaderWidget), findsAtLeastNWidgets(1));
-      expect(find.byType(AnimeList), findsOneWidget);
-      expect(find.byType(AnimeLoaderWidget), findsAtLeastNWidgets(1));
-      expect(find.byType(BottomNavigationBar), findsOneWidget);
+      await testAnimeTab(widgetTester, 2, 2);
+    });
+
+    testWidgets('Tablet', (widgetTester) async {
+      nockUrl();
+
+      widgetTester.binding.window.physicalSizeTestValue = const Size(768, 1024);
+      widgetTester.binding.window.devicePixelRatioTestValue = 1.0;
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+
+      await widgetTester.pumpWidget(const MaterialApp(home: HomeView()));
+      debugDefaultTargetPlatformOverride = null;
+
+      await testEpisodeTab(widgetTester, 6);
+
+      log('HomeViewTest', 'Tap on anime tab');
+      await widgetTester.tap(find.byIcon(Icons.live_tv));
       await widgetTester.pump();
-      expect(find.byType(TopNavigationBar), findsOneWidget);
-      expect(find.byType(VerticalDivider), findsNothing);
-      expect(find.byType(SimulcastList), findsOneWidget);
-      expect(find.byType(SimulcastWidget), findsAtLeastNWidgets(1));
-      expect(find.byType(AnimeList), findsOneWidget);
-      expect(find.byType(AnimeWidget), findsAtLeastNWidgets(1));
-      expect(find.byType(BottomNavigationBar), findsOneWidget);
+
+      await testAnimeTab(widgetTester, 2, 6);
     });
   });
 }

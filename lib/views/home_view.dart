@@ -4,11 +4,11 @@ import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/navigation_controller.dart';
+import 'package:jais/views/animes/anime_tab.dart';
+import 'package:jais/views/episodes/episode_tab.dart';
+import 'package:jais/views/episodes/episode_watchlist_tab.dart';
 import 'package:jais/widgets/animes/anime_list.dart';
-import 'package:jais/widgets/animes/anime_tab.dart';
 import 'package:jais/widgets/episodes/episode_list.dart';
-import 'package:jais/widgets/episodes/episode_tab.dart';
-import 'package:jais/widgets/episodes/episode_watchlist_tab.dart';
 import 'package:jais/widgets/top_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
