@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/anime_tab_controller.dart';
 import 'package:jais/controllers/animes/anime_watchlist_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
-import 'package:jais/controllers/episodes/episode_controller.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
-import 'package:jais/controllers/episodes/episode_watchlist_filter_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/widgets/animes/anime_list.dart';
@@ -95,17 +92,17 @@ class MyPage extends StatelessWidget {
       onPageChanged: controller.setCurrentPage,
       children: [
         // EPISODES TAB
-        EpisodeTab(controller: EpisodeController()),
+        const EpisodeTab(),
         // WATCHLIST TAB
         if (controller.advancedView)
           EpisodeList(controller: EpisodeWatchlistController())
         else
-          EpisodeWatchlistTab(controller: EpisodeWatchlistFilterController()),
+          const EpisodeWatchlistTab(),
         // ANIME TAB
         if (controller.advancedView)
           AnimeList(controller: AnimeWatchlistController())
         else
-          AnimeTab(controller: AnimeTabController()),
+          const AnimeTab(),
       ],
     );
   }

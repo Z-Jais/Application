@@ -4,30 +4,35 @@ import 'package:jais/controllers/logger.dart';
 import 'package:jais/widgets/episodes/episode_list.dart';
 import 'package:jais/widgets/filter_watchlist.dart';
 
-class EpisodeWatchlistTab extends StatelessWidget {
-  final EpisodeWatchlistFilterController controller;
+class EpisodeWatchlistTab extends StatefulWidget {
+  const EpisodeWatchlistTab({super.key});
 
-  const EpisodeWatchlistTab({required this.controller, super.key});
+  @override
+  State<StatefulWidget> createState() => _EpisodeWatchlistTabState();
+}
+
+class _EpisodeWatchlistTabState extends State<EpisodeWatchlistTab> {
+  final _controller = EpisodeWatchlistFilterController();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _controller.load());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     log('EpisodeWatchlistTab', 'build()');
-
-    return FutureBuilder(
-      future: controller.load(),
-      builder: (context, snapshot) {
-        return Column(
-          children: [
-            FilterWatchlist(
-              onFilterChanged: () async {
-                controller.reset();
-                await controller.load();
-              },
-            ),
-            Expanded(child: EpisodeList(controller: controller)),
-          ],
-        );
-      },
+    return Column(
+      children: [
+        FilterWatchlist(
+          onFilterChanged: () async {
+            _controller.reset();
+            await _controller.load();
+          },
+        ),
+        Expanded(child: EpisodeList(controller: _controller)),
+      ],
     );
   }
 }

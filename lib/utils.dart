@@ -131,8 +131,6 @@ extension StringExt on String? {
 
 extension ScrollControllerExt on ScrollController {
   Future<void> scrollToEnd() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 100));
-
     try {
       animateTo(
         position.maxScrollExtent,

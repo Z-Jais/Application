@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
@@ -21,8 +20,6 @@ class EpisodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('EpisodeWidget', 'build()');
-
     return GestureDetector(
       onTap: () async {
         URLController().goOnUrl(episode.url);

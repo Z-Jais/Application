@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/episodes/episode_controller.dart';
-import 'package:jais/controllers/logger.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/infinite_scroll.dart';
 
@@ -18,8 +17,6 @@ class EpisodeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('EpisodeList', 'build()');
-
     if (!context.isOnMobile) {
       final double width = MediaQuery.of(context).size.width;
 
