@@ -73,19 +73,23 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
 
   Future<void> load() async {
     if (_isLoading) {
+      print('Already loading $runtimeType');
       return;
     }
 
+    print('Loading $runtimeType');
     _isLoading = true;
     list.addAll(_loaders);
     notifyListeners();
 
     try {
+      print('Loading $runtimeType (page $page) ...');
       final List<ModelWidget> widgets = await this.widgets();
       _removeLoader();
       list.addAll(widgets);
       _canLoadMore = widgets.length == limit;
       lastPageError = false;
+      print('Loading $runtimeType (page $page) done');
     } catch (exception, stackTrace) {
       lastPageError = true;
 
