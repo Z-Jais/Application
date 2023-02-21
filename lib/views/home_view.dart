@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/anime_tab_controller.dart';
 import 'package:jais/controllers/animes/anime_watchlist_controller.dart';
@@ -7,10 +5,12 @@ import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/episodes/episode_controller.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_filter_controller.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/widgets/animes/anime_list.dart';
 import 'package:jais/widgets/animes/anime_tab.dart';
 import 'package:jais/widgets/episodes/episode_list.dart';
+import 'package:jais/widgets/episodes/episode_tab.dart';
 import 'package:jais/widgets/episodes/episode_watchlist_tab.dart';
 import 'package:jais/widgets/top_navigation_bar.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('HomeView.build()');
+    log('HomeView', 'build()');
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -95,7 +95,7 @@ class MyPage extends StatelessWidget {
       onPageChanged: controller.setCurrentPage,
       children: [
         // EPISODES TAB
-        EpisodeList(controller: EpisodeController()),
+        EpisodeTab(controller: EpisodeController()),
         // WATCHLIST TAB
         if (controller.advancedView)
           EpisodeList(controller: EpisodeWatchlistController())

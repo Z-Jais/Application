@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/decoration/border_decoration.dart';
 import 'package:jais/widgets/platforms/platform_loader_widget.dart';
@@ -9,6 +10,8 @@ class EpisodeLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('EpisodeLoaderWidget', 'build()');
+
     return BorderDecoration(
       child: Column(
         mainAxisSize: MainAxisSize.min,

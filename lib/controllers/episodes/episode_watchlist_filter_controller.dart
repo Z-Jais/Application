@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:jais/controllers/app_controller.dart';
@@ -13,7 +12,7 @@ class EpisodeWatchlistFilterController extends EpisodeController {
   EpisodeWatchlistFilterController() : super(showActions: true);
 
   String toGzip() {
-    final String base64 = base64Encode(
+    return base64Encode(
       gzip.encode(
         utf8.encode(
           jsonEncode(
@@ -29,8 +28,6 @@ class EpisodeWatchlistFilterController extends EpisodeController {
         ),
       ),
     );
-    log(base64);
-    return base64;
   }
 
   @override

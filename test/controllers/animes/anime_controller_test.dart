@@ -14,14 +14,15 @@ void main() {
       expect(controller.lastPageError, isFalse);
       expect(controller.nothingToShow(), isFalse);
     });
-    
+
     test('Load', () async {
       final SimulcastController simulcastController = SimulcastController();
       await simulcastController.load();
       await Future.delayed(const Duration(seconds: 1));
 
       final controller = AnimeController();
-      controller.simulcast = (simulcastController.list.last as SimulcastWidget).simulcast;
+      controller.simulcast =
+          (simulcastController.list.last as SimulcastWidget).simulcast;
       await controller.load();
       await Future.delayed(const Duration(seconds: 1));
 

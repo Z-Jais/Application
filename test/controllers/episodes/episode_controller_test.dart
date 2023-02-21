@@ -12,7 +12,7 @@ void main() {
       expect(controller.lastPageError, isFalse);
       expect(controller.nothingToShow(), isFalse);
     });
-    
+
     test('Load', () async {
       final controller = EpisodeController();
       await controller.load();

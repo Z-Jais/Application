@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jais/controllers/ad_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/models/navigation_bar_item.dart';
 import 'package:jais/widgets/decoration/round_border_decoration.dart';
@@ -45,6 +46,8 @@ class TopNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('TopNavigationBar', 'build()');
+
     return SizedBox(
       height: 50,
       child: Row(

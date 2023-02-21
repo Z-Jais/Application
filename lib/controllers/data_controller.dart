@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/logger.dart';
 
 abstract class DataController<Model, ModelLoadingWidget extends Widget,
     ModelWidget extends Widget> with ChangeNotifier {
@@ -48,8 +47,8 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
   }
 
   bool nothingToShow() =>
-      (list.whereType<ModelWidget>().isEmpty && page == 1 && lastPageError) ||
-      (!_isLoading && list.whereType<ModelWidget>().isEmpty && !_canLoadMore);
+      list.whereType<ModelWidget>().isEmpty &&
+      (page == 1 && lastPageError || !_isLoading && !_canLoadMore);
 
   List<ModelLoadingWidget> get _loaders =>
       List<ModelLoadingWidget>.generate(limit, (_) => loadingWidget);
@@ -68,28 +67,27 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
 
   Future<void> load() async {
     if (_isLoading) {
-      print('Already loading $runtimeType');
+      log(runtimeType.toString(), 'Already loading $runtimeType');
       return;
     }
-
-    print('Loading $runtimeType');
     _isLoading = true;
     list.addAll(_loaders);
     notifyListeners();
 
     try {
-      print('Loading $runtimeType (page $page) ...');
+      log(runtimeType.toString(), 'Loading (page $page) ...');
       final List<ModelWidget> widgets = await this.widgets();
       _removeLoader();
       list.addAll(widgets);
       _canLoadMore = widgets.length == limit;
       lastPageError = false;
-      print('Loading $runtimeType (page $page) done');
+      log(runtimeType.toString(), 'Loading (page $page) done');
     } catch (exception, stackTrace) {
       lastPageError = true;
 
       log(
-        'Error while loading $runtimeType',
+        runtimeType.toString(),
+        'Error while loading',
         error: exception,
         stackTrace: stackTrace,
       );
