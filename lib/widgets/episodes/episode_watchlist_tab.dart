@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_filter_controller.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:jais/widgets/episodes/episode_list.dart';
 import 'package:jais/widgets/filter_watchlist.dart';
 
@@ -10,6 +11,8 @@ class EpisodeWatchlistTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('EpisodeWatchlistTab', 'build()');
+
     return FutureBuilder(
       future: controller.load(),
       builder: (context, snapshot) {
