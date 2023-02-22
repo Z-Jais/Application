@@ -64,10 +64,21 @@ void nockUrl() {
         '/episodes/watchlist_filter/page/1/limit/12',
         "H4sIAAAAAAAACl2Ou06DMQxG3yVzLTmJ4wvPwYY62PkdVAlKpU4I8e6NOjAwfledn+LXy2fey8vb+VTydrl/Hf/U6/ft6RRNdUMSQMMKlKODa52wQpy4TW/YyqlMazrkEKjHbEBHT1BZDNom46xJPW3XTKx1brrDPnbNOugKhjY0mUhihZdN8eHX9z+EUZnS6oKKvkdrc7gpAY7ZDwobIbi/ZRKms0O4TyCVAdo5AZkDQ2PE0nL+fQDZFBtH/QAAAA==",
       )
-      .reply(
-        200,
-        '[]',
-      );
+      .reply(200, '[]');
+
+  nock('https://${Const.serverUrl}')
+      .post(
+    '/episodes/watchlist_filter/page/1/limit/12',
+    "H4sIAAAAAAAACsWPO06EMQyE75J6LTmJ4wfnoENb2PkdtBIsK22FEHcnoqCgRqL0+POM56P49fKa9/LwdD6VvF3ub8ev6fH99q0UTXVDEkDDCpSjg2udsEKcuE1v2MqpTGs65BCox2xAR09QWQzaJuOsST1tYybWOjfdyz42Zh10BUMbmkwkscI39g+hu/qLX59/eo/KlFYXVPR9tPYfbkqAY/aDwkYIbm+ZhOnsEO4TSGWAdk5A5sDQGLF0Y3/pdv78AoP5XU/AAQAA",
+  )
+      .reply(200, '[]');
+
+  nock('https://${Const.serverUrl}')
+      .post(
+    '/episodes/watchlist_filter/page/1/limit/12',
+    "H4sIAAAAAAAACuWQO06EMQyE75J6LTmJ4wfnoENb2PkdtBIsK22FEHcnoqDgBEiUHn+eseaj+PXymvfy8HQ+lbxd7m/Hr+nx/fatFE11QxJAwwqUo4NrnbBCnLhNb9jKqUxrOuQQqMdsQEdPUFkM2ibjrEk9bWMm1jo33cs+NmYddAVDG5pMJLHCN/ZfQnffL359/il7VKa0uqCi76O1/3BTAhyzHxQ2QnB7yyRMZ4dwn0AqA7RzAjIHhsaIpRv7u27nzy+Y5N11gwIAAA==",
+  )
+      .reply(200, '[]');
 
   nock('https://${Const.serverUrl}')
       .get('/animes/country/fr/search/name/Boruto')
@@ -86,6 +97,19 @@ Future<void> testEpisodeTab(WidgetTester widgetTester, int atLeast) async {
   expect(find.byType(TopNavigationBar), findsOneWidget);
   expect(find.byType(EpisodeList), findsOneWidget);
   expect(find.byType(EpisodeWidget), findsAtLeastNWidgets(atLeast));
+  expect(find.byType(BottomNavigationBar), findsOneWidget);
+}
+
+Future<void> testWatchlistTab(WidgetTester widgetTester, int atLeast) async {
+  expect(find.byType(TopNavigationBar), findsOneWidget);
+  expect(find.byType(FilterWatchlist), findsOneWidget);
+  expect(find.byType(EpisodeList), findsOneWidget);
+  expect(find.byType(EpisodeLoaderWidget), findsAtLeastNWidgets(atLeast));
+  expect(find.byType(BottomNavigationBar), findsOneWidget);
+  await widgetTester.pump();
+  expect(find.byType(TopNavigationBar), findsOneWidget);
+  expect(find.byType(FilterWatchlist), findsOneWidget);
+  expect(find.byType(NoElement), findsOneWidget);
   expect(find.byType(BottomNavigationBar), findsOneWidget);
 }
 
@@ -119,95 +143,202 @@ void main() {
   setUp(nock.cleanAll);
 
   group('HomeView on Android', () {
-    testWidgets('Smartphone', (widgetTester) async {
-      nockUrl();
+    group('Smartphone', () {
+      testWidgets('Default Tabs', (widgetTester) async {
+        nockUrl();
 
-      widgetTester.binding.window.physicalSizeTestValue = const Size(360, 640);
-      widgetTester.binding.window.devicePixelRatioTestValue = 1.0;
-      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+        widgetTester.binding.window.physicalSizeTestValue =
+            const Size(360, 640);
+        widgetTester.binding.window.devicePixelRatioTestValue = 1.0;
+        debugDefaultTargetPlatformOverride = TargetPlatform.android;
 
-      info('HomeViewTest', 'Init controllers');
-      SharedPreferences.setMockInitialValues({});
-      await AppController.seen.init();
-      await AppController.watchlist.init();
-      await FilterController.instance.init();
+        info('HomeViewTest', 'Init controllers');
+        SharedPreferences.setMockInitialValues({});
+        await AppController.seen.init();
+        await AppController.watchlist.init();
+        await FilterController.instance.init();
 
-      debug('HomeViewTest', '-' * 50);
-      debug('HomeViewTest', 'Build widget');
+        debug('HomeViewTest', '-' * 50);
+        debug('HomeViewTest', 'Build widget');
 
-      await widgetTester.pumpWidget(
-        MaterialApp(
-          initialRoute: '/',
-          routes: {
-            '/': (context) => const HomeView(),
-            '/anime/search': (_) {
-              return AnimeSearchView(controller: AnimeSearchController());
+        await widgetTester.pumpWidget(const MaterialApp(home: HomeView()));
+
+        debugDefaultTargetPlatformOverride = null;
+
+        // EPISODES TAB
+        debug('HomeViewTest', '-' * 50);
+        await testEpisodeTab(widgetTester, 2);
+
+        // WATCHLIST TAB
+        debug('HomeViewTest', 'Tap on watchlist tab');
+        await widgetTester.tap(find.byIcon(Icons.list));
+        await widgetTester.pump();
+
+        await testWatchlistTab(widgetTester, 1);
+        debug('HomeViewTest', '-' * 50);
+
+        // ANIME TAB
+        debug('HomeViewTest', 'Tap on anime tab');
+        await widgetTester.tap(find.byIcon(Icons.live_tv));
+        await widgetTester.pump();
+
+        await testAnimeTab(widgetTester, 2, 2);
+        expect(find.byIcon(Icons.search), findsOneWidget);
+        expect(find.byIcon(Icons.calendar_view_week), findsOneWidget);
+        debug('HomeViewTest', '-' * 50);
+      });
+
+      testWidgets('Search View', (widgetTester) async {
+        nockUrl();
+
+        widgetTester.binding.window.physicalSizeTestValue =
+            const Size(360, 640);
+        widgetTester.binding.window.devicePixelRatioTestValue = 1.0;
+        debugDefaultTargetPlatformOverride = TargetPlatform.android;
+
+        info('HomeViewTest', 'Init controllers');
+        SharedPreferences.setMockInitialValues({});
+        await AppController.seen.init();
+        await AppController.watchlist.init();
+        await FilterController.instance.init();
+
+        debug('HomeViewTest', '-' * 50);
+        debug('HomeViewTest', 'Build widget');
+
+        await widgetTester.pumpWidget(
+          MaterialApp(
+            initialRoute: '/',
+            routes: {
+              '/': (context) => const HomeView(),
+              '/anime/search': (_) {
+                return AnimeSearchView(controller: AnimeSearchController());
+              },
+              '/anime/detail': (_) {
+                return AnimeDetailView(controller: AnimeDetailController());
+              },
+              '/anime/diary': (_) {
+                return AnimeDiaryView(controller: AnimeDiaryController());
+              },
             },
-            '/anime/detail': (_) {
-              return AnimeDetailView(controller: AnimeDetailController());
+          ),
+        );
+
+        debugDefaultTargetPlatformOverride = null;
+
+        // EPISODES TAB
+        debug('HomeViewTest', '-' * 50);
+        await testEpisodeTab(widgetTester, 2);
+
+        // WATCHLIST TAB
+        debug('HomeViewTest', 'Tap on watchlist tab');
+        await widgetTester.tap(find.byIcon(Icons.list));
+        await widgetTester.pump();
+
+        await testWatchlistTab(widgetTester, 1);
+        debug('HomeViewTest', '-' * 50);
+
+        // ANIME TAB
+        debug('HomeViewTest', 'Tap on anime tab');
+        await widgetTester.tap(find.byIcon(Icons.live_tv));
+        await widgetTester.pump();
+
+        await testAnimeTab(widgetTester, 2, 2);
+        expect(find.byIcon(Icons.search), findsOneWidget);
+        expect(find.byIcon(Icons.calendar_view_week), findsOneWidget);
+        debug('HomeViewTest', '-' * 50);
+
+        // SEARCH VIEW
+        debug('HomeViewTest', 'Tap on search icon');
+        await widgetTester.tap(find.byIcon(Icons.search));
+        await widgetTester.pumpAndSettle();
+
+        expect(find.byType(TopNavigationBar), findsNothing);
+        expect(find.byType(AppBar), findsOneWidget);
+        expect(find.byType(AnimeList), findsOneWidget);
+        expect(find.byType(AnimeLoaderWidget), findsNothing);
+        expect(find.byType(AnimeWidget), findsNothing);
+
+        // Enter text
+        debug('HomeViewTest', 'Enter text');
+        await widgetTester.enterText(find.byType(TextField), 'Boruto');
+        await widgetTester.testTextInput.receiveAction(TextInputAction.search);
+        await widgetTester.pump();
+
+        expect(find.byType(TopNavigationBar), findsNothing);
+        expect(find.byType(AppBar), findsOneWidget);
+        expect(find.byType(AnimeList), findsOneWidget);
+        expect(find.byType(AnimeLoaderWidget), findsNothing);
+        expect(find.byType(AnimeWidget), findsOneWidget);
+      });
+
+      testWidgets('Diary View', (widgetTester) async {
+        nockUrl();
+
+        widgetTester.binding.window.physicalSizeTestValue =
+            const Size(360, 640);
+        widgetTester.binding.window.devicePixelRatioTestValue = 1.0;
+        debugDefaultTargetPlatformOverride = TargetPlatform.android;
+
+        info('HomeViewTest', 'Init controllers');
+        SharedPreferences.setMockInitialValues({});
+        await AppController.seen.init();
+        await AppController.watchlist.init();
+        await FilterController.instance.init();
+
+        debug('HomeViewTest', '-' * 50);
+        debug('HomeViewTest', 'Build widget');
+
+        await widgetTester.pumpWidget(
+          MaterialApp(
+            initialRoute: '/',
+            routes: {
+              '/': (context) => const HomeView(),
+              '/anime/search': (_) {
+                return AnimeSearchView(controller: AnimeSearchController());
+              },
+              '/anime/detail': (_) {
+                return AnimeDetailView(controller: AnimeDetailController());
+              },
+              '/anime/diary': (_) {
+                return AnimeDiaryView(controller: AnimeDiaryController());
+              },
             },
-            '/anime/diary': (_) {
-              return AnimeDiaryView(controller: AnimeDiaryController());
-            },
-          },
-        ),
-      );
+          ),
+        );
 
-      debugDefaultTargetPlatformOverride = null;
+        debugDefaultTargetPlatformOverride = null;
 
-      // EPISODES TAB
-      debug('HomeViewTest', '-' * 50);
-      await testEpisodeTab(widgetTester, 2);
+        // EPISODES TAB
+        debug('HomeViewTest', '-' * 50);
+        await testEpisodeTab(widgetTester, 2);
 
-      // WATCHLIST TAB
-      debug('HomeViewTest', 'Tap on watchlist tab');
-      await widgetTester.tap(find.byIcon(Icons.list));
-      await widgetTester.pump();
+        // WATCHLIST TAB
+        debug('HomeViewTest', 'Tap on watchlist tab');
+        await widgetTester.tap(find.byIcon(Icons.list));
+        await widgetTester.pump();
 
-      expect(find.byType(TopNavigationBar), findsOneWidget);
-      expect(find.byType(FilterWatchlist), findsOneWidget);
-      expect(find.byType(EpisodeList), findsOneWidget);
-      expect(find.byType(EpisodeLoaderWidget), findsAtLeastNWidgets(1));
-      expect(find.byType(BottomNavigationBar), findsOneWidget);
-      await widgetTester.pump();
-      expect(find.byType(TopNavigationBar), findsOneWidget);
-      expect(find.byType(FilterWatchlist), findsOneWidget);
-      expect(find.byType(NoElement), findsOneWidget);
-      expect(find.byType(BottomNavigationBar), findsOneWidget);
-      debug('HomeViewTest', '-' * 50);
+        await testWatchlistTab(widgetTester, 1);
+        debug('HomeViewTest', '-' * 50);
 
-      // ANIME TAB
-      debug('HomeViewTest', 'Tap on anime tab');
-      await widgetTester.tap(find.byIcon(Icons.live_tv));
-      await widgetTester.pump();
+        // ANIME TAB
+        debug('HomeViewTest', 'Tap on anime tab');
+        await widgetTester.tap(find.byIcon(Icons.live_tv));
+        await widgetTester.pump();
 
-      await testAnimeTab(widgetTester, 2, 2);
-      expect(find.byIcon(Icons.search), findsOneWidget);
-      expect(find.byIcon(Icons.calendar_view_week), findsOneWidget);
-      debug('HomeViewTest', '-' * 50);
+        await testAnimeTab(widgetTester, 2, 2);
+        expect(find.byIcon(Icons.search), findsOneWidget);
+        expect(find.byIcon(Icons.calendar_view_week), findsOneWidget);
+        debug('HomeViewTest', '-' * 50);
 
-      // SEARCH VIEW
-      debug('HomeViewTest', 'Tap on search icon');
-      await widgetTester.tap(find.byIcon(Icons.search));
-      await widgetTester.pumpAndSettle();
+        // DIARY VIEW
+        debug('HomeViewTest', 'Tap on diary icon');
+        await widgetTester.tap(find.byIcon(Icons.calendar_view_week));
+        await widgetTester.pumpAndSettle();
 
-      expect(find.byType(TopNavigationBar), findsNothing);
-      expect(find.byType(AppBar), findsOneWidget);
-      expect(find.byType(AnimeList), findsOneWidget);
-      expect(find.byType(AnimeLoaderWidget), findsNothing);
-      expect(find.byType(AnimeWidget), findsNothing);
-
-      // Enter text
-      debug('HomeViewTest', 'Enter text');
-      await widgetTester.enterText(find.byType(TextField), 'Boruto');
-      await widgetTester.testTextInput.receiveAction(TextInputAction.search);
-      await widgetTester.pump();
-
-      expect(find.byType(TopNavigationBar), findsNothing);
-      expect(find.byType(AppBar), findsOneWidget);
-      expect(find.byType(AnimeList), findsOneWidget);
-      expect(find.byType(AnimeLoaderWidget), findsNothing);
-      expect(find.byType(AnimeWidget), findsOneWidget);
+        expect(find.byType(TopNavigationBar), findsNothing);
+        expect(find.byType(AppBar), findsOneWidget);
+        expect(find.byType(AnimeList), findsOneWidget);
+      });
     });
   });
 }

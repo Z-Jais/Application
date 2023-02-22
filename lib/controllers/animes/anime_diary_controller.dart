@@ -37,12 +37,8 @@ class AnimeDiaryController extends AnimeController {
   ];
   final List<DayWidget> days = [];
 
-  AnimeDiaryController()
-      : super(
-          listener: false,
-        ) {
+  AnimeDiaryController() : super(listener: false) {
     day = DateTime.now().weekday;
-    load();
   }
 
   int get day => _day;
