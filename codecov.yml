@@ -1,4 +1,4 @@
 ignore:
   - "**/*.g.dart"
-  - "**/models/**"
+  - "**/models/*.dart"
   - "**/firebase_options.dart"
