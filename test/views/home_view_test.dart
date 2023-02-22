@@ -68,16 +68,16 @@ void nockUrl() {
 
   nock('https://${Const.serverUrl}')
       .post(
-    '/episodes/watchlist_filter/page/1/limit/12',
-    "H4sIAAAAAAAACsWPO06EMQyE75J6LTmJ4wfnoENb2PkdtBIsK22FEHcnoqCgRqL0+POM56P49fKa9/LwdD6VvF3ub8ev6fH99q0UTXVDEkDDCpSjg2udsEKcuE1v2MqpTGs65BCox2xAR09QWQzaJuOsST1tYybWOjfdyz42Zh10BUMbmkwkscI39g+hu/qLX59/eo/KlFYXVPR9tPYfbkqAY/aDwkYIbm+ZhOnsEO4TSGWAdk5A5sDQGLF0Y3/pdv78AoP5XU/AAQAA",
-  )
+        '/episodes/watchlist_filter/page/1/limit/12',
+        "H4sIAAAAAAAACsWPO06EMQyE75J6LTmJ4wfnoENb2PkdtBIsK22FEHcnoqCgRqL0+POM56P49fKa9/LwdD6VvF3ub8ev6fH99q0UTXVDEkDDCpSjg2udsEKcuE1v2MqpTGs65BCox2xAR09QWQzaJuOsST1tYybWOjfdyz42Zh10BUMbmkwkscI39g+hu/qLX59/eo/KlFYXVPR9tPYfbkqAY/aDwkYIbm+ZhOnsEO4TSGWAdk5A5sDQGLF0Y3/pdv78AoP5XU/AAQAA",
+      )
       .reply(200, '[]');
 
   nock('https://${Const.serverUrl}')
       .post(
-    '/episodes/watchlist_filter/page/1/limit/12',
-    "H4sIAAAAAAAACuWQO06EMQyE75J6LTmJ4wfnoENb2PkdtBIsK22FEHcnoqDgBEiUHn+eseaj+PXymvfy8HQ+lbxd7m/Hr+nx/fatFE11QxJAwwqUo4NrnbBCnLhNb9jKqUxrOuQQqMdsQEdPUFkM2ibjrEk9bWMm1jo33cs+NmYddAVDG5pMJLHCN/ZfQnffL359/il7VKa0uqCi76O1/3BTAhyzHxQ2QnB7yyRMZ4dwn0AqA7RzAjIHhsaIpRv7u27nzy+Y5N11gwIAAA==",
-  )
+        '/episodes/watchlist_filter/page/1/limit/12',
+        "H4sIAAAAAAAACuWQO06EMQyE75J6LTmJ4wfnoENb2PkdtBIsK22FEHcnoqDgBEiUHn+eseaj+PXymvfy8HQ+lbxd7m/Hr+nx/fatFE11QxJAwwqUo4NrnbBCnLhNb9jKqUxrOuQQqMdsQEdPUFkM2ibjrEk9bWMm1jo33cs+NmYddAVDG5pMJLHCN/ZfQnffL359/il7VKa0uqCi76O1/3BTAhyzHxQ2QnB7yyRMZ4dwn0AqA7RzAjIHhsaIpRv7u27nzy+Y5N11gwIAAA==",
+      )
       .reply(200, '[]');
 
   nock('https://${Const.serverUrl}')
