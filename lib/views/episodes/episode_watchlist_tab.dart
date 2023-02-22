@@ -22,7 +22,7 @@ class _EpisodeWatchlistTabState extends State<EpisodeWatchlistTab> {
 
   @override
   Widget build(BuildContext context) {
-    log('EpisodeWatchlistTab', 'build()');
+    info('EpisodeWatchlistTab', 'build()');
     return Column(
       children: [
         FilterWatchlist(

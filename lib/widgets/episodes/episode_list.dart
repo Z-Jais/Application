@@ -18,7 +18,7 @@ class EpisodeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('EpisodeList', 'build()');
+    info('EpisodeList', 'build()');
 
     if (!context.isOnMobile) {
       final double width = MediaQuery.of(context).size.width;

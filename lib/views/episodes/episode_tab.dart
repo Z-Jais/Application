@@ -21,7 +21,7 @@ class _EpisodeTabState extends State<EpisodeTab> {
 
   @override
   Widget build(BuildContext context) {
-    log('EpisodeTab', 'build()');
+    info('EpisodeTab', 'build()');
     return EpisodeList(controller: _controller);
   }
 }

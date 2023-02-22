@@ -9,19 +9,28 @@ import 'package:url_launcher/url_launcher.dart';
 class URLController {
   Future<http.Response?> get(String url) async {
     try {
+      debug('URLController', 'get($url)');
       return http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
     } catch (exception, stackTrace) {
-      log('URLController', 'get()', error: exception, stackTrace: stackTrace);
+      error('URLController', 'get()', error: exception, stackTrace: stackTrace);
       return null;
     }
   }
 
   Future<http.Response?> post(String url, Object body) async {
     try {
+      debug('URLController', 'post($url, $body)');
       return await http
           .post(Uri.parse(url), body: body)
           .timeout(const Duration(seconds: 10));
-    } catch (_) {
+    } catch (exception, stackTrace) {
+      error(
+        'URLController',
+        'post()',
+        error: exception,
+        stackTrace: stackTrace,
+      );
+
       return null;
     }
   }

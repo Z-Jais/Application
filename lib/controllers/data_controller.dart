@@ -67,7 +67,7 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
 
   Future<void> load() async {
     if (_isLoading) {
-      log(runtimeType.toString(), 'Already loading $runtimeType');
+      warning(runtimeType.toString(), 'Already loading $runtimeType');
       return;
     }
     _isLoading = true;
@@ -75,17 +75,17 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
     notifyListeners();
 
     try {
-      log(runtimeType.toString(), 'Loading (page $page) ...');
+      info(runtimeType.toString(), 'Loading (page $page) ...');
       final List<ModelWidget> widgets = await this.widgets();
       _removeLoader();
       list.addAll(widgets);
       _canLoadMore = widgets.length == limit;
       lastPageError = false;
-      log(runtimeType.toString(), 'Loading (page $page) done');
+      info(runtimeType.toString(), 'Loading (page $page) done');
     } catch (exception, stackTrace) {
       lastPageError = true;
 
-      log(
+      error(
         runtimeType.toString(),
         'Error while loading',
         error: exception,

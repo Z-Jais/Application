@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('HomeView', 'build()');
+    info('HomeView', 'build()');
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

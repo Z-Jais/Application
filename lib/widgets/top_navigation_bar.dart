@@ -46,7 +46,7 @@ class TopNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('TopNavigationBar', 'build()');
+    info('TopNavigationBar', 'build()');
 
     return SizedBox(
       height: 50,

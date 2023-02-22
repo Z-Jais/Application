@@ -22,7 +22,7 @@ class _AnimeTabState extends State<AnimeTab> {
 
   @override
   Widget build(BuildContext context) {
-    log('AnimeTab', 'build()');
+    info('AnimeTab', 'build()');
     return SingleChildScrollView(
       controller: _controller.animeController.scrollController,
       child: Column(
