@@ -12,7 +12,7 @@ class URLController {
       debug('URLController', 'get($url)');
       return http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
     } catch (exception, stackTrace) {
-      error('URLController', 'get()', error: exception, stackTrace: stackTrace);
+      error('URLController', 'get()', exception, stackTrace);
       return null;
     }
   }
@@ -24,13 +24,7 @@ class URLController {
           .post(Uri.parse(url), body: body)
           .timeout(const Duration(seconds: 10));
     } catch (exception, stackTrace) {
-      error(
-        'URLController',
-        'post()',
-        error: exception,
-        stackTrace: stackTrace,
-      );
-
+      error('URLController', 'post()', exception, stackTrace);
       return null;
     }
   }

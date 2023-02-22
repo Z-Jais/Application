@@ -34,13 +34,13 @@ void warning(String member, String message) {
 
 void error(
   String member,
-  String message, {
-  Object? error,
-  StackTrace? stackTrace,
-}) {
+  String message,
+  Object error,
+  StackTrace stackTrace,
+) {
   _log(
     LogLevel.error,
     member,
-    '$message ${error != null ? '\n$error' : ''} ${stackTrace != null ? '\n$stackTrace' : ''}',
+    '$message\n$error\n$stackTrace',
   );
 }

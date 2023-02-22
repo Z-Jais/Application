@@ -88,8 +88,8 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
       error(
         runtimeType.toString(),
         'Error while loading',
-        error: exception,
-        stackTrace: stackTrace,
+        exception,
+        stackTrace,
       );
     } finally {
       _isLoading = false;

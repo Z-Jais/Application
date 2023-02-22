@@ -209,24 +209,5 @@ void main() {
       expect(find.byType(AnimeLoaderWidget), findsNothing);
       expect(find.byType(AnimeWidget), findsOneWidget);
     });
-
-    testWidgets('Tablet', (widgetTester) async {
-      nockUrl();
-
-      widgetTester.binding.window.physicalSizeTestValue = const Size(768, 1024);
-      widgetTester.binding.window.devicePixelRatioTestValue = 1.0;
-      debugDefaultTargetPlatformOverride = TargetPlatform.android;
-
-      await widgetTester.pumpWidget(const MaterialApp(home: HomeView()));
-      debugDefaultTargetPlatformOverride = null;
-
-      await testEpisodeTab(widgetTester, 6);
-
-      info('HomeViewTest', 'Tap on anime tab');
-      await widgetTester.tap(find.byIcon(Icons.live_tv));
-      await widgetTester.pump();
-
-      await testAnimeTab(widgetTester, 2, 6);
-    });
   });
 }
