@@ -11,7 +11,7 @@ environment:
 dependencies:
   cached_network_image: ^3.2.3
   firebase_core: ^2.6.1
-  firebase_messaging: ^14.2.4
+  firebase_messaging: ^14.2.5
   flutter:
     sdk: flutter
   freezed_annotation: ^2.2.0
@@ -22,10 +22,10 @@ dependencies:
   json_annotation: ^4.8.0
   local_notifier: ^0.1.5
   provider: ^6.0.5
-  shared_preferences: ^2.0.17
+  shared_preferences: ^2.0.18
   shimmer: ^2.0.0
   system_tray: ^2.0.2
-  url_launcher: ^6.1.9
+  url_launcher: ^6.1.10
   web_socket_channel: ^2.3.0
   window_manager: ^0.3.0
 
