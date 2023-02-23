@@ -24,7 +24,7 @@ dependencies:
   shared_preferences: ^2.0.18
   shimmer: ^2.0.0
   system_tray: ^2.0.2
-  url_launcher: ^6.1.9
+  url_launcher: ^6.1.10
   web_socket_channel: ^2.3.0
   window_manager: ^0.3.0
 
