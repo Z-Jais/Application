@@ -18,6 +18,8 @@ import 'package:jais/widgets/animes/anime_widget.dart';
 import 'package:jais/widgets/episodes/episode_list.dart';
 import 'package:jais/widgets/episodes/episode_loader_widget.dart';
 import 'package:jais/widgets/episodes/episode_widget.dart';
+import 'package:jais/widgets/episodes/lite_episode_list.dart';
+import 'package:jais/widgets/episodes/lite_episode_widget.dart';
 import 'package:jais/widgets/filter_watchlist.dart';
 import 'package:jais/widgets/no_element.dart';
 import 'package:jais/widgets/simulcasts/simulcast_list.dart';
@@ -68,6 +70,15 @@ void nockUrl() {
       .reply(
         200,
         '[{"uuid":"5396d2a0-3f08-48a1-8334-e22c2d18cca1","country":{"uuid":"a6029576-0071-41b8-a2eb-01b007d1d96c","tag":"fr","name":"France"},"name":"Boruto","releaseDate":"2022-10-02T08:30:00Z","image":"https://image.animationdigitalnetwork.fr/license/boruto/tv/web/affiche_350x500.jpg","description":"Les grands affrontements dans le monde des ninjas appartiennent désormais au passé. Le village de Konoha est entré dans une ère de paix. Boruto, le fils du 7e Hokage, vit mal d’être dans l’ombre de son éminent paternel. Il ne se doute pas qu’une nouvelle menace plane sur eux… La légende de la nouvelle génération commence maintenant !","hashes":["boruto","boruto-naruto-next-generations"],"genres":[],"simulcasts":[{"uuid":"4de5f48d-57e9-4a71-940c-f47ee73a9714","season":"WINTER","year":2023},{"uuid":"c0f034b3-8eaa-490b-8326-e7aec8f548d8","season":"AUTUMN","year":2022}]}]',
+      );
+
+  nock('https://${Const.serverUrl}')
+      .get(
+        '/episodes/anime/d5de4edf-8fed-411b-8197-2706a3bb984a/page/1/limit/12',
+      )
+      .reply(
+        200,
+        '[{"uuid":"900efa82-f99b-453d-bf49-3b98f152d983","anime":{"uuid":"d5de4edf-8fed-411b-8197-2706a3bb984a","country":{"uuid":"a6029576-0071-41b8-a2eb-01b007d1d96c","tag":"fr","name":"France"},"name":"Arrête de me chauffer, Nagatoro","releaseDate":"2023-01-07T18:30:00Z","image":"https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/3b77b95ad923e19f543faa570e55d80d.jpe","description":"Alors qu’il se rend à la bibliothèque, Naoto devient un jour la cible d’une fille plus jeune que lui. Cette élève qui le taquine, l’aguiche et le tourmente s’appelle Nagatoro ! À la fois ennuyeuse, mais adorable, elle ne cesse de s’en prendre à Naoto. Mais où veut-elle en venir, finalement ? Et si ses caprices agacent le garçon, ils pourraient bien l’aider à sortir de sa timidité...","hashes":["arrête-de-me-chauffer-nagatoro"],"genres":[],"simulcasts":[{"uuid":"4de5f48d-57e9-4a71-940c-f47ee73a9714","season":"WINTER","year":2023}]},"episodeType":{"uuid":"8e8a9047-0901-4e53-a81c-fb7a462ca202","name":"EPISODE"},"langType":{"uuid":"5164e91f-10a5-4f01-a984-05c3d4b95b70","name":"SUBTITLES"},"hash":"CRUN-887715-VOSTFR","releaseDate":"2023-02-18T18:30:00Z","season":2,"number":8,"title":"Et si tu faisais un peu de muscu ?","url":"https://www.crunchyroll.com/fr/dont-toy-with-me-miss-nagatoro/episode-8-why-dont-you-try-bulking-up-a-little-paisen-887715","image":"https://img1.ak.crunchyroll.com/i/spire3-tmb/e90e2a0caba3e3f16427c83e4ae719e41676741110_full.jpg","duration":1420,"platform":{"uuid":"eb438d41-2152-4b4d-851b-cbb2c50201f4","name":"Crunchyroll","url":"https://www.crunchyroll.com/","image":"https://jais.ziedelth.fr/attachments/platforms/crunchyroll.jpg"}},{"uuid":"a0a78996-f469-4848-af2e-f3711d8644c5","anime":{"uuid":"d5de4edf-8fed-411b-8197-2706a3bb984a","country":{"uuid":"a6029576-0071-41b8-a2eb-01b007d1d96c","tag":"fr","name":"France"},"name":"Arrête de me chauffer, Nagatoro","releaseDate":"2023-01-07T18:30:00Z","image":"https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/3b77b95ad923e19f543faa570e55d80d.jpe","description":"Alors qu’il se rend à la bibliothèque, Naoto devient un jour la cible d’une fille plus jeune que lui. Cette élève qui le taquine, l’aguiche et le tourmente s’appelle Nagatoro ! À la fois ennuyeuse, mais adorable, elle ne cesse de s’en prendre à Naoto. Mais où veut-elle en venir, finalement ? Et si ses caprices agacent le garçon, ils pourraient bien l’aider à sortir de sa timidité...","hashes":["arrête-de-me-chauffer-nagatoro"],"genres":[],"simulcasts":[{"uuid":"4de5f48d-57e9-4a71-940c-f47ee73a9714","season":"WINTER","year":2023}]},"episodeType":{"uuid":"8e8a9047-0901-4e53-a81c-fb7a462ca202","name":"EPISODE"},"langType":{"uuid":"5164e91f-10a5-4f01-a984-05c3d4b95b70","name":"SUBTITLES"},"hash":"CRUN-887714-VOSTFR","releaseDate":"2023-02-11T18:30:00Z","season":2,"number":7,"title":"Ça m\u0027étonne pas que tu sois nul","url":"https://www.crunchyroll.com/fr/dont-toy-with-me-miss-nagatoro/episode-7-i-figured-thats-how-youd-ski-senpai-887714","image":"https://img1.ak.crunchyroll.com/i/spire2-tmb/11422c89240b1ca5a9452d0328fca9ff1676140271_full.jpg","duration":1420,"platform":{"uuid":"eb438d41-2152-4b4d-851b-cbb2c50201f4","name":"Crunchyroll","url":"https://www.crunchyroll.com/","image":"https://jais.ziedelth.fr/attachments/platforms/crunchyroll.jpg"}},{"uuid":"b7eb075d-1d52-4823-a23a-faa282db7155","anime":{"uuid":"d5de4edf-8fed-411b-8197-2706a3bb984a","country":{"uuid":"a6029576-0071-41b8-a2eb-01b007d1d96c","tag":"fr","name":"France"},"name":"Arrête de me chauffer, Nagatoro","releaseDate":"2023-01-07T18:30:00Z","image":"https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/3b77b95ad923e19f543faa570e55d80d.jpe","description":"Alors qu’il se rend à la bibliothèque, Naoto devient un jour la cible d’une fille plus jeune que lui. Cette élève qui le taquine, l’aguiche et le tourmente s’appelle Nagatoro ! À la fois ennuyeuse, mais adorable, elle ne cesse de s’en prendre à Naoto. Mais où veut-elle en venir, finalement ? Et si ses caprices agacent le garçon, ils pourraient bien l’aider à sortir de sa timidité...","hashes":["arrête-de-me-chauffer-nagatoro"],"genres":[],"simulcasts":[{"uuid":"4de5f48d-57e9-4a71-940c-f47ee73a9714","season":"WINTER","year":2023}]},"episodeType":{"uuid":"8e8a9047-0901-4e53-a81c-fb7a462ca202","name":"EPISODE"},"langType":{"uuid":"5164e91f-10a5-4f01-a984-05c3d4b95b70","name":"SUBTITLES"},"hash":"CRUN-887713-VOSTFR","releaseDate":"2023-02-04T18:30:00Z","season":2,"number":6,"title":"Seras-tu chanceux cette année ?","url":"https://www.crunchyroll.com/fr/dont-toy-with-me-miss-nagatoro/episode-6-how-are-your-fortunes-this-year-senpai-887713","image":"https://img1.ak.crunchyroll.com/i/spire4-tmb/93f6f509979f948235e724a7d98de9aa1675529512_full.jpg","duration":1420,"platform":{"uuid":"eb438d41-2152-4b4d-851b-cbb2c50201f4","name":"Crunchyroll","url":"https://www.crunchyroll.com/","image":"https://jais.ziedelth.fr/attachments/platforms/crunchyroll.jpg"}},{"uuid":"17cfd962-4032-4cec-9728-87484151ba54","anime":{"uuid":"d5de4edf-8fed-411b-8197-2706a3bb984a","country":{"uuid":"a6029576-0071-41b8-a2eb-01b007d1d96c","tag":"fr","name":"France"},"name":"Arrête de me chauffer, Nagatoro","releaseDate":"2023-01-07T18:30:00Z","image":"https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/3b77b95ad923e19f543faa570e55d80d.jpe","description":"Alors qu’il se rend à la bibliothèque, Naoto devient un jour la cible d’une fille plus jeune que lui. Cette élève qui le taquine, l’aguiche et le tourmente s’appelle Nagatoro ! À la fois ennuyeuse, mais adorable, elle ne cesse de s’en prendre à Naoto. Mais où veut-elle en venir, finalement ? Et si ses caprices agacent le garçon, ils pourraient bien l’aider à sortir de sa timidité...","hashes":["arrête-de-me-chauffer-nagatoro"],"genres":[],"simulcasts":[{"uuid":"4de5f48d-57e9-4a71-940c-f47ee73a9714","season":"WINTER","year":2023}]},"episodeType":{"uuid":"8e8a9047-0901-4e53-a81c-fb7a462ca202","name":"EPISODE"},"langType":{"uuid":"5164e91f-10a5-4f01-a984-05c3d4b95b70","name":"SUBTITLES"},"hash":"CRUN-887712-VOSTFR","releaseDate":"2023-01-28T18:30:00Z","season":2,"number":5,"title":"C\u0027est à ça que ressemble ta chambre","url":"https://www.crunchyroll.com/fr/dont-toy-with-me-miss-nagatoro/episode-5-so-this-is-your-room-huh-senpai-887712","image":"https://img1.ak.crunchyroll.com/i/spire3-tmb/25c9bb1ca8a226791b4da265b202911c1674922020_full.jpg","duration":1420,"platform":{"uuid":"eb438d41-2152-4b4d-851b-cbb2c50201f4","name":"Crunchyroll","url":"https://www.crunchyroll.com/","image":"https://jais.ziedelth.fr/attachments/platforms/crunchyroll.jpg"}},{"uuid":"d49bcf39-0ece-4729-9c48-6354f0ae2e1c","anime":{"uuid":"d5de4edf-8fed-411b-8197-2706a3bb984a","country":{"uuid":"a6029576-0071-41b8-a2eb-01b007d1d96c","tag":"fr","name":"France"},"name":"Arrête de me chauffer, Nagatoro","releaseDate":"2023-01-07T18:30:00Z","image":"https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/3b77b95ad923e19f543faa570e55d80d.jpe","description":"Alors qu’il se rend à la bibliothèque, Naoto devient un jour la cible d’une fille plus jeune que lui. Cette élève qui le taquine, l’aguiche et le tourmente s’appelle Nagatoro ! À la fois ennuyeuse, mais adorable, elle ne cesse de s’en prendre à Naoto. Mais où veut-elle en venir, finalement ? Et si ses caprices agacent le garçon, ils pourraient bien l’aider à sortir de sa timidité...","hashes":["arrête-de-me-chauffer-nagatoro"],"genres":[],"simulcasts":[{"uuid":"4de5f48d-57e9-4a71-940c-f47ee73a9714","season":"WINTER","year":2023}]},"episodeType":{"uuid":"8e8a9047-0901-4e53-a81c-fb7a462ca202","name":"EPISODE"},"langType":{"uuid":"5164e91f-10a5-4f01-a984-05c3d4b95b70","name":"SUBTITLES"},"hash":"CRUN-887711-VOSTFR","releaseDate":"2023-01-21T18:30:00Z","season":2,"number":4,"title":"Tu peux entrer. Fais comme chez toi.","url":"https://www.crunchyroll.com/fr/dont-toy-with-me-miss-nagatoro/episode-4-why-dont-you-come-inside-senpai-kun-887711","image":"https://img1.ak.crunchyroll.com/i/spire2-tmb/ce59684e86d8f1fbd5fa0484002c63531674289880_full.jpg","duration":1420,"platform":{"uuid":"eb438d41-2152-4b4d-851b-cbb2c50201f4","name":"Crunchyroll","url":"https://www.crunchyroll.com/","image":"https://jais.ziedelth.fr/attachments/platforms/crunchyroll.jpg"}},{"uuid":"43339531-4c64-4428-bed3-e8252f549f19","anime":{"uuid":"d5de4edf-8fed-411b-8197-2706a3bb984a","country":{"uuid":"a6029576-0071-41b8-a2eb-01b007d1d96c","tag":"fr","name":"France"},"name":"Arrête de me chauffer, Nagatoro","releaseDate":"2023-01-07T18:30:00Z","image":"https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/3b77b95ad923e19f543faa570e55d80d.jpe","description":"Alors qu’il se rend à la bibliothèque, Naoto devient un jour la cible d’une fille plus jeune que lui. Cette élève qui le taquine, l’aguiche et le tourmente s’appelle Nagatoro ! À la fois ennuyeuse, mais adorable, elle ne cesse de s’en prendre à Naoto. Mais où veut-elle en venir, finalement ? Et si ses caprices agacent le garçon, ils pourraient bien l’aider à sortir de sa timidité...","hashes":["arrête-de-me-chauffer-nagatoro"],"genres":[],"simulcasts":[{"uuid":"4de5f48d-57e9-4a71-940c-f47ee73a9714","season":"WINTER","year":2023}]},"episodeType":{"uuid":"8e8a9047-0901-4e53-a81c-fb7a462ca202","name":"EPISODE"},"langType":{"uuid":"5164e91f-10a5-4f01-a984-05c3d4b95b70","name":"SUBTITLES"},"hash":"CRUN-887710-VOSTFR","releaseDate":"2023-01-14T18:30:00Z","season":2,"number":3,"title":"T\u0027as entendu notre conversation ?","url":"https://www.crunchyroll.com/fr/dont-toy-with-me-miss-nagatoro/episode-3-senpai-were-you-listening-to-what-i-said-887710","image":"https://img1.ak.crunchyroll.com/i/spire1-tmb/a9b4d753b0eb1479acf9f79b5efd5da11673718439_full.jpg","duration":1420,"platform":{"uuid":"eb438d41-2152-4b4d-851b-cbb2c50201f4","name":"Crunchyroll","url":"https://www.crunchyroll.com/","image":"https://jais.ziedelth.fr/attachments/platforms/crunchyroll.jpg"}},{"uuid":"ccdb4f73-6ee0-44df-beb9-a10166181b08","anime":{"uuid":"d5de4edf-8fed-411b-8197-2706a3bb984a","country":{"uuid":"a6029576-0071-41b8-a2eb-01b007d1d96c","tag":"fr","name":"France"},"name":"Arrête de me chauffer, Nagatoro","releaseDate":"2023-01-07T18:30:00Z","image":"https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/3b77b95ad923e19f543faa570e55d80d.jpe","description":"Alors qu’il se rend à la bibliothèque, Naoto devient un jour la cible d’une fille plus jeune que lui. Cette élève qui le taquine, l’aguiche et le tourmente s’appelle Nagatoro ! À la fois ennuyeuse, mais adorable, elle ne cesse de s’en prendre à Naoto. Mais où veut-elle en venir, finalement ? Et si ses caprices agacent le garçon, ils pourraient bien l’aider à sortir de sa timidité...","hashes":["arrête-de-me-chauffer-nagatoro"],"genres":[],"simulcasts":[{"uuid":"4de5f48d-57e9-4a71-940c-f47ee73a9714","season":"WINTER","year":2023}]},"episodeType":{"uuid":"8e8a9047-0901-4e53-a81c-fb7a462ca202","name":"EPISODE"},"langType":{"uuid":"5164e91f-10a5-4f01-a984-05c3d4b95b70","name":"SUBTITLES"},"hash":"CRUN-886709-VOSTFR","releaseDate":"2023-01-11T08:00:00Z","season":2,"number":2,"title":"Ça alors, tu m\u0027invites ?","url":"https://www.crunchyroll.com/fr/dont-toy-with-me-miss-nagatoro/episode-2-youre-inviting-me-senpai-886709","image":"https://img1.ak.crunchyroll.com/i/spire2-tmb/794627c3f098b425e22a9f207ffc1fcb1673417388_full.jpg","duration":1419,"platform":{"uuid":"eb438d41-2152-4b4d-851b-cbb2c50201f4","name":"Crunchyroll","url":"https://www.crunchyroll.com/","image":"https://jais.ziedelth.fr/attachments/platforms/crunchyroll.jpg"}},{"uuid":"85f312d3-a9a5-42ef-85ee-a774b1a5243e","anime":{"uuid":"d5de4edf-8fed-411b-8197-2706a3bb984a","country":{"uuid":"a6029576-0071-41b8-a2eb-01b007d1d96c","tag":"fr","name":"France"},"name":"Arrête de me chauffer, Nagatoro","releaseDate":"2023-01-07T18:30:00Z","image":"https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/3b77b95ad923e19f543faa570e55d80d.jpe","description":"Alors qu’il se rend à la bibliothèque, Naoto devient un jour la cible d’une fille plus jeune que lui. Cette élève qui le taquine, l’aguiche et le tourmente s’appelle Nagatoro ! À la fois ennuyeuse, mais adorable, elle ne cesse de s’en prendre à Naoto. Mais où veut-elle en venir, finalement ? Et si ses caprices agacent le garçon, ils pourraient bien l’aider à sortir de sa timidité...","hashes":["arrête-de-me-chauffer-nagatoro"],"genres":[],"simulcasts":[{"uuid":"4de5f48d-57e9-4a71-940c-f47ee73a9714","season":"WINTER","year":2023}]},"episodeType":{"uuid":"8e8a9047-0901-4e53-a81c-fb7a462ca202","name":"EPISODE"},"langType":{"uuid":"5164e91f-10a5-4f01-a984-05c3d4b95b70","name":"SUBTITLES"},"hash":"CRUN-886708-VOSTFR","releaseDate":"2023-01-07T18:30:00Z","season":2,"number":1,"title":"On est potes, non ?","url":"https://www.crunchyroll.com/fr/dont-toy-with-me-miss-nagatoro/episode-1-its-you-and-me-senpai-886708","image":"https://img1.ak.crunchyroll.com/i/spire2-tmb/6debe0de8233557d5816d395a1e042fa1673098737_full.jpg","duration":1420,"platform":{"uuid":"eb438d41-2152-4b4d-851b-cbb2c50201f4","name":"Crunchyroll","url":"https://www.crunchyroll.com/","image":"https://jais.ziedelth.fr/attachments/platforms/crunchyroll.jpg"}}]',
       );
 }
 
@@ -329,6 +340,79 @@ void main() {
           expect(find.byType(TopNavigationBar), findsNothing);
           expect(find.byType(AppBar), findsOneWidget);
           expect(find.byType(AnimeList), findsOneWidget);
+        });
+
+        testWidgets('Anime Detail View', (widgetTester) async {
+          nockUrl();
+
+          widgetTester.binding.window.physicalSizeTestValue = size;
+          widgetTester.binding.window.devicePixelRatioTestValue = 1.0;
+          debugDefaultTargetPlatformOverride = TargetPlatform.android;
+
+          info('HomeViewTest', 'Init controllers');
+          SharedPreferences.setMockInitialValues({});
+          await AppController.seen.init();
+          await AppController.watchlist.init();
+          await FilterController.instance.init();
+
+          debug('HomeViewTest', '-' * 50);
+          debug('HomeViewTest', 'Build widget');
+
+          await widgetTester.pumpWidget(
+            MaterialApp(
+              initialRoute: '/',
+              routes: {
+                '/': (context) => const HomeView(),
+                '/anime/search': (_) {
+                  return AnimeSearchView(controller: AnimeSearchController());
+                },
+                '/anime/detail': (_) {
+                  return AnimeDetailView(controller: AnimeDetailController());
+                },
+                '/anime/diary': (_) {
+                  return AnimeDiaryView(controller: AnimeDiaryController());
+                },
+              },
+            ),
+          );
+
+          debugDefaultTargetPlatformOverride = null;
+
+          // EPISODES TAB
+          debug('HomeViewTest', '-' * 50);
+          await testEpisodeTab(widgetTester, 2);
+
+          // WATCHLIST TAB
+          debug('HomeViewTest', 'Tap on watchlist tab');
+          await widgetTester.tap(find.byIcon(Icons.list));
+          await widgetTester.pump();
+
+          await testWatchlistTab(widgetTester, 1);
+          debug('HomeViewTest', '-' * 50);
+
+          // ANIME TAB
+          debug('HomeViewTest', 'Tap on anime tab');
+          await widgetTester.tap(find.byIcon(Icons.live_tv));
+          await widgetTester.pump();
+
+          await testAnimeTab(widgetTester, 2, 2);
+          expect(find.byIcon(Icons.search), findsOneWidget);
+          expect(find.byIcon(Icons.calendar_view_week), findsOneWidget);
+          debug('HomeViewTest', '-' * 50);
+
+          // ANIME DETAIL VIEW
+          debug('HomeViewTest', 'Tap on anime');
+          await widgetTester.tap(find.byType(AnimeWidget).first);
+
+          for (int i = 0; i < 5; i++) {
+            // because pumpAndSettle doesn't work with riverpod
+            await widgetTester.pump(const Duration(seconds: 1));
+          }
+
+          expect(find.byType(TopNavigationBar), findsNothing);
+          expect(find.byType(AppBar), findsOneWidget);
+          expect(find.byType(LiteEpisodeList), findsOneWidget);
+          expect(find.byType(LiteEpisodeWidget), findsAtLeastNWidgets(1));
         });
       });
     }
