@@ -63,10 +63,16 @@ jobs:
       - name: Flutter Native Splash
         run: flutter pub run flutter_native_splash:create
 
-      - uses: EndBug/add-and-commit@v9
+      - run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git commit -m 'Update native splash'
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          default_author: github_actions
-          message: 'Update native splash'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
   # Check if environment is correct
   check_env:
