@@ -2,7 +2,7 @@ name: jais
 description: A Flutter application by Ziedelth for mobile members
 
 publish_to: 'none'
-version: 2.1.3+17
+version: 2.1.4+18
 
 environment:
   sdk: ">=2.19.0 <4.0.0"
@@ -11,7 +11,7 @@ environment:
 dependencies:
   cached_network_image: ^3.2.3
   firebase_core: ^2.6.1
-  firebase_messaging: ^14.2.5
+  firebase_messaging: ^14.2.6
   flutter:
     sdk: flutter
   freezed_annotation: ^2.2.0
@@ -38,7 +38,7 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.6.1
   lint: ^2.0.1
-  msix: ^3.7.0
+  msix: ^3.9.1
   nock: ^1.2.1
 
 flutter_icons:
@@ -73,6 +73,6 @@ msix_config:
   display_name: Jais
   publisher_display_name: Ziedelth
   identity_name: Ziedelth.Jais
-  msix_version: 2.1.3.0
+  msix_version: 2.1.4.0
   logo_path: assets/icon.png
   capabilities: internetClient
