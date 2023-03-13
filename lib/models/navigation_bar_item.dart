@@ -5,12 +5,14 @@ class NavigationBarItem {
   final Icon icon;
   final List<NavigationBarItem>? topWidgets;
   final String? route;
+  final void Function(BuildContext)? onPressed;
 
   const NavigationBarItem({
     required this.name,
     required this.icon,
     this.topWidgets,
     this.route,
+    this.onPressed,
   });
 
   BottomNavigationBarItem toBottomNavigationBarItem() =>
@@ -24,6 +26,8 @@ class NavigationBarItem {
         onPressed: () {
           if (route != null) {
             Navigator.of(context).pushNamed(route!);
+          } else if (onPressed != null) {
+            onPressed?.call(context);
           }
         },
       );

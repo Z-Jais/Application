@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/animes/anime_watchlist_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
-import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/views/animes/anime_tab.dart';
 import 'package:jais/views/episodes/episode_tab.dart';
 import 'package:jais/views/episodes/episode_watchlist_tab.dart';
-import 'package:jais/widgets/animes/anime_list.dart';
-import 'package:jais/widgets/episodes/episode_list.dart';
 import 'package:jais/widgets/top_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -68,8 +64,7 @@ class HomeView extends StatelessWidget {
                     selectedItemColor: Theme.of(context).primaryColor,
                     unselectedItemColor: Colors.grey,
                     currentIndex: value.currentPage,
-                    onTap: (page) =>
-                        value.setCurrentPage(page, fromNavigationBar: true),
+                    onTap: value.setCurrentPage,
                     items: value.bottomNavigationBarItems.toList(),
                   );
                 },
@@ -90,19 +85,13 @@ class MyPage extends StatelessWidget {
     return PageView(
       controller: controller.pageController,
       onPageChanged: controller.setCurrentPage,
-      children: [
+      children: const [
         // EPISODES TAB
-        const EpisodeTab(),
+        EpisodeTab(),
         // WATCHLIST TAB
-        if (controller.advancedView)
-          EpisodeList(controller: EpisodeWatchlistController())
-        else
-          const EpisodeWatchlistTab(),
+        EpisodeWatchlistTab(),
         // ANIME TAB
-        if (controller.advancedView)
-          AnimeList(controller: AnimeWatchlistController())
-        else
-          const AnimeTab(),
+        AnimeTab(),
       ],
     );
   }

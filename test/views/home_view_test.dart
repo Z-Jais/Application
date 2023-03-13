@@ -20,7 +20,6 @@ import 'package:jais/widgets/episodes/episode_loader_widget.dart';
 import 'package:jais/widgets/episodes/episode_widget.dart';
 import 'package:jais/widgets/episodes/lite_episode_list.dart';
 import 'package:jais/widgets/episodes/lite_episode_widget.dart';
-import 'package:jais/widgets/filter_watchlist.dart';
 import 'package:jais/widgets/no_element.dart';
 import 'package:jais/widgets/simulcasts/simulcast_list.dart';
 import 'package:jais/widgets/simulcasts/simulcast_loader_widget.dart';
@@ -96,13 +95,11 @@ Future<void> testEpisodeTab(WidgetTester widgetTester, int atLeast) async {
 
 Future<void> testWatchlistTab(WidgetTester widgetTester, int atLeast) async {
   expect(find.byType(TopNavigationBar), findsOneWidget);
-  expect(find.byType(FilterWatchlist), findsOneWidget);
   expect(find.byType(EpisodeList), findsOneWidget);
   expect(find.byType(EpisodeLoaderWidget), findsAtLeastNWidgets(atLeast));
   expect(find.byType(BottomNavigationBar), findsOneWidget);
   await widgetTester.pump();
   expect(find.byType(TopNavigationBar), findsOneWidget);
-  expect(find.byType(FilterWatchlist), findsOneWidget);
   expect(find.byType(NoElement), findsOneWidget);
   expect(find.byType(BottomNavigationBar), findsOneWidget);
 }
