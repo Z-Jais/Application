@@ -29,15 +29,9 @@ class _FilterWatchlistState extends State<FilterWatchlist> {
               leading: Checkbox(
                 value: FilterController.instance.watchlistEpisodeTypeFilter
                     .hasIn(episodeType.uuid),
-                onChanged: (value) {
-                  if (value == true) {
-                    FilterController.instance.watchlistEpisodeTypeFilter
-                        .add(episodeType.uuid);
-                  } else {
-                    FilterController.instance.watchlistEpisodeTypeFilter
-                        .remove(episodeType.uuid);
-                  }
-
+                onChanged: (value) async {
+                  await FilterController.instance.watchlistEpisodeTypeFilter
+                      .toggle(episodeType.uuid);
                   setState(() {});
                 },
               ),
@@ -54,19 +48,29 @@ class _FilterWatchlistState extends State<FilterWatchlist> {
               leading: Checkbox(
                 value: FilterController.instance.watchlistLangTypeFilter
                     .hasIn(langType.uuid),
-                onChanged: (value) {
-                  if (value == true) {
-                    FilterController.instance.watchlistLangTypeFilter
-                        .add(langType.uuid);
-                  } else {
-                    FilterController.instance.watchlistLangTypeFilter
-                        .remove(langType.uuid);
-                  }
-
+                onChanged: (value) async {
+                  await FilterController.instance.watchlistLangTypeFilter
+                      .toggle(langType.uuid);
                   setState(() {});
                 },
               ),
             ),
+          const SizedBox(height: 16),
+          Text(
+            'Épisodes',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: 8),
+          ListTile(
+            title: const Text('Vu(s)'),
+            leading: Checkbox(
+              value: FilterController.instance.episodeWatchedFilter.data == 1,
+              onChanged: (value) async {
+                await FilterController.instance.episodeWatchedFilter.invert();
+                setState(() {});
+              },
+            ),
+          ),
         ],
       ),
     );

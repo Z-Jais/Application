@@ -18,7 +18,10 @@ class EpisodeWatchlistFilterController extends EpisodeController {
           jsonEncode(
             {
               'animes': AppController.watchlist.data,
-              'episodes': AppController.seen.data,
+              'episodes':
+                  FilterController.instance.episodeWatchedFilter.data == 0
+                      ? AppController.seen.data
+                      : [],
               'episodeTypes':
                   FilterController.instance.watchlistEpisodeTypeFilter.data,
               'langTypes':
