@@ -6,7 +6,7 @@ import 'package:jais/widgets/simulcasts/simulcast_widget.dart';
 
 class AnimeTabController with ChangeNotifier {
   final SimulcastController simulcastController = SimulcastController();
-  final AnimeController animeController = AnimeController(firstLoad: false);
+  final AnimeController animeController = AnimeController();
 
   Future<void> init() async {
     simulcastController.reset();

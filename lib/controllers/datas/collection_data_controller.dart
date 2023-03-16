@@ -56,6 +56,14 @@ class CollectionDataController extends AbstractDataController<List<String>> {
     await save();
   }
 
+  Future<void> toggle(String uuid) async {
+    if (hasIn(uuid)) {
+      await remove(uuid);
+    } else {
+      await add(uuid);
+    }
+  }
+
   String toGzip() {
     return base64Encode(gzip.encode(utf8.encode(jsonEncode(data))));
   }

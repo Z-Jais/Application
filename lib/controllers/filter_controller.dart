@@ -1,4 +1,5 @@
 import 'package:jais/controllers/datas/collection_data_controller.dart';
+import 'package:jais/controllers/datas/int_data_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/episodetype.dart';
 import 'package:jais/models/langtype.dart';
@@ -11,6 +12,8 @@ class FilterController {
       CollectionDataController('watchlistEpisodeTypeFilter');
   final CollectionDataController watchlistLangTypeFilter =
       CollectionDataController('watchlistLangTypeFilter');
+  final IntDataController episodeWatchedFilter =
+      IntDataController('episodeWatchedFilter');
 
   final List<EpisodeType> episodeTypes = [];
   final List<LangType> langTypes = [];
@@ -34,18 +37,24 @@ class FilterController {
             },
           ),
       watchlistLangTypeFilter.init(),
+      episodeWatchedFilter.init(),
     ]);
 
     if (watchlistEpisodeTypeFilter.firstInit) {
-      watchlistEpisodeTypeFilter.data.addAll(
+      await watchlistEpisodeTypeFilter.addAll(
         episodeTypes.map((p0) => p0.uuid),
       );
     }
 
     if (watchlistLangTypeFilter.firstInit) {
-      watchlistLangTypeFilter.data.addAll(
+      await watchlistLangTypeFilter.addAll(
         langTypes.map((p0) => p0.uuid),
       );
+    }
+
+    if (episodeWatchedFilter.firstInit) {
+      episodeWatchedFilter.data = 0;
+      await episodeWatchedFilter.save();
     }
   }
 }

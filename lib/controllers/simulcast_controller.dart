@@ -11,7 +11,6 @@ class SimulcastController
   SimulcastController()
       : super(
           listener: false,
-          firstLoad: false,
           limit: 9,
           loadingWidget: const SimulcastLoaderWidget(),
           fromJson: (json) => Simulcast.fromJson(json),

@@ -3,23 +3,28 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:jais/controllers/ad_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class URLController {
   Future<http.Response?> get(String url) async {
     try {
+      debug('URLController', 'get($url)');
       return http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
-    } catch (_) {
+    } catch (exception, stackTrace) {
+      error('URLController', 'get()', exception, stackTrace);
       return null;
     }
   }
 
   Future<http.Response?> post(String url, Object body) async {
     try {
+      debug('URLController', 'post($url, $body)');
       return await http
           .post(Uri.parse(url), body: body)
           .timeout(const Duration(seconds: 10));
-    } catch (_) {
+    } catch (exception, stackTrace) {
+      error('URLController', 'post()', exception, stackTrace);
       return null;
     }
   }
@@ -71,7 +76,9 @@ extension FutureResponseNullableExtension on Future<http.Response?> {
     if (response.isOk) {
       return map(response!);
     } else {
-      throw Exception('Response is not ok');
+      throw Exception(
+        'Response is not ok (${response?.statusCode} - ${response?.body})',
+      );
     }
   }
 
