@@ -15,9 +15,11 @@ enum LogLevel {
 }
 
 void _log(LogLevel level, String member, String message) {
-  final format =
-      '${level.color}[${_dateFormat.format(DateTime.now())} $member] $message\x1B[0m';
-  debugPrint(format);
+  if (kDebugMode) {
+    final format =
+        '${level.color}[${_dateFormat.format(DateTime.now())} $member] $message\x1B[0m';
+    debugPrint(format);
+  }
 }
 
 void info(String member, String message) {
