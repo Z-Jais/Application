@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:jais/controllers/app_controller.dart';
@@ -10,17 +9,19 @@ import 'package:jais/utils.dart';
 import 'package:jais/widgets/episodes/episode_widget.dart';
 
 class EpisodeWatchlistFilterController extends EpisodeController {
-  EpisodeWatchlistFilterController()
-      : super(showActions: true, firstLoad: false);
+  EpisodeWatchlistFilterController() : super(showActions: true);
 
   String toGzip() {
-    final String base64 = base64Encode(
+    return base64Encode(
       gzip.encode(
         utf8.encode(
           jsonEncode(
             {
               'animes': AppController.watchlist.data,
-              'episodes': AppController.seen.data,
+              'episodes':
+                  FilterController.instance.episodeWatchedFilter.data == 0
+                      ? AppController.seen.data
+                      : [],
               'episodeTypes':
                   FilterController.instance.watchlistEpisodeTypeFilter.data,
               'langTypes':
@@ -30,8 +31,6 @@ class EpisodeWatchlistFilterController extends EpisodeController {
         ),
       ),
     );
-    log(base64);
-    return base64;
   }
 
   @override

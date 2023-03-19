@@ -46,3 +46,4 @@ app.*.map.json
 /coverage/
 /tests.output
 /sonar-project.properties
+/metrics/

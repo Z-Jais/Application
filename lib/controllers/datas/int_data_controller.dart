@@ -20,4 +20,9 @@ class IntDataController extends AbstractDataController<int> {
 
     await sharedPreferences.setInt(key, data);
   }
+
+  Future<void> invert() async {
+    data = data == 0 ? 1 : 0;
+    await save();
+  }
 }

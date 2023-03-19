@@ -2,19 +2,32 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:jais/models/navigation_bar_item.dart';
+import 'package:jais/widgets/filter_watchlist.dart';
 
 class NavigationController with ChangeNotifier {
   static final NavigationController instance = NavigationController();
   final PageController pageController = PageController();
-  bool _advancedView = false;
   final List<NavigationBarItem> _items = [
     const NavigationBarItem(
       name: 'Épisodes',
       icon: Icon(Icons.subscriptions_outlined),
     ),
-    const NavigationBarItem(
+    NavigationBarItem(
       name: 'Watchlist',
-      icon: Icon(Icons.list),
+      icon: const Icon(Icons.list),
+      topWidgets: [
+        NavigationBarItem(
+          name: 'Filtre',
+          icon: const Icon(Icons.filter_alt),
+          onPressed: (BuildContext context) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) =>
+                  const AlertDialog(content: FilterWatchlist()),
+            );
+          },
+        ),
+      ],
     ),
     const NavigationBarItem(
       name: 'Animes',
@@ -42,15 +55,9 @@ class NavigationController with ChangeNotifier {
     }
   }
 
-  void setCurrentPage(int page, {bool fromNavigationBar = false}) {
-    if (fromNavigationBar && page == currentPage) {
-      _advancedView = !_advancedView;
-      notifyListeners();
+  void setCurrentPage(int page) {
+    if (page == currentPage) {
       return;
-    }
-
-    if (_advancedView) {
-      _advancedView = false;
     }
 
     try {
@@ -65,8 +72,6 @@ class NavigationController with ChangeNotifier {
     }
   }
 
-  bool get advancedView => _advancedView;
-
   Iterable<BottomNavigationBarItem> get bottomNavigationBarItems =>
       _items.map((NavigationBarItem item) => item.toBottomNavigationBarItem());
   List<NavigationBarItem>? get currentTopNavigationBarItems =>
@@ -77,7 +82,7 @@ class NavigationController with ChangeNotifier {
           final int index = _items.indexOf(item);
 
           return IconButton(
-            onPressed: () => setCurrentPage(index, fromNavigationBar: true),
+            onPressed: () => setCurrentPage(index),
             padding: const EdgeInsets.all(16),
             color: currentPage == index ? Theme.of(context).primaryColor : null,
             icon: Flex(

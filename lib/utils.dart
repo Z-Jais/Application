@@ -72,35 +72,6 @@ class Utils {
     return "à l'instant";
   }
 
-  String printTimeSinceDays(DateTime? dateTime) {
-    if (dateTime == null) {
-      return 'erreur';
-    }
-
-    final double seconds = (DateTime.now().millisecondsSinceEpoch -
-            dateTime.millisecondsSinceEpoch) /
-        1000;
-    double interval = seconds / 31536000;
-
-    if (interval > 1) {
-      return 'Il y a ${interval.floor()} an${interval >= 2 ? 's' : ''}';
-    }
-
-    interval = seconds / 2592000;
-
-    if (interval > 1) {
-      return 'Il y a ${interval.floor()} mois';
-    }
-
-    interval = seconds / 86400;
-
-    if (interval > 1) {
-      return 'Il y a ${interval.floor()} jour${interval >= 2 ? 's' : ''}';
-    }
-
-    return "Aujourd'hui";
-  }
-
   List<Widget> separate(List<Widget> children, {int rowCol = 3}) {
     final List<Widget> list = <Widget>[];
 
@@ -131,8 +102,6 @@ extension StringExt on String? {
 
 extension ScrollControllerExt on ScrollController {
   Future<void> scrollToEnd() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 100));
-
     try {
       animateTo(
         position.maxScrollExtent,
