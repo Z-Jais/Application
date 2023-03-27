@@ -4,12 +4,12 @@ on:
   push:
     branches:
       - master
-  schedule:
-    - cron: '00 14 * * 1' # Tous les lundis à 7h00 (heure française)
-
-  issues:
-    types:
-      - labeled
+#  schedule:
+#    - cron: '00 14 * * 1' # Tous les lundis à 7h00 (heure française)
+#
+#  issues:
+#    types:
+#      - labeled
 
 jobs:
   create_pull_request:
