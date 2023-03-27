@@ -2,7 +2,7 @@ name: Flutter Version Increment
 
 on:
   schedule:
-    - cron: '20 10 * * 1' # Tous les lundis à 7h00 (heure française)
+    - cron: '30 10 * * 1' # Tous les lundis à 7h00 (heure française)
 
   issues:
     types:
@@ -48,11 +48,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: 'stable'
 
       - name: Run the bash script with the appropriate version type
         run: |
