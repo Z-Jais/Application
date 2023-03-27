@@ -2,7 +2,7 @@ name: Flutter Version Increment
 
 on:
   schedule:
-    - cron: '50 11 * * 1' # Tous les lundis à 7h00 (heure française)
+    - cron: '05 12 * * 1' # Tous les lundis à 7h00 (heure française)
 
   issues:
     types:
@@ -12,6 +12,13 @@ jobs:
   create_pull_request:
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
+
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -29,13 +36,9 @@ jobs:
       - name: Create a temporary file with the current date
         run: echo "$(date)" > temp_date.txt
 
-      - name: Commit changes
-        run: |
-          git add temp_date.txt
-          git commit -m "Create temp_date.txt with current date"
-
-      - name: Push changes
-        run: git push origin version-increment
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update version type"=
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
