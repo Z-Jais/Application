@@ -1,0 +1,80 @@
+name: Flutter Version Increment
+
+on:
+  schedule:
+    - cron: '0 5 * * 1' # Tous les lundis à 7h00 (heure française)
+
+  issues:
+    types:
+      - labeled
+
+jobs:
+  create_pull_request:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create and checkout a new branch
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git checkout -b version-increment
+
+      - name: Create a temporary file with the current date
+        run: echo "$(date)" > temp_date.txt
+
+      - name: Commit changes
+        run: |
+          git add temp_date.txt
+          git commit -m "Create temp_date.txt with current date"
+
+      - name: Push changes
+        run: git push origin version-increment
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: "Version increment"
+          branch: version-increment
+          labels: "Waiting for version type"
+          reviewers: Ziedelth
+          assignees: Ziedelth
+
+  update_version_type:
+    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'Waiting for version type') && (contains(github.event.label.name, 'major') || contains(github.event.label.name, 'minor') || contains(github.event.label.name, 'patch'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: 'stable'
+
+      - name: Run the bash script with the appropriate version type
+        run: |
+          chmod +x increment_version.sh
+          if contains(github.event.label.name, 'major'); then
+            ./increment_version.sh major
+          elif contains(github.event.label.name, 'minor'); then
+            ./increment_version.sh minor
+          else
+            ./increment_version.sh patch
+          fi
+
+      - name: Commit changes
+        run: |
+          git add pubspec.yaml
+          git commit -m "Update version type"
+
+      - name: Push changes
+        run: git push origin HEAD
+
+      - name: Add comment to the issue
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: "Version type updated and changes pushed to the pull request."
