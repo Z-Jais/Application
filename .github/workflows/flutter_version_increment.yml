@@ -39,6 +39,9 @@ jobs:
       - name: Create a temporary file with the current date
         run: echo "$(date)" > temp_date.txt
 
+      - name: Set upstream branch
+        run: git push --set-upstream origin version-increment
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Update version type"
