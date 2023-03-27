@@ -2,7 +2,7 @@ name: Flutter Version Increment
 
 on:
   schedule:
-    - cron: '0 11 * * 1' # Tous les lundis à 7h00 (heure française)
+    - cron: '50 11 * * 1' # Tous les lundis à 7h00 (heure française)
 
   issues:
     types:
@@ -21,6 +21,10 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
           git checkout -b version-increment
+
+      # Delete origin version-increment branch if it exists
+      - name: Delete origin version-increment branch if it exists
+        run: git push origin --delete version-increment
 
       - name: Create a temporary file with the current date
         run: echo "$(date)" > temp_date.txt
