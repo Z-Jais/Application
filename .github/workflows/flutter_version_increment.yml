@@ -2,7 +2,7 @@ name: Flutter Version Increment
 
 on:
   schedule:
-    - cron: '05 12 * * 1' # Tous les lundis à 7h00 (heure française)
+    - cron: '07 12 * * 1' # Tous les lundis à 7h00 (heure française)
 
   issues:
     types:
@@ -38,7 +38,7 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Update version type"=
+          commit_message: "Update version type"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
