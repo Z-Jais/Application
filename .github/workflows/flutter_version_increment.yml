@@ -33,7 +33,7 @@ jobs:
           git checkout -b version-increment
 
       # Delete origin version-increment branch if it exists
-      - name: Delete origin version-increment branch if it exists
+      - name: Delete origin version-increment branch if it exists, otherwise continue
         run: git push origin --delete version-increment || true
 
       - name: Create a temporary file with the current date
