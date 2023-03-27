@@ -2,7 +2,7 @@ name: Flutter Version Increment
 
 on:
   schedule:
-    - cron: '35 13 * * 1' # Tous les lundis à 7h00 (heure française)
+    - cron: '00 14 * * 1' # Tous les lundis à 7h00 (heure française)
 
   issues:
     types:
