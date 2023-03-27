@@ -2,7 +2,7 @@ name: Flutter Version Increment
 
 on:
   schedule:
-    - cron: '30 10 * * 1' # Tous les lundis à 7h00 (heure française)
+    - cron: '0 11 * * 1' # Tous les lundis à 7h00 (heure française)
 
   issues:
     types:
@@ -34,10 +34,11 @@ jobs:
         run: git push origin version-increment
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           title: "Version increment"
           branch: version-increment
+          base: master
           labels: "Waiting for version type"
           reviewers: Ziedelth
           assignees: Ziedelth
