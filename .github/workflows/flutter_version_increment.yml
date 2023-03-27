@@ -34,7 +34,7 @@ jobs:
 
       # Delete origin version-increment branch if it exists
       - name: Delete origin version-increment branch if it exists
-        run: git push origin --delete version-increment
+        run: git push origin --delete version-increment || true
 
       - name: Create a temporary file with the current date
         run: echo "$(date)" > temp_date.txt
