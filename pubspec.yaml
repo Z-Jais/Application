@@ -2,7 +2,7 @@ name: jais
 description: A Flutter application by Ziedelth for mobile members
 
 publish_to: 'none'
-version: 2.2.0+19
+version: 2.2.1+20
 
 environment:
   sdk: ">=2.19.0 <4.0.0"
@@ -73,6 +73,6 @@ msix_config:
   display_name: Jais
   publisher_display_name: Ziedelth
   identity_name: Ziedelth.Jais
-  msix_version: 2.2.0.0
+  msix_version: 2.2.1.0
   logo_path: assets/icon.png
   capabilities: internetClient
