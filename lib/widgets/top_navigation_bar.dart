@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:jais/controllers/ad_controller.dart';
-import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/models/navigation_bar_item.dart';
@@ -103,21 +100,7 @@ class TopNavigationBar extends StatelessWidget {
               fontFamily: 'Pacifico',
             ),
           ),
-          if (AdController.instance.bannerAd != null &&
-              AppController.isAndroidOrIOS)
-            Expanded(
-              child: ColoredBox(
-                color: Colors.transparent,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: AdWidget(
-                    ad: AdController.instance.bannerAd!,
-                  ),
-                ),
-              ),
-            )
-          else
-            const Spacer(),
+          const Spacer(),
           ChangeNotifierProvider.value(
             value: NavigationController.instance,
             child: Consumer<NavigationController>(
