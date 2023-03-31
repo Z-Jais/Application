@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:jais/controllers/ad_controller.dart';
-import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -36,12 +34,8 @@ class URLController {
     );
   }
 
-  Future<void> goOnUrl(String url, {bool showAd = true}) async {
-    if (showAd && AppController.isAndroidOrIOS) {
-      await AdController.instance.show((_) async => _redirectTo(url));
-    } else {
-      await _redirectTo(url);
-    }
+  Future<void> goOnUrl(String url) async {
+    await _redirectTo(url);
   }
 }
 
