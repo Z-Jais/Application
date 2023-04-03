@@ -38,7 +38,7 @@ dev_dependencies:
   json_serializable: ^6.6.1
   lint: ^2.0.1
   msix: ^3.9.1
-  nock: ^1.2.1
+  nock: ^1.2.2
 
 flutter_icons:
   image_path: 'assets/icon.png'
