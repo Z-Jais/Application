@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:jais/models/navigation_bar_item.dart';
 import 'package:jais/widgets/filter_watchlist.dart';
 
@@ -46,22 +47,21 @@ class NavigationController with ChangeNotifier {
       ],
     ),
   ];
+  int _currentPage = 0;
 
-  int get currentPage {
-    try {
-      return pageController.page?.toInt() ?? 0;
-    } catch (e) {
-      return 0;
-    }
-  }
+  int get currentPage => _currentPage;
 
   void setCurrentPage(int page) {
+    debug('NavigationController', '$currentPage -> $page');
+    // Detect scroll direction
+
     if (page == currentPage) {
       return;
     }
 
     try {
       pageController.jumpToPage(page);
+      _currentPage = page;
       notifyListeners();
     } catch (exception, stacktrace) {
       log(
