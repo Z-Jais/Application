@@ -27,7 +27,7 @@ class HomeView extends StatelessWidget {
                 child: Consumer<NavigationController>(
                   builder: (_, value, __) {
                     if (AppController.isAndroidOrIOS) {
-                      return MyPage(controller: value);
+                      return const MyPage();
                     }
 
                     return Row(
@@ -43,7 +43,7 @@ class HomeView extends StatelessWidget {
                           thickness: 1,
                           color: Theme.of(context).primaryColor,
                         ),
-                        Expanded(child: MyPage(controller: value)),
+                        const Expanded(child: MyPage()),
                       ],
                     );
                   },
@@ -76,15 +76,13 @@ class HomeView extends StatelessWidget {
 }
 
 class MyPage extends StatelessWidget {
-  final NavigationController controller;
-
-  const MyPage({required this.controller, super.key});
+  const MyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return PageView(
-      controller: controller.pageController,
-      onPageChanged: controller.setCurrentPage,
+      controller: NavigationController.instance.pageController,
+      onPageChanged: NavigationController.instance.setCurrentPage,
       children: const [
         // EPISODES TAB
         EpisodeTab(),
