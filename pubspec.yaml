@@ -26,11 +26,11 @@ dependencies:
   system_tray: ^2.0.2
   url_launcher: ^6.1.10
   web_socket_channel: ^2.3.0
-  window_manager: ^0.3.1
+  window_manager: ^0.3.2
 
 dev_dependencies:
   build_runner: ^2.3.3
-  dart_code_metrics: ^5.7.0
+  dart_code_metrics: ^5.7.2
   flutter_launcher_icons: ^0.13.0
   flutter_native_splash: ^2.2.19
   flutter_test:
