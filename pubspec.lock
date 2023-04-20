@@ -874,7 +874,7 @@ packages:
       name: system_tray
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3"
   term_glyph:
     dependency: transitive
     description:

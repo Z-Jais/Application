@@ -23,7 +23,7 @@ dependencies:
   provider: ^6.0.5
   shared_preferences: ^2.1.0
   shimmer: ^2.0.0
-  system_tray: ^2.0.2
+  system_tray: ^2.0.3
   url_launcher: ^6.1.10
   web_socket_channel: ^2.4.0
   window_manager: ^0.3.2
