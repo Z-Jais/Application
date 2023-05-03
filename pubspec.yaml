@@ -37,7 +37,7 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.6.1
   lint: ^2.0.1
-  msix: ^3.11.0
+  msix: ^3.11.1
   nock: ^1.2.2
 
 flutter_icons:
