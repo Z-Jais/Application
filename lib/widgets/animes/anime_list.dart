@@ -19,7 +19,10 @@ class AnimeList extends StatelessWidget {
         child: Consumer<AnimeController>(
           builder: (_, value, ___) => (value.nothingToShow() ||
                   (controller is AnimeDiaryController && value.list.isEmpty))
-              ? const NoElement()
+              ? const NoElement(
+                  title: 'Mince !',
+                  message: 'Aucun élément à afficher !',
+                )
               : listView
                   ? SingleChildScrollView(
                       child: Column(
@@ -38,7 +41,10 @@ class AnimeList extends StatelessWidget {
       child: Consumer<AnimeController>(
         builder: (_, value, ___) => (value.nothingToShow() ||
                 (controller is AnimeDiaryController && value.list.isEmpty))
-            ? const NoElement()
+            ? const NoElement(
+                title: 'Mince !',
+                message: 'Aucun élément à afficher !',
+              )
             : listView
                 ? ListView.builder(
                     addAutomaticKeepAlives: false,

@@ -39,7 +39,8 @@ class MyApp extends StatefulWidget with WindowListener {
 }
 
 class _MyAppState extends State<MyApp> with WindowListener {
-  static const Color _mainColor = Color(0xFFF2B05E);
+  static const Color _mainWhiteThemeColor = Color(0xFF59413C);
+  static const Color _mainDarkThemeColor = Color(0xFFF2EBDC);
 
   @override
   void initState() {
@@ -56,22 +57,22 @@ class _MyAppState extends State<MyApp> with WindowListener {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        primaryColor: _mainColor,
-        colorScheme: ColorScheme.fromSeed(seedColor: _mainColor),
+        primaryColor: _mainWhiteThemeColor,
+        colorScheme: ColorScheme.fromSeed(seedColor: _mainWhiteThemeColor),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
-        primaryColor: _mainColor,
+        primaryColor: _mainDarkThemeColor,
         scaffoldBackgroundColor: Colors.black,
         colorScheme: ColorScheme.fromSwatch(
           backgroundColor: Colors.black,
           brightness: Brightness.dark,
-          primarySwatch: MaterialColor(_mainColor.value, {
+          primarySwatch: MaterialColor(_mainDarkThemeColor.value, {
             for (var i = 50; i <= 900; i += 50)
               i: Color.fromRGBO(
-                _mainColor.red,
-                _mainColor.green,
-                _mainColor.blue,
+                _mainDarkThemeColor.red,
+                _mainDarkThemeColor.green,
+                _mainDarkThemeColor.blue,
                 i / 100,
               ),
           }),

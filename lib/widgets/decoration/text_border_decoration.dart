@@ -50,6 +50,9 @@ class _TextBorderDecorationState extends State<TextBorderDecoration> {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: widget.isSelected ? FontWeight.bold : null,
+                color: widget.isSelected
+                    ? Theme.of(context).colorScheme.background
+                    : null,
               ),
             ),
           ),

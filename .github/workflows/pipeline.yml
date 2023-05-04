@@ -4,32 +4,27 @@ on:
   pull_request:
 
 jobs:
-  test:
-    name: Test
+  # Check if environment is correct
+  check_env:
+    name: Check environment
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Get
-        run: flutter pub get
+      - name: Check environment
+        run: |
+          result=$(cat lib/utils.dart | grep -v "//" | grep "serverUrl" | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//' | sed 's/.*"\(.*\)".*/\1/')
 
-      - name: Test
-        run: flutter test --coverage
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-
-  format_and_analyze:
-    needs:
-      - test
+          if [ "$result" != "beta-api.ziedelth.fr" ]; then
+            echo "Environment is not correct"
+            exit 1
+          fi
+  validating:
     name: Format and Analyze
     runs-on: ubuntu-latest
+    needs:
+      - check_env
     steps:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -59,12 +54,33 @@ jobs:
 
       - name: Check unused code
         run: flutter pub run dart_code_metrics:metrics check-unused-code lib
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs:
+      - validating
+    steps:
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
 
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get
+        run: flutter pub get
+
+      - name: Test
+        run: flutter test --coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
   # Make a job with the title of pull request contains "flutter_native_splash" and only on opened pull request
   native_splash:
     if: contains(github.event.pull_request.title, 'flutter_native_splash') && (github.event.action == 'opened' || github.event.action == 'synchronize')
     needs:
-      - format_and_analyze
+      - test
     name: Flutter Native Splash
     runs-on: ubuntu-latest
 
@@ -92,22 +108,23 @@ jobs:
         run: flutter pub run flutter_native_splash:create
 
       - uses: stefanzweifel/git-auto-commit-action@v4
-
-  # Check if environment is correct
-  check_env:
-    needs:
-      - format_and_analyze
-    name: Check environment
+  # Build the app
+  build_android:
+    name: Build Android
     runs-on: ubuntu-latest
+    needs:
+      - test
     steps:
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Check environment
-        run: |
-          result=$(cat lib/utils.dart | grep -v "//" | grep "serverUrl" | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//' | sed 's/.*"\(.*\)".*/\1/')
-          
-          if [ "$result" != "beta-api.ziedelth.fr" ]; then
-            echo "Environment is not correct"
-            exit 1
-          fi
+      - name: Get
+        run: flutter pub get
+
+      - name: Build Android
+        run: flutter build apk --profile --split-per-abi
