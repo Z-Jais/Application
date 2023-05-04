@@ -35,7 +35,7 @@ dev_dependencies:
   flutter_native_splash: ^2.2.19
   flutter_test:
     sdk: flutter
-  json_serializable: ^6.6.1
+  json_serializable: ^6.6.2
   lint: ^2.0.1
   msix: ^3.11.1
   nock: ^1.2.2
