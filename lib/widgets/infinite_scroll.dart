@@ -18,8 +18,12 @@ class InfiniteScroll<T extends DataController> extends StatelessWidget {
     return ChangeNotifierProvider<T>.value(
       value: controller,
       child: Consumer<T>(
-        builder: (_, __, ___) =>
-            controller.nothingToShow() ? const NoElement() : builder(),
+        builder: (_, __, ___) => controller.nothingToShow()
+            ? const NoElement(
+                title: 'Mince !',
+                message: 'Aucun élément à afficher !',
+              )
+            : builder(),
       ),
     );
   }

@@ -60,8 +60,7 @@ flutter:
   assets:
     - 'assets/icon.png'
     - 'assets/icon.ico'
-    - 'assets/no_connection.png'
-    - 'assets/no_element.png'
+    - 'assets/no.png'
 
   fonts:
     - family: 'Pacifico'
