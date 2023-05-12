@@ -36,7 +36,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   json_serializable: ^6.6.2
-  lint: ^2.0.1
+  lint: ^2.1.2
   msix: ^3.12.1
   nock: ^1.2.2
 
