@@ -10,6 +10,7 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
   final ModelLoadingWidget loadingWidget;
   final Model Function(Map<String, dynamic>) fromJson;
   final ModelWidget Function(Model) toWidget;
+  final VoidCallback notifyListenersCallback;
 
   bool _isLoading = false;
   int page = 1;
@@ -23,6 +24,7 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
     required this.loadingWidget,
     required this.fromJson,
     required this.toWidget,
+    required this.notifyListenersCallback,
   }) {
     if (addDefaultLoader) {
       list.addAll(_loaders);
@@ -34,6 +36,7 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
   }
 
   void notify() {
+    notifyListenersCallback();
     notifyListeners();
   }
 
@@ -72,7 +75,7 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
     }
     _isLoading = true;
     list.addAll(_loaders);
-    notifyListeners();
+    notify();
 
     try {
       info(runtimeType.toString(), 'Loading (page $page) ...');
@@ -93,7 +96,7 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
       );
     } finally {
       _isLoading = false;
-      notifyListeners();
+      notify();
     }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'simulcast.g.dart';
 
@@ -16,5 +16,6 @@ class Simulcast {
 
   factory Simulcast.fromJson(Map<String, dynamic> json) =>
       _$SimulcastFromJson(json);
+
   Map<String, dynamic> toJson() => _$SimulcastToJson(this);
 }

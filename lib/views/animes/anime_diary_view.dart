@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_diary_controller.dart';
-import 'package:jais/widgets/animes/anime_list.dart';
 import 'package:jais/widgets/day_widget.dart';
+import 'package:jais/widgets/h_v_list.dart';
 import 'package:provider/provider.dart';
 
 class AnimeDiaryView extends StatelessWidget {
@@ -18,26 +18,24 @@ class AnimeDiaryView extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+            Expanded(
               child: ChangeNotifierProvider.value(
                 value: controller,
                 child: Consumer<AnimeDiaryController>(
-                  builder: (_, value, ___) => Row(
-                    children: [
-                      ...controller.days.map(
+                  builder: (_, value, ___) {
+                    return HVList(
+                      hList: controller.days.map(
                         (DayWidget e) => GestureDetector(
                           child: e,
                           onTap: () async => controller.day = e.dayNumber,
                         ),
                       ),
-                    ],
-                  ),
+                      hCenter: true,
+                      vList: value.list,
+                    );
+                  },
                 ),
               ),
-            ),
-            Expanded(
-              child: AnimeList(controller: controller),
             ),
           ],
         ),

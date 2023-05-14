@@ -11,11 +11,13 @@ class NavigationController with ChangeNotifier {
   final List<NavigationBarItem> _items = [
     const NavigationBarItem(
       name: 'Épisodes',
+      selectedIcon: Icon(Icons.subscriptions),
       icon: Icon(Icons.subscriptions_outlined),
     ),
     NavigationBarItem(
       name: 'Watchlist',
-      icon: const Icon(Icons.list),
+      selectedIcon: const Icon(Icons.playlist_play),
+      icon: const Icon(Icons.playlist_play_outlined),
       topWidgets: [
         NavigationBarItem(
           name: 'Filtre',
@@ -32,7 +34,8 @@ class NavigationController with ChangeNotifier {
     ),
     const NavigationBarItem(
       name: 'Animes',
-      icon: Icon(Icons.live_tv),
+      selectedIcon: Icon(Icons.video_library),
+      icon: Icon(Icons.video_library_outlined),
       topWidgets: [
         NavigationBarItem(
           name: 'Rechercher',
@@ -72,23 +75,26 @@ class NavigationController with ChangeNotifier {
     }
   }
 
-  Iterable<BottomNavigationBarItem> get bottomNavigationBarItems =>
-      _items.map((NavigationBarItem item) => item.toBottomNavigationBarItem());
+  Iterable<NavigationDestination> get bottomNavigationBarItems =>
+      _items.map((NavigationBarItem item) => item.toNavigationDestination());
+
   List<NavigationBarItem>? get currentTopNavigationBarItems =>
       _items[currentPage].topWidgets;
 
   List<Widget> slideButtons(BuildContext context) => _items.map(
         (NavigationBarItem item) {
           final int index = _items.indexOf(item);
+          final isSelected = currentPage == index;
 
           return IconButton(
             onPressed: () => setCurrentPage(index),
             padding: const EdgeInsets.all(16),
-            color: currentPage == index ? Theme.of(context).primaryColor : null,
+            color: isSelected ? Theme.of(context).primaryColor : null,
             icon: Flex(
               direction: Axis.vertical,
               children: [
-                item.icon,
+                if (isSelected && item.selectedIcon != null) item.selectedIcon!,
+                if (!isSelected) item.icon,
                 Text(item.name),
               ],
             ),

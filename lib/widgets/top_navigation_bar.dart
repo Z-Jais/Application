@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/models/navigation_bar_item.dart';
-import 'package:jais/widgets/decoration/round_border_decoration.dart';
 import 'package:provider/provider.dart';
 
 class TopNavigationBar extends StatelessWidget {
@@ -53,11 +52,11 @@ class TopNavigationBar extends StatelessWidget {
             onLongPress: () {
               showDialog(
                 context: context,
-                builder: (_) => AlertDialog(
+                builder: (_) => const AlertDialog(
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         'Développé par :',
                         style: TextStyle(fontWeight: FontWeight.bold),
@@ -87,8 +86,10 @@ class TopNavigationBar extends StatelessWidget {
                 ),
               );
             },
-            child:
-                RoundBorderDecoration(widget: Image.asset('assets/icon.png')),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset('assets/icon.png'),
+            ),
           ),
           const SizedBox(width: 5),
           Text(

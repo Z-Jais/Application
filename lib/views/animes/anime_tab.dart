@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/anime_tab_controller.dart';
 import 'package:jais/controllers/logger.dart';
-import 'package:jais/widgets/animes/anime_list.dart';
-import 'package:jais/widgets/simulcasts/simulcast_list.dart';
+import 'package:jais/widgets/h_v_list.dart';
+import 'package:provider/provider.dart';
 
 class AnimeTab extends StatefulWidget {
   const AnimeTab({super.key});
@@ -16,6 +16,7 @@ class _AnimeTabState extends State<AnimeTab> {
 
   @override
   void initState() {
+    _controller.setup();
     WidgetsBinding.instance.addPostFrameCallback((_) => _controller.init());
     super.initState();
   }
@@ -23,19 +24,23 @@ class _AnimeTabState extends State<AnimeTab> {
   @override
   Widget build(BuildContext context) {
     info('AnimeTab', 'build()');
-    return SingleChildScrollView(
-      controller: _controller.animeController.scrollController,
-      child: Column(
-        children: <Widget>[
-          SimulcastList(
-            simulcastController: _controller.simulcastController,
-            animeController: _controller.animeController,
-          ),
-          AnimeList(
-            controller: _controller.animeController,
-            listView: false,
-          ),
-        ],
+    return ChangeNotifierProvider.value(
+      value: _controller,
+      child: Consumer<AnimeTabController>(
+        builder: (_, value, __) {
+          return RefreshIndicator(
+            onRefresh: () async {
+              await _controller.init();
+            },
+            child: HVList(
+              hCenter: true,
+              hController: _controller.simulcastController.scrollController,
+              hList: _controller.simulcastWidgets,
+              vController: _controller.animeController.scrollController,
+              vList: _controller.animeController.list,
+            ),
+          );
+        },
       ),
     );
   }

@@ -1,18 +1,12 @@
-include: package:lint/strict.yaml
+include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  plugins:
-    - dart_code_metrics
   exclude:
     - '**/*.g.dart'
-    - '**/*.freezed.dart'
 
-dart_code_metrics:
-  anti-patterns:
-    - long-method
-    - long-parameter-list
-  metrics:
-    cyclomatic-complexity: 20
-    lines-of-executable-code: 50
-    number-of-parameters: 4
-    maximum-nesting-level: 5
+analyze:
+  rules:
+    prefer_const_constructors: true
+    prefer_conditional_assignment: true
+    prefer_const_declarations: true
+    sort_constructors_first: true
