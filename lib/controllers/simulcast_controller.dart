@@ -8,7 +8,7 @@ import 'package:jais/widgets/simulcasts/simulcast_widget.dart';
 
 class SimulcastController
     extends DataController<Simulcast, SimulcastLoaderWidget, SimulcastWidget> {
-  SimulcastController()
+  SimulcastController({required super.notifyListenersCallback})
       : super(
           listener: false,
           limit: 9,
@@ -21,7 +21,7 @@ class SimulcastController
   Future<List<SimulcastWidget>> widgets() async {
     return URLController()
         .get(
-          'https://${Const.serverUrl}/simulcasts/country/fr',
+          '${Const.instance.serverUrlWithHttpProtocol}/simulcasts/country/fr',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }

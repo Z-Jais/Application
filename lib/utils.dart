@@ -3,16 +3,21 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class Const {
+  static final Const instance = Const();
   static const double platformImageWith = 20;
   static const double platformImageHeight = 20;
   static const double episodeImageHeight = 200;
   static const double animeImageWith = 75;
   static const double animeImageHeight = 100;
-  static const double mangaImageWith = 75;
-  static const double mangaImageHeight = 100;
+  static const double missingAnimeImageWith = 64;
+  static const double missingAnimeImageHeight = 64;
 
-  static const String serverUrl = "beta-api.ziedelth.fr";
-  // static const String serverUrl = "alpha-api.ziedelth.fr";
+  // static const String serverUrl = "beta-api.ziedelth.fr";
+  static const String serverUrl = "alpha-api.ziedelth.fr";
+  // static const String serverUrl = "192.168.1.20:8080";
+
+  String get serverUrlWithHttpProtocol => 'https://$serverUrl';
+  String get serverUrlWithSocketProtocol => 'wss://$serverUrl';
 }
 
 class Utils {
@@ -115,5 +120,9 @@ extension ScrollControllerExt on ScrollController {
 extension BuildContextExt on BuildContext {
   bool get isOnMobile {
     return MediaQuery.of(this).size.width < 768;
+  }
+
+  Color get mainBackgroundColor {
+    return Theme.of(this).colorScheme.background.withAlpha(247);
   }
 }

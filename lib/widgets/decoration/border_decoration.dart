@@ -35,11 +35,10 @@ class _BorderDecorationState extends State<BorderDecoration> {
         },
         child: DecoratedBox(
           decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).primaryColor),
             borderRadius: BorderRadius.circular(8),
             color: _isHover
                 ? Theme.of(context).primaryColor.withOpacity(0.2)
-                : Colors.transparent,
+                : Theme.of(context).colorScheme.background,
           ),
           child: Padding(
             padding: const EdgeInsets.all(10),

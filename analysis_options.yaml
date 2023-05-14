@@ -5,7 +5,6 @@ analyzer:
     - dart_code_metrics
   exclude:
     - '**/*.g.dart'
-    - '**/*.freezed.dart'
 
 dart_code_metrics:
   anti-patterns:

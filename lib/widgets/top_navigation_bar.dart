@@ -53,11 +53,11 @@ class TopNavigationBar extends StatelessWidget {
             onLongPress: () {
               showDialog(
                 context: context,
-                builder: (_) => AlertDialog(
+                builder: (_) => const AlertDialog(
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         'Développé par :',
                         style: TextStyle(fontWeight: FontWeight.bold),

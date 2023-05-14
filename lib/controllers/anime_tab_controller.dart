@@ -5,8 +5,13 @@ import 'package:jais/utils.dart';
 import 'package:jais/widgets/simulcasts/simulcast_widget.dart';
 
 class AnimeTabController with ChangeNotifier {
-  final SimulcastController simulcastController = SimulcastController();
-  final AnimeController animeController = AnimeController();
+  late SimulcastController simulcastController;
+  late AnimeController animeController;
+
+  void setup() {
+    simulcastController = SimulcastController(notifyListenersCallback: notify);
+    animeController = AnimeController(notifyListenersCallback: notify);
+  }
 
   Future<void> init() async {
     simulcastController.reset();
@@ -22,6 +27,29 @@ class AnimeTabController with ChangeNotifier {
     animeController.reset();
     await animeController.load();
 
+    notify();
+  }
+
+  void notify() {
     notifyListeners();
+  }
+
+  Iterable<Widget> get simulcastWidgets {
+    return simulcastController.setCurrent(animeController.simulcast).map(
+          (e) => GestureDetector(
+            child: e,
+            onTap: () {
+              if (e is! SimulcastWidget) {
+                return;
+              }
+
+              animeController.scrollController.jumpTo(0);
+              animeController.simulcast = e.simulcast;
+              animeController.reset();
+              animeController.load();
+              notify();
+            },
+          ),
+        );
   }
 }

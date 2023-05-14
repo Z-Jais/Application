@@ -8,25 +8,27 @@ class AnimeLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BorderDecoration(
-      child: Row(
-        children: <Widget>[
-          const Skeleton(
-            width: Const.animeImageWith,
-            height: Const.animeImageHeight,
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const <Widget>[
-                Skeleton(height: 20),
-                SizedBox(height: 10),
-                Skeleton(height: 70),
-              ],
+    return const RepaintBoundary(
+      child: BorderDecoration(
+        child: Row(
+          children: <Widget>[
+            Skeleton(
+              width: Const.animeImageWith,
+              height: Const.animeImageHeight,
             ),
-          ),
-        ],
+            SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Skeleton(height: 20),
+                  SizedBox(height: 10),
+                  Skeleton(height: 70),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

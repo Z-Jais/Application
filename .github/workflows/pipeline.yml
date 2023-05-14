@@ -44,16 +44,16 @@ jobs:
         run: dart analyze
 
       - name: Check nullable code
-        run: flutter pub run dart_code_metrics:metrics check-unnecessary-nullable lib
+        run: dart run dart_code_metrics:metrics check-unnecessary-nullable lib
 
       - name: Check unused files
-        run: flutter pub run dart_code_metrics:metrics check-unused-files lib
+        run: dart run dart_code_metrics:metrics check-unused-files lib
 
       - name: Check unused localizations
-        run: flutter pub run dart_code_metrics:metrics check-unused-l10n lib
+        run: dart run dart_code_metrics:metrics check-unused-l10n lib
 
       - name: Check unused code
-        run: flutter pub run dart_code_metrics:metrics check-unused-code lib
+        run: dart run dart_code_metrics:metrics check-unused-code lib
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -105,7 +105,7 @@ jobs:
         run: flutter pub get
 
       - name: Flutter Native Splash
-        run: flutter pub run flutter_native_splash:create
+        run: dart run flutter_native_splash:create
 
       - uses: stefanzweifel/git-auto-commit-action@v4
   # Build the app

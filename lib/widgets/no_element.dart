@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/logger.dart';
 
 class NoElement extends StatelessWidget {
   final String title;
@@ -16,7 +15,7 @@ class NoElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('NoElement.build()');
+    warning('NoElement', 'build()');
 
     return Center(
       child: Column(

@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/app_controller.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:jais/views/home_view.dart';
 import 'package:jais/widgets/no_element.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +10,7 @@ class InitializationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('InitializationView.build()');
+    info('InitializationView', 'build()');
     final appController = Provider.of<AppController>(context);
 
     if (appController.inProgress) {

@@ -5,10 +5,15 @@ import 'package:jais/controllers/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class URLController {
+  static const Duration _timeoutDuration = Duration(seconds: 10);
+
   Future<http.Response?> get(String url) async {
     try {
       debug('URLController', 'get($url)');
-      return http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+      final http.Response response =
+          await http.get(Uri.parse(url)).timeout(_timeoutDuration);
+      debug('URLController', 'get($url) => $response');
+      return response;
     } catch (exception, stackTrace) {
       error('URLController', 'get()', exception, stackTrace);
       return null;
@@ -18,9 +23,10 @@ class URLController {
   Future<http.Response?> post(String url, Object body) async {
     try {
       debug('URLController', 'post($url, $body)');
-      return await http
-          .post(Uri.parse(url), body: body)
-          .timeout(const Duration(seconds: 10));
+      final http.Response response =
+          await http.post(Uri.parse(url), body: body).timeout(_timeoutDuration);
+      debug('URLController', 'post($url, $body) => $response');
+      return response;
     } catch (exception, stackTrace) {
       error('URLController', 'post()', exception, stackTrace);
       return null;

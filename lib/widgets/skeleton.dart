@@ -3,9 +3,15 @@ import 'package:shimmer/shimmer.dart';
 
 class Skeleton extends StatelessWidget {
   final double? width;
-  final double? height;
+  final double height;
+  final double radius;
 
-  const Skeleton({this.width, this.height, super.key});
+  const Skeleton({
+    this.width,
+    required this.height,
+    this.radius = 16,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,7 @@ class Skeleton extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(.09),
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
           ),
         ),
       ),

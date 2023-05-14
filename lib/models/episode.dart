@@ -1,8 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:jais/models/anime.dart';
 import 'package:jais/models/episodetype.dart';
 import 'package:jais/models/langtype.dart';
 import 'package:jais/models/platform.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'episode.g.dart';
 

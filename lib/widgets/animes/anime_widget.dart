@@ -10,9 +10,8 @@ class AnimeWidget extends StatelessWidget {
 
   const AnimeWidget({required this.anime, super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    final borderDecoration = BorderDecoration(
+  Widget borderDecoration(BuildContext context) {
+    return BorderDecoration(
       hoverListener: true,
       child: Row(
         children: <Widget>[
@@ -44,19 +43,24 @@ class AnimeWidget extends StatelessWidget {
         ],
       ),
     );
+  }
 
-    return GestureDetector(
-      onTap: () async {
-        Navigator.of(context).pushNamed('/anime/detail', arguments: anime);
-      },
-      child: Stack(
-        children: [
-          borderDecoration,
-          if (AppController.watchlist.hasIn(anime.uuid))
-            Badge(smallSize: 16, child: borderDecoration)
-          else
-            borderDecoration,
-        ],
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: GestureDetector(
+        onTap: () async {
+          Navigator.of(context).pushNamed('/anime/detail', arguments: anime);
+        },
+        child: Stack(
+          children: [
+            borderDecoration(context),
+            if (AppController.watchlist.hasIn(anime.uuid))
+              Badge(smallSize: 16, child: borderDecoration(context))
+            else
+              borderDecoration(context),
+          ],
+        ),
       ),
     );
   }

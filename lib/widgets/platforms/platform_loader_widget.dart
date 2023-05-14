@@ -10,6 +10,7 @@ class PlatformLoaderWidget extends StatelessWidget {
     return const Skeleton(
       width: Const.platformImageWith,
       height: Const.platformImageHeight,
+      radius: 360,
     );
   }
 }

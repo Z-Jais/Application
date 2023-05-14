@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_detail_controller.dart';
 import 'package:jais/controllers/animes/anime_diary_controller.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/platforms/windows_platform_controller.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_diary_view.dart';
@@ -39,19 +38,19 @@ class MyApp extends StatefulWidget with WindowListener {
 }
 
 class _MyAppState extends State<MyApp> with WindowListener {
-  static const Color _mainWhiteThemeColor = Color(0xFF59413C);
-  static const Color _mainDarkThemeColor = Color(0xFFF2EBDC);
+  static const Color _mainWhiteThemeColor = Color(0xFFa32d26);
+  static const Color _mainDarkThemeColor = Color(0xFFfde5c9);
 
   @override
   void initState() {
-    log('_MyAppState.initState()');
+    info('_MyAppState', 'initState()');
     windowManager.addListener(this);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    log('_MyAppState.build()');
+    info('_MyAppState', 'build()');
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

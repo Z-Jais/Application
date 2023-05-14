@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:http/http.dart';
 import 'package:jais/controllers/datas/collection_data_controller.dart';
 import 'package:jais/controllers/filter_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
@@ -39,12 +39,9 @@ class AppController with ChangeNotifier {
     _inProgress = true;
     notifyListeners();
 
-    _hasInternet = await InternetConnectionChecker.createInstance(
-          checkTimeout: const Duration(seconds: 3),
-          checkInterval: const Duration(seconds: 3),
-        ).hasConnection &&
-        (await URLController().get("https://${Const.serverUrl}/"))!.statusCode <
-            500;
+    final Response? response = await URLController()
+        .get("${Const.instance.serverUrlWithHttpProtocol}/");
+    _hasInternet = response != null && response.statusCode < 500;
 
     _inProgress = false;
     notifyListeners();
@@ -66,8 +63,9 @@ class AppController with ChangeNotifier {
 
     if (isWindows) {
       try {
-        final WebSocketChannel webSocketChannel =
-            WebSocketChannel.connect(Uri.parse('wss://${Const.serverUrl}/'));
+        final WebSocketChannel webSocketChannel = WebSocketChannel.connect(
+          Uri.parse(Const.instance.serverUrlWithSocketProtocol),
+        );
 
         webSocketChannel.stream.listen((message) async {
           final Notification notification = Notification.fromJson(

@@ -25,12 +25,19 @@ class _WatchlistButtonState extends State<WatchlistButton> {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(
-        _inWatchlist
-            ? Icons.indeterminate_check_box_outlined
-            : Icons.add_box_outlined,
-        color: _inWatchlist ? Colors.red : Colors.green,
+    return ElevatedButton(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            _inWatchlist
+                ? Icons.indeterminate_check_box_outlined
+                : Icons.add_box_outlined,
+            color: _inWatchlist ? Colors.red : Colors.green,
+          ),
+          const SizedBox(width: 5),
+          Text(_inWatchlist ? 'Remove from watchlist' : 'Add to watchlist'),
+        ],
       ),
       onPressed: () async {
         await widget.onToggle(_inWatchlist);
