@@ -33,26 +33,25 @@ class AnimeDiaryController extends AnimeController {
     ),
     DayWidget(
       day: 'Dimanche',
+      dayNumber: 7,
     ),
   ];
   final List<DayWidget> days = [];
 
-  AnimeDiaryController() : super(listener: false) {
+  AnimeDiaryController()
+      : super(
+          listener: false,
+          notifyListenersCallback: () {},
+        ) {
     day = DateTime.now().weekday;
   }
 
   int get day => _day;
 
   set day(int day) {
-    int dayNumber = day;
-
-    if (dayNumber == 7) {
-      dayNumber = 0;
-    }
-
-    _day = dayNumber;
-    final DayWidget dayWidget = _initial
-        .firstWhere((DayWidget element) => element.dayNumber == dayNumber);
+    _day = day;
+    final DayWidget dayWidget =
+        _initial.firstWhere((DayWidget element) => element.dayNumber == day);
     final int index = _initial.indexOf(dayWidget);
 
     days.clear();
@@ -67,7 +66,7 @@ class AnimeDiaryController extends AnimeController {
   Future<List<AnimeWidget>> widgets() async {
     return URLController()
         .get(
-          'https://${Const.serverUrl}/animes/diary/country/fr/day/$_day',
+          '${Const.instance.serverUrlWithHttpProtocol}/animes/diary/country/fr/day/$_day',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }

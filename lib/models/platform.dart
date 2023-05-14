@@ -1,4 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'platform.g.dart';
 
@@ -18,5 +18,6 @@ class Platform {
 
   factory Platform.fromJson(Map<String, dynamic> json) =>
       _$PlatformFromJson(json);
+
   Map<String, dynamic> toJson() => _$PlatformToJson(this);
 }

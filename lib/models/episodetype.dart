@@ -1,4 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'episodetype.g.dart';
 
@@ -14,6 +14,7 @@ class EpisodeType {
 
   factory EpisodeType.fromJson(Map<String, dynamic> json) =>
       _$EpisodeTypeFromJson(json);
+
   Map<String, dynamic> toJson() => _$EpisodeTypeToJson(this);
 
   @override

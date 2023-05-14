@@ -11,6 +11,7 @@ enum LogLevel {
   ;
 
   final String color;
+
   const LogLevel(this.color);
 }
 

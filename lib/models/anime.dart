@@ -1,7 +1,7 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:jais/models/country.dart';
 import 'package:jais/models/genre.dart';
 import 'package:jais/models/simulcast.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'anime.g.dart';
 
@@ -30,5 +30,6 @@ class Anime {
   });
 
   factory Anime.fromJson(Map<String, dynamic> json) => _$AnimeFromJson(json);
+
   Map<String, dynamic> toJson() => _$AnimeToJson(this);
 }

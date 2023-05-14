@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/logger.dart';
 
 class NoElement extends StatelessWidget {
   final String title;
@@ -16,7 +15,7 @@ class NoElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('NoElement.build()');
+    warning('NoElement', 'build()');
 
     return Center(
       child: Column(
@@ -28,7 +27,7 @@ class NoElement extends StatelessWidget {
             title,
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          Text(message),
+          Text(message, textAlign: TextAlign.center),
           if (onRetry != null) ...[
             const SizedBox(height: 10),
             TextButton(

@@ -19,6 +19,7 @@ class AnimeDetailController extends DataController<Episode,
             episode: episode,
             showActions: true,
           ),
+          notifyListenersCallback: () {},
         );
 
   Anime? get anime => _anime;
@@ -37,7 +38,7 @@ class AnimeDetailController extends DataController<Episode,
   Future<List<LiteEpisodeWidget>> widgets() async {
     return URLController()
         .get(
-          'https://${Const.serverUrl}/episodes/anime/${_anime?.uuid}/page/$page/limit/$limit',
+          '${Const.instance.serverUrlWithHttpProtocol}/episodes/anime/${_anime?.uuid}/page/$page/limit/$limit',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }

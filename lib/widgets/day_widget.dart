@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jais/widgets/decoration/text_border_decoration.dart';
 
 class DayWidget extends StatelessWidget {
   final String day;
@@ -27,9 +26,23 @@ class DayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextBorderDecoration(
-      text: day,
-      isSelected: isSelected,
+    return Container(
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: isSelected
+            ? Theme.of(context).primaryColor
+            : Theme.of(context).colorScheme.background,
+      ),
+      child: Text(
+        day,
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: isSelected ? FontWeight.bold : null,
+          color: isSelected ? Theme.of(context).colorScheme.background : null,
+        ),
+      ),
     );
   }
 }

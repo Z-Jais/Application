@@ -13,6 +13,7 @@ class AnimeController
   AnimeController({
     super.listener = true,
     super.addDefaultLoader = true,
+    required super.notifyListenersCallback,
   }) : super(
           limit: 24,
           loadingWidget: const AnimeLoaderWidget(),
@@ -24,7 +25,7 @@ class AnimeController
   Future<List<AnimeWidget>> widgets() async {
     return URLController()
         .get(
-          'https://${Const.serverUrl}/animes/country/fr/simulcast/${simulcast?.uuid}/page/$page/limit/$limit',
+          '${Const.instance.serverUrlWithHttpProtocol}/animes/country/fr/simulcast/${simulcast?.uuid}/page/$page/limit/$limit',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }

@@ -7,8 +7,10 @@ import 'package:jais/widgets/episodes/episode_widget.dart';
 
 class EpisodeController
     extends DataController<Episode, EpisodeLoaderWidget, EpisodeWidget> {
-  EpisodeController({bool showActions = false})
-      : super(
+  EpisodeController({
+    bool showActions = false,
+    required super.notifyListenersCallback,
+  }) : super(
           limit: 12,
           loadingWidget: const EpisodeLoaderWidget(),
           fromJson: (json) => Episode.fromJson(json),
@@ -22,7 +24,7 @@ class EpisodeController
   Future<List<EpisodeWidget>> widgets() async {
     return URLController()
         .get(
-          'https://${Const.serverUrl}/episodes/country/fr/page/$page/limit/$limit',
+          '${Const.instance.serverUrlWithHttpProtocol}/episodes/country/fr/page/$page/limit/$limit',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }

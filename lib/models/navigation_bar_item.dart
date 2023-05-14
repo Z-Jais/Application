@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class NavigationBarItem {
   final String name;
+  final Icon? selectedIcon;
   final Icon icon;
   final List<NavigationBarItem>? topWidgets;
   final String? route;
@@ -9,15 +10,16 @@ class NavigationBarItem {
 
   const NavigationBarItem({
     required this.name,
+    this.selectedIcon,
     required this.icon,
     this.topWidgets,
     this.route,
     this.onPressed,
   });
 
-  BottomNavigationBarItem toBottomNavigationBarItem() =>
-      BottomNavigationBarItem(
+  NavigationDestination toNavigationDestination() => NavigationDestination(
         icon: icon,
+        selectedIcon: selectedIcon,
         label: name,
       );
 
