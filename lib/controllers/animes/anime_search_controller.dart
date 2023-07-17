@@ -10,13 +10,14 @@ class AnimeSearchController extends AnimeController {
       : super(
           listener: false,
           addDefaultLoader: false,
+          notifyListenersCallback: () {},
         );
 
   @override
   Future<List<AnimeWidget>> widgets() async {
     return URLController()
         .get(
-          'https://${Const.serverUrl}/animes/country/fr/search/name/$query',
+          '${Const.instance.serverUrlWithHttpProtocol}/animes/country/fr/search/name/$query',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }

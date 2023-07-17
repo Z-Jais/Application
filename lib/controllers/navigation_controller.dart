@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:jais/models/navigation_bar_item.dart';
 import 'package:jais/widgets/filter_watchlist.dart';
 
@@ -10,11 +11,13 @@ class NavigationController with ChangeNotifier {
   final List<NavigationBarItem> _items = [
     const NavigationBarItem(
       name: 'Épisodes',
+      selectedIcon: Icon(Icons.subscriptions),
       icon: Icon(Icons.subscriptions_outlined),
     ),
     NavigationBarItem(
       name: 'Watchlist',
-      icon: const Icon(Icons.list),
+      selectedIcon: const Icon(Icons.playlist_play),
+      icon: const Icon(Icons.playlist_play_outlined),
       topWidgets: [
         NavigationBarItem(
           name: 'Filtre',
@@ -31,7 +34,8 @@ class NavigationController with ChangeNotifier {
     ),
     const NavigationBarItem(
       name: 'Animes',
-      icon: Icon(Icons.live_tv),
+      selectedIcon: Icon(Icons.video_library),
+      icon: Icon(Icons.video_library_outlined),
       topWidgets: [
         NavigationBarItem(
           name: 'Rechercher',
@@ -46,22 +50,21 @@ class NavigationController with ChangeNotifier {
       ],
     ),
   ];
+  int _currentPage = 0;
 
-  int get currentPage {
-    try {
-      return pageController.page?.toInt() ?? 0;
-    } catch (e) {
-      return 0;
-    }
-  }
+  int get currentPage => _currentPage;
 
   void setCurrentPage(int page) {
+    debug('NavigationController', '$currentPage -> $page');
+    // Detect scroll direction
+
     if (page == currentPage) {
       return;
     }
 
     try {
       pageController.jumpToPage(page);
+      _currentPage = page;
       notifyListeners();
     } catch (exception, stacktrace) {
       log(
@@ -72,23 +75,26 @@ class NavigationController with ChangeNotifier {
     }
   }
 
-  Iterable<BottomNavigationBarItem> get bottomNavigationBarItems =>
-      _items.map((NavigationBarItem item) => item.toBottomNavigationBarItem());
+  Iterable<NavigationDestination> get bottomNavigationBarItems =>
+      _items.map((NavigationBarItem item) => item.toNavigationDestination());
+
   List<NavigationBarItem>? get currentTopNavigationBarItems =>
       _items[currentPage].topWidgets;
 
   List<Widget> slideButtons(BuildContext context) => _items.map(
         (NavigationBarItem item) {
           final int index = _items.indexOf(item);
+          final isSelected = currentPage == index;
 
           return IconButton(
             onPressed: () => setCurrentPage(index),
             padding: const EdgeInsets.all(16),
-            color: currentPage == index ? Theme.of(context).primaryColor : null,
+            color: isSelected ? Theme.of(context).primaryColor : null,
             icon: Flex(
               direction: Axis.vertical,
               children: [
-                item.icon,
+                if (isSelected && item.selectedIcon != null) item.selectedIcon!,
+                if (!isSelected) item.icon,
                 Text(item.name),
               ],
             ),

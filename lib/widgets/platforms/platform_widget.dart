@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/models/platform.dart';
 import 'package:jais/utils.dart';
-import 'package:jais/widgets/decoration/round_border_decoration.dart';
 import 'package:jais/widgets/platforms/platform_loader_widget.dart';
 
 class PlatformWidget extends StatelessWidget {
@@ -14,11 +13,11 @@ class PlatformWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl:
-          'https://${Const.serverUrl}/platforms/attachment/${platform.uuid}',
+          '${Const.instance.serverUrlWithHttpProtocol}/platforms/attachment/${platform.uuid}',
       imageBuilder: (_, ImageProvider<Object> imageProvider) {
-        return RoundBorderDecoration(
-          radius: 360,
-          widget: Image(image: imageProvider, fit: BoxFit.cover),
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(360),
+          child: Image(image: imageProvider, fit: BoxFit.cover),
         );
       },
       placeholder: (_, __) => const PlatformLoaderWidget(),

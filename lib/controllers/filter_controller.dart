@@ -20,7 +20,9 @@ class FilterController {
 
   Future<void> init() async {
     await Future.wait([
-      URLController().get('https://${Const.serverUrl}/episodetypes').ifOk(
+      URLController()
+          .get('${Const.instance.serverUrlWithHttpProtocol}/episodetypes')
+          .ifOk(
             (p0) => {
               episodeTypes.clear(),
               episodeTypes.addAll(
@@ -29,7 +31,9 @@ class FilterController {
             },
           ),
       watchlistEpisodeTypeFilter.init(),
-      URLController().get('https://${Const.serverUrl}/langtypes').ifOk(
+      URLController()
+          .get('${Const.instance.serverUrlWithHttpProtocol}/langtypes')
+          .ifOk(
             (p0) => {
               langTypes.clear(),
               langTypes

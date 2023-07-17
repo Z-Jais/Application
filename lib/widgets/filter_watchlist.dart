@@ -7,7 +7,7 @@ class FilterWatchlist extends StatefulWidget {
   const FilterWatchlist({super.key});
 
   @override
-  _FilterWatchlistState createState() => _FilterWatchlistState();
+  State<FilterWatchlist> createState() => _FilterWatchlistState();
 }
 
 class _FilterWatchlistState extends State<FilterWatchlist> {

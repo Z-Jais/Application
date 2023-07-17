@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/views/animes/anime_tab.dart';
@@ -26,26 +25,7 @@ class HomeView extends StatelessWidget {
                 value: NavigationController.instance,
                 child: Consumer<NavigationController>(
                   builder: (_, value, __) {
-                    if (AppController.isAndroidOrIOS) {
-                      return MyPage(controller: value);
-                    }
-
-                    return Row(
-                      children: [
-                        Column(
-                          children: [
-                            const Padding(padding: EdgeInsets.only(top: 8)),
-                            ...value.slideButtons(context),
-                          ],
-                        ),
-                        VerticalDivider(
-                          width: 1,
-                          thickness: 1,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        Expanded(child: MyPage(controller: value)),
-                      ],
-                    );
+                    return const MyPage();
                   },
                 ),
               ),
@@ -53,38 +33,32 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: AppController.isAndroidOrIOS
-          ? ChangeNotifierProvider.value(
-              value: NavigationController.instance,
-              child: Consumer<NavigationController>(
-                builder: (_, value, __) {
-                  return BottomNavigationBar(
-                    showSelectedLabels: false,
-                    showUnselectedLabels: false,
-                    selectedItemColor: Theme.of(context).primaryColor,
-                    unselectedItemColor: Colors.grey,
-                    currentIndex: value.currentPage,
-                    onTap: value.setCurrentPage,
-                    items: value.bottomNavigationBarItems.toList(),
-                  );
-                },
-              ),
-            )
-          : null,
+      bottomNavigationBar: ChangeNotifierProvider.value(
+        value: NavigationController.instance,
+        child: Consumer<NavigationController>(
+          builder: (_, value, __) {
+            return NavigationBar(
+              selectedIndex: value.currentPage,
+              onDestinationSelected: value.setCurrentPage,
+              destinations: value.bottomNavigationBarItems.toList(),
+              indicatorColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).colorScheme.background,
+            );
+          },
+        ),
+      ),
     );
   }
 }
 
 class MyPage extends StatelessWidget {
-  final NavigationController controller;
-
-  const MyPage({required this.controller, super.key});
+  const MyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return PageView(
-      controller: controller.pageController,
-      onPageChanged: controller.setCurrentPage,
+      controller: NavigationController.instance.pageController,
+      onPageChanged: NavigationController.instance.setCurrentPage,
       children: const [
         // EPISODES TAB
         EpisodeTab(),

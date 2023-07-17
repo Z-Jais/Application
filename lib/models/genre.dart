@@ -1,4 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'genre.g.dart';
 
@@ -13,5 +13,6 @@ class Genre {
   });
 
   factory Genre.fromJson(Map<String, dynamic> json) => _$GenreFromJson(json);
+
   Map<String, dynamic> toJson() => _$GenreToJson(this);
 }

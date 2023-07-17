@@ -1,17 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_detail_controller.dart';
 import 'package:jais/controllers/animes/anime_diary_controller.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
-import 'package:jais/controllers/platforms/windows_platform_controller.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_diary_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
 import 'package:jais/views/initialization_view.dart';
 import 'package:provider/provider.dart';
-import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,59 +16,46 @@ Future<void> main() async {
   // debugRepaintRainbowEnabled = kDebugMode;
   // debugRepaintTextRainbowEnabled = kDebugMode;
 
-  if (AppController.isWindows) {
-    await WindowsPlatformController.instance.init();
-  }
-
   runApp(
     ChangeNotifierProvider(
       create: (_) => AppController(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
-class MyApp extends StatefulWidget with WindowListener {
-  MyApp({super.key});
+class MyApp extends StatelessWidget {
+  static const Color _mainWhiteThemeColor = Color(0xFFa32d26);
+  static const Color _mainDarkThemeColor = Color(0xFFfde5c9);
 
-  @override
-  State<StatefulWidget> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> with WindowListener {
-  static const Color _mainColor = Color(0xFFF2B05E);
-
-  @override
-  void initState() {
-    log('_MyAppState.initState()');
-    windowManager.addListener(this);
-    super.initState();
-  }
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    log('_MyAppState.build()');
+    info('MyApp', 'build()');
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        primaryColor: _mainColor,
-        colorScheme: ColorScheme.fromSeed(seedColor: _mainColor),
+        primaryColor: _mainWhiteThemeColor,
+        scaffoldBackgroundColor: const Color(0xFFF0F0F0),
+        colorScheme: ColorScheme.fromSeed(seedColor: _mainWhiteThemeColor)
+            .copyWith(background: Colors.white),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
-        primaryColor: _mainColor,
-        scaffoldBackgroundColor: Colors.black,
+        primaryColor: _mainDarkThemeColor,
+        scaffoldBackgroundColor: const Color(0xFF101010),
         colorScheme: ColorScheme.fromSwatch(
           backgroundColor: Colors.black,
           brightness: Brightness.dark,
-          primarySwatch: MaterialColor(_mainColor.value, {
+          primarySwatch: MaterialColor(_mainDarkThemeColor.value, {
             for (var i = 50; i <= 900; i += 50)
               i: Color.fromRGBO(
-                _mainColor.red,
-                _mainColor.green,
-                _mainColor.blue,
+                _mainDarkThemeColor.red,
+                _mainDarkThemeColor.green,
+                _mainDarkThemeColor.blue,
                 i / 100,
               ),
           }),
@@ -91,17 +75,5 @@ class _MyAppState extends State<MyApp> with WindowListener {
         },
       },
     );
-  }
-
-  @override
-  void onWindowMinimize() {
-    windowManager.hide();
-    super.onWindowMinimize();
-  }
-
-  @override
-  void onWindowRestore() {
-    setState(() {});
-    super.onWindowRestore();
   }
 }

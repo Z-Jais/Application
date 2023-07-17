@@ -8,7 +8,7 @@ class EpisodeSeeWidget extends StatefulWidget {
   const EpisodeSeeWidget({required this.episode, super.key});
 
   @override
-  _EpisodeSeeWidgetState createState() => _EpisodeSeeWidgetState();
+  State<EpisodeSeeWidget> createState() => _EpisodeSeeWidgetState();
 }
 
 class _EpisodeSeeWidgetState extends State<EpisodeSeeWidget> {

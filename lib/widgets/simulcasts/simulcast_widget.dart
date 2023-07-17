@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jais/models/simulcast.dart';
-import 'package:jais/widgets/decoration/text_border_decoration.dart';
 
 class SimulcastWidget extends StatelessWidget {
   final Simulcast simulcast;
@@ -43,9 +42,23 @@ class SimulcastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextBorderDecoration(
-      text: '${getNaturalSeason()} ${simulcast.year}',
-      isSelected: isSelected,
+    return Container(
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: isSelected
+            ? Theme.of(context).primaryColor
+            : Theme.of(context).colorScheme.background,
+      ),
+      child: Text(
+        '${getNaturalSeason()} ${simulcast.year}',
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: isSelected ? FontWeight.bold : null,
+          color: isSelected ? Theme.of(context).colorScheme.background : null,
+        ),
+      ),
     );
   }
 }

@@ -1,20 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/logger.dart';
 
 class NoElement extends StatelessWidget {
-  const NoElement({super.key});
+  final String title;
+  final String message;
+  final VoidCallback? onRetry;
+
+  const NoElement({
+    required this.title,
+    required this.message,
+    this.onRetry,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    warning('NoElement', 'build()');
+
     return Center(
       child: Column(
-        children: <Widget>[
-          Image.asset('assets/no_element.png', width: 200),
-          const SizedBox(height: 10),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset('assets/no.png', width: 200),
+          const SizedBox(height: 30),
           Text(
-            'Mince !',
+            title,
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          const Text('Aucun élément à afficher'),
+          Text(message, textAlign: TextAlign.center),
+          if (onRetry != null) ...[
+            const SizedBox(height: 10),
+            TextButton(
+              onPressed: onRetry,
+              child: const Text('Réessayer'),
+            ),
+          ],
         ],
       ),
     );
