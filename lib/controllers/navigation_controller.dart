@@ -62,6 +62,9 @@ class NavigationController with ChangeNotifier {
       return;
     }
 
+    PaintingBinding.instance.imageCache.clear();
+    PaintingBinding.instance.imageCache.clearLiveImages();
+
     try {
       pageController.jumpToPage(page);
       _currentPage = page;
