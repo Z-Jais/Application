@@ -2,11 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
+import 'package:jais/widgets/disposing_image.dart';
 import 'package:jais/widgets/skeleton.dart';
 
 class EpisodeImage extends StatelessWidget {
   final Episode episode;
-  final double? height;
+  final double height;
 
   const EpisodeImage({
     required this.episode,
@@ -31,11 +32,13 @@ class EpisodeImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           child: Stack(
             children: <Widget>[
-              Image(
-                image: imageProvider,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: height,
+              DisposingImage(
+                image: Image(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: height,
+                ),
               ),
               if (needStack)
                 Positioned(

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/models/anime.dart';
 import 'package:jais/utils.dart';
+import 'package:jais/widgets/disposing_image.dart';
 import 'package:jais/widgets/skeleton.dart';
 
 class AnimeImage extends StatelessWidget {
@@ -21,24 +22,26 @@ class AnimeImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
+      width: width,
+      height: height,
+      fit: BoxFit.cover,
       imageUrl:
           '${Const.instance.serverUrlWithHttpProtocol}/animes/attachment/${anime.uuid}',
       imageBuilder: (_, ImageProvider<Object> imageProvider) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(radius),
-          child: Image(
-            image: imageProvider,
-            fit: BoxFit.cover,
-            width: width,
-            height: height,
+          child: DisposingImage(
+            image: Image(
+              image: imageProvider,
+              fit: BoxFit.cover,
+              width: width,
+              height: height,
+            ),
           ),
         );
       },
       placeholder: (_, __) => Skeleton(height: height),
       errorWidget: (_, __, ___) => Skeleton(height: height),
-      width: width,
-      height: height,
-      fit: BoxFit.cover,
     );
   }
 }
