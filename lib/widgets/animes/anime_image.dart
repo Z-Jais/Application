@@ -40,8 +40,8 @@ class AnimeImage extends StatelessWidget {
           ),
         );
       },
-      placeholder: (_, __) => Skeleton(height: height),
-      errorWidget: (_, __, ___) => Skeleton(height: height),
+      placeholder: (_, __) => Skeleton(height: height, radius: radius),
+      errorWidget: (_, __, ___) => Skeleton(height: height, radius: radius),
     );
   }
 }
