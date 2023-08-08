@@ -61,6 +61,7 @@ class MissingAnimeWidget extends StatelessWidget {
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -77,6 +78,7 @@ class MissingAnimeWidget extends StatelessWidget {
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                 ),
               )
             ],
