@@ -6,18 +6,10 @@ class SimulcastLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: Theme.of(context).primaryColor),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.all(8),
-          child: Skeleton(width: 80, height: 20),
-        ),
-      ),
+      child: const Skeleton(width: 80, height: 20),
     );
   }
 }
