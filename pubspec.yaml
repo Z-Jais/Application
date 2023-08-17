@@ -45,9 +45,10 @@ flutter:
   uses-material-design: true
 
   assets:
-    - 'assets/icon.png'
-    - 'assets/no.png'
-    - 'assets/x-twitter.svg'
+    - assets/icon.png
+    - assets/no.png
+    - assets/x-twitter.svg
+    - shorebird.yaml
 
   fonts:
     - family: 'Pacifico'
