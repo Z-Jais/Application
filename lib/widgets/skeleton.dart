@@ -3,12 +3,12 @@ import 'package:shimmer/shimmer.dart';
 
 class Skeleton extends StatelessWidget {
   final double? width;
-  final double? height;
+  final double height;
   final double radius;
 
   const Skeleton({
     this.width,
-    this.height,
+    required this.height,
     this.radius = 8,
     super.key,
   });

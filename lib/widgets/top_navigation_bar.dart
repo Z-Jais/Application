@@ -112,7 +112,7 @@ class TopNavigationBar extends StatelessWidget {
                     ...?calculateTopWidgets(
                       context,
                       value.currentTopNavigationBarItems,
-                    )
+                    ),
                   ],
                 );
               },

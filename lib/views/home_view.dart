@@ -4,6 +4,7 @@ import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/views/animes/anime_tab.dart';
 import 'package:jais/views/episodes/episode_tab.dart';
 import 'package:jais/views/episodes/episode_watchlist_tab.dart';
+import 'package:jais/views/profile_tab.dart';
 import 'package:jais/widgets/top_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -66,6 +67,8 @@ class MyPage extends StatelessWidget {
         EpisodeWatchlistTab(),
         // ANIME TAB
         AnimeTab(),
+        // PROFILE TAB
+        ProfileTab(),
       ],
     );
   }

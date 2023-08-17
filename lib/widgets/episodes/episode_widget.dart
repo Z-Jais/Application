@@ -106,7 +106,7 @@ class EpisodeWidget extends StatelessWidget {
                   const Spacer(),
                   if (showActions) EpisodeSeeWidget(episode: episode),
                 ],
-              )
+              ),
             ],
           ),
         ),
