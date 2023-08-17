@@ -50,7 +50,7 @@ class NavigationController with ChangeNotifier {
       ],
     ),
     const NavigationBarItem(
-      name: 'Profile',
+      name: 'Profil',
       selectedIcon: Icon(Icons.person),
       icon: Icon(Icons.person_outline_outlined),
     ),

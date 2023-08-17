@@ -13,6 +13,10 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  FlutterError.onError = (details) {
+    error('FlutterError', '.onError', details.exception, details.stack);
+  };
+
   // debugRepaintRainbowEnabled = kDebugMode;
   // debugRepaintTextRainbowEnabled = kDebugMode;
 

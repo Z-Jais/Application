@@ -25,9 +25,9 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.6
-  flutterando_metrics: ^5.7.6
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.2
+  flutterando_metrics: ^5.7.6
   json_serializable: ^6.7.1
   lint: ^2.1.2
 

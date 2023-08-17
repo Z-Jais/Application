@@ -61,4 +61,10 @@ class FilterController {
       await episodeWatchedFilter.save();
     }
   }
+
+  Future<void> reset() async {
+    await watchlistEpisodeTypeFilter.reset();
+    await watchlistLangTypeFilter.reset();
+    await episodeWatchedFilter.reset();
+  }
 }

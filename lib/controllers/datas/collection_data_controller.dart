@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:jais/controllers/datas/abstract_data_controller.dart';
 
 class CollectionDataController extends AbstractDataController<List<String>> {
-  CollectionDataController(super.key);
+  CollectionDataController(super.key, {super.limit});
 
   @override
   List<String> load() {
@@ -31,6 +31,10 @@ class CollectionDataController extends AbstractDataController<List<String>> {
       return;
     }
 
+    if (limit != null && data.length >= limit!) {
+      data.removeAt(0);
+    }
+
     data.add(uuid);
     await save();
   }
@@ -39,6 +43,10 @@ class CollectionDataController extends AbstractDataController<List<String>> {
     for (final String uuid in uuids) {
       if (hasIn(uuid)) {
         continue;
+      }
+
+      if (limit != null && data.length >= limit!) {
+        data.removeAt(0);
       }
 
       data.add(uuid);
