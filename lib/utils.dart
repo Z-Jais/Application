@@ -92,7 +92,7 @@ class Utils {
       list.add(
         Row(
           children: <Widget>[
-            ...sublist.map<Widget>((Widget e) => Expanded(child: e))
+            ...sublist.map<Widget>((Widget e) => Expanded(child: e)),
           ],
         ),
       );
@@ -126,5 +126,20 @@ extension BuildContextExt on BuildContext {
 
   Color get mainBackgroundColor {
     return Theme.of(this).scaffoldBackgroundColor;
+  }
+}
+
+extension ListWidgetExt on List<Widget> {
+  Iterable<Widget> joinWidget(Widget separator) sync* {
+    if (isEmpty) {
+      return;
+    }
+
+    yield this[0];
+
+    for (int i = 1; i < length; i++) {
+      yield separator;
+      yield this[i];
+    }
   }
 }

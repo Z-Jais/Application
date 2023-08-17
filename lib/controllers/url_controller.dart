@@ -36,12 +36,18 @@ class URLController {
   Future<bool> _redirectTo(String url) async {
     return launchUrl(
       Uri.parse(url),
-      mode: LaunchMode.externalApplication,
+      mode: LaunchMode.externalNonBrowserApplication,
     );
   }
 
   Future<void> goOnUrl(String url) async {
     await _redirectTo(url);
+  }
+
+  Future<bool> mailTo(String email) async {
+    return launchUrl(
+      Uri.parse('mailto:$email'),
+    );
   }
 }
 

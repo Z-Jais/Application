@@ -80,7 +80,7 @@ class MissingAnimeWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                 ),
-              )
+              ),
             ],
           ),
         ),

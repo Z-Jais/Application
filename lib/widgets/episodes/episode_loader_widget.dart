@@ -53,7 +53,7 @@ class EpisodeLoaderWidget extends StatelessWidget {
                       SizedBox(height: 5),
                       Skeleton(width: 250, height: 15),
                       SizedBox(height: 5),
-                      Skeleton(width: 100, height: 15)
+                      Skeleton(width: 100, height: 15),
                     ],
                   ),
                 ),
