@@ -1,18 +1,20 @@
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
+import 'package:jais/controllers/app_controller.dart';
 
 final _dateFormat = DateFormat('HH:mm:ss.SSSS dd/MM/yyyy');
 
 enum LogLevel {
-  debug('\x1B[34m'),
-  info('\x1B[32m'),
-  warning('\x1B[33m'),
-  error('\x1B[31m'),
+  debug('DEBUG', '\x1B[34m'),
+  info('INFO', '\x1B[32m'),
+  warning('WARNING', '\x1B[33m'),
+  error('ERROR', '\x1B[31m'),
   ;
 
+  final String name;
   final String color;
 
-  const LogLevel(this.color);
+  const LogLevel(this.name, this.color);
 }
 
 void _log(LogLevel level, String member, String message) {
@@ -20,6 +22,10 @@ void _log(LogLevel level, String member, String message) {
     final format =
         '${level.color}[${_dateFormat.format(DateTime.now())} $member] $message\x1B[0m';
     debugPrint(format);
+  } else {
+    final format =
+        '[${level.name} ${_dateFormat.format(DateTime.now())} $member] $message';
+    AppController.logs.add(format);
   }
 }
 
@@ -39,11 +45,11 @@ void error(
   String member,
   String message,
   Object error,
-  StackTrace stackTrace,
+  StackTrace? stackTrace,
 ) {
   _log(
     LogLevel.error,
     member,
-    '$message\n$error\n$stackTrace',
+    '$message\n$error\n${stackTrace ?? ''}',
   );
 }

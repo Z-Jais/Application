@@ -2,12 +2,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AbstractDataController<T> {
   final String key;
-  late final SharedPreferences sharedPreferences;
+  final int? limit;
+  late SharedPreferences sharedPreferences;
   bool firstInit = true;
   bool isInit = false;
   late T data;
 
-  AbstractDataController(this.key);
+  AbstractDataController(this.key, {this.limit});
 
   Future<void> init() async {
     if (isInit) {
@@ -23,4 +24,10 @@ abstract class AbstractDataController<T> {
   T load();
 
   Future<void> save();
+
+  Future<void> reset() async {
+    await sharedPreferences.remove(key);
+    isInit = false;
+    await init();
+  }
 }
