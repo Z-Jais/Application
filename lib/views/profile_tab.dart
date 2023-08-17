@@ -29,6 +29,10 @@ class ProfileTab extends StatelessWidget {
                   'assets/x-twitter.svg',
                   width: 24,
                   height: 24,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.onSurface,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 onTap: () {
                   URLController().goOnUrl('https://x.com/Jaiss___');
