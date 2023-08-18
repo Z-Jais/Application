@@ -25,6 +25,7 @@ class _EpisodeSeeWidgetState extends State<EpisodeSeeWidget> {
         }
 
         setState(() {});
+        await AppController.homeWidgetController.notify();
       },
       child: Icon(
         isWatched ? Icons.visibility : Icons.visibility_off,

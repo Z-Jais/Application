@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_widget/home_widget.dart';
 import 'package:jais/controllers/animes/anime_detail_controller.dart';
 import 'package:jais/controllers/animes/anime_diary_controller.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
@@ -28,11 +29,22 @@ Future<void> main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   static const Color _mainWhiteThemeColor = Color(0xFFa32d26);
   static const Color _mainDarkThemeColor = Color(0xFFfde5c9);
 
-  const MyApp({super.key});
+  @override
+  void initState() {
+    super.initState();
+    HomeWidget.setAppGroupId('jais');
+  }
 
   @override
   Widget build(BuildContext context) {

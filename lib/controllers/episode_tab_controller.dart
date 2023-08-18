@@ -17,8 +17,8 @@ class EpisodeTabController with ChangeNotifier {
     episodeController.reset();
     notify();
 
-    missingAnimeController.load().whenComplete(() => notify());
-    episodeController.load().whenComplete(() => notify());
+    missingAnimeController.load().whenComplete(notify);
+    episodeController.load().whenComplete(notify);
   }
 
   void notify() {

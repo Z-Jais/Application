@@ -15,6 +15,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.7
+  home_widget:
+    git:
+      url: https://github.com/Ziedelth/flutter_home_widget.git
+      ref: e02d386487bf47324fb7ca5112eccb345a26cf06
   http: ^0.13.6
   intl: ^0.18.1
   json_annotation: ^4.8.1

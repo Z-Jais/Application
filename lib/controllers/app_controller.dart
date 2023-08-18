@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:jais/controllers/datas/collection_data_controller.dart';
 import 'package:jais/controllers/filter_controller.dart';
+import 'package:jais/controllers/home_widget_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/firebase_options.dart';
 import 'package:jais/utils.dart';
@@ -13,6 +14,8 @@ class AppController with ChangeNotifier {
       CollectionDataController('animeWatchlist');
   static final CollectionDataController seen =
       CollectionDataController('episodesSeen');
+  static final HomeWidgetController homeWidgetController =
+      HomeWidgetController();
 
   static final CollectionDataController logs =
       CollectionDataController('logs', limit: 100);
@@ -26,6 +29,7 @@ class AppController with ChangeNotifier {
 
   AppController() {
     checkInternetConnection();
+    homeWidgetController.init();
   }
 
   Future<void> checkInternetConnection() async {
@@ -52,6 +56,7 @@ class AppController with ChangeNotifier {
 
     await FirebaseMessaging.instance.requestPermission();
     await FirebaseMessaging.instance.subscribeToTopic('all');
+    await homeWidgetController.notify();
   }
 
   Future<void> reset() async {

@@ -8,9 +8,10 @@ import 'package:jais/widgets/animes/missing_anime_widget.dart';
 
 class MissingAnimeController extends DataController<MissingAnime,
     MissingAnimeLoaderWidget, MissingAnimeWidget> with AbstractFilter {
-  MissingAnimeController({required super.notifyListenersCallback})
-      : super(
-          limit: 12,
+  MissingAnimeController({
+    required super.notifyListenersCallback,
+    super.limit = 12,
+  }) : super(
           loadingWidget: const MissingAnimeLoaderWidget(),
           fromJson: (json) => MissingAnime.fromJson(json),
           toWidget: (anime) => MissingAnimeWidget(missingAnime: anime),

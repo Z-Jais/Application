@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/app_controller.dart';
 
 class WatchlistButton extends StatefulWidget {
   final bool inWatchlist;
@@ -47,6 +48,8 @@ class _WatchlistButtonState extends State<WatchlistButton> {
         setState(() {
           _inWatchlist = !_inWatchlist;
         });
+
+        await AppController.homeWidgetController.notify();
       },
     );
   }
