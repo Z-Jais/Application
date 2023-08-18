@@ -1,12 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:jais/controllers/datas/collection_data_controller.dart';
 import 'package:jais/controllers/filter_controller.dart';
+import 'package:jais/controllers/notification_controller.dart';
 import 'package:jais/controllers/review/advanced_in_app_review.dart';
 import 'package:jais/controllers/url_controller.dart';
-import 'package:jais/firebase_options.dart';
 import 'package:jais/utils.dart';
 
 class AppController with ChangeNotifier {
@@ -46,13 +44,7 @@ class AppController with ChangeNotifier {
     await seen.init();
     await logs.init();
     await FilterController.instance.init();
-
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
-    await FirebaseMessaging.instance.requestPermission();
-    await FirebaseMessaging.instance.subscribeToTopic('all');
+    await NotificationController.instance.init();
 
     AdvancedInAppReview()
         .setMinDaysBeforeRemind(7)

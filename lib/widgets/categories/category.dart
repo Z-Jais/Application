@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jais/utils.dart';
-import 'package:jais/widgets/categories/category_button.dart';
 
 class Category extends StatelessWidget {
   final String label;
-  final List<CategoryButton> buttons;
+  final List<Widget> buttons;
 
   const Category({required this.label, required this.buttons, super.key});
 

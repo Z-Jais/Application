@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/logger.dart';
 
 class DisposingImage extends StatefulWidget {
   final Image image;
@@ -18,7 +17,6 @@ class _DisposingImageState extends State<DisposingImage> {
 
   @override
   void dispose() {
-    debug('DisposingImage', 'dispose()');
     imageCache.evict(widget.image);
     super.dispose();
   }
