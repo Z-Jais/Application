@@ -1,13 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jais/controllers/app_controller.dart';
+import 'package:jais/controllers/notification_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/widgets/categories/category.dart';
 import 'package:jais/widgets/categories/category_button.dart';
 import 'package:provider/provider.dart';
+import 'package:vibration/vibration.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});
+
+  Future<bool> _checkIfSomethingIsRunning(
+    NotificationController value,
+    BuildContext context,
+  ) async {
+    if (!value.isRunning) {
+      return false;
+    }
+
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'Veuillez patienter un instant...',
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+
+    if (await Vibration.hasVibrator() == true) {
+      Vibration.vibrate(duration: 100);
+    }
+
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +43,96 @@ class ProfileTab extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
+          ChangeNotifierProvider.value(
+            value: NotificationController.instance,
+            child: Consumer<NotificationController>(
+              builder: (_, value, __) {
+                return Category(
+                  label: 'NOTIFICATION',
+                  buttons: [
+                    FutureBuilder(
+                      future: value.isAll,
+                      builder: (context, snapshot) {
+                        final isEnabled = snapshot.data == true;
+
+                        return CategoryButton(
+                          label: 'Toutes',
+                          icon: Icon(
+                            isEnabled
+                                ? Icons.notifications_active
+                                : Icons.notifications_off_outlined,
+                          ),
+                          trailing: isEnabled ? const Icon(Icons.check) : null,
+                          onTap: () async {
+                            if (!await _checkIfSomethingIsRunning(
+                              value,
+                              context,
+                            )) {
+                              await value
+                                  .setNotificationType(NotificationType.all);
+                            }
+                          },
+                        );
+                      },
+                    ),
+                    FutureBuilder(
+                      future: value.isWatchlist,
+                      builder: (context, snapshot) {
+                        final isEnabled = snapshot.data == true;
+
+                        return CategoryButton(
+                          label: 'Watchlist',
+                          icon: Icon(
+                            isEnabled
+                                ? Icons.edit_notifications
+                                : Icons.edit_notifications_outlined,
+                          ),
+                          trailing: isEnabled ? const Icon(Icons.check) : null,
+                          onTap: () async {
+                            if (!await _checkIfSomethingIsRunning(
+                              value,
+                              context,
+                            )) {
+                              await value.setNotificationType(
+                                NotificationType.watchlist,
+                              );
+                            }
+                          },
+                        );
+                      },
+                    ),
+                    FutureBuilder(
+                      future: value.isDisabled,
+                      builder: (context, snapshot) {
+                        final isEnabled = snapshot.data == true;
+
+                        return CategoryButton(
+                          label: 'Désactivé',
+                          icon: Icon(
+                            isEnabled
+                                ? Icons.notifications_off
+                                : Icons.notifications_off_outlined,
+                          ),
+                          trailing: isEnabled ? const Icon(Icons.check) : null,
+                          onTap: () async {
+                            if (!await _checkIfSomethingIsRunning(
+                              value,
+                              context,
+                            )) {
+                              await value.setNotificationType(
+                                NotificationType.disabled,
+                              );
+                            }
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 32),
           Category(
             label: 'ASSISTANCE',
             buttons: [

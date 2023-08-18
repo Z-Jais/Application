@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/notification_controller.dart';
 
 class WatchlistButton extends StatefulWidget {
   final bool inWatchlist;
@@ -43,6 +44,10 @@ class _WatchlistButtonState extends State<WatchlistButton> {
       ),
       onPressed: () async {
         await widget.onToggle(_inWatchlist);
+
+        if (await NotificationController.instance.isWatchlist) {
+          NotificationController.instance.subscribeToWatchlist();
+        }
 
         setState(() {
           _inWatchlist = !_inWatchlist;
