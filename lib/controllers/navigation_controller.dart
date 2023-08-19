@@ -49,6 +49,11 @@ class NavigationController with ChangeNotifier {
         ),
       ],
     ),
+    const NavigationBarItem(
+      name: 'Profil',
+      selectedIcon: Icon(Icons.person),
+      icon: Icon(Icons.person_outline_outlined),
+    ),
   ];
   int _currentPage = 0;
 
@@ -56,11 +61,13 @@ class NavigationController with ChangeNotifier {
 
   void setCurrentPage(int page) {
     debug('NavigationController', '$currentPage -> $page');
-    // Detect scroll direction
 
     if (page == currentPage) {
       return;
     }
+
+    PaintingBinding.instance.imageCache.clear();
+    PaintingBinding.instance.imageCache.clearLiveImages();
 
     try {
       pageController.jumpToPage(page);
@@ -80,25 +87,4 @@ class NavigationController with ChangeNotifier {
 
   List<NavigationBarItem>? get currentTopNavigationBarItems =>
       _items[currentPage].topWidgets;
-
-  List<Widget> slideButtons(BuildContext context) => _items.map(
-        (NavigationBarItem item) {
-          final int index = _items.indexOf(item);
-          final isSelected = currentPage == index;
-
-          return IconButton(
-            onPressed: () => setCurrentPage(index),
-            padding: const EdgeInsets.all(16),
-            color: isSelected ? Theme.of(context).primaryColor : null,
-            icon: Flex(
-              direction: Axis.vertical,
-              children: [
-                if (isSelected && item.selectedIcon != null) item.selectedIcon!,
-                if (!isSelected) item.icon,
-                Text(item.name),
-              ],
-            ),
-          );
-        },
-      ).toList();
 }

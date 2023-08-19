@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
+import 'package:jais/widgets/disposing_image.dart';
 import 'package:jais/widgets/platforms/platform_widget.dart';
 import 'package:jais/widgets/skeleton.dart';
 
@@ -28,11 +29,13 @@ class LiteEpisodeImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           child: Stack(
             children: [
-              Image(
-                image: imageProvider,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: height,
+              DisposingImage(
+                image: Image(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: height,
+                ),
               ),
               Positioned(
                 top: 2,

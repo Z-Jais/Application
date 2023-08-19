@@ -33,7 +33,7 @@ class LiteEpisodeLoaderWidget extends StatelessWidget {
                     top: 2,
                     right: 3,
                     child: PlatformLoaderWidget(),
-                  )
+                  ),
                 ],
               ),
             ),
