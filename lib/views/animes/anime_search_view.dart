@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
+import 'package:jais/widgets/animes/anime_search_bar.dart';
 import 'package:provider/provider.dart';
 
 class AnimeSearchView extends StatelessWidget {
@@ -14,29 +15,7 @@ class AnimeSearchView extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: SearchBar(
-                leading: BackButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                trailing: [
-                  IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () async {
-                      controller.reset();
-                      await controller.load();
-                    },
-                  ),
-                ],
-                hintText: 'Rechercher un anime',
-                onChanged: (String value) {
-                  controller.query = value;
-                },
-              ),
-            ),
+            AnimeSearchBar(controller: controller),
             Expanded(
               child: ChangeNotifierProvider.value(
                 value: controller,
