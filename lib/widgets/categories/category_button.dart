@@ -32,6 +32,7 @@ class CategoryButton extends StatelessWidget {
             Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium,
+              overflow: TextOverflow.ellipsis,
             ),
             if (trailing != null) ...[
               const Spacer(),
