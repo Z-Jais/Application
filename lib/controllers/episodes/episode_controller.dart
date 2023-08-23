@@ -9,6 +9,7 @@ class EpisodeController
     extends DataController<Episode, EpisodeLoaderWidget, EpisodeWidget> {
   EpisodeController({
     bool showActions = false,
+    void Function(Episode, bool)? onTap,
     required super.notifyListenersCallback,
   }) : super(
           limit: 12,
@@ -17,6 +18,7 @@ class EpisodeController
           toWidget: (episode) => EpisodeWidget(
             episode: episode,
             showActions: showActions,
+            onTap: onTap,
           ),
         );
 

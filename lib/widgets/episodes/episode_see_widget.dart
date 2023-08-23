@@ -4,8 +4,13 @@ import 'package:jais/models/episode.dart';
 
 class EpisodeSeeWidget extends StatefulWidget {
   final Episode episode;
+  final void Function(Episode, bool)? onTap;
 
-  const EpisodeSeeWidget({required this.episode, super.key});
+  const EpisodeSeeWidget({
+    required this.episode,
+    this.onTap,
+    super.key,
+  });
 
   @override
   State<EpisodeSeeWidget> createState() => _EpisodeSeeWidgetState();
@@ -23,6 +28,8 @@ class _EpisodeSeeWidgetState extends State<EpisodeSeeWidget> {
         } else {
           await AppController.seen.add(widget.episode.uuid);
         }
+
+        widget.onTap?.call(widget.episode, !isWatched);
 
         setState(() {});
       },
