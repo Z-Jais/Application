@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_filter_controller.dart';
 import 'package:jais/controllers/logger.dart';
+import 'package:jais/models/episode.dart';
 import 'package:jais/widgets/h_v_list.dart';
 import 'package:jais/widgets/no_element.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,15 @@ class EpisodeWatchlistTab extends StatefulWidget {
 }
 
 class _EpisodeWatchlistTabState extends State<EpisodeWatchlistTab> {
-  final _controller = EpisodeWatchlistFilterController();
+  late final _controller = EpisodeWatchlistFilterController(onTap: _onTap);
+
+  void _onTap(Episode episode, bool isSeen) {
+    if (isSeen) {
+      _controller.seen.add(episode.uuid);
+    } else {
+      _controller.seen.remove(episode.uuid);
+    }
+  }
 
   @override
   void initState() {
