@@ -10,10 +10,12 @@ import 'package:jais/widgets/platforms/platform_widget.dart';
 class EpisodeWidget extends StatelessWidget {
   final Episode episode;
   final bool showActions;
+  final void Function(Episode, bool)? onTap;
 
   const EpisodeWidget({
     required this.episode,
     this.showActions = false,
+    this.onTap,
     super.key,
   });
 
@@ -104,7 +106,11 @@ class EpisodeWidget extends StatelessWidget {
                     'Il y a ${Utils.instance.printTimeSince(DateTime.parse(episode.releaseDate))}',
                   ),
                   const Spacer(),
-                  if (showActions) EpisodeSeeWidget(episode: episode),
+                  if (showActions)
+                    EpisodeSeeWidget(
+                      episode: episode,
+                      onTap: onTap,
+                    ),
                 ],
               ),
             ],
