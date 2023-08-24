@@ -29,13 +29,14 @@ class CategoryButton extends StatelessWidget {
               ),
               child: icon,
             ),
-            Text(
-              label,
-              style: Theme.of(context).textTheme.bodyMedium,
-              overflow: TextOverflow.ellipsis,
+            Expanded(
+              child: Text(
+                label,
+                style: Theme.of(context).textTheme.bodyMedium,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            if (trailing != null) ...[
-              const Spacer(),
+            if (trailing != null)
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 8,
@@ -43,7 +44,6 @@ class CategoryButton extends StatelessWidget {
                 ),
                 child: trailing,
               ),
-            ],
           ],
         ),
       ),
