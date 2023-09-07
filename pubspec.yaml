@@ -23,7 +23,7 @@ dependencies:
       path: in_app_review
   intl: ^0.18.1
   json_annotation: ^4.8.1
-  permission_handler: ^10.4.3
+  permission_handler: ^10.4.5
   provider: ^6.0.5
   shared_preferences: ^2.2.1
   shimmer: ^3.0.0
