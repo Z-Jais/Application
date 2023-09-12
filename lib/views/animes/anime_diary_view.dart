@@ -24,6 +24,7 @@ class AnimeDiaryView extends StatelessWidget {
                 child: Consumer<AnimeDiaryController>(
                   builder: (_, value, ___) {
                     return HVList(
+                      hController: value.scrollController,
                       hList: controller.days.map(
                         (DayWidget e) => GestureDetector(
                           child: e,
