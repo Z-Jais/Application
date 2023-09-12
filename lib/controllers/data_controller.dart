@@ -4,8 +4,25 @@ import 'package:jais/controllers/logger.dart';
 abstract class DataController<Model, ModelLoadingWidget extends Widget,
     ModelWidget extends Widget> with ChangeNotifier {
   final int limit;
-  final ScrollController scrollController = ScrollController();
   final List<Widget> list = [];
+
+  double _scrollbarPositionOnDetached = 0.0;
+  late ScrollController scrollController = ScrollController(
+    onDetach: (position) {
+      _scrollbarPositionOnDetached = position.pixels;
+    },
+    onAttach: (position) {
+      if (position.pixels == 0.0 && _scrollbarPositionOnDetached != 0.0) {
+        if (scrollController.hasClients) {
+          scrollController.animateTo(
+            _scrollbarPositionOnDetached,
+            duration: const Duration(milliseconds: 25),
+            curve: Curves.easeInOut,
+          );
+        }
+      }
+    },
+  );
 
   final ModelLoadingWidget loadingWidget;
   final Model Function(Map<String, dynamic>) fromJson;

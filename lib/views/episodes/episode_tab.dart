@@ -62,13 +62,12 @@ class _EpisodeTabState extends State<EpisodeTab> {
                     )
                   : null,
               hController: showMissingAnimes
-                  ? _controller.missingAnimeController.scrollController
+                  ? value.missingAnimeController.scrollController
                   : null,
-              hList: showMissingAnimes
-                  ? _controller.missingAnimeController.list
-                  : null,
-              vController: _controller.episodeController.scrollController,
-              vList: _controller.episodeController.list,
+              hList:
+                  showMissingAnimes ? value.missingAnimeController.list : null,
+              vController: value.episodeController.scrollController,
+              vList: value.episodeController.list,
             ),
           );
         },
