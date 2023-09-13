@@ -2,7 +2,7 @@ name: jais
 description: A Flutter application by Ziedelth for mobile members
 
 publish_to: 'none'
-version: 2.4.1+2401
+version: 2.4.2+2402
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -12,7 +12,7 @@ dependencies:
   app_settings: ^5.0.0
   cached_network_image: ^3.2.3
   firebase_core: ^2.15.1
-  firebase_messaging: ^14.6.6
+  firebase_messaging: ^14.6.7
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.7
@@ -23,11 +23,11 @@ dependencies:
       path: in_app_review
   intl: ^0.18.1
   json_annotation: ^4.8.1
-  permission_handler: ^10.4.3
+  permission_handler: ^11.0.0
   provider: ^6.0.5
-  shared_preferences: ^2.2.0
+  shared_preferences: ^2.2.1
   shimmer: ^3.0.0
-  url_launcher: ^6.1.12
+  url_launcher: ^6.1.14
   vibration: ^1.8.1
 
 dev_dependencies:

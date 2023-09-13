@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/logger.dart';
 import 'package:jais/utils.dart';
 
 class HVList extends StatelessWidget {
@@ -48,23 +49,17 @@ class HVList extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment:
-              hCenter ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+        child: Wrap(
           children: [
-            if (hTitle != null) ...[
-              hTitle!,
-              const SizedBox(height: 7.5),
-            ],
+            if (hTitle != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 7.5),
+                child: hTitle,
+              ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               controller: hController,
-              child: Row(
-                children: [
-                  ...hList!,
-                ],
-              ),
+              child: Row(children: hList!.toList()),
             ),
           ],
         ),
@@ -78,15 +73,14 @@ class HVList extends StatelessWidget {
     final horizontalWidget = getHorizontalWidget(context);
 
     return [
-      if (horizontalWidget != null) ...[
-        horizontalWidget,
-      ],
+      if (horizontalWidget != null) horizontalWidget,
       if (vList.isNotEmpty) ...responsive(context),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
+    info('HVList', 'build');
     final List<Widget> children = list(context);
 
     return ListView.builder(
@@ -94,6 +88,7 @@ class HVList extends StatelessWidget {
       addAutomaticKeepAlives: false,
       addRepaintBoundaries: false,
       itemCount: children.length,
+      shrinkWrap: true,
       itemBuilder: (context, index) => children.elementAt(index),
     );
   }
