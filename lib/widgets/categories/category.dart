@@ -16,17 +16,7 @@ class Category extends StatelessWidget {
         Text(label, style: Theme.of(context).textTheme.labelMedium),
         const SizedBox(height: 8),
         Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).primaryColor.withOpacity(0.2),
-                blurRadius: 4,
-                offset: const Offset(4, 4),
-              ),
-            ],
-          ),
+          decoration: Utils.instance.buildBoxDecoration(context),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

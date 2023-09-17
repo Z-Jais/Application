@@ -85,14 +85,7 @@ class AnimePresentation extends StatelessWidget {
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              anime.description ?? '',
-              style: const TextStyle(
-                fontSize: 14,
-              ),
-              maxLines: 5,
-              overflow: TextOverflow.ellipsis,
-            ),
+            child: AnimeDescription(anime: anime),
           ),
           const SizedBox(height: 20),
           Padding(
@@ -150,6 +143,41 @@ class AnimePresentation extends StatelessWidget {
         ),
         const Spacer(),
       ],
+    );
+  }
+}
+
+class AnimeDescription extends StatefulWidget {
+  final Anime anime;
+
+  const AnimeDescription({
+    super.key,
+    required this.anime,
+  });
+
+  @override
+  State<StatefulWidget> createState() => _AnimeDescriptionState();
+}
+
+class _AnimeDescriptionState extends State<AnimeDescription> {
+  bool _isOpen = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _isOpen = !_isOpen;
+        });
+      },
+      child: Text(
+        widget.anime.description ?? '',
+        style: const TextStyle(
+          fontSize: 14,
+        ),
+        maxLines: _isOpen ? null : 5,
+        overflow: _isOpen ? null : TextOverflow.ellipsis,
+      ),
     );
   }
 }
