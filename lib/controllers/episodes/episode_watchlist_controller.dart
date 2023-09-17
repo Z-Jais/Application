@@ -5,11 +5,10 @@ import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/episodes/episode_widget.dart';
 
-class EpisodeWatchlistFilterController extends EpisodeController
-    with AbstractFilter {
+class EpisodeWatchlistController extends EpisodeController with AbstractFilter {
   final List<String> _seen = [];
 
-  EpisodeWatchlistFilterController({
+  EpisodeWatchlistController({
     required void Function(Episode, bool) onTap,
   }) : super(
           showActions: true,
@@ -23,7 +22,7 @@ class EpisodeWatchlistFilterController extends EpisodeController
   Future<List<EpisodeWidget>> widgets() async {
     return URLController()
         .post(
-          '${Const.instance.serverUrlWithHttpProtocol}/episodes/watchlist_filter/page/$page/limit/$limit',
+          '${Const.instance.serverUrlWithHttpProtocol}/episodes/watchlist/page/$page/limit/$limit',
           toGzip(remove: _seen),
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));

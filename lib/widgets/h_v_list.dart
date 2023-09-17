@@ -38,17 +38,7 @@ class HVList extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(8),
         margin: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).primaryColor.withOpacity(0.2),
-              blurRadius: 4,
-              offset: const Offset(4, 4),
-            ),
-          ],
-        ),
+        decoration: Utils.instance.buildBoxDecoration(context),
         child: Wrap(
           children: [
             if (hTitle != null)

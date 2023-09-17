@@ -9,17 +9,7 @@ class AnimeLoaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).primaryColor.withOpacity(0.1),
-              blurRadius: 4,
-              offset: const Offset(4, 4),
-            ),
-          ],
-        ),
+        decoration: Utils.instance.buildBoxDecoration(context),
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 10),
         child: const Row(
