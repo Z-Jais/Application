@@ -42,6 +42,37 @@ class Utils {
     }
   }
 
+  String printDurationWithLetters(Duration duration) {
+    if (duration.isNegative) {
+      return '??:??';
+    }
+
+    final int inDays = duration.inDays;
+    final int inHours = duration.inHours.remainder(24);
+    final int inMinutes = duration.inMinutes.remainder(60);
+    final int inSeconds = duration.inSeconds.remainder(60);
+
+    String finalString = '';
+
+    if (inDays > 0) {
+      finalString += '${inDays}j ';
+    }
+
+    if (inHours > 0) {
+      finalString += '${inHours}h ';
+    }
+
+    if (inMinutes > 0) {
+      finalString += '${inMinutes}min ';
+    }
+
+    if (inSeconds > 0) {
+      finalString += '${inSeconds}s ';
+    }
+
+    return finalString.trim();
+  }
+
   String printTimeSince(DateTime dateTime) {
     final double seconds = (DateTime.now().millisecondsSinceEpoch -
             dateTime.millisecondsSinceEpoch) /
@@ -99,6 +130,20 @@ class Utils {
     }
 
     return list;
+  }
+
+  BoxDecoration buildBoxDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: Theme.of(context).colorScheme.background,
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+        BoxShadow(
+          color: Theme.of(context).primaryColor.withOpacity(0.2),
+          blurRadius: 4,
+          offset: const Offset(4, 4),
+        ),
+      ],
+    );
   }
 }
 
