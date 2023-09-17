@@ -4,13 +4,13 @@ class CategoryButton extends StatelessWidget {
   final String label;
   final Widget icon;
   final Widget? trailing;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const CategoryButton({
     required this.label,
     required this.icon,
     this.trailing,
-    required this.onTap,
+    this.onTap,
     super.key,
   });
 

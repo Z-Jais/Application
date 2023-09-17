@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/episodes/episode_watchlist_filter_controller.dart';
+import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/widgets/h_v_list.dart';
@@ -14,7 +14,7 @@ class EpisodeWatchlistTab extends StatefulWidget {
 }
 
 class _EpisodeWatchlistTabState extends State<EpisodeWatchlistTab> {
-  late final _controller = EpisodeWatchlistFilterController(onTap: _onTap);
+  late final _controller = EpisodeWatchlistController(onTap: _onTap);
 
   void _onTap(Episode episode, bool isSeen) {
     if (isSeen) {
@@ -36,7 +36,7 @@ class _EpisodeWatchlistTabState extends State<EpisodeWatchlistTab> {
     return RefreshIndicator(
       child: ChangeNotifierProvider.value(
         value: _controller,
-        child: Consumer<EpisodeWatchlistFilterController>(
+        child: Consumer<EpisodeWatchlistController>(
           builder: (_, value, __) {
             if (value.nothingToShow()) {
               return const NoElement(

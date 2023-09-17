@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/anime_tab_controller.dart';
+import 'package:jais/controllers/animes/anime_tab_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/widgets/h_v_list.dart';
 import 'package:provider/provider.dart';
