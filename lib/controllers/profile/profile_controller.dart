@@ -8,12 +8,15 @@ import 'package:jais/utils.dart';
 class ProfileController extends AbstractFilter {
   static final ProfileController instance = ProfileController();
 
-  Future<int> getTotalDuration() async {
+  int lastTotalDuration = 0;
+
+  Future<void> setTotalDuration() async {
     if (AppController.seen.data.isEmpty) {
-      return 0;
+      lastTotalDuration = 0;
+      return;
     }
 
-    return URLController()
+    lastTotalDuration = await URLController()
         .post(
           '${Const.instance.serverUrlWithHttpProtocol}/profile/total-duration',
           toGzip(),
