@@ -17,7 +17,7 @@ class AnimeSearchController extends AnimeController {
   Future<List<AnimeWidget>> widgets() async {
     return URLController()
         .get(
-          '${Const.instance.serverUrlWithHttpProtocol}/animes/country/fr/search/name/$query',
+          '${Const.instance.serverUrlWithHttpProtocol}/animes/country/${Const.selectedCountry}/search/name/$query',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }
