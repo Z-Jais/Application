@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/app_controller.dart';
+import 'package:jais/controllers/profile/profile_controller.dart';
 import 'package:jais/models/episode.dart';
 
 class EpisodeSeeWidget extends StatefulWidget {
@@ -29,6 +30,7 @@ class _EpisodeSeeWidgetState extends State<EpisodeSeeWidget> {
           await AppController.seen.add(widget.episode.uuid);
         }
 
+        ProfileController.instance.setTotalDuration();
         widget.onTap?.call(widget.episode, !isWatched);
 
         setState(() {});
