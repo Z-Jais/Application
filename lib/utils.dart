@@ -13,6 +13,7 @@ class Const {
   static const double missingAnimeImageHeight = 64;
 
   static const String serverUrl = "beta-api.ziedelth.fr";
+  static const String selectedCountry = 'fr';
 
   // static const String serverUrl = "alpha-api.ziedelth.fr";
   // static const String serverUrl = "192.168.1.20:8080";

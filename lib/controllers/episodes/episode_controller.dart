@@ -26,7 +26,7 @@ class EpisodeController
   Future<List<EpisodeWidget>> widgets() async {
     return URLController()
         .get(
-          '${Const.instance.serverUrlWithHttpProtocol}/episodes/country/fr/page/$page/limit/$limit',
+          '${Const.instance.serverUrlWithHttpProtocol}/episodes/country/${Const.selectedCountry}/page/$page/limit/$limit',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }
