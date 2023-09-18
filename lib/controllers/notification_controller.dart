@@ -103,7 +103,7 @@ class NotificationController with ChangeNotifier {
     final start = DateTime.now();
 
     await Future.wait([
-      for (final anime in AppController.watchlist.data)
+      for (final anime in AppController.watchlist.data.reversed)
         FirebaseMessaging.instance.subscribeToTopic(anime),
     ]);
 
@@ -162,6 +162,7 @@ class NotificationController with ChangeNotifier {
         _subscribeToAll(),
       ]).then((value) {
         isRunning = false;
+        notifyListeners();
 
         debug(
           'NotificationController',
@@ -176,6 +177,7 @@ class NotificationController with ChangeNotifier {
         subscribeToWatchlist(),
       ]).then((value) {
         isRunning = false;
+        notifyListeners();
 
         debug(
           'NotificationController',
@@ -188,6 +190,7 @@ class NotificationController with ChangeNotifier {
         if (oldType == NotificationType.watchlist) _unsubscribeFromWatchlist(),
       ]).then((value) {
         isRunning = false;
+        notifyListeners();
 
         debug(
           'NotificationController',

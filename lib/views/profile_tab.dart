@@ -46,46 +46,52 @@ class ProfileTab extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            FutureBuilder(
-              future: ProfileController.instance.getTotalDuration(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData || snapshot.data! <= 0) {
-                  return Container();
-                }
-
-                final totalDuration = Duration(seconds: snapshot.data!);
-
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 32),
-                  child: Category(
-                    label: 'STATISTIQUES AVANCÉES',
-                    buttons: [
-                      CategoryButton(
-                        label:
-                            'Série(s) : ${AppController.watchlist.data.length}',
-                        icon: const Icon(Icons.video_library),
-                      ),
-                      CategoryButton(
-                        label:
-                            'Épisode(s) vu(s) : ${AppController.seen.data.length}',
-                        icon: const Icon(Icons.subscriptions),
-                      ),
-                      CategoryButton(
-                        label:
-                            'Durée totale : ${Utils.instance.printDurationWithLetters(totalDuration)}',
-                        icon: const Icon(Icons.watch_later),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
+            if (ProfileController.instance.lastTotalDuration > 0)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 32),
+                child: Category(
+                  label: 'STATISTIQUES AVANCÉES',
+                  buttons: [
+                    CategoryButton(
+                      label:
+                          'Série(s) : ${AppController.watchlist.data.length}',
+                      icon: const Icon(Icons.video_library),
+                    ),
+                    CategoryButton(
+                      label:
+                          'Épisode(s) vu(s) : ${AppController.seen.data.length}',
+                      icon: const Icon(Icons.subscriptions),
+                    ),
+                    CategoryButton(
+                      label:
+                          'Durée totale : ${Utils.instance.printDurationWithLetters(Duration(seconds: ProfileController.instance.lastTotalDuration))}',
+                      icon: const Icon(Icons.watch_later),
+                    ),
+                  ],
+                ),
+              ),
             ChangeNotifierProvider.value(
               value: NotificationController.instance,
               child: Consumer<NotificationController>(
                 builder: (_, value, __) {
                   return Category(
                     label: 'NOTIFICATION',
+                    trailing: value.isRunning
+                        ? const Wrap(
+                            children: [
+                              Text('Chargement...'),
+                              Padding(
+                                padding: EdgeInsets.only(left: 8),
+                                child: SizedBox(
+                                  width: 16,
+                                  height: 16,
+                                  child:
+                                      CircularProgressIndicator(strokeWidth: 2),
+                                ),
+                              ),
+                            ],
+                          )
+                        : null,
                     buttons: [
                       FutureBuilder(
                         future: value.isAll,
