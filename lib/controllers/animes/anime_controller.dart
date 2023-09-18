@@ -25,7 +25,7 @@ class AnimeController
   Future<List<AnimeWidget>> widgets() async {
     return URLController()
         .get(
-          '${Const.instance.serverUrlWithHttpProtocol}/animes/country/fr/simulcast/${simulcast?.uuid}/page/$page/limit/$limit',
+          '${Const.instance.serverUrlWithHttpProtocol}/animes/country/${Const.selectedCountry}/simulcast/${simulcast?.uuid}/page/$page/limit/$limit',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }

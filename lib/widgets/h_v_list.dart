@@ -39,7 +39,10 @@ class HVList extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         margin: const EdgeInsets.all(8),
         decoration: Utils.instance.buildBoxDecoration(context),
-        child: Wrap(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment:
+              hCenter ? CrossAxisAlignment.center : CrossAxisAlignment.start,
           children: [
             if (hTitle != null)
               Padding(
