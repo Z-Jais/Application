@@ -66,7 +66,7 @@ class AnimeDiaryController extends AnimeController {
   Future<List<AnimeWidget>> widgets() async {
     return URLController()
         .get(
-          '${Const.instance.serverUrlWithHttpProtocol}/animes/diary/country/fr/day/$_day',
+          '${Const.instance.serverUrlWithHttpProtocol}/animes/diary/country/${Const.selectedCountry}/day/$_day',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }

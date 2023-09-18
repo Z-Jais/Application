@@ -21,7 +21,7 @@ class SimulcastController
   Future<List<SimulcastWidget>> widgets() async {
     return URLController()
         .get(
-          '${Const.instance.serverUrlWithHttpProtocol}/simulcasts/country/fr',
+          '${Const.instance.serverUrlWithHttpProtocol}/simulcasts/country/${Const.selectedCountry}',
         )
         .mapWithObjectIfOk((p0) => toWidget(fromJson(p0)));
   }
