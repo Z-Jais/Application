@@ -43,9 +43,9 @@ class NavigationController with ChangeNotifier {
           route: '/anime/search',
         ),
         NavigationBarItem(
-          name: 'Agenda',
-          icon: Icon(Icons.calendar_view_week),
-          route: '/anime/diary',
+          name: 'Calendrier',
+          icon: Icon(Icons.calendar_month),
+          route: '/anime/calendar',
         ),
       ],
     ),

@@ -74,8 +74,8 @@ class MyApp extends StatelessWidget {
         '/anime/detail': (_) {
           return AnimeDetailView(controller: AnimeDetailController());
         },
-        '/anime/diary': (_) {
-          return AnimeDiaryView(controller: AnimeDiaryController());
+        '/anime/calendar': (_) {
+          return AnimeCalendarView(controller: AnimeCalendarController());
         },
       },
     );

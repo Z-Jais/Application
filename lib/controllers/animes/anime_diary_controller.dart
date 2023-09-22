@@ -4,7 +4,7 @@ import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_widget.dart';
 import 'package:jais/widgets/day_widget.dart';
 
-class AnimeDiaryController extends AnimeController {
+class AnimeCalendarController extends AnimeController {
   late int _day;
   final List<DayWidget> _initial = const [
     DayWidget(
@@ -38,7 +38,7 @@ class AnimeDiaryController extends AnimeController {
   ];
   final List<DayWidget> days = [];
 
-  AnimeDiaryController()
+  AnimeCalendarController()
       : super(
           listener: false,
           notifyListenersCallback: () {},
