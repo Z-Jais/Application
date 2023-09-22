@@ -4,16 +4,16 @@ import 'package:jais/widgets/day_widget.dart';
 import 'package:jais/widgets/h_v_list.dart';
 import 'package:provider/provider.dart';
 
-class AnimeDiaryView extends StatelessWidget {
-  final AnimeDiaryController controller;
+class AnimeCalendarView extends StatelessWidget {
+  final AnimeCalendarController controller;
 
-  const AnimeDiaryView({required this.controller, super.key});
+  const AnimeCalendarView({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agenda'),
+        title: const Text('Calendrier'),
       ),
       body: SafeArea(
         child: Column(
@@ -21,7 +21,7 @@ class AnimeDiaryView extends StatelessWidget {
             Expanded(
               child: ChangeNotifierProvider.value(
                 value: controller,
-                child: Consumer<AnimeDiaryController>(
+                child: Consumer<AnimeCalendarController>(
                   builder: (_, value, ___) {
                     return HVList(
                       hController: value.scrollController,
