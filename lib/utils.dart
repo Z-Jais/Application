@@ -154,14 +154,21 @@ extension StringExt on String? {
 }
 
 extension ScrollControllerExt on ScrollController {
-  Future<void> scrollToEnd() async {
+  Future<void> scrollTo(
+    double position, {
+    Duration duration = const Duration(milliseconds: 300),
+  }) async {
     try {
       animateTo(
-        position.maxScrollExtent,
-        duration: const Duration(milliseconds: 300),
+        position,
+        duration: duration,
         curve: Curves.easeInOut,
       );
     } catch (_) {}
+  }
+
+  Future<void> scrollToEnd() async {
+    scrollTo(position.maxScrollExtent);
   }
 }
 

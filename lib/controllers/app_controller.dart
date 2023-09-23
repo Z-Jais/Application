@@ -3,7 +3,6 @@ import 'package:http/http.dart';
 import 'package:jais/controllers/datas/collection_data_controller.dart';
 import 'package:jais/controllers/filter_controller.dart';
 import 'package:jais/controllers/notification_controller.dart';
-import 'package:jais/controllers/profile/profile_controller.dart';
 import 'package:jais/controllers/review/advanced_in_app_review.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/utils.dart';
@@ -46,7 +45,6 @@ class AppController with ChangeNotifier {
     await logs.init();
     await FilterController.instance.init();
     await NotificationController.instance.init();
-    await ProfileController.instance.setTotalDuration();
 
     AdvancedInAppReview()
         .setMinDaysBeforeRemind(7)
@@ -61,6 +59,5 @@ class AppController with ChangeNotifier {
     await seen.reset();
     await logs.reset();
     await FilterController.instance.reset();
-    ProfileController.instance.lastTotalDuration = 0;
   }
 }

@@ -21,7 +21,7 @@ class NavigationController with ChangeNotifier {
       topWidgets: [
         NavigationBarItem(
           name: 'Filtre',
-          icon: const Icon(Icons.filter_alt),
+          icon: const Icon(Icons.filter_list),
           onPressed: (BuildContext context) {
             showDialog(
               context: context,
