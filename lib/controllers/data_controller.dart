@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/logger.dart';
+import 'package:jais/utils.dart';
 
 abstract class DataController<Model, ModelLoadingWidget extends Widget,
     ModelWidget extends Widget> with ChangeNotifier {
@@ -14,10 +15,9 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
     onAttach: (position) {
       if (position.pixels == 0.0 && _scrollbarPositionOnDetached != 0.0) {
         if (scrollController.hasClients) {
-          scrollController.animateTo(
+          scrollController.scrollTo(
             _scrollbarPositionOnDetached,
             duration: const Duration(milliseconds: 25),
-            curve: Curves.easeInOut,
           );
         }
       }
