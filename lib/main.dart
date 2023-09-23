@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/animes/anime_calendar_controller.dart';
 import 'package:jais/controllers/animes/anime_detail_controller.dart';
-import 'package:jais/controllers/animes/anime_diary_controller.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/logger.dart';

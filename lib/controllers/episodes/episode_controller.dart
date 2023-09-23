@@ -8,18 +8,13 @@ import 'package:jais/widgets/episodes/episode_widget.dart';
 class EpisodeController
     extends DataController<Episode, EpisodeLoaderWidget, EpisodeWidget> {
   EpisodeController({
-    bool showActions = false,
     void Function(Episode, bool)? onTap,
     required super.notifyListenersCallback,
   }) : super(
           limit: 12,
           loadingWidget: const EpisodeLoaderWidget(),
           fromJson: (json) => Episode.fromJson(json),
-          toWidget: (episode) => EpisodeWidget(
-            episode: episode,
-            showActions: showActions,
-            onTap: onTap,
-          ),
+          toWidget: (episode) => EpisodeWidget(episode: episode, onTap: onTap),
         );
 
   @override

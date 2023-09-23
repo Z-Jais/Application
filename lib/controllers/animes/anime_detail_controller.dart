@@ -15,10 +15,7 @@ class AnimeDetailController extends DataController<Episode,
           limit: 12,
           loadingWidget: const LiteEpisodeLoaderWidget(),
           fromJson: (json) => Episode.fromJson(json),
-          toWidget: (episode) => LiteEpisodeWidget(
-            episode: episode,
-            showActions: true,
-          ),
+          toWidget: (episode) => LiteEpisodeWidget(episode: episode),
           notifyListenersCallback: () {},
         );
 

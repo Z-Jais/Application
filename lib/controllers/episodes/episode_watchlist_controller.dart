@@ -8,15 +8,16 @@ import 'package:jais/widgets/episodes/episode_widget.dart';
 class EpisodeWatchlistController extends EpisodeController with AbstractFilter {
   final List<String> _seen = [];
 
-  EpisodeWatchlistController({
-    required void Function(Episode, bool) onTap,
-  }) : super(
-          showActions: true,
-          onTap: onTap,
-          notifyListenersCallback: () {},
-        );
+  EpisodeWatchlistController({required void Function(Episode, bool) onTap})
+      : super(onTap: onTap, notifyListenersCallback: () {});
 
   List<String> get seen => _seen;
+
+  @override
+  void reset() {
+    _seen.clear();
+    super.reset();
+  }
 
   @override
   Future<List<EpisodeWidget>> widgets() async {
