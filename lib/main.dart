@@ -64,6 +64,9 @@ class MyApp extends StatelessWidget {
               ),
           }),
         ),
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Color(0xDDFFFFFF)),
+        ),
       ),
       initialRoute: '/',
       routes: {
