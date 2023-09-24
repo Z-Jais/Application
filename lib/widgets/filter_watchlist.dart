@@ -26,7 +26,7 @@ class _FilterWatchlistState extends State<FilterWatchlist> {
               in FilterController.instance.episodeTypes)
             ListTile(
               title: Text(episodeType.toString()),
-              leading: Checkbox(
+              trailing: Switch(
                 value: FilterController.instance.watchlistEpisodeTypeFilter
                     .hasIn(episodeType.uuid),
                 onChanged: (value) async {
@@ -45,7 +45,7 @@ class _FilterWatchlistState extends State<FilterWatchlist> {
           for (final LangType langType in FilterController.instance.langTypes)
             ListTile(
               title: Text(langType.toString()),
-              leading: Checkbox(
+              trailing: Switch(
                 value: FilterController.instance.watchlistLangTypeFilter
                     .hasIn(langType.uuid),
                 onChanged: (value) async {
@@ -56,14 +56,11 @@ class _FilterWatchlistState extends State<FilterWatchlist> {
               ),
             ),
           const SizedBox(height: 16),
-          Text(
-            'Épisodes',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          const Divider(),
           const SizedBox(height: 8),
           ListTile(
-            title: const Text('Vu(s)'),
-            leading: Checkbox(
+            title: const Text('Affichez les épisodes marqués comme "vu"'),
+            trailing: Switch(
               value: FilterController.instance.episodeWatchedFilter.data == 1,
               onChanged: (value) async {
                 await FilterController.instance.episodeWatchedFilter.invert();

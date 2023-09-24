@@ -91,16 +91,6 @@ class TopNavigationBar extends StatelessWidget {
               child: Image.asset('assets/icon.png'),
             ),
           ),
-          const SizedBox(width: 5),
-          Text(
-            'Jaïs',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
-              fontFamily: 'Pacifico',
-            ),
-          ),
           const Spacer(),
           ChangeNotifierProvider.value(
             value: NavigationController.instance,

@@ -21,7 +21,7 @@ class NavigationController with ChangeNotifier {
       topWidgets: [
         NavigationBarItem(
           name: 'Filtre',
-          icon: const Icon(Icons.filter_alt),
+          icon: const Icon(Icons.filter_list),
           onPressed: (BuildContext context) {
             showDialog(
               context: context,
@@ -43,9 +43,9 @@ class NavigationController with ChangeNotifier {
           route: '/anime/search',
         ),
         NavigationBarItem(
-          name: 'Agenda',
-          icon: Icon(Icons.calendar_view_week),
-          route: '/anime/diary',
+          name: 'Calendrier',
+          icon: Icon(Icons.calendar_month),
+          route: '/anime/calendar',
         ),
       ],
     ),

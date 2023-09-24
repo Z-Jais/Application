@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/notification_controller.dart';
+import 'package:jais/controllers/profile/profile_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
+import 'package:jais/utils.dart';
 import 'package:jais/widgets/categories/category.dart';
 import 'package:jais/widgets/categories/category_button.dart';
 import 'package:provider/provider.dart';
@@ -44,12 +46,61 @@ class ProfileTab extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            if (AppController.seen.data.isNotEmpty)
+              FutureBuilder(
+                future: ProfileController.instance.getTotalDuration(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Container();
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 32),
+                    child: Category(
+                      label: 'STATISTIQUES AVANCÉES',
+                      buttons: [
+                        CategoryButton(
+                          label:
+                              'Série(s) : ${AppController.watchlist.data.length}',
+                          icon: const Icon(Icons.video_library),
+                        ),
+                        CategoryButton(
+                          label:
+                              'Épisode(s) vu(s) : ${AppController.seen.data.length}',
+                          icon: const Icon(Icons.subscriptions),
+                        ),
+                        CategoryButton(
+                          label:
+                              'Durée totale : ${Utils.instance.printDurationWithLetters(Duration(seconds: snapshot.data!))}',
+                          icon: const Icon(Icons.watch_later),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ChangeNotifierProvider.value(
               value: NotificationController.instance,
               child: Consumer<NotificationController>(
                 builder: (_, value, __) {
                   return Category(
                     label: 'NOTIFICATION',
+                    trailing: value.isRunning
+                        ? const Wrap(
+                            children: [
+                              Text('Chargement...'),
+                              Padding(
+                                padding: EdgeInsets.only(left: 8),
+                                child: SizedBox(
+                                  width: 16,
+                                  height: 16,
+                                  child:
+                                      CircularProgressIndicator(strokeWidth: 2),
+                                ),
+                              ),
+                            ],
+                          )
+                        : null,
                     buttons: [
                       FutureBuilder(
                         future: value.isAll,

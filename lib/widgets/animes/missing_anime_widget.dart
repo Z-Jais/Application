@@ -22,24 +22,11 @@ class MissingAnimeWidget extends StatelessWidget {
             children: <Widget>[
               Stack(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(360),
-                      boxShadow: [
-                        BoxShadow(
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.1),
-                          blurRadius: 4,
-                          offset: const Offset(4, 4),
-                        ),
-                      ],
-                    ),
-                    child: AnimeImage(
-                      anime: missingAnime.anime,
-                      width: Const.missingAnimeImageWith,
-                      height: Const.missingAnimeImageHeight,
-                      radius: 360,
-                    ),
+                  AnimeImage(
+                    anime: missingAnime.anime,
+                    width: Const.missingAnimeImageWith,
+                    height: Const.missingAnimeImageHeight,
+                    radius: 360,
                   ),
                   Positioned(
                     right: 0,

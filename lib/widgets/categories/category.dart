@@ -3,9 +3,15 @@ import 'package:jais/utils.dart';
 
 class Category extends StatelessWidget {
   final String label;
+  final Widget? trailing;
   final List<Widget> buttons;
 
-  const Category({required this.label, required this.buttons, super.key});
+  const Category({
+    required this.label,
+    required this.buttons,
+    this.trailing,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,20 +19,19 @@ class Category extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: Theme.of(context).textTheme.labelMedium),
-        const SizedBox(height: 8),
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).primaryColor.withOpacity(0.2),
-                blurRadius: 4,
-                offset: const Offset(4, 4),
-              ),
+        if (trailing == null)
+          Text(label, style: Theme.of(context).textTheme.labelMedium)
+        else
+          Row(
+            children: [
+              Text(label, style: Theme.of(context).textTheme.labelMedium),
+              const Spacer(),
+              trailing!,
             ],
           ),
+        const SizedBox(height: 8),
+        Container(
+          decoration: Utils.instance.buildBoxDecoration(context),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

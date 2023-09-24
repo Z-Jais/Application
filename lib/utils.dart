@@ -13,6 +13,7 @@ class Const {
   static const double missingAnimeImageHeight = 64;
 
   static const String serverUrl = "beta-api.ziedelth.fr";
+  static const String selectedCountry = 'fr';
 
   // static const String serverUrl = "alpha-api.ziedelth.fr";
   // static const String serverUrl = "192.168.1.20:8080";
@@ -40,6 +41,37 @@ class Utils {
     } else {
       return '$twoDigitMinutes:$twoDigitSeconds';
     }
+  }
+
+  String printDurationWithLetters(Duration duration) {
+    if (duration.isNegative) {
+      return '??:??';
+    }
+
+    final int inDays = duration.inDays;
+    final int inHours = duration.inHours.remainder(24);
+    final int inMinutes = duration.inMinutes.remainder(60);
+    final int inSeconds = duration.inSeconds.remainder(60);
+
+    String finalString = '';
+
+    if (inDays > 0) {
+      finalString += '${inDays}j ';
+    }
+
+    if (inHours > 0) {
+      finalString += '${inHours}h ';
+    }
+
+    if (inMinutes > 0) {
+      finalString += '${inMinutes}min ';
+    }
+
+    if (inSeconds > 0) {
+      finalString += '${inSeconds}s ';
+    }
+
+    return finalString.trim();
   }
 
   String printTimeSince(DateTime dateTime) {
@@ -100,6 +132,20 @@ class Utils {
 
     return list;
   }
+
+  BoxDecoration buildBoxDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: Theme.of(context).colorScheme.background,
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+        BoxShadow(
+          color: Theme.of(context).primaryColor.withOpacity(0.2),
+          blurRadius: 4,
+          offset: const Offset(4, 4),
+        ),
+      ],
+    );
+  }
 }
 
 extension StringExt on String? {
@@ -108,14 +154,21 @@ extension StringExt on String? {
 }
 
 extension ScrollControllerExt on ScrollController {
-  Future<void> scrollToEnd() async {
+  Future<void> scrollTo(
+    double position, {
+    Duration duration = const Duration(milliseconds: 300),
+  }) async {
     try {
       animateTo(
-        position.maxScrollExtent,
-        duration: const Duration(milliseconds: 300),
+        position,
+        duration: duration,
         curve: Curves.easeInOut,
       );
     } catch (_) {}
+  }
+
+  Future<void> scrollToEnd() async {
+    scrollTo(position.maxScrollExtent);
   }
 }
 

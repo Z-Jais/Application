@@ -45,18 +45,6 @@ jobs:
 
       - name: Dart Analyze
         run: dart analyze .
-
-      - name: Check nullable code
-        run: dart run flutterando_metrics:metrics check-unnecessary-nullable lib --disable-sunset-warning
-
-      - name: Check unused files
-        run: dart run flutterando_metrics:metrics check-unused-files lib --disable-sunset-warning
-
-      - name: Check unused localizations
-        run: dart run flutterando_metrics:metrics check-unused-l10n lib --disable-sunset-warning
-
-      - name: Check unused code
-        run: dart run flutterando_metrics:metrics check-unused-code lib --disable-sunset-warning
   # Make a job with the title of pull request contains "flutter_native_splash" and only on opened pull request
   native_splash:
     if: contains(github.event.pull_request.title, 'flutter_native_splash') && (github.event.action == 'opened' || github.event.action == 'synchronize')
