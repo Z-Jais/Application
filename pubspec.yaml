@@ -56,8 +56,3 @@ flutter:
     - assets/no.png
     - assets/x-twitter.svg
     - shorebird.yaml
-
-  fonts:
-    - family: 'Pacifico'
-      fonts:
-        - asset: 'assets/fonts/Pacifico-Regular.ttf'
