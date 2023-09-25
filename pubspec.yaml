@@ -9,7 +9,7 @@ environment:
   flutter: ">=3.10.0"
 
 dependencies:
-  app_settings: ^5.0.0
+  app_settings: ^5.1.1
   cached_network_image: ^3.2.3
   firebase_core: ^2.16.0
   firebase_messaging: ^14.6.8
