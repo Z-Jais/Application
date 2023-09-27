@@ -28,7 +28,7 @@ dependencies:
   shared_preferences: ^2.2.1
   shimmer: ^3.0.0
   url_launcher: ^6.1.14
-  vibration: ^1.8.1
+  vibration: ^1.8.2
 
 dev_dependencies:
   build_runner: ^2.4.6
