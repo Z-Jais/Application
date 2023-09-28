@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/disposing_image.dart';
+import 'package:jais/widgets/opacity_container.dart';
 import 'package:jais/widgets/platforms/platform_widget.dart';
 import 'package:jais/widgets/skeleton.dart';
 import 'package:provider/provider.dart';
@@ -46,23 +47,9 @@ class LiteEpisodeImage extends StatelessWidget {
               Positioned(
                 bottom: 5,
                 right: 5,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 2.5,
-                    horizontal: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.black.withOpacity(0.75),
-                  ),
-                  child: Text(
-                    Utils.instance
-                        .printDuration(Duration(seconds: episode.duration)),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                child: OpacityContainer(
+                  text: Utils.instance
+                      .printDuration(Duration(seconds: episode.duration)),
                 ),
               ),
               ChangeNotifierProvider.value(
@@ -70,28 +57,18 @@ class LiteEpisodeImage extends StatelessWidget {
                 child: Consumer<Episode>(
                   builder: (context, episode, __) {
                     return episode.isSeen
-                        ? Positioned(
+                        ? const Positioned(
                             bottom: 5,
                             left: 5,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 2.5,
-                                horizontal: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.black.withOpacity(0.75),
-                              ),
-                              child: const Row(
+                            child: OpacityContainer(
+                              child: Row(
                                 children: [
                                   Icon(Icons.visibility, size: 16),
                                   SizedBox(width: 8),
                                   Text(
                                     'Vu',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
