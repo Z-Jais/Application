@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/models/anime.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
+import 'package:provider/provider.dart';
 
 class AnimeWidget extends StatelessWidget {
   final Anime anime;
@@ -56,12 +56,38 @@ class AnimeWidget extends StatelessWidget {
         child: Stack(
           children: [
             borderDecoration(context),
-            if (AppController.watchlist.hasIn(anime.uuid))
-              Badge(
-                smallSize: 16,
-                backgroundColor: Theme.of(context).primaryColor,
-                child: borderDecoration(context),
+            ChangeNotifierProvider.value(
+              value: anime,
+              child: Consumer<Anime>(
+                builder: (context, anime, _) {
+                  return anime.inWatchlist
+                      ? Positioned(
+                          top: 0,
+                          right: 2.5,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius: BorderRadius.circular(360),
+                            ),
+                            child: Text(
+                              'Watchlist',
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        )
+                      : Container();
+                },
               ),
+            ),
           ],
         ),
       ),

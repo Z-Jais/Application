@@ -5,6 +5,7 @@ import 'package:jais/utils.dart';
 import 'package:jais/widgets/disposing_image.dart';
 import 'package:jais/widgets/platforms/platform_widget.dart';
 import 'package:jais/widgets/skeleton.dart';
+import 'package:provider/provider.dart';
 
 class LiteEpisodeImage extends StatelessWidget {
   final Episode episode;
@@ -62,6 +63,42 @@ class LiteEpisodeImage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                ),
+              ),
+              ChangeNotifierProvider.value(
+                value: episode,
+                child: Consumer<Episode>(
+                  builder: (context, episode, __) {
+                    return episode.isSeen
+                        ? Positioned(
+                            bottom: 5,
+                            left: 5,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 2.5,
+                                horizontal: 10,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.black.withOpacity(0.75),
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(Icons.visibility, size: 16),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    'Vu',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        : Container();
+                  },
                 ),
               ),
             ],
