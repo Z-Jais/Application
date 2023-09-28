@@ -3,6 +3,7 @@ import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
+import 'package:jais/widgets/custom_badge.dart';
 import 'package:jais/widgets/episodes/episode_image.dart';
 import 'package:jais/widgets/episodes/episode_more_options.dart';
 import 'package:jais/widgets/platforms/platform_widget.dart';
@@ -102,28 +103,10 @@ class EpisodeWidget extends StatelessWidget {
             ),
           ),
           if (episode.isNew)
-            Positioned(
+            const Positioned(
               top: 0,
               right: 2.5,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 5,
-                  vertical: 2,
-                ),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(360),
-                ),
-                child: Text(
-                  'New',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
+              child: CustomBadge(text: 'New'),
             ),
         ],
       ),
