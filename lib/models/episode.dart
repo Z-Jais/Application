@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/models/anime.dart';
 import 'package:jais/models/episodetype.dart';
 import 'package:jais/models/langtype.dart';
@@ -7,7 +9,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'episode.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Episode {
+class Episode with ChangeNotifier {
   final String uuid;
   final Platform platform;
   final Anime anime;
@@ -42,4 +44,12 @@ class Episode {
       _$EpisodeFromJson(json);
 
   Map<String, dynamic> toJson() => _$EpisodeToJson(this);
+
+  bool get isNew =>
+      season == 1 && number == 1 && anime.releaseDate == releaseDate;
+
+  bool get isSeen => AppController.seen.hasIn(uuid);
+  void notify() {
+    notifyListeners();
+  }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_detail_controller.dart';
-import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/models/anime.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
@@ -90,16 +89,7 @@ class AnimePresentation extends StatelessWidget {
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: WatchlistButton(
-              onToggle: (bool inWatchlist) async {
-                if (inWatchlist) {
-                  await AppController.watchlist.remove(anime.uuid);
-                } else {
-                  await AppController.watchlist.add(anime.uuid);
-                }
-              },
-              inWatchlist: AppController.watchlist.hasIn(anime.uuid),
-            ),
+            child: WatchlistButton(anime: anime),
           ),
         ],
       );
@@ -128,16 +118,7 @@ class AnimePresentation extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 30),
-              WatchlistButton(
-                onToggle: (bool inWatchlist) async {
-                  if (inWatchlist) {
-                    await AppController.watchlist.remove(anime.uuid);
-                  } else {
-                    await AppController.watchlist.add(anime.uuid);
-                  }
-                },
-                inWatchlist: AppController.watchlist.hasIn(anime.uuid),
-              ),
+              WatchlistButton(anime: anime),
             ],
           ),
         ),

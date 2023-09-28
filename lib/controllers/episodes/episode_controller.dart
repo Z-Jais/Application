@@ -14,7 +14,8 @@ class EpisodeController
           limit: 12,
           loadingWidget: const EpisodeLoaderWidget(),
           fromJson: (json) => Episode.fromJson(json),
-          toWidget: (episode) => EpisodeWidget(episode: episode, onTap: onTap),
+          toWidget: (episode) =>
+              EpisodeWidget(episode: episode, onSeenTap: onTap),
         );
 
   @override

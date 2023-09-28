@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/models/country.dart';
 import 'package:jais/models/genre.dart';
 import 'package:jais/models/simulcast.dart';
@@ -6,7 +8,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'anime.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Anime {
+class Anime with ChangeNotifier {
   final String uuid;
   final Country country;
   final String name;
@@ -32,4 +34,10 @@ class Anime {
   factory Anime.fromJson(Map<String, dynamic> json) => _$AnimeFromJson(json);
 
   Map<String, dynamic> toJson() => _$AnimeToJson(this);
+
+  bool get inWatchlist => AppController.watchlist.hasIn(uuid);
+
+  void notify() {
+    notifyListeners();
+  }
 }

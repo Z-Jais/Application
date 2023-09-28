@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/models/episode.dart';
+import 'package:provider/provider.dart';
 
-class EpisodeMoreOptions extends StatefulWidget {
+class EpisodeMoreOptions extends StatelessWidget {
   final Episode episode;
   final void Function() onRedirectTap;
   final void Function(Episode, bool)? onSeenTap;
@@ -15,19 +16,6 @@ class EpisodeMoreOptions extends StatefulWidget {
   });
 
   @override
-  State<EpisodeMoreOptions> createState() => _EpisodeMoreOptionsState();
-}
-
-class _EpisodeMoreOptionsState extends State<EpisodeMoreOptions> {
-  late bool _hasSee;
-
-  @override
-  void initState() {
-    _hasSee = AppController.seen.hasIn(widget.episode.uuid);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 24,
@@ -38,20 +26,29 @@ class _EpisodeMoreOptionsState extends State<EpisodeMoreOptions> {
           return [
             PopupMenuItem(
               onTap: _onTap,
-              child: Row(
-                children: [
-                  Icon(_hasSee ? Icons.visibility_off : Icons.visibility),
-                  const SizedBox(width: 8),
-                  Text(
-                    _hasSee
-                        ? "Je n'ai pas vu cet épisode"
-                        : "J'ai vu cet épisode",
-                  ),
-                ],
+              child: ChangeNotifierProvider.value(
+                value: episode,
+                child: Consumer<Episode>(
+                  builder: (_, episode, __) {
+                    return Row(
+                      children: [
+                        Icon(episode.isSeen
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        const SizedBox(width: 8),
+                        Text(
+                          episode.isSeen
+                              ? "Je n'ai pas vu cet épisode"
+                              : "J'ai vu cet épisode",
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
             PopupMenuItem(
-              onTap: widget.onRedirectTap,
+              onTap: onRedirectTap,
               child: const Row(
                 children: [
                   Icon(Icons.queue_play_next_rounded),
@@ -67,16 +64,15 @@ class _EpisodeMoreOptionsState extends State<EpisodeMoreOptions> {
   }
 
   Future<void> _onTap() async {
-    if (_hasSee) {
-      await AppController.seen.remove(widget.episode.uuid);
+    final isSeen = episode.isSeen;
+
+    if (isSeen) {
+      await AppController.seen.remove(episode.uuid);
     } else {
-      await AppController.seen.add(widget.episode.uuid);
+      await AppController.seen.add(episode.uuid);
     }
 
-    widget.onSeenTap?.call(widget.episode, !_hasSee);
-
-    setState(() {
-      _hasSee = !_hasSee;
-    });
+    onSeenTap?.call(episode, !isSeen);
+    episode.notify();
   }
 }
