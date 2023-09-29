@@ -17,10 +17,6 @@ dependencies:
     sdk: flutter
   flutter_svg: ^2.0.7
   http: ^1.1.0
-  in_app_review:
-    git:
-      url: https://github.com/Z-Jais/in_app_review.git
-      path: in_app_review
   intl: ^0.18.1
   json_annotation: ^4.8.1
   permission_handler: ^11.0.0

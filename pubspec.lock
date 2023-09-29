@@ -448,23 +448,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.17"
-  in_app_review:
-    dependency: "direct main"
-    description:
-      path: in_app_review
-      ref: HEAD
-      resolved-ref: "36fee044e86fdfb2455be44e9d36cd101f5f0f84"
-      url: "https://github.com/Z-Jais/in_app_review.git"
-    source: git
-    version: "2.0.6"
-  in_app_review_platform_interface:
-    dependency: transitive
-    description:
-      name: in_app_review_platform_interface
-      sha256: b12ec9aaf6b34d3a72aa95895eb252b381896246bdad4ef378d444affe8410ef
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.4"
   intl:
     dependency: "direct main"
     description:
