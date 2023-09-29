@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/models/anime.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
+import 'package:jais/widgets/custom_badge.dart';
+import 'package:provider/provider.dart';
 
 class AnimeWidget extends StatelessWidget {
   final Anime anime;
@@ -56,12 +57,20 @@ class AnimeWidget extends StatelessWidget {
         child: Stack(
           children: [
             borderDecoration(context),
-            if (AppController.watchlist.hasIn(anime.uuid))
-              Badge(
-                smallSize: 16,
-                backgroundColor: Theme.of(context).primaryColor,
-                child: borderDecoration(context),
+            ChangeNotifierProvider.value(
+              value: anime,
+              child: Consumer<Anime>(
+                builder: (context, anime, _) {
+                  return anime.inWatchlist
+                      ? const Positioned(
+                          top: 0,
+                          right: 2.5,
+                          child: CustomBadge(text: 'Watchlist'),
+                        )
+                      : Container();
+                },
               ),
+            ),
           ],
         ),
       ),
