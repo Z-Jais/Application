@@ -42,8 +42,15 @@ class _AnimeSearchBarState extends State<AnimeSearchBar> {
           ),
         ],
         hintText: 'Rechercher un anime',
-        onChanged: (String value) {
+        onChanged: (String value) async {
           widget.controller.query = value;
+          widget.controller.reset();
+
+          if (value.isNotEmpty) {
+            await widget.controller.load();
+          } else {
+            widget.controller.notify();
+          }
         },
         onSubmitted: (String value) async {
           widget.controller.reset();
