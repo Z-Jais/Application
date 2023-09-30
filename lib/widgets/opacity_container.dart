@@ -20,7 +20,10 @@ class OpacityContainer extends StatelessWidget {
       child: text != null
           ? Text(
               text!,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             )
           : child,
     );

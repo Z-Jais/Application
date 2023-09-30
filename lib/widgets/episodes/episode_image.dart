@@ -57,12 +57,18 @@ class EpisodeImage extends StatelessWidget {
                             child: OpacityContainer(
                               child: Row(
                                 children: [
-                                  Icon(Icons.visibility, size: 16),
+                                  Icon(
+                                    Icons.visibility,
+                                    size: 16,
+                                    color: Colors.white,
+                                  ),
                                   SizedBox(width: 8),
                                   Text(
                                     'Vu',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
