@@ -8,15 +8,14 @@ import 'package:jais/utils.dart';
 import 'package:jais/widgets/categories/category.dart';
 import 'package:jais/widgets/categories/category_button.dart';
 import 'package:provider/provider.dart';
-import 'package:vibration/vibration.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});
 
-  Future<bool> _checkIfSomethingIsRunning(
+  bool _checkIfSomethingIsRunning(
     NotificationController value,
     BuildContext context,
-  ) async {
+  ) {
     if (!value.isRunning) {
       return false;
     }
@@ -31,10 +30,6 @@ class ProfileTab extends StatelessWidget {
         ),
       ),
     );
-
-    if (await Vibration.hasVibrator() == true) {
-      Vibration.vibrate(duration: 100);
-    }
 
     return true;
   }
@@ -117,7 +112,7 @@ class ProfileTab extends StatelessWidget {
                             trailing:
                                 isEnabled ? const Icon(Icons.check) : null,
                             onTap: () async {
-                              if (!await _checkIfSomethingIsRunning(
+                              if (!_checkIfSomethingIsRunning(
                                 value,
                                 context,
                               )) {
@@ -143,7 +138,7 @@ class ProfileTab extends StatelessWidget {
                             trailing:
                                 isEnabled ? const Icon(Icons.check) : null,
                             onTap: () async {
-                              if (!await _checkIfSomethingIsRunning(
+                              if (!_checkIfSomethingIsRunning(
                                 value,
                                 context,
                               )) {
@@ -170,7 +165,7 @@ class ProfileTab extends StatelessWidget {
                             trailing:
                                 isEnabled ? const Icon(Icons.check) : null,
                             onTap: () async {
-                              if (!await _checkIfSomethingIsRunning(
+                              if (!_checkIfSomethingIsRunning(
                                 value,
                                 context,
                               )) {

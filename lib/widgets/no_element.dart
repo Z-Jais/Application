@@ -21,7 +21,7 @@ class NoElement extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset('assets/no.png', width: 200),
+          const Image(image: AssetImage('assets/no.png'), width: 200),
           const SizedBox(height: 30),
           Text(
             title,

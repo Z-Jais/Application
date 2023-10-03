@@ -14,7 +14,7 @@ class CustomBadge extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
-        borderRadius: BorderRadius.circular(360),
+        borderRadius: const BorderRadius.all(Radius.circular(360)),
       ),
       child: Text(
         text,

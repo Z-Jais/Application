@@ -30,7 +30,7 @@ class DayWidget extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
         color: isSelected
             ? Theme.of(context).primaryColor
             : Theme.of(context).colorScheme.background,

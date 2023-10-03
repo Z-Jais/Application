@@ -27,7 +27,7 @@ class EpisodeImage extends StatelessWidget {
           '${Const.instance.serverUrlWithHttpProtocol}/episodes/attachment/${episode.uuid}',
       imageBuilder: (_, ImageProvider<Object> imageProvider) {
         return ClipRRect(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
           child: Stack(
             children: <Widget>[
               DisposingImage(

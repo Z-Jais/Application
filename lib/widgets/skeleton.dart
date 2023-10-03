@@ -16,14 +16,14 @@ class Skeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.white,
-      highlightColor: Colors.black,
+      baseColor: const Color(0xFFFFFFFF),
+      highlightColor: const Color(0xFF000000),
       child: SizedBox(
         width: width ?? double.infinity,
         height: height,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(.09),
+            color: const Color.fromRGBO(255, 255, 255, 0.1),
             borderRadius: BorderRadius.all(Radius.circular(radius)),
           ),
         ),
