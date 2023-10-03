@@ -2,7 +2,7 @@ name: jais
 description: A Flutter application by Ziedelth for mobile members
 
 publish_to: 'none'
-version: 2.5.1+2501
+version: 2.5.2+2502
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
