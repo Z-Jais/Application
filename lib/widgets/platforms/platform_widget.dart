@@ -20,7 +20,7 @@ class PlatformWidget extends StatelessWidget {
           '${Const.instance.serverUrlWithHttpProtocol}/platforms/attachment/${platform.uuid}',
       imageBuilder: (_, ImageProvider<Object> imageProvider) {
         return ClipRRect(
-          borderRadius: BorderRadius.circular(360),
+          borderRadius: const BorderRadius.all(Radius.circular(360)),
           child: DisposingImage(
             image: Image(
               image: imageProvider,
