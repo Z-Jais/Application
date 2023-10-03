@@ -86,9 +86,9 @@ class TopNavigationBar extends StatelessWidget {
                 ),
               );
             },
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset('assets/icon.png'),
+            child: const ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+              child: Image(image: AssetImage('assets/icon.png')),
             ),
           ),
           const Spacer(),

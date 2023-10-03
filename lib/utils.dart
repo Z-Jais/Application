@@ -136,7 +136,7 @@ class Utils {
   BoxDecoration buildBoxDecoration(BuildContext context) {
     return BoxDecoration(
       color: Theme.of(context).colorScheme.background,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
       boxShadow: [
         BoxShadow(
           color: Theme.of(context).primaryColor.withOpacity(0.2),

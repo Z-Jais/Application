@@ -29,7 +29,7 @@ class AnimeImage extends StatelessWidget {
           '${Const.instance.serverUrlWithHttpProtocol}/animes/attachment/${anime.uuid}',
       imageBuilder: (_, ImageProvider<Object> imageProvider) {
         return ClipRRect(
-          borderRadius: BorderRadius.circular(radius),
+          borderRadius: BorderRadius.all(Radius.circular(radius)),
           child: DisposingImage(
             image: Image(
               image: imageProvider,
