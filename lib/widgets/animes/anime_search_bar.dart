@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
 
@@ -12,6 +14,7 @@ class AnimeSearchBar extends StatefulWidget {
 
 class _AnimeSearchBarState extends State<AnimeSearchBar> {
   final FocusNode _focusNode = FocusNode();
+  Timer? _timer;
 
   @override
   void initState() {
@@ -20,6 +23,22 @@ class _AnimeSearchBarState extends State<AnimeSearchBar> {
     });
 
     super.initState();
+  }
+
+  void _search() {
+    _timer?.cancel();
+    widget.controller.reset(loader: true);
+
+    _timer = Timer(
+      const Duration(milliseconds: 500),
+      () async {
+        if (widget.controller.query!.isNotEmpty) {
+          await widget.controller.load();
+        } else {
+          widget.controller.notify();
+        }
+      },
+    );
   }
 
   @override
@@ -42,19 +61,13 @@ class _AnimeSearchBarState extends State<AnimeSearchBar> {
           ),
         ],
         hintText: 'Rechercher un anime',
-        onChanged: (String value) async {
+        onChanged: (String value) {
           widget.controller.query = value;
-          widget.controller.reset();
-
-          if (value.isNotEmpty) {
-            await widget.controller.load();
-          } else {
-            widget.controller.notify();
-          }
+          _search();
         },
-        onSubmitted: (String value) async {
-          widget.controller.reset();
-          await widget.controller.load();
+        onSubmitted: (String value) {
+          widget.controller.query = value;
+          _search();
         },
         focusNode: _focusNode,
       ),

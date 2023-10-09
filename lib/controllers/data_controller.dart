@@ -77,10 +77,15 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
     list.removeWhere((element) => element is ModelLoadingWidget);
   }
 
-  void reset() {
+  void reset({bool loader = false}) {
     list.clear();
     _isLoading = false;
     page = 1;
+
+    if (loader) {
+      list.addAll(_loaders);
+      notify();
+    }
   }
 
   Future<List<ModelWidget>> widgets();

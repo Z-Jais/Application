@@ -14,9 +14,9 @@ class EpisodeWatchlistController extends EpisodeController with AbstractFilter {
   List<String> get seen => _seen;
 
   @override
-  void reset() {
+  void reset({bool loader = false}) {
     _seen.clear();
-    super.reset();
+    super.reset(loader: loader);
   }
 
   @override
