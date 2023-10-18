@@ -41,7 +41,8 @@ class ProfileTab extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            if (AppController.seen.data.isNotEmpty)
+            if (AppController.watchlist.data.isNotEmpty ||
+                AppController.seen.data.isNotEmpty)
               FutureBuilder(
                 future: ProfileController.instance.getTotalDuration(),
                 builder: (context, snapshot) {
@@ -64,11 +65,12 @@ class ProfileTab extends StatelessWidget {
                               'Épisode(s) vu(s) : ${AppController.seen.data.length}',
                           icon: const Icon(Icons.subscriptions),
                         ),
-                        CategoryButton(
-                          label:
-                              'Durée totale : ${Utils.instance.printDurationWithLetters(Duration(seconds: snapshot.data!))}',
-                          icon: const Icon(Icons.watch_later),
-                        ),
+                        if (AppController.seen.data.isNotEmpty)
+                          CategoryButton(
+                            label:
+                                'Durée totale : ${Utils.instance.fullFormatDuration(Duration(seconds: snapshot.data!))}',
+                            icon: const Icon(Icons.watch_later),
+                          ),
                       ],
                     ),
                   );

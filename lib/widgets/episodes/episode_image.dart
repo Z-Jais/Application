@@ -43,7 +43,7 @@ class EpisodeImage extends StatelessWidget {
                 right: 5,
                 child: OpacityContainer(
                   text: Utils.instance
-                      .printDuration(Duration(seconds: episode.duration)),
+                      .formatDuration(Duration(seconds: episode.duration)),
                 ),
               ),
               ChangeNotifierProvider.value(

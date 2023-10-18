@@ -26,111 +26,83 @@ class Const {
 class Utils {
   static final Utils instance = Utils();
 
-  String printDuration(Duration duration) {
-    if (duration.isNegative) {
-      return '??:??';
-    }
+  String formatDuration(Duration duration) {
+    if (duration.isNegative) return '??:??';
 
     String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final String twoDigitHours = twoDigits(duration.inHours);
+
     final String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
     final String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
 
-    if ((int.tryParse(twoDigitHours) ?? 0) > 0) {
-      return '$twoDigitHours:$twoDigitMinutes:$twoDigitSeconds';
-    } else {
-      return '$twoDigitMinutes:$twoDigitSeconds';
+    String formattedDuration = '$twoDigitMinutes:$twoDigitSeconds';
+
+    final int hours = duration.inHours;
+
+    if (hours > 0) {
+      String twoDigitHours = twoDigits(hours);
+      formattedDuration = '$twoDigitHours:$formattedDuration';
     }
+
+    return formattedDuration;
   }
 
-  String printDurationWithLetters(Duration duration) {
+  String fullFormatDuration(Duration duration) {
     if (duration.isNegative) {
       return '??:??';
     }
 
-    final int inDays = duration.inDays;
-    final int inHours = duration.inHours.remainder(24);
-    final int inMinutes = duration.inMinutes.remainder(60);
-    final int inSeconds = duration.inSeconds.remainder(60);
+    Map<String, int> timeParts = {
+      'j': duration.inDays,
+      'h': duration.inHours.remainder(24),
+      'min': duration.inMinutes.remainder(60),
+      's': duration.inSeconds.remainder(60)
+    };
 
-    String finalString = '';
-
-    if (inDays > 0) {
-      finalString += '${inDays}j ';
-    }
-
-    if (inHours > 0) {
-      finalString += '${inHours}h ';
-    }
-
-    if (inMinutes > 0) {
-      finalString += '${inMinutes}min ';
-    }
-
-    if (inSeconds > 0) {
-      finalString += '${inSeconds}s ';
-    }
-
-    return finalString.trim();
+    return timeParts.entries
+        .where((entry) => entry.value > 0)
+        .map((entry) => '${entry.value}${entry.key}')
+        .join(' ')
+        .trim();
   }
 
   String printTimeSince(DateTime dateTime) {
     final double seconds = (DateTime.now().millisecondsSinceEpoch -
             dateTime.millisecondsSinceEpoch) /
         1000;
-    double interval = seconds / 31536000;
+    return _formatTime(seconds, 31536000, "an") ??
+        _formatTime(seconds, 2592000, "mois") ??
+        _formatTime(seconds, 86400, "jour") ??
+        _formatTime(seconds, 3600, "heure") ??
+        _formatTime(seconds, 60, "minute") ??
+        "à l'instant";
+  }
 
+  String? _formatTime(double seconds, int value, String text) {
+    double interval = seconds / value;
     if (interval > 1) {
-      return '${interval.floor()} an${interval >= 2 ? 's' : ''}';
+      return '${interval.floor()} $text${interval >= 2 ? 's' : ''}';
     }
-
-    interval = seconds / 2592000;
-
-    if (interval > 1) {
-      return '${interval.floor()} mois';
-    }
-
-    interval = seconds / 86400;
-
-    if (interval > 1) {
-      return '${interval.floor()} jour${interval >= 2 ? 's' : ''}';
-    }
-
-    interval = seconds / 3600;
-
-    if (interval > 1) {
-      return '${interval.floor()} heure${interval >= 2 ? 's' : ''}';
-    }
-
-    interval = seconds / 60;
-
-    if (interval > 1) {
-      return '${interval.floor()} minute${interval >= 2 ? 's' : ''}';
-    }
-
-    return "à l'instant";
+    return null;
   }
 
   List<Widget> separate(List<Widget> children, {int rowCol = 3}) {
-    final List<Widget> list = <Widget>[];
+    return [
+      for (int i = 0; i < children.length; i += rowCol)
+        _buildRow(children, i, rowCol),
+    ];
+  }
 
-    for (int i = 0; i < children.length; i += rowCol) {
-      final int minV = min(i + rowCol, children.length);
-      final int length = minV - i;
+  Widget _buildRow(List<Widget> children, int start, int rowCol) {
+    final end = min(start + rowCol, children.length);
+    final sublist = children.sublist(start, end);
 
-      final List<Widget> sublist = children.sublist(i, minV);
-      sublist.addAll(List<Widget>.filled(rowCol - length, Container()));
-
-      list.add(
-        Row(
-          children: <Widget>[
-            ...sublist.map<Widget>((Widget e) => Expanded(child: e)),
-          ],
-        ),
-      );
-    }
-
-    return list;
+    return Row(
+      children: [
+        for (final widget in sublist) Expanded(child: widget),
+        for (int i = sublist.length; i < rowCol; i++)
+          Expanded(child: Container()),
+      ],
+    );
   }
 
   BoxDecoration buildBoxDecoration(BuildContext context) {
