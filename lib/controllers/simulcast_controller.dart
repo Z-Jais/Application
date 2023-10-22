@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:jais/controllers/data_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/simulcast.dart';
@@ -31,18 +31,34 @@ class SimulcastController
       return list;
     }
 
-    final List<Widget> copy = list.toList();
-    final int index = copy.indexWhere(
+    List<Widget> copy = copyList(list);
+    final int index = findWidgetIndex(copy, simulcast);
+
+    if (index != -1) {
+      copy = updateWidgetInList(copy, index, simulcast);
+    }
+
+    return copy;
+  }
+
+  List<Widget> copyList(List<Widget> list) {
+    return List<Widget>.from(list);
+  }
+
+  int findWidgetIndex(List<Widget> list, Simulcast simulcast) {
+    return list.indexWhere(
       (element) =>
           element is SimulcastWidget &&
           element.simulcast.uuid == simulcast.uuid,
     );
+  }
 
-    if (index == -1) {
-      return list;
-    }
-
-    copy[index] = SimulcastWidget(simulcast: simulcast, isSelected: true);
-    return copy;
+  List<Widget> updateWidgetInList(
+    List<Widget> list,
+    int index,
+    Simulcast simulcast,
+  ) {
+    list[index] = SimulcastWidget(simulcast: simulcast, isSelected: true);
+    return list;
   }
 }

@@ -5,7 +5,7 @@ import 'package:jais/controllers/animes/anime_search_controller.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
-import 'package:jais/views/animes/anime_diary_view.dart';
+import 'package:jais/views/animes/anime_calendar_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
 import 'package:jais/views/initialization_view.dart';
 import 'package:provider/provider.dart';
