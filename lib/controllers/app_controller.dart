@@ -12,9 +12,6 @@ class AppController with ChangeNotifier {
   static final CollectionDataController seen =
       CollectionDataController('episodesSeen');
 
-  static final CollectionDataController logs =
-      CollectionDataController('logs', limit: 100);
-
   bool _inProgress = true;
   bool _hasInternet = false;
 
@@ -41,7 +38,6 @@ class AppController with ChangeNotifier {
   Future<void> initialize() async {
     await watchlist.init();
     await seen.init();
-    await logs.init();
     await FilterController.instance.init();
     await NotificationController.instance.init();
   }
@@ -49,7 +45,6 @@ class AppController with ChangeNotifier {
   Future<void> reset() async {
     await watchlist.reset();
     await seen.reset();
-    await logs.reset();
     await FilterController.instance.reset();
   }
 }

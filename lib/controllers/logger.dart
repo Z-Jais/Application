@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
-import 'package:jais/controllers/app_controller.dart';
 
 final _dateFormat = DateFormat('HH:mm:ss.SSSS dd/MM/yyyy');
 
@@ -22,10 +21,6 @@ void _log(LogLevel level, String member, String message) {
     final format =
         '${level.color}[${_dateFormat.format(DateTime.now())} $member] $message\x1B[0m';
     debugPrint(format);
-  } else {
-    final format =
-        '[${level.name} ${_dateFormat.format(DateTime.now())} $member] $message';
-    AppController.logs.add(format);
   }
 }
 
