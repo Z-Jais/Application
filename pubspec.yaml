@@ -15,7 +15,7 @@ dependencies:
   firebase_messaging: ^14.7.1
   flutter:
     sdk: flutter
-  flutter_svg: ^2.0.7
+  flutter_svg: ^2.0.8
   http: ^1.1.0
   intl: ^0.18.1
   json_annotation: ^4.8.1
