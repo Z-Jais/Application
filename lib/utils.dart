@@ -19,8 +19,6 @@ class Const {
   // static const String serverUrl = "192.168.1.20:8080";
 
   String get serverUrlWithHttpProtocol => 'https://$serverUrl';
-
-  String get serverUrlWithSocketProtocol => 'wss://$serverUrl';
 }
 
 class Utils {

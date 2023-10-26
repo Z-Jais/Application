@@ -70,7 +70,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const InitializationView(),
+        '/': (_) {
+          return const InitializationView();
+        },
         '/anime/search': (_) {
           return AnimeSearchView(controller: AnimeSearchController());
         },
