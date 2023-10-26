@@ -26,22 +26,24 @@ mixin class AbstractFilter {
     return FilterController.instance.episodeWatchedFilter.data == 0 ? data : [];
   }
 
+  String jsonEncodeGzip(Map<String, dynamic> data) {
+    return base64Encode(gzip.encode(utf8.encode(jsonEncode(data))));
+  }
+
+  Map<String, dynamic> buildData({
+    bool sendSeen = false,
+    List<String>? remove,
+  }) {
+    return {
+      'animes': AppController.watchlist.data,
+      'episodes': _episodes(sendSeen, remove: remove),
+      'episodeTypes': FilterController.instance.watchlistEpisodeTypeFilter.data,
+      'langTypes': FilterController.instance.watchlistLangTypeFilter.data,
+    };
+  }
+
   String toGzip({bool sendSeen = false, List<String>? remove}) {
-    return base64Encode(
-      gzip.encode(
-        utf8.encode(
-          jsonEncode(
-            {
-              'animes': AppController.watchlist.data,
-              'episodes': _episodes(sendSeen, remove: remove),
-              'episodeTypes':
-                  FilterController.instance.watchlistEpisodeTypeFilter.data,
-              'langTypes':
-                  FilterController.instance.watchlistLangTypeFilter.data,
-            },
-          ),
-        ),
-      ),
-    );
+    Map<String, dynamic> data = buildData(sendSeen: sendSeen, remove: remove);
+    return jsonEncodeGzip(data);
   }
 }

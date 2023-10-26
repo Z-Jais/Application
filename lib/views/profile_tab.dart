@@ -220,9 +220,6 @@ class ProfileTab extends StatelessWidget {
                   label: 'Suppression des données',
                   icon: const Icon(Icons.delete_forever_outlined),
                   onTap: () {
-                    final appController =
-                        Provider.of<AppController>(context, listen: false);
-
                     showDialog(
                       context: context,
                       builder: (_) => AlertDialog(
@@ -240,7 +237,7 @@ class ProfileTab extends StatelessWidget {
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
-                              appController.reset();
+                              AppController.reset();
                             },
                             child: const Text('Supprimer'),
                           ),

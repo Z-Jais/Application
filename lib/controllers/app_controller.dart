@@ -42,7 +42,7 @@ class AppController with ChangeNotifier {
     await NotificationController.instance.init();
   }
 
-  Future<void> reset() async {
+  static Future<void> reset() async {
     await watchlist.reset();
     await seen.reset();
     await FilterController.instance.reset();
