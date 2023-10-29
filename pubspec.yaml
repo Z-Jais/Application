@@ -16,6 +16,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.8
+  google_mobile_ads:
+    git:
+      url: https://github.com/googleads/googleads-mobile-flutter.git
+      path: packages/google_mobile_ads
   http: ^1.1.0
   intl: ^0.18.1
   json_annotation: ^4.8.1

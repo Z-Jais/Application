@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
+import 'package:jais/controllers/ad_controller.dart';
 import 'package:jais/controllers/datas/collection_data_controller.dart';
 import 'package:jais/controllers/filter_controller.dart';
 import 'package:jais/controllers/notification_controller.dart';
@@ -40,6 +41,7 @@ class AppController with ChangeNotifier {
     await seen.init();
     await FilterController.instance.init();
     await NotificationController.instance.init();
+    await AdController.instance.loadAd();
   }
 
   static Future<void> reset() async {
