@@ -29,8 +29,8 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static const Color _mainWhiteThemeColor = Color(0xFFa32d26);
-  static const Color _mainDarkThemeColor = Color(0xFFfde5c9);
+  static const Color _mainWhiteThemeColor = Color(0xFFA66E4E);
+  static const Color _mainDarkThemeColor = Color(0xFFF2D091);
 
   const MyApp({super.key});
 
