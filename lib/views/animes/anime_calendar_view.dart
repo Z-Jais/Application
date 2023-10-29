@@ -52,12 +52,14 @@ class _AnimeCalendarViewState extends State<AnimeCalendarView> {
                   builder: (_, value, ___) {
                     return HVList(
                       hController: value.scrollController,
-                      hList: value.days.map(
-                        (DayWidget e) => GestureDetector(
-                          child: e,
-                          onTap: () async => value.day = e.dayNumber,
-                        ),
-                      ),
+                      hList: value.days
+                          .map(
+                            (DayWidget e) => GestureDetector(
+                              child: e,
+                              onTap: () async => value.day = e.dayNumber,
+                            ),
+                          )
+                          .toList(),
                       hCenter: true,
                       vList: value.list,
                     );

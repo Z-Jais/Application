@@ -6,11 +6,11 @@ class HVList extends StatelessWidget {
   final Widget? hTitle;
   final bool hCenter;
   final ScrollController? hController;
-  final Iterable<Widget>? hList;
+  final List<Widget>? hList;
   final Widget? hChild;
 
   final ScrollController? vController;
-  final Iterable<Widget> vList;
+  final List<Widget> vList;
 
   const HVList({
     this.hTitle,
@@ -23,58 +23,56 @@ class HVList extends StatelessWidget {
     super.key,
   });
 
-  List<Widget> responsive(BuildContext context) {
-    if (context.isOnMobile) {
-      return vList.toList();
-    } else {
-      return Utils.instance.separate(vList.toList());
-    }
+  List<Widget> _createResponsiveList(BuildContext context) {
+    return context.isOnMobile ? vList : Utils.instance.separate(vList);
   }
 
-  Widget? getHorizontalWidget(BuildContext context) {
+  Widget? _createHorizontalWidget(BuildContext context) {
     if (hChild != null) {
       return hChild;
     } else if (hList != null && hList!.isNotEmpty) {
-      return Container(
-        padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.all(8),
-        decoration: Utils.instance.buildBoxDecoration(context),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment:
-              hCenter ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-          children: [
-            if (hTitle != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 7.5),
-                child: hTitle,
-              ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              controller: hController,
-              child: Row(children: hList!.toList()),
-            ),
-          ],
-        ),
-      );
+      return _buildContainer(context);
     }
-
     return null;
   }
 
-  List<Widget> list(BuildContext context) {
-    final horizontalWidget = getHorizontalWidget(context);
-
+  List<Widget> _createList(BuildContext context) {
+    final horizontalWidget = _createHorizontalWidget(context);
     return [
       if (horizontalWidget != null) horizontalWidget,
-      if (vList.isNotEmpty) ...responsive(context),
+      if (vList.isNotEmpty) ..._createResponsiveList(context),
     ];
+  }
+
+  Container _buildContainer(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
+      decoration: Utils.instance.buildBoxDecoration(context),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment:
+            hCenter ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+        children: [
+          if (hTitle != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 7.5),
+              child: hTitle,
+            ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            controller: hController,
+            child: Row(children: hList!),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     info('HVList', 'build');
-    final List<Widget> children = list(context);
+    final List<Widget> children = _createList(context);
 
     return ListView.builder(
       controller: vController,
@@ -82,7 +80,7 @@ class HVList extends StatelessWidget {
       addRepaintBoundaries: false,
       itemCount: children.length,
       shrinkWrap: true,
-      itemBuilder: (context, index) => children.elementAt(index),
+      itemBuilder: (context, index) => children[index],
     );
   }
 }

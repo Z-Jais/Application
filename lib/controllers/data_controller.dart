@@ -91,34 +91,59 @@ abstract class DataController<Model, ModelLoadingWidget extends Widget,
   Future<List<ModelWidget>> widgets();
 
   Future<void> load() async {
-    if (_isLoading) {
-      warning(runtimeType.toString(), 'Already loading $runtimeType');
+    if (isLoading()) {
       return;
     }
+
+    preLoad();
+
+    try {
+      final widgets = await loadWidgets();
+      postLoad(widgets);
+    } catch (exception, stackTrace) {
+      handleError(exception, stackTrace);
+    } finally {
+      finalizeLoad();
+    }
+  }
+
+  bool isLoading() {
+    if (_isLoading) {
+      warning(runtimeType.toString(), 'Already loading $runtimeType');
+      return true;
+    }
+    return false;
+  }
+
+  void preLoad() {
     _isLoading = true;
     list.addAll(_loaders);
     notify();
+    info(runtimeType.toString(), 'Loading (page $page) ...');
+  }
 
-    try {
-      info(runtimeType.toString(), 'Loading (page $page) ...');
-      final List<ModelWidget> widgets = await this.widgets();
-      _removeLoader();
-      list.addAll(widgets);
-      _canLoadMore = widgets.length == limit;
-      lastPageError = false;
-      info(runtimeType.toString(), 'Loading (page $page) done');
-    } catch (exception, stackTrace) {
-      lastPageError = true;
+  Future<List<ModelWidget>> loadWidgets() => this.widgets();
 
-      error(
-        runtimeType.toString(),
-        'Error while loading',
-        exception,
-        stackTrace,
-      );
-    } finally {
-      _isLoading = false;
-      notify();
-    }
+  void postLoad(List<ModelWidget> widgets) {
+    _removeLoader();
+    list.addAll(widgets);
+    _canLoadMore = widgets.length == limit;
+    lastPageError = false;
+    info(runtimeType.toString(), 'Loading (page $page) done');
+  }
+
+  void handleError(dynamic exception, StackTrace stackTrace) {
+    lastPageError = true;
+    error(
+      runtimeType.toString(),
+      'Error while loading',
+      exception,
+      stackTrace,
+    );
+  }
+
+  void finalizeLoad() {
+    _isLoading = false;
+    notify();
   }
 }

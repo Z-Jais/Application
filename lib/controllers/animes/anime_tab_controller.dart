@@ -34,8 +34,10 @@ class AnimeTabController with ChangeNotifier {
     notifyListeners();
   }
 
-  Iterable<Widget> get simulcastWidgets {
-    return simulcastController.setCurrent(animeController.simulcast).map(
+  List<Widget> get simulcastWidgets {
+    return simulcastController
+        .setCurrent(animeController.simulcast)
+        .map(
           (e) => GestureDetector(
             child: e,
             onTap: () {
@@ -50,6 +52,7 @@ class AnimeTabController with ChangeNotifier {
               notify();
             },
           ),
-        );
+        )
+        .toList();
   }
 }
