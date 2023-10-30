@@ -26,7 +26,7 @@ class InitializationView extends StatelessWidget {
         body: Center(
           child: NoElement(
             title: 'Mince !',
-            message: 'Impossible de se connecter à Jaïs !',
+            message: 'Impossible de se connecter à Jais !',
             onRetry: appController.checkInternetConnection,
           ),
         ),
