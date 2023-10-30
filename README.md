@@ -1,4 +1,4 @@
-# Jaïs
+# Jais - Application
 
 ---
 Pour ajouter un model
