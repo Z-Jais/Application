@@ -1,0 +1,21 @@
+{
+  "oops": "Mince !",
+  "connectionFailureMessage": "Impossible de se connecter à Jais !",
+  "retry": "Réessayer",
+  "episodes": "{count, plural, =1{Épisode} other{Épisodes}}",
+  "watchlist": "Watchlist",
+  "filter": "Filtre",
+  "types": "Types",
+  "langs": "Langues",
+  "showMarkedAsWatchedEpisode": "Affichez les épisodes marqués comme \"vu\"",
+  "special": "Spécial",
+  "film": "Film",
+  "subtitles": "VOSTFR",
+  "voice": "VF",
+  "animes": "{count, plural, =1{Animé} other{Animés}}",
+  "search": "Rechercher",
+  "calendar": "Calendrier",
+  "profile": "Profil",
+  "thingsYouMayHaveMissed1": "Ce que tu aurais pu ",
+  "thingsYouMayHaveMissed2": "manquer"
+}

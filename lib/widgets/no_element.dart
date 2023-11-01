@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/logger.dart';
 
 class NoElement extends StatelessWidget {
@@ -32,7 +33,7 @@ class NoElement extends StatelessWidget {
             const SizedBox(height: 10),
             TextButton(
               onPressed: onRetry,
-              child: const Text('Réessayer'),
+              child: Text(AppLocalizations.of(context)!.retry),
             ),
           ],
         ],

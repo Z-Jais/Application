@@ -50,53 +50,14 @@ class TopNavigationBar extends StatelessWidget {
       height: 50,
       child: Row(
         children: <Widget>[
-          GestureDetector(
-            onLongPress: () {
-              showDialog(
-                context: context,
-                builder: (_) => const AlertDialog(
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Développé par :',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 10),
-                      Text('• Ziedelth'),
-                      SizedBox(height: 10),
-                      Divider(),
-                      SizedBox(height: 10),
-                      Text(
-                        'Partenariat :',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 10),
-                      Text('• Kitsune No Baguette'),
-                      SizedBox(height: 10),
-                      Divider(),
-                      SizedBox(height: 10),
-                      Text(
-                        'Contributeur :',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 10),
-                      Text('• SputNikPlop'),
-                    ],
-                  ),
-                ),
-              );
-            },
-            child: const ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              child: Image(image: AssetImage('assets/icon.png')),
-            ),
+          const ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            child: Image(image: AssetImage('assets/icon.png')),
           ),
           ChangeNotifierProvider.value(
             value: AdController.instance,
             child: Consumer<AdController>(
-              builder: (context, value, child) {
+              builder: (_, value, __) {
                 if (!value.isLoaded) {
                   return const Spacer();
                 }
@@ -108,13 +69,13 @@ class TopNavigationBar extends StatelessWidget {
           ChangeNotifierProvider.value(
             value: NavigationController.instance,
             child: Consumer<NavigationController>(
-              builder: (context, value, _) {
+              builder: (_, value, __) {
                 return Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ...?calculateTopWidgets(
                       context,
-                      value.currentTopNavigationBarItems,
+                      value.currentTopNavigationBarItems(context),
                     ),
                   ],
                 );
