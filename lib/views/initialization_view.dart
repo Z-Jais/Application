@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/views/home_view.dart';
@@ -25,8 +26,8 @@ class InitializationView extends StatelessWidget {
       return Scaffold(
         body: Center(
           child: NoElement(
-            title: 'Mince !',
-            message: 'Impossible de se connecter à Jais !',
+            title: AppLocalizations.of(context)!.oops,
+            message: AppLocalizations.of(context)!.connectionFailureMessage,
             onRetry: appController.checkInternetConnection,
           ),
         ),
