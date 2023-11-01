@@ -41,7 +41,7 @@ class HomeView extends StatelessWidget {
             return NavigationBar(
               selectedIndex: value.currentPage,
               onDestinationSelected: value.setCurrentPage,
-              destinations: value.bottomNavigationBarItems.toList(),
+              destinations: value.bottomNavigationBarItems(context).toList(),
               indicatorColor: Theme.of(context).primaryColor,
               backgroundColor: Theme.of(context).colorScheme.background,
             );

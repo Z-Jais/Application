@@ -44,7 +44,7 @@ class LiteEpisodeWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    '${episode.episodeType} ${episode.number} ${episode.langType}',
+                    '${episode.episodeType.toStringTranslated(context)} ${episode.number} ${episode.langType.toStringTranslated(context)}',
                     overflow: TextOverflow.ellipsis,
                   ),
                   Row(

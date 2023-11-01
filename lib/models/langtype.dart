@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'langtype.g.dart';
@@ -17,16 +19,14 @@ class LangType {
 
   Map<String, dynamic> toJson() => _$LangTypeToJson(this);
 
-  @override
-  String toString() {
-    if (name == 'SUBTITLES') {
-      return 'VOSTFR';
+  String toStringTranslated(BuildContext context) {
+    switch (name) {
+      case 'SUBTITLES':
+        return AppLocalizations.of(context)!.subtitles;
+      case 'VOICE':
+        return AppLocalizations.of(context)!.voice;
+      default:
+        return '??';
     }
-
-    if (name == 'VOICE') {
-      return 'VF';
-    }
-
-    return '??';
   }
 }

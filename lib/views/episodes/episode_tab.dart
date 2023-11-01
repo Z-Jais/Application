@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/episodes/episode_tab_controller.dart';
 import 'package:jais/controllers/logger.dart';
@@ -43,15 +44,15 @@ class _EpisodeTabState extends State<EpisodeTab> {
                   ? Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
-                          'Ce que tu aurais pu ',
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.thingsYouMayHaveMissed1,
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          'manquer',
+                          AppLocalizations.of(context)!.thingsYouMayHaveMissed2,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
