@@ -70,7 +70,7 @@ class EpisodeWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Saison ${episode.season} • ${episode.episodeType} ${episode.number} ${episode.langType}',
+                            'Saison ${episode.season} • ${episode.episodeType.toStringTranslated(context)} ${episode.number} ${episode.langType.toStringTranslated(context)}',
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],

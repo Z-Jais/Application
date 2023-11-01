@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/filter_controller.dart';
 import 'package:jais/models/episodetype.dart';
 import 'package:jais/models/langtype.dart';
@@ -18,15 +19,15 @@ class _FilterWatchlistState extends State<FilterWatchlist> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Types',
+            AppLocalizations.of(context)!.types,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
           for (final EpisodeType episodeType
               in FilterController.instance.episodeTypes)
             ListTile(
-              title: Text(episodeType.toString()),
-              trailing: Switch(
+              title: Text(episodeType.toStringTranslated(context)),
+              trailing: Switch.adaptive(
                 value: FilterController.instance.watchlistEpisodeTypeFilter
                     .hasIn(episodeType.uuid),
                 onChanged: (value) async {
@@ -38,14 +39,14 @@ class _FilterWatchlistState extends State<FilterWatchlist> {
             ),
           const SizedBox(height: 16),
           Text(
-            'Langues',
+            AppLocalizations.of(context)!.langs,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
           for (final LangType langType in FilterController.instance.langTypes)
             ListTile(
-              title: Text(langType.toString()),
-              trailing: Switch(
+              title: Text(langType.toStringTranslated(context)),
+              trailing: Switch.adaptive(
                 value: FilterController.instance.watchlistLangTypeFilter
                     .hasIn(langType.uuid),
                 onChanged: (value) async {
@@ -59,8 +60,9 @@ class _FilterWatchlistState extends State<FilterWatchlist> {
           const Divider(),
           const SizedBox(height: 8),
           ListTile(
-            title: const Text('Affichez les épisodes marqués comme "vu"'),
-            trailing: Switch(
+            title:
+                Text(AppLocalizations.of(context)!.showMarkedAsWatchedEpisode),
+            trailing: Switch.adaptive(
               value: FilterController.instance.episodeWatchedFilter.data == 1,
               onChanged: (value) async {
                 await FilterController.instance.episodeWatchedFilter.invert();
