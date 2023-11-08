@@ -79,7 +79,7 @@ class ProfileTab extends StatelessWidget {
             ChangeNotifierProvider.value(
               value: NotificationController.instance,
               child: Consumer<NotificationController>(
-                builder: (_, value, __) {
+                builder: (context, value, child) {
                   return Category(
                     label: 'NOTIFICATION',
                     trailing: value.isRunning
@@ -222,7 +222,7 @@ class ProfileTab extends StatelessWidget {
                   onTap: () {
                     showDialog(
                       context: context,
-                      builder: (_) => AlertDialog(
+                      builder: (context) => AlertDialog(
                         title: const Text('Suppression des données'),
                         content: const Text(
                           'Êtes-vous sûr de vouloir supprimer toutes vos données ?',

@@ -17,7 +17,7 @@ class WatchlistButton extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: anime,
       child: Consumer<Anime>(
-        builder: (context, anime, child) {
+        builder: (context, value, child) {
           return ElevatedButton(
             child: Row(
               mainAxisSize: MainAxisSize.min,

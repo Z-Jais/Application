@@ -26,7 +26,7 @@ class LiteEpisodeImage extends StatelessWidget {
       fit: BoxFit.cover,
       imageUrl:
           '${Const.instance.serverUrlWithHttpProtocol}/episodes/attachment/${episode.uuid}',
-      imageBuilder: (_, ImageProvider<Object> imageProvider) {
+      imageBuilder: (context, imageProvider) {
         return ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           child: Stack(
@@ -55,8 +55,8 @@ class LiteEpisodeImage extends StatelessWidget {
               ChangeNotifierProvider.value(
                 value: episode,
                 child: Consumer<Episode>(
-                  builder: (context, episode, __) {
-                    return episode.isSeen
+                  builder: (context, value, child) {
+                    return value.isSeen
                         ? const Positioned(
                             bottom: 5,
                             left: 5,
@@ -88,8 +88,8 @@ class LiteEpisodeImage extends StatelessWidget {
           ),
         );
       },
-      placeholder: (_, __) => Skeleton(height: height),
-      errorWidget: (_, __, ___) => Skeleton(height: height),
+      placeholder: (context, url) => Skeleton(height: height),
+      errorWidget: (context, url, error) => Skeleton(height: height),
     );
   }
 }

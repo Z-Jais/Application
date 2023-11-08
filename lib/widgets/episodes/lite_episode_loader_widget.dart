@@ -14,10 +14,10 @@ class LiteEpisodeLoaderWidget extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 10),
         child: const Row(
-          children: <Widget>[
+          children: [
             Expanded(
               child: Stack(
-                children: <Widget>[
+                children: [
                   Skeleton(height: Const.episodeImageHeight / 2),
                   Positioned(
                     top: 2,
@@ -32,7 +32,7 @@ class LiteEpisodeLoaderWidget extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: [
                   Skeleton(width: 150, height: 20),
                   SizedBox(height: 5),
                   Skeleton(width: 100, height: 20),
