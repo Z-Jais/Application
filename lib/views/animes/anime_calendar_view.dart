@@ -49,7 +49,7 @@ class _AnimeCalendarViewState extends State<AnimeCalendarView> {
               child: ChangeNotifierProvider.value(
                 value: widget.controller,
                 child: Consumer<AnimeCalendarController>(
-                  builder: (_, value, ___) {
+                  builder: (context, value, child) {
                     return HVList(
                       hController: value.scrollController,
                       hList: value.days

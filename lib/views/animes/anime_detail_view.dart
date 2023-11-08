@@ -34,7 +34,7 @@ class _AnimeDetailViewState extends State<AnimeDetailView> {
               child: ChangeNotifierProvider.value(
                 value: widget.controller,
                 child: Consumer<AnimeDetailController>(
-                  builder: (_, value, __) {
+                  builder: (context, value, child) {
                     return HVList(
                       hChild: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20),

@@ -5,12 +5,14 @@ import 'package:jais/controllers/logger.dart';
 class NoElement extends StatelessWidget {
   final String title;
   final String message;
-  final VoidCallback? onRetry;
+  final VoidCallback? onTap;
+  final String? textButton;
 
   const NoElement({
     required this.title,
     required this.message,
-    this.onRetry,
+    this.onTap,
+    this.textButton,
     super.key,
   });
 
@@ -29,11 +31,11 @@ class NoElement extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
           ),
           Text(message, textAlign: TextAlign.center),
-          if (onRetry != null) ...[
+          if (onTap != null) ...[
             const SizedBox(height: 10),
-            TextButton(
-              onPressed: onRetry,
-              child: Text(AppLocalizations.of(context)!.retry),
+            ElevatedButton(
+              onPressed: onTap,
+              child: Text(textButton ?? AppLocalizations.of(context)!.retry),
             ),
           ],
         ],

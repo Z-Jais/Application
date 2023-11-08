@@ -27,7 +27,7 @@ class AnimeImage extends StatelessWidget {
       fit: BoxFit.cover,
       imageUrl:
           '${Const.instance.serverUrlWithHttpProtocol}/animes/attachment/${anime.uuid}',
-      imageBuilder: (_, ImageProvider<Object> imageProvider) {
+      imageBuilder: (context, imageProvider) {
         return ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           child: DisposingImage(
@@ -40,8 +40,9 @@ class AnimeImage extends StatelessWidget {
           ),
         );
       },
-      placeholder: (_, __) => Skeleton(height: height, radius: radius),
-      errorWidget: (_, __, ___) => Skeleton(height: height, radius: radius),
+      placeholder: (context, url) => Skeleton(height: height, radius: radius),
+      errorWidget: (context, url, error) =>
+          Skeleton(height: height, radius: radius),
     );
   }
 }

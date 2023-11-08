@@ -28,14 +28,14 @@ class EpisodeWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: <Widget>[
+                  children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
+                        children: [
                           Row(
-                            children: <Widget>[
+                            children: [
                               PlatformWidget(platform: episode.platform),
                               const SizedBox(width: 7.5),
                               Expanded(

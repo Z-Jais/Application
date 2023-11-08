@@ -13,7 +13,7 @@ class AnimeLoaderWidget extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 10),
         child: const Row(
-          children: <Widget>[
+          children: [
             Skeleton(
               width: Const.animeImageWith,
               height: Const.animeImageHeight,
@@ -22,7 +22,7 @@ class AnimeLoaderWidget extends StatelessWidget {
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
+                children: [
                   Skeleton(height: 20),
                   SizedBox(height: 10),
                   Skeleton(height: 70),

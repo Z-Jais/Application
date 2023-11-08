@@ -8,10 +8,13 @@ class NavigationController with ChangeNotifier {
   static final NavigationController instance = NavigationController();
   final PageController pageController = PageController();
   int _currentPage = 0;
+  bool _inProgress = false;
 
   int get currentPage => _currentPage;
 
   void setCurrentPage(int page) {
+    if (_inProgress) return;
+    _inProgress = true;
     debug('NavigationController', '$currentPage -> $page');
 
     if (page == currentPage) {
@@ -33,6 +36,8 @@ class NavigationController with ChangeNotifier {
         stacktrace,
       );
     }
+
+    _inProgress = false;
   }
 
   List<NavigationBarItem> _items(BuildContext context) {
