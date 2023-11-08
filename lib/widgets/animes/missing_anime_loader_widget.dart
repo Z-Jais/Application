@@ -11,7 +11,7 @@ class MissingAnimeLoaderWidget extends StatelessWidget {
       child: SizedBox.square(
         dimension: Const.missingAnimeImageWith + 30,
         child: Column(
-          children: <Widget>[
+          children: [
             Skeleton(
               width: Const.missingAnimeImageWith,
               height: Const.missingAnimeImageHeight,

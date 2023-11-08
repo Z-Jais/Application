@@ -57,7 +57,7 @@ class TopNavigationBar extends StatelessWidget {
           ChangeNotifierProvider.value(
             value: AdController.instance,
             child: Consumer<AdController>(
-              builder: (_, value, __) {
+              builder: (context, value, child) {
                 if (!value.isLoaded) {
                   return const Spacer();
                 }
@@ -69,7 +69,7 @@ class TopNavigationBar extends StatelessWidget {
           ChangeNotifierProvider.value(
             value: NavigationController.instance,
             child: Consumer<NavigationController>(
-              builder: (_, value, __) {
+              builder: (context, value, child) {
                 return Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

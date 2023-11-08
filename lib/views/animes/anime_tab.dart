@@ -27,7 +27,7 @@ class _AnimeTabState extends State<AnimeTab> {
     return ChangeNotifierProvider.value(
       value: _controller,
       child: Consumer<AnimeTabController>(
-        builder: (_, value, __) {
+        builder: (context, value, child) {
           return RefreshIndicator(
             onRefresh: () async {
               await _controller.init();

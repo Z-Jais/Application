@@ -18,7 +18,7 @@ class PlatformWidget extends StatelessWidget {
       fit: BoxFit.cover,
       imageUrl:
           '${Const.instance.serverUrlWithHttpProtocol}/platforms/attachment/${platform.uuid}',
-      imageBuilder: (_, ImageProvider<Object> imageProvider) {
+      imageBuilder: (context, imageProvider) {
         return ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(360)),
           child: DisposingImage(
@@ -31,8 +31,8 @@ class PlatformWidget extends StatelessWidget {
           ),
         );
       },
-      placeholder: (_, __) => const PlatformLoaderWidget(),
-      errorWidget: (_, __, ___) => const PlatformLoaderWidget(),
+      placeholder: (context, url) => const PlatformLoaderWidget(),
+      errorWidget: (context, url, error) => const PlatformLoaderWidget(),
     );
   }
 }

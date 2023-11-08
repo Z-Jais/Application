@@ -20,7 +20,7 @@ class MissingAnimeWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Column(
-            children: <Widget>[
+            children: [
               Stack(
                 children: [
                   AnimeImage(

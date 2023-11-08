@@ -30,7 +30,7 @@ class _EpisodeTabState extends State<EpisodeTab> {
     return ChangeNotifierProvider.value(
       value: _controller,
       child: Consumer<EpisodeTabController>(
-        builder: (_, value, __) {
+        builder: (context, value, child) {
           final bool showMissingAnimes =
               AppController.watchlist.data.isNotEmpty &&
                   _controller.missingAnimeController.list.isNotEmpty;

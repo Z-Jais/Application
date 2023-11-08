@@ -57,7 +57,7 @@ class _AnimeSearchViewState extends State<AnimeSearchView> {
               child: ChangeNotifierProvider.value(
                 value: widget.controller,
                 child: Consumer<AnimeSearchController>(
-                  builder: (_, value, ___) {
+                  builder: (context, value, child) {
                     return ListView.builder(
                       itemCount: value.list.length,
                       itemBuilder: (context, index) => value.list[index],

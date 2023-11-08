@@ -16,16 +16,16 @@ class EpisodeLoaderWidget extends StatelessWidget {
         child: const Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: [
             Row(
-              children: <Widget>[
+              children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
+                    children: [
                       Row(
-                        children: <Widget>[
+                        children: [
                           PlatformLoaderWidget(),
                           SizedBox(width: 7.5),
                           Expanded(

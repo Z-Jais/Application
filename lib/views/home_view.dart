@@ -25,7 +25,7 @@ class HomeView extends StatelessWidget {
               child: ChangeNotifierProvider.value(
                 value: NavigationController.instance,
                 child: Consumer<NavigationController>(
-                  builder: (_, value, __) {
+                  builder: (context, value, child) {
                     return const MyPage();
                   },
                 ),
@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
       bottomNavigationBar: ChangeNotifierProvider.value(
         value: NavigationController.instance,
         child: Consumer<NavigationController>(
-          builder: (_, value, __) {
+          builder: (context, value, child) {
             return NavigationBar(
               selectedIndex: value.currentPage,
               onDestinationSelected: value.setCurrentPage,

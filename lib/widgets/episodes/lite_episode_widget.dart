@@ -18,7 +18,7 @@ class LiteEpisodeWidget extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 10),
         child: Row(
-          children: <Widget>[
+          children: [
             Expanded(
               child: GestureDetector(
                 onTap: _onTap,
@@ -33,7 +33,7 @@ class LiteEpisodeWidget extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: [
                   Text(
                     episode.title.ifEmptyOrNull('＞﹏＜').replaceAll('\n', ' '),
                     overflow: TextOverflow.ellipsis,
@@ -48,7 +48,7 @@ class LiteEpisodeWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Row(
-                    children: <Widget>[
+                    children: [
                       const Spacer(),
                       EpisodeMoreOptions(
                         episode: episode,
