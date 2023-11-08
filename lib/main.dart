@@ -3,13 +3,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/animes/anime_calendar_controller.dart';
 import 'package:jais/controllers/animes/anime_detail_controller.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
-import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_calendar_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
+import 'package:jais/views/home_view.dart';
 import 'package:jais/views/initialization_view.dart';
-import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,15 +17,7 @@ Future<void> main() async {
     error('FlutterError', '.onError', details.exception, details.stack);
   };
 
-  // debugRepaintRainbowEnabled = kDebugMode;
-  // debugRepaintTextRainbowEnabled = kDebugMode;
-
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => AppController(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -75,6 +66,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (_) {
           return const InitializationView();
+        },
+        '/home': (_) {
+          return const HomeView();
         },
         '/anime/search': (_) {
           return AnimeSearchView(controller: AnimeSearchController());

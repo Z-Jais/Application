@@ -29,15 +29,15 @@ class EpisodeMoreOptions extends StatelessWidget {
               child: ChangeNotifierProvider.value(
                 value: episode,
                 child: Consumer<Episode>(
-                  builder: (_, episode, __) {
+                  builder: (context, value, child) {
                     return Row(
                       children: [
-                        Icon(episode.isSeen
+                        Icon(value.isSeen
                             ? Icons.visibility_off
                             : Icons.visibility),
                         const SizedBox(width: 8),
                         Text(
-                          episode.isSeen
+                          value.isSeen
                               ? "Je n'ai pas vu cet épisode"
                               : "J'ai vu cet épisode",
                         ),

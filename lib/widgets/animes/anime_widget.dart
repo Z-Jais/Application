@@ -60,8 +60,8 @@ class AnimeWidget extends StatelessWidget {
             ChangeNotifierProvider.value(
               value: anime,
               child: Consumer<Anime>(
-                builder: (context, anime, _) {
-                  return anime.inWatchlist
+                builder: (context, value, child) {
+                  return value.inWatchlist
                       ? const Positioned(
                           top: 0,
                           right: 2.5,

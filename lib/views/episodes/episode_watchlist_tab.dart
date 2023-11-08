@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
 import 'package:jais/controllers/logger.dart';
+import 'package:jais/controllers/navigation_controller.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/widgets/h_v_list.dart';
 import 'package:jais/widgets/no_element.dart';
@@ -37,12 +39,16 @@ class _EpisodeWatchlistTabState extends State<EpisodeWatchlistTab> {
       child: ChangeNotifierProvider.value(
         value: _controller,
         child: Consumer<EpisodeWatchlistController>(
-          builder: (_, value, __) {
+          builder: (context, value, child) {
             if (value.nothingToShow()) {
-              return const NoElement(
+              return NoElement(
                 title: 'Mince !',
                 message:
-                    'Aucun anime dans votre watchlist !\nAjoutez-en pour voir les épisodes à regarder.',
+                    'Aucun animé dans votre watchlist !\nAjoutez-en pour voir les épisodes à regarder.',
+                textButton: AppLocalizations.of(context)!.add,
+                onTap: () {
+                  NavigationController.instance.setCurrentPage(2);
+                },
               );
             }
 
