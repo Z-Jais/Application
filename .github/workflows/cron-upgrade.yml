@@ -1,0 +1,38 @@
+name: Cron upgrade Flutter packages
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+  push:
+    branches:
+      - master
+
+jobs:
+  upgrader:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - uses: actions/checkout@v4
+      - run: flutter pub get
+      - run: flutter pub upgrade
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "Upgrade Flutter packages"
+          title: "Upgrade Flutter packages"
+          body: "Upgrade Flutter packages"
+          branch: upgrade-packages
+          branch-suffix: timestamp
+          labels: "dependencies,dart"
+          assignees: "Ziedelth"
+          reviewers: "Ziedelth"
+          signoff: true
+          delete-branch: true
