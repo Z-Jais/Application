@@ -4,7 +4,6 @@ on:
   pull_request:
 
 jobs:
-  # Check if environment is correct
   check_env:
     name: Check environment
     runs-on: ubuntu-latest
@@ -45,42 +44,6 @@ jobs:
 
       - name: Dart Analyze
         run: dart analyze .
-  upgrade:
-    # If the target branch is 'stable'
-    if: github.event.pull_request.base.ref == 'stable'
-    needs:
-      - validating
-    name: Flutter Upgrade
-    runs-on: ubuntu-latest
-
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
-      contents: write
-
-    steps:
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }}
-
-      - name: Get
-        run: flutter pub get
-
-      - name: Flutter Upgrade
-        run: flutter pub upgrade
-
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Upgrade Flutter
-
-  # Make a job with the title of pull request contains "flutter_native_splash" and only on opened pull request
   native_splash:
     if: contains(github.event.pull_request.title, 'flutter_native_splash') && (github.event.action == 'opened' || github.event.action == 'synchronize')
     needs:
@@ -89,8 +52,6 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
       contents: write
 
     steps:
@@ -112,13 +73,12 @@ jobs:
         run: dart run flutter_native_splash:create
 
       - uses: stefanzweifel/git-auto-commit-action@v5
-  # Build the app
   build_android:
     name: Build Android
     runs-on: ubuntu-latest
 
-    if: ${{ always() }}
-    needs: [validating, native_splash, upgrade]
+    needs:
+      - validating
 
     steps:
       - name: Set up JDK 17
