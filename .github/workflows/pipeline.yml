@@ -76,7 +76,7 @@ jobs:
       - name: Flutter Upgrade
         run: flutter pub upgrade
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Upgrade Flutter
 
@@ -111,7 +111,7 @@ jobs:
       - name: Flutter Native Splash
         run: dart run flutter_native_splash:create
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
   # Build the app
   build_android:
     name: Build Android
