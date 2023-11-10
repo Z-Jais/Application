@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jais/utils.dart';
 
 class DayWidget extends StatelessWidget {
   final String day;
@@ -30,7 +31,8 @@ class DayWidget extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        borderRadius:
+            const BorderRadius.all(Radius.circular(Const.defaultRadius)),
         color: isSelected
             ? Theme.of(context).primaryColor
             : Theme.of(context).colorScheme.background,

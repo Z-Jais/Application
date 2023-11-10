@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jais/utils.dart';
 import 'package:shimmer/shimmer.dart';
 
 class Skeleton extends StatelessWidget {
@@ -9,15 +10,15 @@ class Skeleton extends StatelessWidget {
   const Skeleton({
     this.width,
     required this.height,
-    this.radius = 8,
+    this.radius = Const.defaultRadius,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: const Color(0xFFFFFFFF),
-      highlightColor: const Color(0xFF000000),
+      baseColor: const Color(0xFFE0E0E0),
+      highlightColor: const Color(0xFF1E1E1E),
       child: SizedBox(
         width: width ?? double.infinity,
         height: height,

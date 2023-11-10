@@ -18,5 +18,20 @@
   "profile": "Profil",
   "thingsYouMayHaveMissed1": "Ce que tu aurais pu ",
   "thingsYouMayHaveMissed2": "manquer",
-  "add": "Ajouter"
+  "add": "Ajouter",
+  "seen": "Vu",
+  "episodeNotWatched": "Je n'ai pas vu cet épisode",
+  "episodeWatched": "J'ai vu cet épisode",
+  "goToEpisode": "Aller sur l'épisode",
+  "episodeDetails": "Saison {seasonNumber} • {episodeType} {episodeNumber} {langType}",
+  "newS": "Nouveau",
+  "year": "{count, plural, =1{{count} an} other{{count} ans}}",
+  "month": "{count, plural, =1{{count} mois} other{{count} mois}}",
+  "day": "{count, plural, =1{{count} jour} other{{count} jours}}",
+  "hour": "{count, plural, =1{{count} heure} other{{count} heures}}",
+  "minute": "{count, plural, =1{{count} minute} other{{count} minutes}}",
+  "now": "à l'instant",
+  "timeSince": "Il y a {time}",
+  "season": "Saison {seasonNumber}",
+  "minEpisodeDetails": "{episodeType} {episodeNumber} {langType}"
 }

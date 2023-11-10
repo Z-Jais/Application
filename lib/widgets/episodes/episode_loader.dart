@@ -3,8 +3,8 @@ import 'package:jais/utils.dart';
 import 'package:jais/widgets/platforms/platform_loader_widget.dart';
 import 'package:jais/widgets/skeleton.dart';
 
-class EpisodeLoaderWidget extends StatelessWidget {
-  const EpisodeLoaderWidget({super.key});
+class EpisodeLoader extends StatelessWidget {
+  const EpisodeLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +42,6 @@ class EpisodeLoaderWidget extends StatelessWidget {
                       Skeleton(width: 200, height: 20),
                       SizedBox(height: 5),
                       Skeleton(width: 250, height: 15),
-                      SizedBox(height: 5),
-                      Skeleton(width: 100, height: 15),
                     ],
                   ),
                 ),

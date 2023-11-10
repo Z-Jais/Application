@@ -14,7 +14,7 @@ class OpacityContainer extends StatelessWidget {
         horizontal: 10,
       ),
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
         color: Color.fromRGBO(0, 0, 0, 0.75),
       ),
       child: text != null

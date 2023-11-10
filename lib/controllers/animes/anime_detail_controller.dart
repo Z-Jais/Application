@@ -3,19 +3,19 @@ import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/anime.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
-import 'package:jais/widgets/episodes/lite_episode_loader_widget.dart';
-import 'package:jais/widgets/episodes/lite_episode_widget.dart';
+import 'package:jais/widgets/episodes/lite_episode_loader.dart';
+import 'package:jais/widgets/episodes/lite_episode.dart';
 
-class AnimeDetailController extends DataController<Episode,
-    LiteEpisodeLoaderWidget, LiteEpisodeWidget> {
+class AnimeDetailController
+    extends DataController<Episode, LiteEpisodeLoader, LiteEpisode> {
   Anime? _anime;
 
   AnimeDetailController()
       : super(
           limit: 12,
-          loadingWidget: const LiteEpisodeLoaderWidget(),
+          loadingWidget: const LiteEpisodeLoader(),
           fromJson: (json) => Episode.fromJson(json),
-          toWidget: (episode) => LiteEpisodeWidget(episode: episode),
+          toWidget: (episode) => LiteEpisode(episode: episode),
           notifyListenersCallback: () {},
         );
 
@@ -32,7 +32,7 @@ class AnimeDetailController extends DataController<Episode,
   }
 
   @override
-  Future<List<LiteEpisodeWidget>> widgets() async {
+  Future<List<LiteEpisode>> widgets() async {
     return URLController()
         .get(
           '${Const.instance.serverUrlWithHttpProtocol}/episodes/anime/${_anime?.uuid}/page/$page/limit/$limit',

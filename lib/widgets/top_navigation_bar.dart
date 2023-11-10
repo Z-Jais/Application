@@ -50,10 +50,7 @@ class TopNavigationBar extends StatelessWidget {
       height: 50,
       child: Row(
         children: <Widget>[
-          const ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-            child: Image(image: AssetImage('assets/icon.png')),
-          ),
+          const Image(image: AssetImage('assets/icon.png')),
           ChangeNotifierProvider.value(
             value: AdController.instance,
             child: Consumer<AdController>(

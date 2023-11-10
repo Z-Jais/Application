@@ -155,6 +155,7 @@ class _AnimeDescriptionState extends State<AnimeDescription> {
         widget.anime.description ?? '',
         style: const TextStyle(
           fontSize: 14,
+          height: 1.6,
         ),
         maxLines: _isOpen ? null : 5,
         overflow: _isOpen ? null : TextOverflow.ellipsis,

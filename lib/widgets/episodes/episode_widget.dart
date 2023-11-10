@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
@@ -44,7 +45,6 @@ class EpisodeWidget extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 13,
                                   ),
                                 ),
                               ),
@@ -59,7 +59,8 @@ class EpisodeWidget extends StatelessWidget {
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 15,
+                                fontSize: 16,
+                              height: 1.5,
                               ),
                             ),
                           ),
@@ -70,10 +71,16 @@ class EpisodeWidget extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
+                              height: 1.5,
                             ),
                           ),
                           Text(
-                            'Saison ${episode.season} • ${episode.episodeType.toStringTranslated(context)} ${episode.number} ${episode.langType.toStringTranslated(context)}',
+                            AppLocalizations.of(context)!.episodeDetails(
+                              episode.number,
+                              episode.episodeType.toStringTranslated(context),
+                              episode.langType.toStringTranslated(context),
+                              episode.season,
+                            ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],
@@ -95,7 +102,8 @@ class EpisodeWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Il y a ${Utils.instance.printTimeSince(DateTime.parse(episode.releaseDate))}',
+                      AppLocalizations.of(context)!.timeSince(Utils.instance
+                          .printTimeSince(context, episode.releaseDate)),
                     ),
                     const Spacer(),
                     EpisodeMoreOptions(
@@ -109,10 +117,10 @@ class EpisodeWidget extends StatelessWidget {
             ),
           ),
           if (episode.isNew)
-            const Positioned(
+            Positioned(
               top: 0,
-              right: 2.5,
-              child: CustomBadge(text: 'New'),
+              right: 5,
+              child: CustomBadge(text: AppLocalizations.of(context)!.newS),
             ),
         ],
       ),
