@@ -3,9 +3,6 @@ name: Cron upgrade Flutter packages
 on:
   schedule:
     - cron: "0 10 * * *"
-  push:
-    branches:
-      - master
 
 jobs:
   upgrader:
