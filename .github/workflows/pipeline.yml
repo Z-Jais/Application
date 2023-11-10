@@ -4,13 +4,12 @@ on:
   pull_request:
 
 jobs:
-  # Check if environment is correct
   check_env:
     name: Check environment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Check environment
         run: |
@@ -32,7 +31,7 @@ jobs:
           channel: 'stable'
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get
         run: flutter pub get
@@ -45,7 +44,6 @@ jobs:
 
       - name: Dart Analyze
         run: dart analyze .
-  # Make a job with the title of pull request contains "flutter_native_splash" and only on opened pull request
   native_splash:
     if: contains(github.event.pull_request.title, 'flutter_native_splash') && (github.event.action == 'opened' || github.event.action == 'synchronize')
     needs:
@@ -54,8 +52,6 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
       contents: write
 
     steps:
@@ -65,7 +61,7 @@ jobs:
           channel: 'stable'
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
@@ -76,13 +72,14 @@ jobs:
       - name: Flutter Native Splash
         run: dart run flutter_native_splash:create
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
-  # Build the app
+      - uses: stefanzweifel/git-auto-commit-action@v5
   build_android:
     name: Build Android
     runs-on: ubuntu-latest
+
     needs:
       - validating
+
     steps:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -96,7 +93,7 @@ jobs:
           channel: 'stable'
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get
         run: flutter pub get
