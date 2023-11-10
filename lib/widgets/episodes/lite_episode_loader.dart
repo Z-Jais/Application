@@ -3,8 +3,8 @@ import 'package:jais/utils.dart';
 import 'package:jais/widgets/platforms/platform_loader_widget.dart';
 import 'package:jais/widgets/skeleton.dart';
 
-class LiteEpisodeLoaderWidget extends StatelessWidget {
-  const LiteEpisodeLoaderWidget({super.key});
+class LiteEpisodeLoader extends StatelessWidget {
+  const LiteEpisodeLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,6 @@ class LiteEpisodeLoaderWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Skeleton(width: 150, height: 20),
-                  SizedBox(height: 5),
-                  Skeleton(width: 100, height: 20),
                   SizedBox(height: 5),
                   Skeleton(width: 100, height: 20),
                   SizedBox(height: 5),
