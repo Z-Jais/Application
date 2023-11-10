@@ -64,7 +64,7 @@ class AnimeWidget extends StatelessWidget {
                   return value.inWatchlist
                       ? const Positioned(
                           top: 0,
-                          right: 2.5,
+                          right: 5,
                           child: CustomBadge(text: 'Watchlist'),
                         )
                       : Container();

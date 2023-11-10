@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Const {
   static final Const instance = Const();
@@ -14,6 +15,8 @@ class Const {
 
   static const String serverUrl = "beta-api.ziedelth.fr";
   static const String selectedCountry = 'fr';
+
+  static const double defaultRadius = 16;
 
   // static const String serverUrl = "alpha-api.ziedelth.fr";
   // static const String serverUrl = "192.168.1.20:8080";
@@ -63,23 +66,34 @@ class Utils {
         .trim();
   }
 
-  String printTimeSince(DateTime dateTime) {
+  String printTimeSince(BuildContext context, String releaseDate) {
     final double seconds = (DateTime.now().millisecondsSinceEpoch -
-            dateTime.millisecondsSinceEpoch) /
+            DateTime.parse(releaseDate).millisecondsSinceEpoch) /
         1000;
-    return _formatTime(seconds, 31536000, "an") ??
-        _formatTime(seconds, 2592000, "mois") ??
-        _formatTime(seconds, 86400, "jour") ??
-        _formatTime(seconds, 3600, "heure") ??
-        _formatTime(seconds, 60, "minute") ??
-        "à l'instant";
+
+    Map<int, String Function(int)> timeUnits = {
+      31536000: (x) => AppLocalizations.of(context)!.year(x),
+      2592000: (x) => AppLocalizations.of(context)!.month(x),
+      86400: (x) => AppLocalizations.of(context)!.day(x),
+      3600: (x) => AppLocalizations.of(context)!.hour(x),
+      60: (x) => AppLocalizations.of(context)!.minute(x),
+    };
+
+    for (var timeUnit in timeUnits.entries) {
+      String? formatted = _formatTime(seconds, timeUnit.key, timeUnit.value);
+      if (formatted != null) return formatted;
+    }
+
+    return AppLocalizations.of(context)!.now;
   }
 
-  String? _formatTime(double seconds, int value, String text) {
-    double interval = seconds / value;
+  String? _formatTime(double seconds, int value, String Function(int) text) {
+    final double interval = seconds / value;
+
     if (interval > 1) {
-      return '${interval.floor()} $text${interval >= 2 ? 's' : ''}';
+      return text.call(interval.floor());
     }
+
     return null;
   }
 
@@ -106,10 +120,11 @@ class Utils {
   BoxDecoration buildBoxDecoration(BuildContext context) {
     return BoxDecoration(
       color: Theme.of(context).colorScheme.background,
-      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      borderRadius:
+          const BorderRadius.all(Radius.circular(Const.defaultRadius)),
       boxShadow: [
         BoxShadow(
-          color: Theme.of(context).primaryColor.withOpacity(0.2),
+          color: Theme.of(context).primaryColor.withOpacity(0.1),
           blurRadius: 4,
           offset: const Offset(4, 4),
         ),

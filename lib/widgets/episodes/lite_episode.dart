@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/episodes/episode_more_options.dart';
 import 'package:jais/widgets/episodes/lite_episode_image.dart';
 
-class LiteEpisodeWidget extends StatelessWidget {
+class LiteEpisode extends StatelessWidget {
   final Episode episode;
 
-  const LiteEpisodeWidget({required this.episode, super.key});
+  const LiteEpisode({required this.episode, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +41,15 @@ class LiteEpisodeWidget extends StatelessWidget {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    'Saison ${episode.season}',
+                    AppLocalizations.of(context)!.season(episode.season),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    '${episode.episodeType.toStringTranslated(context)} ${episode.number} ${episode.langType.toStringTranslated(context)}',
+                    AppLocalizations.of(context)!.minEpisodeDetails(
+                      episode.number,
+                      episode.episodeType.toStringTranslated(context),
+                      episode.langType.toStringTranslated(context),
+                    ),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Row(

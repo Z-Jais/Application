@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/models/episode.dart';
 import 'package:provider/provider.dart';
@@ -32,14 +33,16 @@ class EpisodeMoreOptions extends StatelessWidget {
                   builder: (context, value, child) {
                     return Row(
                       children: [
-                        Icon(value.isSeen
-                            ? Icons.visibility_off
-                            : Icons.visibility),
+                        Icon(
+                          value.isSeen
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
                         const SizedBox(width: 8),
                         Text(
                           value.isSeen
-                              ? "Je n'ai pas vu cet épisode"
-                              : "J'ai vu cet épisode",
+                              ? AppLocalizations.of(context)!.episodeNotWatched
+                              : AppLocalizations.of(context)!.episodeWatched,
                         ),
                       ],
                     );
@@ -49,11 +52,11 @@ class EpisodeMoreOptions extends StatelessWidget {
             ),
             PopupMenuItem(
               onTap: onRedirectTap,
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.queue_play_next_rounded),
-                  SizedBox(width: 8),
-                  Text("Aller sur l'épisode"),
+                  const Icon(Icons.queue_play_next_rounded),
+                  const SizedBox(width: 8),
+                  Text(AppLocalizations.of(context)!.goToEpisode),
                 ],
               ),
             ),

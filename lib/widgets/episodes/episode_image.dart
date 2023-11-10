@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/disposing_image.dart';
@@ -51,21 +52,21 @@ class EpisodeImage extends StatelessWidget {
                 child: Consumer<Episode>(
                   builder: (context, value, child) {
                     return value.isSeen
-                        ? const Positioned(
+                        ? Positioned(
                             bottom: 5,
                             left: 5,
                             child: OpacityContainer(
                               child: Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.visibility,
                                     size: 16,
                                     color: Colors.white,
                                   ),
-                                  SizedBox(width: 8),
+                                  const SizedBox(width: 8),
                                   Text(
-                                    'Vu',
-                                    style: TextStyle(
+                                    AppLocalizations.of(context)!.seen,
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),

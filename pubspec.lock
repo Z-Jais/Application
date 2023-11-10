@@ -394,7 +394,7 @@ packages:
     description:
       path: "packages/google_mobile_ads"
       ref: HEAD
-      resolved-ref: f8828d0dc8da25d6c861248ac4e29bac516dc82a
+      resolved-ref: "174f28f69429cd255c9b6b904179c3e10d43f030"
       url: "https://github.com/googleads/googleads-mobile-flutter.git"
     source: git
     version: "3.1.0"
