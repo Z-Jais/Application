@@ -51,13 +51,16 @@ class EpisodeWidget extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 5),
-                          Text(
-                            episode.anime.name,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                          GestureDetector(
+                            onTap: () => _onAnimeTap(context),
+                            child: Text(
+                              episode.anime.name,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
                             ),
                           ),
                           Text(
@@ -77,7 +80,10 @@ class EpisodeWidget extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    AnimeImage(anime: episode.anime),
+                    GestureDetector(
+                      onTap: () => _onAnimeTap(context),
+                      child: AnimeImage(anime: episode.anime),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -113,7 +119,11 @@ class EpisodeWidget extends StatelessWidget {
     );
   }
 
-  Future<void> _onTap() async {
+  void _onTap() {
     URLController().goOnUrl(episode.url);
+  }
+
+  void _onAnimeTap(BuildContext context) {
+    Navigator.of(context).pushNamed('/anime/detail', arguments: episode.anime);
   }
 }
