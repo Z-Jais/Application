@@ -19,7 +19,7 @@ class SimulcastController
 
   @override
   Future<List<SimulcastWidget>> widgets() async {
-    return URLController()
+    return URLController.instance
         .get(
           '${Const.instance.serverUrlWithHttpProtocol}/simulcasts/country/${Const.selectedCountry}',
         )

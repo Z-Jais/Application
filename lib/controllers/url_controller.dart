@@ -1,21 +1,24 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:jais/controllers/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class URLController {
+  static final URLController instance = URLController();
   static const Duration _timeoutDuration = Duration(seconds: 10);
 
-  Future<http.Response?> get(String url) async {
+  Future<http.Response?> get(String url, {String? token}) async {
     try {
       debug('URLController', 'get($url)');
-      final http.Response response =
-          await http.get(Uri.parse(url)).timeout(_timeoutDuration);
+      final http.Response response = await http.get(Uri.parse(url), headers: {
+        'Authorization': 'Bearer $token',
+      }).timeout(_timeoutDuration);
       debug('URLController', 'get($url) => $response');
       return response;
     } catch (exception, stackTrace) {
-      error('URLController', 'get()', exception, stackTrace);
+      error('URLController', 'get($url)', exception, stackTrace);
       return null;
     }
   }
@@ -28,7 +31,40 @@ class URLController {
       debug('URLController', 'post($url, $body) => $response');
       return response;
     } catch (exception, stackTrace) {
-      error('URLController', 'post()', exception, stackTrace);
+      error('URLController', 'post($url, $body)', exception, stackTrace);
+      return null;
+    }
+  }
+
+  Future<http.Response?> put(String url, {String? token, Object? body}) async {
+    try {
+      debug('URLController', 'put($url, $body)');
+      final http.Response response = await http
+          .put(
+            Uri.parse(url),
+            headers: {'Authorization': 'Bearer $token'},
+            body: body,
+          )
+          .timeout(_timeoutDuration);
+      debug('URLController', 'put($url, $body) => $response');
+      return response;
+    } catch (exception, stackTrace) {
+      error('URLController', 'put($url, $body)', exception, stackTrace);
+      return null;
+    }
+  }
+
+  Future<http.Response?> delete(String url, {String? token}) async {
+    try {
+      debug('URLController', 'delete($url)');
+      final http.Response response = await http.delete(
+        Uri.parse(url),
+        headers: {'Authorization': 'Bearer $token'},
+      ).timeout(_timeoutDuration);
+      debug('URLController', 'delete($url) => $response');
+      return response;
+    } catch (exception, stackTrace) {
+      error('URLController', 'delete($url)', exception, stackTrace);
       return null;
     }
   }
@@ -52,7 +88,7 @@ class URLController {
 }
 
 extension ResponseNullableExtension on http.Response? {
-  bool get isOk => this != null && this?.statusCode == 200;
+  bool get isOk => this != null && this?.statusCode == HttpStatus.ok;
 
   bool isCorrect(int statusCode) =>
       this != null && this?.statusCode == statusCode;

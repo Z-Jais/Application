@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 
 class CategoryButton extends StatelessWidget {
   final String label;
-  final Widget icon;
+  final Widget? icon;
   final Widget? trailing;
   final VoidCallback? onTap;
+  final bool subCategory;
 
   const CategoryButton({
     required this.label,
-    required this.icon,
+    this.icon,
     this.trailing,
     this.onTap,
+    this.subCategory = false,
     super.key,
   });
 
@@ -22,17 +24,27 @@ class CategoryButton extends StatelessWidget {
         padding: const EdgeInsets.all(4),
         child: Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: 4,
+            if (icon != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
+                child: icon,
+              )
+            else
+              const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
               ),
-              child: icon,
-            ),
             Expanded(
               child: Text(
                 label,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: TextStyle(
+                  fontWeight: subCategory ? FontWeight.bold : FontWeight.normal,
+                ),
                 overflow: TextOverflow.ellipsis,
               ),
             ),

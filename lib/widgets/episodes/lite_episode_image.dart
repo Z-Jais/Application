@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jais/controllers/profile_controller.dart';
 import 'package:jais/models/episode.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/disposing_image.dart';
@@ -57,7 +58,8 @@ class LiteEpisodeImage extends StatelessWidget {
                 value: episode,
                 child: Consumer<Episode>(
                   builder: (context, value, child) {
-                    return value.isSeen
+                    return ProfileController.instance
+                            .isEpisodeInWatchlist(episode)
                         ? Positioned(
                             bottom: 5,
                             left: 5,

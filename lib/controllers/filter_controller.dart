@@ -1,5 +1,4 @@
 import 'package:jais/controllers/datas/collection_data_controller.dart';
-import 'package:jais/controllers/datas/int_data_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/models/episodetype.dart';
 import 'package:jais/models/langtype.dart';
@@ -12,15 +11,13 @@ class FilterController {
       CollectionDataController('watchlistEpisodeTypeFilter');
   final CollectionDataController watchlistLangTypeFilter =
       CollectionDataController('watchlistLangTypeFilter');
-  final IntDataController episodeWatchedFilter =
-      IntDataController('episodeWatchedFilter');
 
   final List<EpisodeType> episodeTypes = [];
   final List<LangType> langTypes = [];
 
   Future<void> init() async {
     await Future.wait([
-      URLController()
+      URLController.instance
           .get('${Const.instance.serverUrlWithHttpProtocol}/episodetypes')
           .ifOk(
             (p0) => {
@@ -31,7 +28,7 @@ class FilterController {
             },
           ),
       watchlistEpisodeTypeFilter.init(),
-      URLController()
+      URLController.instance
           .get('${Const.instance.serverUrlWithHttpProtocol}/langtypes')
           .ifOk(
             (p0) => {
@@ -41,7 +38,6 @@ class FilterController {
             },
           ),
       watchlistLangTypeFilter.init(),
-      episodeWatchedFilter.init(),
     ]);
 
     if (watchlistEpisodeTypeFilter.firstInit) {
@@ -55,16 +51,10 @@ class FilterController {
         langTypes.map((p0) => p0.uuid),
       );
     }
-
-    if (episodeWatchedFilter.firstInit) {
-      episodeWatchedFilter.data = 0;
-      await episodeWatchedFilter.save();
-    }
   }
 
   Future<void> reset() async {
     await watchlistEpisodeTypeFilter.reset();
     await watchlistLangTypeFilter.reset();
-    await episodeWatchedFilter.reset();
   }
 }

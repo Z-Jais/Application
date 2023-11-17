@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jais/utils.dart';
-import 'package:jais/widgets/platforms/platform_loader_widget.dart';
 import 'package:jais/widgets/skeleton.dart';
 
 class LiteEpisodeLoader extends StatelessWidget {
@@ -15,18 +14,7 @@ class LiteEpisodeLoader extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 10),
         child: const Row(
           children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  Skeleton(height: Const.episodeImageHeight / 2),
-                  Positioned(
-                    top: 2,
-                    right: 3,
-                    child: PlatformLoaderWidget(),
-                  ),
-                ],
-              ),
-            ),
+            Expanded(child: Skeleton(height: Const.episodeImageHeight / 2)),
             SizedBox(width: 10),
             Expanded(
               child: Column(

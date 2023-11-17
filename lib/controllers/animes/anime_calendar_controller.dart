@@ -64,7 +64,7 @@ class AnimeCalendarController extends AnimeController {
 
   @override
   Future<List<AnimeWidget>> widgets() async {
-    return URLController()
+    return URLController.instance
         .get(
           '${Const.instance.serverUrlWithHttpProtocol}/animes/diary/country/${Const.selectedCountry}/day/$_day',
         )
