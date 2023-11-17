@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/skeleton.dart';
 
-class MissingAnimeLoaderWidget extends StatelessWidget {
-  const MissingAnimeLoaderWidget({super.key});
+class MissingAnimeLoader extends StatelessWidget {
+  const MissingAnimeLoader({super.key});
 
   @override
   Widget build(BuildContext context) {

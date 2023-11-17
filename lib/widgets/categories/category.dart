@@ -4,12 +4,14 @@ import 'package:jais/utils.dart';
 class Category extends StatelessWidget {
   final String label;
   final Widget? trailing;
-  final List<Widget> buttons;
+  final List<Widget> children;
+  final Widget? child;
 
   const Category({
     required this.label,
-    required this.buttons,
+    this.children = const [],
     this.trailing,
+    this.child,
     super.key,
   });
 
@@ -35,7 +37,8 @@ class Category extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ...buttons.joinWidget(
+              if (child != null) child!,
+              ...children.joinWidget(
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Divider(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jais/controllers/profile_controller.dart';
 import 'package:jais/models/anime.dart';
 import 'package:jais/utils.dart';
 import 'package:jais/widgets/animes/anime_image.dart';
@@ -7,8 +8,13 @@ import 'package:provider/provider.dart';
 
 class AnimeWidget extends StatelessWidget {
   final Anime anime;
+  final bool showInWatchlist;
 
-  const AnimeWidget({required this.anime, super.key});
+  const AnimeWidget({
+    required this.anime,
+    this.showInWatchlist = true,
+    super.key,
+  });
 
   Widget borderDecoration(BuildContext context) {
     return Container(
@@ -61,7 +67,8 @@ class AnimeWidget extends StatelessWidget {
               value: anime,
               child: Consumer<Anime>(
                 builder: (context, value, child) {
-                  return value.inWatchlist
+                  return showInWatchlist &&
+                          ProfileController.instance.isAnimeInWatchlist(value)
                       ? const Positioned(
                           top: 0,
                           right: 5,

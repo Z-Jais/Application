@@ -12,14 +12,18 @@ class Const {
   static const double animeImageHeight = 100;
   static const double missingAnimeImageWith = 64;
   static const double missingAnimeImageHeight = 64;
+  static const double profileEpisodeImageWidth = 250;
+  static const double profileEpisodeImageHeight = 125;
+  static const double profileAnimeImageWidth = 100;
+  static const double profileAnimeImageHeight = 125;
 
-  static const String serverUrl = "beta-api.ziedelth.fr";
   static const String selectedCountry = 'fr';
 
   static const double defaultRadius = 16;
 
+  static const String serverUrl = "beta-api.ziedelth.fr";
   // static const String serverUrl = "alpha-api.ziedelth.fr";
-  // static const String serverUrl = "192.168.1.20:8080";
+  // static const String serverUrl = "192.168.1.71:8080";
 
   String get serverUrlWithHttpProtocol => 'https://$serverUrl';
 }
@@ -48,8 +52,8 @@ class Utils {
   }
 
   String fullFormatDuration(Duration duration) {
-    if (duration.isNegative) {
-      return '??:??';
+    if (duration.isNegative || duration.inSeconds == 0) {
+      return '0s';
     }
 
     Map<String, int> timeParts = {
@@ -85,6 +89,10 @@ class Utils {
     }
 
     return AppLocalizations.of(context)!.now;
+  }
+
+  String toDateTimeString(DateTime dateTime) {
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
   }
 
   String? _formatTime(double seconds, int value, String Function(int) text) {

@@ -11,9 +11,13 @@ import 'package:jais/widgets/platforms/platform_widget.dart';
 
 class EpisodeWidget extends StatelessWidget {
   final Episode episode;
-  final void Function(Episode, bool)? onSeenTap;
+  final bool showInWatchlist;
 
-  const EpisodeWidget({required this.episode, this.onSeenTap, super.key});
+  const EpisodeWidget({
+    required this.episode,
+    this.showInWatchlist = true,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +64,7 @@ class EpisodeWidget extends StatelessWidget {
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
-                              height: 1.5,
+                                height: 1.5,
                               ),
                             ),
                           ),
@@ -96,7 +100,10 @@ class EpisodeWidget extends StatelessWidget {
                 const SizedBox(height: 10),
                 GestureDetector(
                   onTap: _onTap,
-                  child: EpisodeImage(episode: episode),
+                  child: EpisodeImage(
+                    episode: episode,
+                    showInWatchlist: showInWatchlist,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -108,7 +115,6 @@ class EpisodeWidget extends StatelessWidget {
                     const Spacer(),
                     EpisodeMoreOptions(
                       episode: episode,
-                      onSeenTap: onSeenTap,
                       onRedirectTap: _onTap,
                     ),
                   ],
@@ -128,7 +134,7 @@ class EpisodeWidget extends StatelessWidget {
   }
 
   void _onTap() {
-    URLController().goOnUrl(episode.url);
+    URLController.instance.goOnUrl(episode.url);
   }
 
   void _onAnimeTap(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/models/anime.dart';
 import 'package:jais/models/episodetype.dart';
 import 'package:jais/models/langtype.dart';
@@ -47,8 +46,6 @@ class Episode with ChangeNotifier {
 
   bool get isNew =>
       season == 1 && number == 1 && anime.releaseDate == releaseDate;
-
-  bool get isSeen => AppController.seen.hasIn(uuid);
   void notify() {
     notifyListeners();
   }

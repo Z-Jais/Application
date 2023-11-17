@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/app_controller.dart';
-import 'package:jais/controllers/notification_controller.dart';
+import 'package:jais/controllers/profile_controller.dart';
 import 'package:jais/models/anime.dart';
 import 'package:provider/provider.dart';
 
@@ -18,36 +17,29 @@ class WatchlistButton extends StatelessWidget {
       value: anime,
       child: Consumer<Anime>(
         builder: (context, value, child) {
+          final bool inWatchlist =
+              ProfileController.instance.isAnimeInWatchlist(value);
+
           return ElevatedButton(
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
-                  anime.inWatchlist
+                  inWatchlist
                       ? Icons.indeterminate_check_box_outlined
                       : Icons.add_box_outlined,
-                  color: anime.inWatchlist ? Colors.red : Colors.green,
+                  color: inWatchlist ? Colors.red : Colors.green,
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  anime.inWatchlist
+                  inWatchlist
                       ? 'Retirer de ma watchlist'
                       : 'Ajouter à ma watchlist',
                 ),
               ],
             ),
             onPressed: () async {
-              if (anime.inWatchlist) {
-                await AppController.watchlist.remove(anime.uuid);
-              } else {
-                await AppController.watchlist.add(anime.uuid);
-              }
-
-              if (await NotificationController.instance.isWatchlist) {
-                NotificationController.instance.subscribeToWatchlist();
-              }
-
-              anime.notify();
+              await ProfileController.instance.toggleAnimeInWatchlist(value);
             },
           );
         },

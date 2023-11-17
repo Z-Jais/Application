@@ -28,6 +28,7 @@ abstract class AbstractDataController<T> {
   Future<void> reset() async {
     await sharedPreferences.remove(key);
     isInit = false;
+    firstInit = true;
     await init();
   }
 }

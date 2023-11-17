@@ -2,9 +2,9 @@ import 'package:app_settings/app_settings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/datas/string_data_controller.dart';
 import 'package:jais/controllers/logger.dart';
+import 'package:jais/controllers/profile_controller.dart';
 import 'package:jais/firebase_options.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -41,7 +41,15 @@ class NotificationController with ChangeNotifier {
     if (_notificationTypeController.firstInit) {
       await FirebaseMessaging.instance.requestPermission();
       _subscribeToAll();
+
+      _notificationTypeController.data = NotificationType.all.value;
+      await _notificationTypeController.save();
     }
+  }
+
+  Future<void> delete() async {
+    await setNotificationType(NotificationType.disabled);
+    await _notificationTypeController.reset();
   }
 
   Future<bool> get isNotificationEnabled async {
@@ -79,7 +87,7 @@ class NotificationController with ChangeNotifier {
     final start = DateTime.now();
 
     await Future.wait([
-      for (final anime in AppController.watchlist.data)
+      for (final anime in ProfileController.instance.animesInWatchlist)
         FirebaseMessaging.instance.unsubscribeFromTopic(anime),
     ]);
 
@@ -103,7 +111,7 @@ class NotificationController with ChangeNotifier {
     final start = DateTime.now();
 
     await Future.wait([
-      for (final anime in AppController.watchlist.data.reversed)
+      for (final anime in ProfileController.instance.animesInWatchlist)
         FirebaseMessaging.instance.subscribeToTopic(anime),
     ]);
 

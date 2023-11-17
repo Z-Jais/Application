@@ -33,7 +33,7 @@ class AnimeDetailController
 
   @override
   Future<List<LiteEpisode>> widgets() async {
-    return URLController()
+    return URLController.instance
         .get(
           '${Const.instance.serverUrlWithHttpProtocol}/episodes/anime/${_anime?.uuid}/page/$page/limit/$limit',
         )

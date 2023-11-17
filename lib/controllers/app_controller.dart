@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:jais/controllers/ad_controller.dart';
-import 'package:jais/controllers/datas/collection_data_controller.dart';
 import 'package:jais/controllers/filter_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/controllers/notification_controller.dart';
+import 'package:jais/controllers/profile_controller.dart';
 import 'package:jais/controllers/url_controller.dart';
 import 'package:jais/utils.dart';
 
 class AppController with ChangeNotifier {
   static final AppController instance = AppController();
-  static final CollectionDataController watchlist =
-      CollectionDataController('animeWatchlist');
-  static final CollectionDataController seen =
-      CollectionDataController('episodesSeen');
 
   bool _inProgress = true;
   bool _hasInternet = false;
@@ -28,8 +24,8 @@ class AppController with ChangeNotifier {
     _inProgress = true;
     notifyListeners();
 
-    final Response? response =
-        await URLController().get(Const.instance.serverUrlWithHttpProtocol);
+    final Response? response = await URLController.instance
+        .get(Const.instance.serverUrlWithHttpProtocol);
     _hasInternet = response != null && response.statusCode < 500;
 
     _inProgress = false;
@@ -42,9 +38,8 @@ class AppController with ChangeNotifier {
     if (_initializing) return;
     _initializing = true;
 
-    await watchlist.init();
-    await seen.init();
     await FilterController.instance.init();
+    await ProfileController.instance.init();
 
     NotificationController.instance.init();
     AdController.instance.loadAd();
@@ -53,9 +48,7 @@ class AppController with ChangeNotifier {
     Navigator.pushReplacementNamed(context, '/home');
   }
 
-  static Future<void> reset() async {
-    await watchlist.reset();
-    await seen.reset();
-    await FilterController.instance.reset();
+  Future<void> reset() async {
+    _initializing = false;
   }
 }
