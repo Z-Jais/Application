@@ -164,6 +164,9 @@ class ProfileController {
       return;
     }
 
+    animesInWatchlist.add(anime.uuid);
+    anime.notify();
+
     final Response? response = await URLController.instance.put(
       '$baseUrl/watchlist?anime=${anime.uuid}',
       token: profile?.token,
@@ -175,17 +178,19 @@ class ProfileController {
         'Cannot add anime to watchlist, response: $response',
       );
 
+      animesInWatchlist.remove(anime.uuid);
+      anime.notify();
       return;
     }
-
-    animesInWatchlist.add(anime.uuid);
-    anime.notify();
   }
 
   Future<void> removeAnimeFromWatchlist(Anime anime) async {
     if (!isAnimeInWatchlist(anime)) {
       return;
     }
+
+    animesInWatchlist.remove(anime.uuid);
+    anime.notify();
 
     final Response? response = await URLController.instance.delete(
       '$baseUrl/watchlist?anime=${anime.uuid}',
@@ -198,11 +203,10 @@ class ProfileController {
         'Cannot remove anime from watchlist, response: $response',
       );
 
+      animesInWatchlist.add(anime.uuid);
+      anime.notify();
       return;
     }
-
-    animesInWatchlist.remove(anime.uuid);
-    anime.notify();
   }
 
   Future<void> toggleAnimeInWatchlist(Anime anime) async {
@@ -226,6 +230,10 @@ class ProfileController {
       return;
     }
 
+    episodesInWatchlist.add(episode.uuid);
+    profile?.totalDurationSeen += episode.duration;
+    episode.notify();
+
     final Response? response = await URLController.instance.put(
       '$baseUrl/watchlist?episode=${episode.uuid}',
       token: profile?.token,
@@ -237,18 +245,21 @@ class ProfileController {
         'Cannot add episode to watchlist, response: $response',
       );
 
+      episodesInWatchlist.remove(episode.uuid);
+      profile?.totalDurationSeen -= episode.duration;
+      episode.notify();
       return;
     }
-
-    episodesInWatchlist.add(episode.uuid);
-    profile?.totalDurationSeen += episode.duration;
-    episode.notify();
   }
 
   Future<void> removeEpisodeFromWatchlist(Episode episode) async {
     if (!isEpisodeInWatchlist(episode)) {
       return;
     }
+
+    episodesInWatchlist.remove(episode.uuid);
+    profile?.totalDurationSeen -= episode.duration;
+    episode.notify();
 
     final Response? response = await URLController.instance.delete(
       '$baseUrl/watchlist?episode=${episode.uuid}',
@@ -261,12 +272,11 @@ class ProfileController {
         'Cannot remove episode from watchlist, response: $response',
       );
 
+      episodesInWatchlist.add(episode.uuid);
+      profile?.totalDurationSeen += episode.duration;
+      episode.notify();
       return;
     }
-
-    episodesInWatchlist.remove(episode.uuid);
-    profile?.totalDurationSeen -= episode.duration;
-    episode.notify();
   }
 
   Future<void> toggleEpisodeInWatchlist(Episode episode) async {
