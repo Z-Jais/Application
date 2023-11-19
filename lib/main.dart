@@ -3,12 +3,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/animes/anime_calendar_controller.dart';
 import 'package:jais/controllers/animes/anime_detail_controller.dart';
 import 'package:jais/controllers/animes/anime_search_controller.dart';
+import 'package:jais/controllers/animes/anime_watchlist_controller.dart';
+import 'package:jais/controllers/episodes/episode_watchlist_controller.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/views/animes/anime_detail_view.dart';
 import 'package:jais/views/animes/anime_calendar_view.dart';
 import 'package:jais/views/animes/anime_search_view.dart';
 import 'package:jais/views/home_view.dart';
 import 'package:jais/views/initialization_view.dart';
+import 'package:jais/views/profile/profile_animes_view.dart';
+import 'package:jais/views/profile/profile_episodes_view.dart';
+import 'package:jais/views/profile/profile_settings_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,6 +83,15 @@ class MyApp extends StatelessWidget {
         },
         '/anime/calendar': (_) {
           return AnimeCalendarView(controller: AnimeCalendarController());
+        },
+        '/profile/settings': (_) {
+          return const ProfileSettingsView();
+        },
+        '/profile/episodes': (_) {
+          return ProfileEpisodesView(controller: EpisodeWatchlistController());
+        },
+        '/profile/animes': (_) {
+          return ProfileAnimesView(controller: AnimeWatchlistController());
         },
       },
     );

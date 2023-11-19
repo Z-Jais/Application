@@ -71,6 +71,6 @@ class LiteEpisode extends StatelessWidget {
   }
 
   Future<void> _onTap() async {
-    URLController().goOnUrl(episode.url);
+    URLController.instance.goOnUrl(episode.url);
   }
 }

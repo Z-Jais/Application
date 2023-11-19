@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:jais/controllers/app_controller.dart';
 import 'package:jais/controllers/episodes/episode_tab_controller.dart';
 import 'package:jais/controllers/logger.dart';
+import 'package:jais/controllers/profile_controller.dart';
 import 'package:jais/widgets/h_v_list.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +32,7 @@ class _EpisodeTabState extends State<EpisodeTab> {
       child: Consumer<EpisodeTabController>(
         builder: (context, value, child) {
           final bool showMissingAnimes =
-              AppController.watchlist.data.isNotEmpty &&
+              ProfileController.instance.animesInWatchlist.isNotEmpty &&
                   _controller.missingAnimeController.list.isNotEmpty;
 
           return RefreshIndicator(

@@ -7,20 +7,17 @@ import 'package:jais/widgets/episodes/episode_widget.dart';
 
 class EpisodeController
     extends DataController<Episode, EpisodeLoader, EpisodeWidget> {
-  EpisodeController({
-    void Function(Episode, bool)? onTap,
-    required super.notifyListenersCallback,
-  }) : super(
+  EpisodeController({required super.notifyListenersCallback})
+      : super(
           limit: 12,
           loadingWidget: const EpisodeLoader(),
           fromJson: (json) => Episode.fromJson(json),
-          toWidget: (episode) =>
-              EpisodeWidget(episode: episode, onSeenTap: onTap),
+          toWidget: (episode) => EpisodeWidget(episode: episode),
         );
 
   @override
   Future<List<EpisodeWidget>> widgets() async {
-    return URLController()
+    return URLController.instance
         .get(
           '${Const.instance.serverUrlWithHttpProtocol}/episodes/country/${Const.selectedCountry}/page/$page/limit/$limit',
         )

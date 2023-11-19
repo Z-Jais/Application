@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jais/controllers/logger.dart';
 import 'package:jais/models/navigation_bar_item.dart';
-import 'package:jais/widgets/filter_watchlist.dart';
 
 class NavigationController with ChangeNotifier {
   static final NavigationController instance = NavigationController();
@@ -18,6 +17,7 @@ class NavigationController with ChangeNotifier {
     debug('NavigationController', '$currentPage -> $page');
 
     if (page == currentPage) {
+      _inProgress = false;
       return;
     }
 
@@ -48,24 +48,6 @@ class NavigationController with ChangeNotifier {
         icon: const Icon(Icons.subscriptions_outlined),
       ),
       NavigationBarItem(
-        name: AppLocalizations.of(context)!.watchlist,
-        selectedIcon: const Icon(Icons.playlist_play),
-        icon: const Icon(Icons.playlist_play_outlined),
-        topWidgets: [
-          NavigationBarItem(
-            name: AppLocalizations.of(context)!.filter,
-            icon: const Icon(Icons.filter_list),
-            onPressed: (BuildContext context) {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    const AlertDialog.adaptive(content: FilterWatchlist()),
-              );
-            },
-          ),
-        ],
-      ),
-      NavigationBarItem(
         name: AppLocalizations.of(context)!.animes(2),
         selectedIcon: const Icon(Icons.video_library),
         icon: const Icon(Icons.video_library_outlined),
@@ -83,10 +65,16 @@ class NavigationController with ChangeNotifier {
         ],
       ),
       NavigationBarItem(
-        name: AppLocalizations.of(context)!.profile,
-        selectedIcon: const Icon(Icons.person),
-        icon: const Icon(Icons.person_outline_outlined),
-      ),
+          name: AppLocalizations.of(context)!.profile,
+          selectedIcon: const Icon(Icons.person),
+          icon: const Icon(Icons.person_outline_outlined),
+          topWidgets: [
+            const NavigationBarItem(
+              name: 'Paramètres',
+              icon: Icon(Icons.settings),
+              route: '/profile/settings',
+            ),
+          ]),
     ];
   }
 

@@ -15,7 +15,7 @@ class AnimeSearchController extends AnimeController {
 
   @override
   Future<List<AnimeWidget>> widgets() async {
-    return URLController()
+    return URLController.instance
         .get(
           '${Const.instance.serverUrlWithHttpProtocol}/animes/country/${Const.selectedCountry}/search/name/$query',
         )
