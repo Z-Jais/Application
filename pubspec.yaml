@@ -11,7 +11,7 @@ environment:
 dependencies:
   app_settings: ^5.1.1
   cached_network_image: ^3.3.0
-  firebase_core: ^2.22.0
+  firebase_core: ^2.23.0
   firebase_messaging: ^14.7.4
   flutter:
     sdk: flutter
