@@ -32,6 +32,11 @@ class ProfileController {
     return base64Encode(gzip.encode(utf8.encode(jsonEncode(data))));
   }
 
+  Future<void> setTokenUuid(String tokenUuid) async {
+    _registeredDevice.data = tokenUuid;
+    await _registeredDevice.save();
+  }
+
   Future<bool> _registerDevice() async {
     final CollectionDataController watchlist =
         CollectionDataController('animeWatchlist');
@@ -60,8 +65,7 @@ class ProfileController {
     }
 
     final String registeredDevice = jsonDecode(response!.body)['tokenUuid'];
-    _registeredDevice.data = registeredDevice;
-    await _registeredDevice.save();
+    await setTokenUuid(registeredDevice);
 
     // Reset old data only if registered correctly
     await watchlist.reset();

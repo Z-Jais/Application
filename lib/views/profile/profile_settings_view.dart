@@ -18,6 +18,8 @@ class ProfileSettingsView extends StatefulWidget {
 }
 
 class _ProfileSettingsViewState extends State<ProfileSettingsView> {
+  final TextEditingController textEditingController = TextEditingController();
+
   bool _checkIfSomethingIsRunning(
     NotificationController value,
     BuildContext context,
@@ -266,6 +268,78 @@ class _ProfileSettingsViewState extends State<ProfileSettingsView> {
                                     ),
                                   ],
                                 ),
+                              );
+                            },
+                          ),
+                          CategoryButton(
+                            label: 'Changer mon identifiant',
+                            icon: const Icon(Icons.edit_outlined),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                  title: const Text('Changer mon identifiant'),
+                                  content: Column(
+                                    children: [
+                                      const Text(
+                                        'Êtes-vous sûr de vouloir changer votre identifiant ?',
+                                      ),
+                                      const SizedBox(height: 16),
+                                      TextField(
+                                        controller: textEditingController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Nouvel identifiant',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Annuler'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () async {
+                                        Navigator.of(context).pop();
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              'Changement de l\'identifiant...',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            duration: Duration(seconds: 10),
+                                          ),
+                                        );
+
+                                        await ProfileController.instance
+                                            .setTokenUuid(
+                                          textEditingController.text,
+                                        );
+                                        await ProfileController.instance.init();
+
+                                        if (!context.mounted) return;
+                                        ScaffoldMessenger.of(context)
+                                            .removeCurrentSnackBar();
+
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              'Identifiant changé',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: const Text('Changer'),
+                                    ),
+                                  ],
+                                );
+                                },
                               );
                             },
                           ),
