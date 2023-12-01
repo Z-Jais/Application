@@ -402,7 +402,7 @@ packages:
     description:
       path: "packages/google_mobile_ads"
       ref: HEAD
-      resolved-ref: "31c045eb153ba320050b1c439f7343a1bda08d94"
+      resolved-ref: "6dc8d4a2a851197a455f2b9ab56e9740b9297cde"
       url: "https://github.com/googleads/googleads-mobile-flutter.git"
     source: git
     version: "3.1.0"
@@ -682,10 +682,10 @@ packages:
     dependency: transitive
     description:
       name: petitparser
-      sha256: eeb2d1428ee7f4170e2bd498827296a18d4e7fc462b71727d111c0ac7707cfa6
+      sha256: c15605cd28af66339f8eb6fbe0e541bfe2d1b72d5825efc6598f3e0a31b9ad27
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.1"
+    version: "6.0.2"
   platform:
     dependency: transitive
     description:
@@ -1127,10 +1127,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "7c99c0e1e2fa190b48d25c81ca5e42036d5cac81430ef249027d97b0935c553f"
+      sha256: b0f37db61ba2f2e9b7a78a1caece0052564d1bc70668156cf3a29d676fe4e574
       url: "https://pub.dev"
     source: hosted
-    version: "5.1.0"
+    version: "5.1.1"
   xdg_directories:
     dependency: transitive
     description:
