@@ -359,10 +359,10 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_native_splash
-      sha256: "9cdb5d9665dab5d098dc50feab74301c2c228cd02ca25c9b546ab572cebcd6af"
+      sha256: "558f10070f03ee71f850a78f7136ab239a67636a294a44a06b6b7345178edb1e"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.9"
+    version: "2.3.10"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -870,10 +870,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite
-      sha256: c2c32eb0c74021d987336522acc3b6bf0082fbd0c540c36a9cf4ddb8ba891ddc
+      sha256: a9016f495c927cb90557c909ff26a6d92d9bd54fc42ba92e19d4e79d61e798c6
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.2"
   sqflite_common:
     dependency: transitive
     description:
