@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: flutter pub get
       - run: flutter pub upgrade
-      - uses: peter-evans/create-pull-request@v5
+      - uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
           commit-message: "Upgrade Flutter packages"
