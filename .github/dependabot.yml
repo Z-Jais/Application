@@ -11,6 +11,10 @@ updates:
       - "Ziedelth"
     reviewers:
       - "Ziedelth"
+    groups:
+      dev-dependencies:
+        patterns:
+          - "firebase*"
 
   - package-ecosystem: "gradle"
     directory: "/android/"
