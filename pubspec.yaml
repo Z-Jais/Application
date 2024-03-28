@@ -22,7 +22,7 @@ dependencies:
   http: ^1.2.1
   intl: ^0.18.1
   json_annotation: ^4.8.1
-  permission_handler: ^11.3.0
+  permission_handler: ^11.3.1
   provider: ^6.1.2
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0
